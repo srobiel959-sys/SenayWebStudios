@@ -2,7 +2,7 @@ import { ContactForm } from "@/components/ContactForm";
 import { Header } from "@/components/Header";
 import { Logo, Monogram } from "@/components/Logo";
 import { SectionHeading } from "@/components/SectionHeading";
-import { about, contact, hero, nav, pricing, process, services, site } from "@/content/site";
+import { about, comparison, contact, faq, hero, nav, pricing, process, services, site, why } from "@/content/site";
 
 const container = "mx-auto max-w-6xl px-5 sm:px-8";
 
@@ -63,6 +63,68 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Hvorfor nettside */}
+        <section id="hvorfor" aria-labelledby="hvorfor-tittel" className="py-20 sm:py-28">
+          <div className={container}>
+            <SectionHeading id="hvorfor-tittel" eyebrow={why.eyebrow} title={why.title} lead={why.lead} />
+            <ul className="mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
+              {why.items.map((item) => (
+                <li key={item.title} className="border-t border-navy pt-6">
+                  <h3 className="font-display text-2xl leading-snug">{item.title}</h3>
+                  <p className="mt-3 leading-relaxed text-ink-muted">{item.text}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
+        {/* Uten / med nettside */}
+        <section aria-labelledby="forskjell-tittel" className="border-y border-line bg-sand py-20 sm:py-28">
+          <div className={container}>
+            <SectionHeading id="forskjell-tittel" eyebrow={comparison.eyebrow} title={comparison.title} />
+            <div className="mt-14 grid gap-6 lg:grid-cols-2">
+              <div className="rounded-xl border border-line bg-cream p-8 sm:p-10">
+                <h3 className="font-display text-2xl">{comparison.without.title}</h3>
+                <ul className="mt-6 space-y-4">
+                  {comparison.without.items.map((item) => (
+                    <li key={item} className="flex gap-3 text-ink-muted">
+                      <svg viewBox="0 0 20 20" className="mt-1 h-4 w-4 shrink-0" aria-hidden="true">
+                        <path d="M5 5l10 10M15 5L5 15" fill="none" stroke="currentColor" strokeWidth="1.6" />
+                      </svg>
+                      <span>
+                        <span className="sr-only">Ulempe: </span>
+                        {item}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="rounded-xl bg-navy p-8 text-cream sm:p-10">
+                <h3 className="font-display text-2xl">{comparison.with.title}</h3>
+                <ul className="mt-6 space-y-4">
+                  {comparison.with.items.map((item) => (
+                    <li key={item} className="flex gap-3">
+                      <svg viewBox="0 0 20 20" className="mt-1 h-4 w-4 shrink-0" aria-hidden="true">
+                        <path d="M4 10.5l4 4 8-9" fill="none" stroke="currentColor" strokeWidth="1.6" />
+                      </svg>
+                      <span>
+                        <span className="sr-only">Fordel: </span>
+                        {item}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+                <a
+                  href={comparison.cta.href}
+                  className="mt-10 inline-flex items-center justify-center rounded-full bg-cream px-7 py-3.5 font-medium text-navy transition-colors hover:bg-sand"
+                >
+                  {comparison.cta.label}
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Tjenester */}
         <section id="tjenester" aria-labelledby="tjenester-tittel" className="py-20 sm:py-28">
           <div className={container}>
@@ -106,7 +168,7 @@ export default function Home() {
         <section id="pakker" aria-labelledby="pakker-tittel" className="py-20 sm:py-28">
           <div className={container}>
             <SectionHeading id="pakker-tittel" eyebrow={pricing.eyebrow} title={pricing.title} lead={pricing.lead} />
-            <ul className="mt-14 grid gap-6 lg:grid-cols-3">
+            <ul className="mt-14 grid max-w-4xl gap-6 md:grid-cols-2">
               {pricing.packages.map((pkg) => (
                 <li
                   key={pkg.name}
@@ -118,7 +180,7 @@ export default function Home() {
                     <h3 className="font-display text-2xl">{pkg.name}</h3>
                     {pkg.highlighted ? (
                       <span className="rounded-full border border-cream-muted/60 px-3 py-1 text-xs uppercase tracking-wider">
-                        Anbefalt
+                        Start her
                       </span>
                     ) : null}
                   </div>
@@ -128,12 +190,18 @@ export default function Home() {
                   {pkg.price ? (
                     <p className="mt-8 flex items-baseline gap-2">
                       <span className="text-sm">kr</span>
-                      <span className="font-display text-4xl">{pkg.price}</span>
+                      <span className="text-4xl font-medium tracking-tight">{pkg.price}</span>
                       <span className={`text-sm ${pkg.highlighted ? "text-cream-muted" : "text-ink-muted"}`}>
                         {pkg.period}
                       </span>
                     </p>
-                  ) : (
+                  ) : null}
+                  {pkg.price && pkg.perDay ? (
+                    <p className={`mt-2 text-sm ${pkg.highlighted ? "text-cream-muted" : "text-ink-muted"}`}>
+                      {pkg.perDay}
+                    </p>
+                  ) : null}
+                  {pkg.price ? null : (
                     <p className="mt-8 flex items-baseline gap-2">
                       <span className="font-display text-3xl">Pris på forespørsel</span>
                     </p>
@@ -184,6 +252,32 @@ export default function Home() {
                 </li>
               ))}
             </ul>
+          </div>
+        </section>
+
+        {/* Spørsmål */}
+        <section id="sporsmal" aria-labelledby="sporsmal-tittel" className="py-20 sm:py-28">
+          <div className={`${container} grid gap-12 lg:grid-cols-12`}>
+            <div className="lg:col-span-4">
+              <SectionHeading id="sporsmal-tittel" eyebrow={faq.eyebrow} title={faq.title} />
+            </div>
+            <div className="divide-y divide-line border-y border-line lg:col-span-8">
+              {faq.items.map((item) => (
+                <details key={item.q} className="group py-6">
+                  <summary className="flex cursor-pointer list-none items-start justify-between gap-6 font-display text-xl sm:text-2xl [&::-webkit-details-marker]:hidden">
+                    {item.q}
+                    <svg
+                      viewBox="0 0 20 20"
+                      aria-hidden="true"
+                      className="mt-1.5 h-5 w-5 shrink-0 transition-transform group-open:rotate-45"
+                    >
+                      <path d="M10 3v14M3 10h14" fill="none" stroke="currentColor" strokeWidth="1.6" />
+                    </svg>
+                  </summary>
+                  <p className="mt-4 max-w-2xl leading-relaxed text-ink-muted">{item.a}</p>
+                </details>
+              ))}
+            </div>
           </div>
         </section>
 

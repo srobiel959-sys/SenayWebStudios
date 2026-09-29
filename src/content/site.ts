@@ -12,24 +12,72 @@ export const site = {
 };
 
 export const nav = [
+  { href: "#hvorfor", label: "Hvorfor nettside" },
   { href: "#tjenester", label: "Tjenester" },
-  { href: "#prosess", label: "Prosess" },
-  { href: "#pakker", label: "Pakker" },
-  { href: "#om", label: "Om" },
+  { href: "#pakker", label: "Priser" },
+  { href: "#sporsmal", label: "Spørsmål" },
   { href: "#kontakt", label: "Kontakt" },
 ];
 
 export const hero = {
   eyebrow: "Nettsider for bedrifter",
-  title: "Nettsider som er raske, ryddige og laget for å gi deg kunder.",
-  lead: "Vi designer og utvikler moderne nettsider for små bedrifter som vil fremstå profesjonelt på nett – uten unødvendig kompleksitet, og med én fast kontaktperson hele veien.",
-  primaryCta: { href: "#kontakt", label: "Be om et tilbud" },
-  secondaryCta: { href: "#pakker", label: "Se pakkene" },
+  title: "Kundene dine leter etter deg på nett. Finner de deg?",
+  lead: "Før noen ringer deg, googler de deg. Senay Web Studio lager raske, profesjonelle nettsider som gjør at kundene finner deg, stoler på deg og tar kontakt – til fast pris, med én fast kontaktperson hele veien.",
+  primaryCta: { href: "#kontakt", label: "Få en uforpliktende prat" },
+  secondaryCta: { href: "#pakker", label: "Se prisene" },
   points: [
-    "Skreddersydd design",
-    "Rask på mobil og data",
-    "Enkel å oppdatere",
+    "Fast pris: 4 599 kr",
+    "Tilpasset mobil og PC",
+    "Vi tar oss av det tekniske",
   ],
+};
+
+export const why = {
+  eyebrow: "Hvorfor nettside",
+  title: "En nettside er ikke pynt. Den er din beste selger.",
+  lead: "Folk sjekker bedrifter på nett før de handler. Står du ikke der, velger de noen som gjør det.",
+  items: [
+    {
+      title: "Kundene søker før de ringer",
+      text: "Når noen trenger det du tilbyr, begynner de på Google. Uten en nettside er det konkurrentene dine som blir funnet.",
+    },
+    {
+      title: "Tillit på sekunder",
+      text: "En ryddig, profesjonell nettside viser at bedriften er seriøs. Et dårlig eller manglende førsteinntrykk koster deg kunder du aldri får vite om.",
+    },
+    {
+      title: "Åpent døgnet rundt",
+      text: "Nettsiden svarer på spørsmål og tar imot henvendelser mens du jobber, sover eller har ferie.",
+    },
+    {
+      title: "Din egen plattform",
+      text: "Facebook og Instagram eies av andre, og algoritmen bestemmer hvem som ser deg. På din egen nettside er det du som bestemmer.",
+    },
+  ],
+};
+
+export const comparison = {
+  eyebrow: "Forskjellen",
+  title: "Uten nettside og med nettside.",
+  without: {
+    title: "Uten nettside",
+    items: [
+      "Kundene finner konkurrenten din på Google",
+      "Du virker mindre seriøs enn du er",
+      "Informasjonen er spredt og vanskelig å finne",
+      "Du går glipp av henvendelser utenfor arbeidstid",
+    ],
+  },
+  with: {
+    title: "Med nettside fra Senay Web Studio",
+    items: [
+      "Du dukker opp når kundene søker",
+      "Et profesjonelt førsteinntrykk hver gang",
+      "Tjenester, priser og kontaktinfo samlet ett sted",
+      "Nye henvendelser døgnet rundt",
+    ],
+  },
+  cta: { href: "#kontakt", label: "Jeg vil bli funnet" },
 };
 
 export const services = {
@@ -50,7 +98,7 @@ export const services = {
     },
     {
       title: "Drift og videre utvikling",
-      text: "Vi kan ta oss av hosting, domene, oppdateringer og små endringer, så du kan bruke tiden på det du er best på.",
+      text: "Vi kan ta oss av hosting, oppdateringer og små endringer, så du kan bruke tiden på det du er best på.",
     },
   ],
 };
@@ -78,7 +126,8 @@ export const process = {
   ],
 };
 
-// TODO: Fyll inn priser, f.eks. price: "9 900". Så lenge price er null vises «Pris på forespørsel».
+// Priser i kroner. TODO: Bekreft om prisene er inkl. mva., eks. mva., eller om firmaet
+// ikke er mva.-registrert, og legg det eventuelt til i «note».
 export const pricing: {
   eyebrow: string;
   title: string;
@@ -88,50 +137,39 @@ export const pricing: {
     name: string;
     price: string | null;
     period: string;
+    perDay?: string;
     description: string;
     features: string[];
     highlighted: boolean;
   }[];
 } = {
-  eyebrow: "Pakker",
-  title: "Tydelige pakker med fast pris.",
-  lead: "Alle pakkene inkluderer responsivt design, grunnleggende søkemotoroptimalisering og opplæring. Trenger du noe annet, lager vi et tilpasset tilbud.",
-  note: "Alle priser er oppgitt eks. mva.",
+  eyebrow: "Priser",
+  title: "Én fast pris. Ingen overraskelser.",
+  lead: "Én ny kunde kan være nok til å betale for hele nettsiden. Du vet nøyaktig hva du betaler før vi starter.",
+  note: "Fast pris avtales før arbeidet starter. Trenger du noe utover pakkene, lager vi et tilpasset tilbud.",
   packages: [
     {
-      name: "Start",
-      price: null,
+      name: "Nettside",
+      price: "4 599",
       period: "engangspris",
-      description: "For deg som trenger en enkel og profesjonell tilstedeværelse på nett.",
+      description: "En komplett, profesjonell nettside for bedriften din – designet og bygget for deg.",
       features: [
-        "Én side med de viktigste seksjonene",
+        "Skreddersydd design i dine farger",
+        "Tilpasset mobil, nettbrett og PC",
         "Kontaktskjema",
-        "Tilpasset mobil og PC",
         "Grunnleggende søkemotoroptimalisering",
-      ],
-      highlighted: false,
-    },
-    {
-      name: "Standard",
-      price: null,
-      period: "engangspris",
-      description: "For bedrifter som vil presentere flere tjenester og bygge tillit.",
-      features: [
-        "Flere undersider",
-        "Skreddersydd design",
-        "Kontaktskjema og kart",
-        "Søkemotoroptimalisering per side",
         "Opplæring i å oppdatere innhold",
       ],
       highlighted: true,
     },
     {
       name: "Drift",
-      price: null,
+      price: "799",
       period: "per måned",
-      description: "Løpende hjelp etter lansering, så siden alltid er oppdatert og trygg.",
+      perDay: "Under 27 kr om dagen",
+      description: "Vi holder nettsiden oppe, trygg og oppdatert, så du kan fokusere på kundene.",
       features: [
-        "Hosting og domene",
+        "Hosting",
         "Sikkerhetsoppdateringer",
         "Små endringer ved behov",
         "Fast kontaktperson",
@@ -155,8 +193,35 @@ export const about = {
   ],
 };
 
+export const faq = {
+  eyebrow: "Spørsmål",
+  title: "Det du lurer på.",
+  items: [
+    {
+      q: "Holder det ikke med Facebook eller Instagram?",
+      a: "Sosiale medier er fint i tillegg, men du eier ikke profilen, og algoritmen bestemmer hvem som ser innleggene dine. Mange kunder søker på Google, ikke på Facebook. En nettside er stedet du selv styrer, og som kundene finner når de leter.",
+    },
+    {
+      q: "Jeg er ikke teknisk. Klarer jeg dette?",
+      a: "Ja. Vi tar oss av alt det tekniske, og du får opplæring i å oppdatere innholdet selv. Har du Drift, gjør vi små endringer for deg.",
+    },
+    {
+      q: "Hva koster det?",
+      a: "Nettsiden koster 4 599 kr én gang. Vil du at vi drifter den, koster det 799 kr per måned. Prisen avtales før vi starter, så du slipper overraskelser.",
+    },
+    {
+      q: "Hva trenger dere fra meg?",
+      a: "Litt om bedriften din, hva du tilbyr, og logo og bilder hvis du har det. Resten finner vi ut av sammen i den første samtalen.",
+    },
+    {
+      q: "Hvordan kommer vi i gang?",
+      a: "Send en melding i skjemaet under eller på e-post. Da tar vi en uforpliktende prat om hva du trenger, og du får et konkret forslag med fast pris.",
+    },
+  ],
+};
+
 export const contact = {
   eyebrow: "Kontakt",
-  title: "Klar for en ny nettside?",
-  lead: "Fortell kort om bedriften din og hva du trenger, så tar vi kontakt for en uforpliktende prat.",
+  title: "Klar for å bli funnet?",
+  lead: "Fortell kort om bedriften din og hva du trenger. Så tar vi kontakt for en uforpliktende prat.",
 };
