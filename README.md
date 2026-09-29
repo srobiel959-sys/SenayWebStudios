@@ -13,16 +13,17 @@ npm run build
 
 ## Struktur
 
-- `src/content/site.ts` – **all tekst**, e-post, pakker og priser. Felt merket `TODO` må fylles inn.
-- `src/app/page.tsx` – forsiden (hero, tjenester, prosess, pakker, om, kontakt).
-- `src/components/` – header, logo, kontaktskjema m.m.
-- `src/app/opengraph-image.tsx`, `robots.ts`, `sitemap.ts`, `icon.svg` – metadata og deling.
+- `src/content/site.ts` – **all tekst og alle priser** på ett sted.
+- `src/app/` – sidene: forside (`page.tsx`), `tjenester`, `prosess`, `priser`, `om`, `kontakt`, `personvern` og `not-found`.
+- `src/app/layout.tsx` – felles meny (`Header`) og bunn (`Footer`) for alle sider.
+- `src/components/` – gjenbrukbare deler: `PageHero`, `PricingCards`, `Faq`, `CtaBand`, `Reveal` (inntoning), `Logo`.
+- `src/lib/ui.ts` – felles knapper og marger. `src/lib/meta.ts` – tittel og beskrivelse per side.
 - `public/brand/` – logofilene (navy/krem, liggende, monogram, app-ikoner). Navy #071630 · Krem #FAF8F5.
 
 ## Før lansering
 
-- [ ] Fyll inn priser (`price: null` → f.eks. `"9 900"`) i `src/content/site.ts`
-- [ ] Bekreft e-postadresse (`site.email`)
+- [ ] Bekreft e-postadresse (`site.email`) og legg inn org.nr. (`site.orgNr`)
+- [ ] Les gjennom personvernsiden (`src/app/personvern/page.tsx`)
 - [ ] Kontaktskjemaet åpner e-postprogrammet (mailto). Koble til et skjema-API ved behov.
 - [ ] Koble domenet `senaywebstudio.no` i Vercel
 
