@@ -1,61 +1,50 @@
-// Midlertidig logo. Erstattes av de ekte logofilene i /public/brand/ når de er klare.
+import Image from "next/image";
 
-type MonogramProps = {
-  className?: string;
-  /** "dark" = navy flate med krem tegn, "light" = krem flate med navy tegn */
-  tone?: "dark" | "light";
-};
+// Logofilene ligger i /public/brand/. All tekst i SVG-ene er konvertert til former,
+// så logoen er uavhengig av fonter.
 
-export function Monogram({ className, tone = "dark" }: MonogramProps) {
-  const bg = tone === "dark" ? "var(--color-navy)" : "var(--color-cream)";
-  const fg = tone === "dark" ? "var(--color-cream)" : "var(--color-navy)";
-
-  return (
-    <svg
-      viewBox="0 0 64 64"
-      className={className}
-      aria-hidden="true"
-      focusable="false"
-    >
-      <rect width="64" height="64" rx="10" fill={bg} />
-      <g
-        fill={fg}
-        style={{ fontFamily: "var(--font-bodoni), 'Bodoni Moda', Didot, Georgia, serif" }}
-        fontWeight={500}
-        textAnchor="middle"
-      >
-        <text x="20" y="31" fontSize="27">
-          S
-        </text>
-        <text x="43" y="54" fontSize="25">
-          W
-        </text>
-      </g>
-      <line
-        x1="13"
-        y1="55"
-        x2="51"
-        y2="9"
-        stroke={fg}
-        strokeWidth="1.6"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
-}
+type Tone = "dark" | "light";
 
 type LogoProps = {
   className?: string;
-  tone?: "dark" | "light";
+  /** "dark" = navy logo på lys bakgrunn, "light" = krem logo på mørk bakgrunn */
+  tone?: Tone;
+  /** Sett tom alt når logoen står i en lenke som allerede har tilgjengelig tekst */
+  alt?: string;
+  priority?: boolean;
 };
 
-export function Logo({ className = "", tone = "dark" }: LogoProps) {
+export function Logo({
+  className = "h-8 w-auto",
+  tone = "dark",
+  alt = "Senay Web Studio",
+  priority,
+}: LogoProps) {
   return (
-    <span className={`inline-flex items-center gap-3 ${className}`}>
-      <Monogram tone={tone} className="h-9 w-9 shrink-0" />
-      <span className="font-display text-lg leading-none tracking-tight sm:text-xl">
-        Senay Web Studio
-      </span>
-    </span>
+    <Image
+      src={tone === "dark" ? "/brand/logo-horizontal-navy.svg" : "/brand/logo-horizontal-cream.svg"}
+      alt={alt}
+      width={484}
+      height={80}
+      className={className}
+      priority={priority}
+    />
+  );
+}
+
+type MonogramProps = {
+  className?: string;
+  tone?: Tone;
+};
+
+export function Monogram({ className, tone = "dark" }: MonogramProps) {
+  return (
+    <Image
+      src={tone === "dark" ? "/brand/monogram-navy.svg" : "/brand/monogram-cream.svg"}
+      alt=""
+      width={230}
+      height={200}
+      className={className}
+    />
   );
 }

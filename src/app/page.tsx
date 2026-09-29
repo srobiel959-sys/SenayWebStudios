@@ -1,6 +1,6 @@
 import { ContactForm } from "@/components/ContactForm";
 import { Header } from "@/components/Header";
-import { Logo } from "@/components/Logo";
+import { Logo, Monogram } from "@/components/Logo";
 import { SectionHeading } from "@/components/SectionHeading";
 import { about, contact, hero, nav, pricing, process, services, site } from "@/content/site";
 
@@ -49,14 +49,17 @@ export default function Home() {
                 </a>
               </div>
             </div>
-            <ul className="flex flex-col justify-end gap-4 border-t border-line pt-8 lg:col-span-4 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0">
-              {hero.points.map((point) => (
-                <li key={point} className="flex items-center gap-3 text-lg">
-                  <span aria-hidden="true" className="h-px w-6 bg-navy" />
-                  {point}
-                </li>
-              ))}
-            </ul>
+            <div className="flex flex-col justify-between gap-10 border-t border-line pt-10 lg:col-span-4 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0">
+              <Monogram className="hidden h-auto w-44 self-center lg:block xl:w-52" />
+              <ul className="flex flex-col gap-4">
+                {hero.points.map((point) => (
+                  <li key={point} className="flex items-center gap-3 text-lg">
+                    <span aria-hidden="true" className="h-px w-6 bg-navy" />
+                    {point}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </section>
 
@@ -122,13 +125,19 @@ export default function Home() {
                   <p className={`mt-3 leading-relaxed ${pkg.highlighted ? "text-cream-muted" : "text-ink-muted"}`}>
                     {pkg.description}
                   </p>
-                  <p className="mt-8 flex items-baseline gap-2">
-                    <span className="text-sm">kr</span>
-                    <span className="font-display text-4xl">{pkg.price}</span>
-                    <span className={`text-sm ${pkg.highlighted ? "text-cream-muted" : "text-ink-muted"}`}>
-                      {pkg.period}
-                    </span>
-                  </p>
+                  {pkg.price ? (
+                    <p className="mt-8 flex items-baseline gap-2">
+                      <span className="text-sm">kr</span>
+                      <span className="font-display text-4xl">{pkg.price}</span>
+                      <span className={`text-sm ${pkg.highlighted ? "text-cream-muted" : "text-ink-muted"}`}>
+                        {pkg.period}
+                      </span>
+                    </p>
+                  ) : (
+                    <p className="mt-8 flex items-baseline gap-2">
+                      <span className="font-display text-3xl">Pris på forespørsel</span>
+                    </p>
+                  )}
                   <ul className="mt-8 flex-1 space-y-3 border-t border-current/15 pt-8">
                     {pkg.features.map((feature) => (
                       <li key={feature} className="flex gap-3">
@@ -205,7 +214,10 @@ export default function Home() {
 
       <footer className="bg-navy text-cream">
         <div className={`${container} flex flex-col gap-8 border-t border-cream-muted/30 py-12 md:flex-row md:items-center md:justify-between`}>
-          <Logo tone="light" />
+          <div className="flex flex-col items-start gap-3">
+            <Logo tone="light" className="h-8 w-auto" />
+            <p className="text-xs uppercase tracking-[0.3em] text-cream-muted">Nettsider for bedrifter</p>
+          </div>
           <nav aria-label="Bunnmeny">
             <ul className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-cream-muted">
               {nav.map((item) => (

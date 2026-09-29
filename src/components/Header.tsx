@@ -11,7 +11,7 @@ export function Header() {
     <header className="sticky top-0 z-40 border-b border-line bg-cream/95 backdrop-blur supports-[backdrop-filter]:bg-cream/85">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8">
         <a href="#top" aria-label="Senay Web Studio – til toppen" onClick={() => setOpen(false)}>
-          <Logo />
+          <Logo alt="" priority className="h-7 w-auto sm:h-8" />
         </a>
 
         <nav aria-label="Hovedmeny" className="hidden md:block">

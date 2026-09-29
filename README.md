@@ -17,13 +17,12 @@ npm run build
 - `src/app/page.tsx` – forsiden (hero, tjenester, prosess, pakker, om, kontakt).
 - `src/components/` – header, logo, kontaktskjema m.m.
 - `src/app/opengraph-image.tsx`, `robots.ts`, `sitemap.ts`, `icon.svg` – metadata og deling.
-- `public/brand/` – her skal de ekte logofilene ligge.
+- `public/brand/` – logofilene (navy/krem, liggende, monogram, app-ikoner). Navy #071630 · Krem #FAF8F5.
 
 ## Før lansering
 
-- [ ] Fyll inn priser (`[PRIS]`) i `src/content/site.ts`
+- [ ] Fyll inn priser (`price: null` → f.eks. `"9 900"`) i `src/content/site.ts`
 - [ ] Bekreft e-postadresse (`site.email`)
-- [ ] Legg inn ekte logo i `public/brand/` og oppdater `Logo.tsx` og `src/app/icon.svg`
 - [ ] Kontaktskjemaet åpner e-postprogrammet (mailto). Koble til et skjema-API ved behov.
 - [ ] Koble domenet `senaywebstudio.no` i Vercel
 

@@ -20,7 +20,7 @@ export const nav = [
 ];
 
 export const hero = {
-  eyebrow: "Webbyrå for små bedrifter",
+  eyebrow: "Nettsider for bedrifter",
   title: "Nettsider som er raske, ryddige og laget for å gi deg kunder.",
   lead: "Vi designer og utvikler moderne nettsider for små bedrifter som vil fremstå profesjonelt på nett – uten unødvendig kompleksitet, og med én fast kontaktperson hele veien.",
   primaryCta: { href: "#kontakt", label: "Be om et tilbud" },
@@ -78,8 +78,21 @@ export const process = {
   ],
 };
 
-// TODO: Fyll inn priser. Alle verdier i hakeparentes er plassholdere.
-export const pricing = {
+// TODO: Fyll inn priser, f.eks. price: "9 900". Så lenge price er null vises «Pris på forespørsel».
+export const pricing: {
+  eyebrow: string;
+  title: string;
+  lead: string;
+  note: string;
+  packages: {
+    name: string;
+    price: string | null;
+    period: string;
+    description: string;
+    features: string[];
+    highlighted: boolean;
+  }[];
+} = {
   eyebrow: "Pakker",
   title: "Tydelige pakker med fast pris.",
   lead: "Alle pakkene inkluderer responsivt design, grunnleggende søkemotoroptimalisering og opplæring. Trenger du noe annet, lager vi et tilpasset tilbud.",
@@ -87,7 +100,7 @@ export const pricing = {
   packages: [
     {
       name: "Start",
-      price: "[PRIS]",
+      price: null,
       period: "engangspris",
       description: "For deg som trenger en enkel og profesjonell tilstedeværelse på nett.",
       features: [
@@ -100,7 +113,7 @@ export const pricing = {
     },
     {
       name: "Standard",
-      price: "[PRIS]",
+      price: null,
       period: "engangspris",
       description: "For bedrifter som vil presentere flere tjenester og bygge tillit.",
       features: [
@@ -114,7 +127,7 @@ export const pricing = {
     },
     {
       name: "Drift",
-      price: "[PRIS]",
+      price: null,
       period: "per måned",
       description: "Løpende hjelp etter lansering, så siden alltid er oppdatert og trygg.",
       features: [
