@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Bodoni_Moda, Jost } from "next/font/google";
+import { Footer } from "@/components/Footer";
+import { Header } from "@/components/Header";
 import { site } from "@/content/site";
 import "./globals.css";
 
@@ -16,7 +18,7 @@ const jost = Jost({
   display: "swap",
 });
 
-const title = `${site.name} – Moderne nettsider for små bedrifter`;
+const title = `${site.name} – ${site.tagline}`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -34,9 +36,6 @@ export const metadata: Metadata = {
     "små bedrifter",
     "nettsider for bedrifter",
   ],
-  alternates: {
-    canonical: "/",
-  },
   openGraph: {
     type: "website",
     locale: site.locale,
@@ -65,8 +64,25 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html
       lang="nb"
       className={`${bodoni.variable} ${jost.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
-      <body className="flex min-h-full flex-col">{children}</body>
+      <head>
+        {/* Slår på inntoning kun når JavaScript kjører (se .reveal i globals.css). */}
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
+      </head>
+      <body className="flex min-h-full flex-col">
+        <a
+          href="#innhold"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-navy focus:px-4 focus:py-2 focus:text-cream"
+        >
+          Hopp til innhold
+        </a>
+        <Header />
+        <main id="innhold" className="flex-1">
+          {children}
+        </main>
+        <Footer />
+      </body>
     </html>
   );
 }
