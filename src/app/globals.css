@@ -1,0 +1,43 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-navy: #071630;
+  --color-navy-soft: #13264a;
+  --color-cream: #faf8f5;
+  --color-sand: #efe9e0;
+  /* Dempet tekst: ≥ 4.5:1 mot krem og navy (WCAG AA) */
+  --color-ink-muted: #46536b;
+  --color-cream-muted: #c3c9d4;
+  --color-line: #ddd5c8;
+
+  --font-display: var(--font-bodoni), "Bodoni Moda", Didot, Georgia, serif;
+  --font-sans: var(--font-jost), "Jost", system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background: var(--color-cream);
+  color: var(--color-navy);
+  font-family: var(--font-sans);
+}
+
+::selection {
+  background: var(--color-navy);
+  color: var(--color-cream);
+}
+
+:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
