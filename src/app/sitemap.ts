@@ -1,12 +1,16 @@
 import type { MetadataRoute } from "next";
-import { site } from "@/content/site";
-
-const routes = ["", "/hvorfor", "/tjenester", "/prosess", "/priser", "/om", "/kontakt", "/personvern"];
+import { site } from "@/content/shared";
+import { allPageKeys, href } from "@/lib/routes";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return routes.map((route) => ({
-    url: `${site.url}${route}`,
-    changeFrequency: "monthly",
-    priority: route === "" ? 1 : 0.7,
-  }));
+  return allPageKeys.flatMap((key) =>
+    (["no", "en"] as const).map((lang) => ({
+      url: `${site.url}${href(lang, key)}`,
+      changeFrequency: "monthly" as const,
+      priority: key === "home" ? 1 : 0.7,
+      alternates: {
+        languages: { "nb-NO": `${site.url}${href("no", key)}`, en: `${site.url}${href("en", key)}` },
+      },
+    })),
+  );
 }

@@ -1,8 +1,11 @@
-import { faqPricing, packages, site } from "@/content/site";
+import { getContent } from "@/content";
+import { site } from "@/content/shared";
+import type { Lang } from "./routes";
 
 const toNumber = (price: string) => Number(price.replace(/\s/g, ""));
 
-export function businessSchema() {
+export function businessSchema(lang: Lang) {
+  const c = getContent(lang);
   return {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
@@ -11,16 +14,16 @@ export function businessSchema() {
     email: site.email,
     logo: `${site.url}/brand/icon-512.png`,
     image: `${site.url}/opengraph-image`,
-    description: site.description,
-    slogan: site.tagline,
+    description: c.site.description,
+    slogan: c.site.tagline,
     areaServed: { "@type": "Country", name: "Norge" },
-    makesOffer: packages.map((pkg) => ({
+    makesOffer: c.pricing.packages.map((pkg, i) => ({
       "@type": "Offer",
       name: pkg.name,
       description: pkg.description,
       price: toNumber(pkg.price),
       priceCurrency: "NOK",
-      ...(pkg.period === "per måned"
+      ...(i === 1
         ? {
             priceSpecification: {
               "@type": "UnitPriceSpecification",
@@ -34,11 +37,12 @@ export function businessSchema() {
   };
 }
 
-export function pricingFaqSchema() {
+export function pricingFaqSchema(lang: Lang) {
+  const c = getContent(lang);
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: faqPricing.map((item) => ({
+    mainEntity: c.pricing.faq.map((item) => ({
       "@type": "Question",
       name: item.q,
       acceptedAnswer: { "@type": "Answer", text: item.a },

@@ -13,16 +13,17 @@ npm run build
 
 ## Struktur
 
-- `src/content/site.ts` – **all tekst og alle priser** på ett sted.
-- `src/app/` – sidene: forside (`page.tsx`), `hvorfor`, `tjenester`, `prosess`, `priser`, `om`, `kontakt`, `personvern` og `not-found`.
-- `src/app/layout.tsx` – felles meny (`Header`) og bunn (`Footer`) for alle sider.
-- `src/components/` – gjenbrukbare deler: `PageHero`, `PricingCards`, `Faq`, `CtaBand`, `Reveal` (inntoning), `Logo`.
-- `src/lib/ui.ts` – felles knapper og marger. `src/lib/meta.ts` – tittel og beskrivelse per side.
-- `public/brand/` – logofilene (navy/krem, liggende, monogram, app-ikoner). Navy #071630 · Krem #FAF8F5.
+- **To språk:** norsk på `/`, engelsk på `/en`. Hvert språk har sin egen rot-layout (`src/app/(no)` og `src/app/(en)`), så `<html lang>` alltid er riktig.
+- `src/content/no.ts` og `src/content/en.ts` – **all tekst**, med samme oppbygning. `src/content/shared.ts` – e-post, org.nr. og priser.
+- `src/content/demos.ts` – de 30 eksempelbedriftene (alle oppdiktet) i demo-galleriet.
+- `src/views/` – sidene, skrevet én gang og brukt på begge språk. `src/app/(no|en)/…/page.tsx` er tynne innganger med metadata.
+- `src/lib/routes.ts` – adressene på begge språk og språkvelgeren.
+- `src/components/` – felles deler: `Header`, `Footer`, `PageHero`, `PricingCards`, `AgencyCompare`, `Faq`, `CtaBand`, `Reveal`, og `demo/` (galleri og eksempelnettside).
+- `public/brand/` – logofilene. Navy #071630 · Krem #FAF8F5.
 
 ## Før lansering
 
-- [ ] Bekreft e-postadresse (`site.email`) og legg inn org.nr. (`site.orgNr`)
+- [ ] Bekreft e-postadresse (`site.email`) og legg inn org.nr. (`site.orgNr`) i `src/content/shared.ts`
 - [ ] Les gjennom personvernsiden (`src/app/personvern/page.tsx`)
 - [ ] Kontaktskjemaet åpner e-postprogrammet (mailto). Koble til et skjema-API ved behov.
 - [ ] Koble domenet `senaywebstudio.no` i Vercel

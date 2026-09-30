@@ -11,6 +11,8 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  // To rot-layouter (norsk og engelsk) krever en global 404-side.
+  experimental: { globalNotFound: true },
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];
   },

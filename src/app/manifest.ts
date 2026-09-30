@@ -1,11 +1,12 @@
 import type { MetadataRoute } from "next";
-import { site } from "@/content/site";
+import { no } from "@/content/no";
+import { site } from "@/content/shared";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
     name: site.name,
     short_name: "Senay Web",
-    description: site.description,
+    description: no.site.description,
     lang: "nb",
     start_url: "/",
     display: "standalone",
