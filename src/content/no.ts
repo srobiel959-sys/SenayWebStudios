@@ -7,7 +7,7 @@ export const no = {
   site: {
     tagline: "Nettsider for bedrifter",
     description:
-      "Senay Web Studio lager raske, profesjonelle nettsider for bedrifter. Vi lager nettsiden gratis – du betaler 4 599 kr først når du er fornøyd og den går live. Drift 799 kr/mnd, ingen binding.",
+      "Senay Web Studio lager raske, profesjonelle nettsider for bedrifter. Vi lager nettsiden gratis – er du fornøyd, betaler du 4 599 kr når den går live og 799 kr/mnd for drift og vedlikehold. Ingen binding.",
     locale: "nb_NO",
   },
 
@@ -79,7 +79,7 @@ export const no = {
     },
     pricing: {
       title: "Priser",
-      description: `0 kr for å lage nettsiden. ${prices.website} kr først når du er fornøyd og den går live. Drift ${prices.hosting} kr/mnd uten binding.`,
+      description: `Én pakke: 0 kr for å lage nettsiden, ${prices.website} kr når den går live og ${prices.hosting} kr/mnd for drift og vedlikehold. Ingen binding.`,
     },
     about: {
       title: "Om oss",
@@ -103,7 +103,7 @@ export const no = {
     lead: "Før noen ringer deg, googler de deg. Vi lager raske, profesjonelle nettsider som gjør at kundene finner deg, stoler på deg og tar kontakt.",
     primaryCta: "Få et gratis forslag",
     secondaryCta: "Se eksempler",
-    points: ["0 kr for å lage nettsiden", `${prices.website} kr når den går live`, "Ingen binding"],
+    points: ["0 kr for å lage nettsiden", `${prices.website} kr når den går live`, `${prices.hosting} kr/mnd for drift`, "Ingen binding"],
   },
 
   explore: {
@@ -117,7 +117,7 @@ export const no = {
       {
         key: "pricing",
         title: "Priser",
-        text: `0 kr for å lage nettsiden. ${prices.website} kr når den går live. Drift ${prices.hosting} kr/mnd.`,
+        text: `Én pakke: 0 kr for å lage nettsiden, ${prices.website} kr når den går live og ${prices.hosting} kr/mnd for drift.`,
       },
       { key: "about", title: "Om oss", text: "Et lite studio med én fast kontaktperson hele veien." },
       { key: "contact", title: "Kontakt", text: "Fortell kort hva du trenger, så tar vi en uforpliktende prat." },
@@ -171,7 +171,7 @@ export const no = {
         "Du eier nettside, domene og innhold",
       ],
     },
-    note: `Vi lager nettsiden helt gratis. Er du fornøyd og vil ha den ut live, betaler du ${prices.website} kr – ikke før.`,
+    note: `Vi lager nettsiden helt gratis. Er du fornøyd, betaler du ${prices.website} kr når den går live og ${prices.hosting} kr/mnd for drift – ikke før.`,
     cta: "Få et gratis forslag",
   },
 
@@ -300,63 +300,46 @@ export const no = {
   // -------------------------------------------------------------------------
   pricing: {
     eyebrow: "Priser",
-    title: "0 kr for å lage nettsiden.",
-    lead: "Vi lager nettsiden helt gratis og uforpliktende. Du betaler først når du er fornøyd og vil ha den ut live. Ingen binding og ingen skjulte gebyrer.",
-    packagesHeading: "Pakker",
-    note: "Er du ikke fornøyd, betaler du ingenting. Trenger du noe utover pakkene, får du et eget tilbud med fast pris før vi starter.",
-    overview: "Oversikt",
+    title: "Én pakke. Alt inkludert.",
+    lead: `Vi lager nettsiden helt gratis og uforpliktende. Er du fornøyd, betaler du ${prices.website} kr når den går live – og ${prices.hosting} kr i måneden for at vi drifter og vedlikeholder den. Ingen binding.`,
+    packagesHeading: "Pakken",
+    note: "Er du ikke fornøyd, betaler du ingenting. Ønsker du noe helt nytt, som en nettbutikk, får du et eget tilbud med fast pris først.",
     faqTitle: "Om pris og betaling.",
-    packages: [
-      {
-        name: "Nettside",
-        price: prices.website,
-        period: "når siden går live",
-        perDay: "0 kr for å lage den – du betaler bare hvis du vil ha den live" as string | null,
-        description: "En komplett, profesjonell nettside – laget gratis, betalt først når du er fornøyd.",
-        features: [
-          "Første forslag på få dager",
-          "Skreddersydd design i dine farger",
-          "Tilpasset mobil, nettbrett og PC",
-          "Kontaktskjema",
-          "Grunnleggende søkemotoroptimalisering",
-          "Opplæring i å oppdatere innhold",
-          "Du eier nettside, domene og innhold",
-        ],
-        cta: "Få et gratis forslag",
-        highlighted: true,
-      },
-      {
-        name: "Drift",
-        price: prices.hosting,
-        period: "per måned",
-        perDay: "Under 27 kr om dagen · ingen binding" as string | null,
-        description: "Nettsiden er din – vi drifter den. Vi holder den oppe, trygg og oppdatert, og gjør endringene du trenger.",
-        features: ["Hosting og drift", "Sikkerhetsoppdateringer", "Endringer når du trenger dem", "Fast kontaktperson", "Ingen binding – si opp når du vil"],
-        cta: "Legg til drift",
-        highlighted: false,
-      },
-    ],
-    included: {
-      title: "Hva er inkludert?",
-      rows: [
-        { feature: "Gratis forslag før du bestemmer deg", website: true, hosting: false },
-        { feature: "Skreddersydd design", website: true, hosting: false },
-        { feature: "Tilpasset mobil, nettbrett og PC", website: true, hosting: false },
-        { feature: "Kontaktskjema", website: true, hosting: false },
-        { feature: "Grunnleggende søkemotoroptimalisering", website: true, hosting: false },
-        { feature: "Opplæring i å oppdatere innhold", website: true, hosting: false },
-        { feature: "Hosting", website: false, hosting: true },
-        { feature: "Sikkerhetsoppdateringer", website: false, hosting: true },
-        { feature: "Endringer når du trenger dem", website: false, hosting: true },
-        { feature: "Du eier nettsiden", website: true, hosting: true },
-        { feature: "Fast kontaktperson", website: true, hosting: true },
-        { feature: "Ingen binding", website: true, hosting: true },
+    bundle: {
+      name: "Nettside + drift",
+      badge: "Alt i én pakke",
+      description:
+        "En komplett, profesjonell nettside som vi lager gratis – og som vi drifter, holder oppdatert og endrer for deg etterpå.",
+      steps: [
+        { price: "0", label: "for å lage nettsiden", note: "Du ser resultatet før du betaler" },
+        { price: prices.website, label: "når nettsiden går live", note: "Engangsbeløp – bare hvis du er fornøyd" },
+        { price: prices.hosting, label: "per måned", note: "Drift og vedlikehold · under 27 kr om dagen" },
       ],
+      featuresTitle: "Dette er inkludert",
+      features: [
+        "Første forslag på få dager",
+        "Skreddersydd design i dine farger",
+        "Tilpasset mobil, nettbrett og PC",
+        "Kontaktskjema",
+        "Grunnleggende søkemotoroptimalisering",
+        "Hosting og drift",
+        "Sikkerhetsoppdateringer",
+        "Endringer når du trenger dem",
+        "Opplæring i å oppdatere innhold",
+        "Fast kontaktperson",
+        "Du eier nettside, domene og innhold",
+        "Ingen binding – si opp når du vil",
+      ],
+      cta: "Få et gratis forslag",
     },
     faq: [
       {
         q: "Hva koster det?",
-        a: `Det koster 0 kr å få laget nettsiden. Er du fornøyd og vil ha den ut live, betaler du ${prices.website} kr én gang. Vil du at vi drifter den, koster det ${prices.hosting} kr per måned – uten binding.`,
+        a: `Det koster 0 kr å få laget nettsiden. Er du fornøyd og vil ha den ut live, betaler du ${prices.website} kr én gang, og deretter ${prices.hosting} kr i måneden for drift og vedlikehold. Ingen binding.`,
+      },
+      {
+        q: `Hva får jeg for ${prices.hosting} kr i måneden?`,
+        a: "Vi holder nettsiden oppe, trygg og oppdatert: hosting, sikkerhetsoppdateringer og endringene du trenger. Du sier bare fra, så fikser vi det.",
       },
       {
         q: "Hva om jeg ikke blir fornøyd?",
@@ -364,19 +347,15 @@ export const no = {
       },
       {
         q: "Hvem eier nettsiden?",
-        a: "Du. Nettsiden, domenet og innholdet er ditt. Med Drift tar vi oss av driften for deg – eierskapet blir alltid hos deg, også hvis du en dag vil bytte leverandør.",
+        a: "Du. Nettsiden, domenet og innholdet er ditt. Vi drifter den for deg – eierskapet blir alltid hos deg, også hvis du en dag vil bytte leverandør.",
       },
       {
         q: "Kommer det noe i tillegg?",
-        a: "Nei. Prisen du ser er prisen du betaler. Trenger du noe utover pakkene, får du et eget tilbud med fast pris før vi starter – og du bestemmer selv om du vil ha det.",
+        a: `Nei. ${prices.website} kr når siden går live og ${prices.hosting} kr i måneden – det er alt. Ønsker du noe helt nytt, som en nettbutikk, får du et eget tilbud med fast pris først, og du bestemmer selv om du vil ha det.`,
       },
       {
-        q: "Hva er forskjellen på Nettside og Drift?",
-        a: "Nettside er selve jobben: design, utvikling og lansering, betalt én gang. Drift er det som skjer etterpå: vi drifter nettsiden din, holder den oppdatert og gjør endringene du trenger, for en fast månedspris.",
-      },
-      {
-        q: "Hva om jeg vil endre noe senere?",
-        a: "Med Drift sier du bare fra, så gjør vi endringene for deg – det er inkludert i månedsprisen. Ønsker du noe helt nytt, som en nettbutikk, får du et eget tilbud med fast pris først.",
+        q: "Kan jeg si opp?",
+        a: "Ja. Det er ingen binding på den månedlige prisen. Nettsiden er fortsatt din.",
       },
     ],
   },
@@ -410,7 +389,7 @@ export const no = {
     },
     {
       q: "Jeg er ikke teknisk. Klarer jeg dette?",
-      a: "Ja. Vi tar oss av alt det tekniske, og du får opplæring i å oppdatere innholdet selv. Har du Drift, gjør vi endringene for deg.",
+      a: "Ja. Vi tar oss av alt det tekniske, og du får opplæring i å oppdatere innholdet selv. Endringene gjør vi for deg – det er inkludert i driften.",
     },
     {
       q: "Hva trenger dere fra meg?",
@@ -456,7 +435,7 @@ export const no = {
 
   cta: {
     title: "Få nettsiden laget – helt gratis.",
-    lead: `0 kr for å lage den. ${prices.website} kr først når du er fornøyd og vil ha den live. Ingen binding.`,
+    lead: `0 kr for å lage den. ${prices.website} kr når den går live, og ${prices.hosting} kr/mnd for drift. Ingen binding.`,
     primary: "Få et gratis forslag",
     secondary: "Se hva som er inkludert",
   },
