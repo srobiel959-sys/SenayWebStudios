@@ -25,6 +25,15 @@ html {
   }
 }
 
+/* Bodoni med fastsatt optisk størrelse og litt mer vekt: tydelige streker som er
+   lette å lese, også i store overskrifter (standard gir svært tynne hårstreker). */
+.font-display {
+  font-weight: 500;
+  font-optical-sizing: none;
+  font-variation-settings: "opsz" 11;
+  letter-spacing: -0.01em;
+}
+
 body {
   background: var(--color-cream);
   color: var(--color-navy);

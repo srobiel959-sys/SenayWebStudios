@@ -1,15 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { CtaBand } from "@/components/CtaBand";
-import { Faq } from "@/components/Faq";
 import { JsonLd } from "@/components/JsonLd";
-import { ArrowIcon, CheckIcon, CrossIcon } from "@/components/Icons";
+import { ArrowIcon } from "@/components/Icons";
 import { Monogram } from "@/components/Logo";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
-import { comparison, faqGeneral, hero, prices, process, services, site, why } from "@/content/site";
+import { explore, hero, site } from "@/content/site";
 import { businessSchema } from "@/lib/schema";
-import { btnLight, btnPrimary, btnSecondary, container } from "@/lib/ui";
+import { btnPrimary, btnSecondary, container } from "@/lib/ui";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
@@ -60,168 +59,44 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Hvorfor nettside */}
-      <section aria-labelledby="hvorfor-tittel" className="py-24 sm:py-32">
+      {/* Innganger til sidene */}
+      <section aria-labelledby="utforsk-tittel" className="py-24 sm:py-32">
         <div className={container}>
           <Reveal>
-            <SectionHeading id="hvorfor-tittel" eyebrow={why.eyebrow} title={why.title} lead={why.lead} />
-          </Reveal>
-          <ul className="mt-16 grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
-            {why.items.map((item, i) => (
-              <li key={item.title}>
-                <Reveal delay={i * 90} className="h-full border-t border-navy pt-6">
-                  <span className="text-sm text-ink-muted">{String(i + 1).padStart(2, "0")}</span>
-                  <h3 className="mt-3 font-display text-2xl leading-snug">{item.title}</h3>
-                  <p className="mt-3 leading-relaxed text-ink-muted">{item.text}</p>
-                </Reveal>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      {/* Uten / med nettside */}
-      <section aria-labelledby="forskjell-tittel" className="border-y border-line bg-sand py-24 sm:py-32">
-        <div className={container}>
-          <Reveal>
-            <SectionHeading id="forskjell-tittel" eyebrow={comparison.eyebrow} title={comparison.title} />
-          </Reveal>
-          <div className="mt-16 grid gap-6 lg:grid-cols-2">
-            <Reveal className="h-full rounded-2xl border border-line bg-cream p-8 sm:p-10">
-              <h3 className="font-display text-2xl">{comparison.without.title}</h3>
-              <ul className="mt-6 space-y-4">
-                {comparison.without.items.map((item) => (
-                  <li key={item} className="flex gap-3 text-ink-muted">
-                    <CrossIcon />
-                    <span>
-                      <span className="sr-only">Ulempe: </span>
-                      {item}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </Reveal>
-            <Reveal delay={120} className="h-full rounded-2xl bg-navy p-8 text-cream sm:p-10">
-              <h3 className="font-display text-2xl">{comparison.with.title}</h3>
-              <ul className="mt-6 space-y-4">
-                {comparison.with.items.map((item) => (
-                  <li key={item} className="flex gap-3">
-                    <CheckIcon />
-                    <span>
-                      <span className="sr-only">Fordel: </span>
-                      {item}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-              <Link href="/kontakt" className={`${btnLight} mt-10`}>
-                Jeg vil bli funnet
-                <ArrowIcon />
-              </Link>
-            </Reveal>
-          </div>
-        </div>
-      </section>
-
-      {/* Tjenester (kort) */}
-      <section aria-labelledby="tjenester-tittel" className="py-24 sm:py-32">
-        <div className={container}>
-          <Reveal className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
-            <SectionHeading id="tjenester-tittel" eyebrow={services.eyebrow} title={services.title} />
-            <Link href="/tjenester" className="group inline-flex shrink-0 items-center gap-2 font-medium">
-              Alle tjenester
-              <ArrowIcon className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </Link>
-          </Reveal>
-          <ul className="mt-16 grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2">
-            {services.items.map((item, i) => (
-              <li key={item.title} className="bg-cream">
-                <Reveal delay={i * 80} className="h-full p-8 sm:p-10">
-                  <span className="text-sm text-ink-muted">{String(i + 1).padStart(2, "0")}</span>
-                  <h3 className="mt-3 font-display text-2xl">{item.title}</h3>
-                  <p className="mt-3 leading-relaxed text-ink-muted">{item.text}</p>
-                </Reveal>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      {/* Prosess (kort) */}
-      <section aria-labelledby="prosess-tittel" className="bg-navy py-24 text-cream sm:py-32">
-        <div className={container}>
-          <Reveal className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
-            <SectionHeading id="prosess-tittel" eyebrow={process.eyebrow} title={process.title} tone="dark" />
-            <Link href="/prosess" className="group inline-flex shrink-0 items-center gap-2 font-medium">
-              Se hele prosessen
-              <ArrowIcon className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </Link>
-          </Reveal>
-          <ol className="mt-16 grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
-            {process.steps.map((step, i) => (
-              <li key={step.title}>
-                <Reveal delay={i * 90} className="border-t border-cream-muted/40 pt-6">
-                  <span className="font-display text-5xl" aria-hidden="true">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <h3 className="mt-4 text-xl font-medium">
-                    <span className="sr-only">Steg {i + 1}: </span>
-                    {step.title}
-                  </h3>
-                  <p className="mt-3 leading-relaxed text-cream-muted">{step.text}</p>
-                </Reveal>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
-
-      {/* Priser (kort) */}
-      <section aria-labelledby="priser-tittel" className="py-24 sm:py-32">
-        <div className={`${container} grid gap-12 lg:grid-cols-12 lg:items-end`}>
-          <Reveal className="lg:col-span-5">
             <SectionHeading
-              id="priser-tittel"
-              eyebrow="Priser"
-              title="Én fast pris. Ingen overraskelser."
-              lead="Én ny kunde kan være nok til å betale for hele nettsiden."
+              id="utforsk-tittel"
+              eyebrow="Utforsk"
+              title="Alt du trenger å vite, én side om gangen."
+              lead="Les deg opp i ditt eget tempo – eller gå rett til prisene."
             />
           </Reveal>
-          <Reveal delay={120} className="lg:col-span-7">
-            <dl className="grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2">
-              <div className="bg-cream p-8">
-                <dt className="font-display text-2xl">Nettside</dt>
-                <dd className="mt-6 flex items-baseline gap-2">
-                  <span className="text-sm">kr</span>
-                  <span className="text-5xl font-medium tracking-tight">{prices.website}</span>
-                  <span className="text-sm text-ink-muted">engangspris</span>
-                </dd>
-              </div>
-              <div className="bg-cream p-8">
-                <dt className="font-display text-2xl">Drift</dt>
-                <dd className="mt-6 flex items-baseline gap-2">
-                  <span className="text-sm">kr</span>
-                  <span className="text-5xl font-medium tracking-tight">{prices.hosting}</span>
-                  <span className="text-sm text-ink-muted">per måned</span>
-                </dd>
-              </div>
-            </dl>
-            <Link href="/priser" className={`${btnSecondary} mt-6`}>
-              Se hva som er inkludert
-            </Link>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* Spørsmål */}
-      <section aria-labelledby="sporsmal-tittel" className="border-t border-line py-24 sm:py-32">
-        <div className={`${container} grid gap-12 lg:grid-cols-12`}>
-          <Reveal className="lg:col-span-4">
-            <SectionHeading id="sporsmal-tittel" eyebrow="Spørsmål" title="Det du lurer på." />
-          </Reveal>
-          <Reveal delay={100} className="lg:col-span-8">
-            <Faq items={faqGeneral} />
-          </Reveal>
+          <ul className="mt-16 grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
+            {explore.map((item, i) => {
+              const last = i === explore.length - 1;
+              return (
+                <li key={item.href} className={last ? "bg-navy text-cream" : "bg-cream"}>
+                  <Link
+                    href={item.href}
+                    className={`group flex h-full flex-col p-8 transition-colors duration-300 sm:p-10 ${
+                      last ? "hover:bg-navy-soft" : "hover:bg-sand"
+                    }`}
+                  >
+                    <span className={`text-sm font-medium ${last ? "text-cream-muted" : "text-ink-muted"}`}>
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <h3 className="mt-4 font-display text-3xl">{item.title}</h3>
+                    <p className={`mt-3 flex-1 leading-relaxed ${last ? "text-cream-muted" : "text-ink-muted"}`}>
+                      {item.text}
+                    </p>
+                    <span className="mt-8 inline-flex items-center gap-2 font-medium">
+                      {last ? "Ta kontakt" : "Les mer"}
+                      <ArrowIcon className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1.5" />
+                    </span>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
         </div>
       </section>
 

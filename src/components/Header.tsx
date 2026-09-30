@@ -22,8 +22,8 @@ export function Header() {
           <Logo alt="" preload className="h-7 w-auto sm:h-8" />
         </Link>
 
-        <nav aria-label="Hovedmeny" className="hidden md:block">
-          <ul className="flex items-center gap-9 text-[0.95rem]">
+        <nav aria-label="Hovedmeny" className="hidden lg:block">
+          <ul className="flex items-center gap-8 text-[0.95rem]">
             {nav.map((item) => {
               const active = isActive(pathname, item.href);
               return (
@@ -45,14 +45,14 @@ export function Header() {
 
         <Link
           href="/kontakt"
-          className="hidden rounded-full bg-navy px-5 py-2.5 text-sm font-medium text-cream transition-colors hover:bg-navy-soft md:inline-block"
+          className="hidden rounded-full bg-navy px-5 py-2.5 text-sm font-medium text-cream transition-colors hover:bg-navy-soft lg:inline-block"
         >
           Be om tilbud
         </Link>
 
         <button
           type="button"
-          className="-mr-2 inline-flex h-11 w-11 items-center justify-center md:hidden"
+          className="-mr-2 inline-flex h-11 w-11 items-center justify-center lg:hidden"
           aria-expanded={open}
           aria-controls="mobilmeny"
           onClick={() => setOpen((v) => !v)}
@@ -68,7 +68,7 @@ export function Header() {
         </button>
       </div>
 
-      <nav id="mobilmeny" aria-label="Mobilmeny" hidden={!open} className="border-t border-line bg-cream md:hidden">
+      <nav id="mobilmeny" aria-label="Mobilmeny" hidden={!open} className="border-t border-line bg-cream lg:hidden">
         <ul className="mx-auto flex max-w-6xl flex-col px-5 py-4">
           {nav.map((item) => {
             const active = isActive(pathname, item.href);

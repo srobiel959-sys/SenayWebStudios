@@ -14,7 +14,7 @@ npm run build
 ## Struktur
 
 - `src/content/site.ts` – **all tekst og alle priser** på ett sted.
-- `src/app/` – sidene: forside (`page.tsx`), `tjenester`, `prosess`, `priser`, `om`, `kontakt`, `personvern` og `not-found`.
+- `src/app/` – sidene: forside (`page.tsx`), `hvorfor`, `tjenester`, `prosess`, `priser`, `om`, `kontakt`, `personvern` og `not-found`.
 - `src/app/layout.tsx` – felles meny (`Header`) og bunn (`Footer`) for alle sider.
 - `src/components/` – gjenbrukbare deler: `PageHero`, `PricingCards`, `Faq`, `CtaBand`, `Reveal` (inntoning), `Logo`.
 - `src/lib/ui.ts` – felles knapper og marger. `src/lib/meta.ts` – tittel og beskrivelse per side.

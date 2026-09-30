@@ -15,6 +15,7 @@ export const site = {
 };
 
 export const nav = [
+  { href: "/hvorfor", label: "Hvorfor nettside" },
   { href: "/tjenester", label: "Tjenester" },
   { href: "/prosess", label: "Prosess" },
   { href: "/priser", label: "Priser" },
@@ -145,6 +146,40 @@ export const comparison = {
     ],
   },
 };
+
+// Forsiden: innganger til hver side.
+export const explore = [
+  {
+    href: "/hvorfor",
+    title: "Hvorfor nettside",
+    text: "Hva en nettside gjør for bedriften din – og hva det koster å ikke ha en.",
+  },
+  {
+    href: "/tjenester",
+    title: "Tjenester",
+    text: "Design, utvikling, synlighet i søk og drift. Alt samlet ett sted.",
+  },
+  {
+    href: "/prosess",
+    title: "Prosess",
+    text: "Fire tydelige steg fra første samtale til ferdig nettside.",
+  },
+  {
+    href: "/priser",
+    title: "Priser",
+    text: `Nettside ${prices.website} kr. Drift ${prices.hosting} kr/mnd. Prisen du ser er prisen du betaler.`,
+  },
+  {
+    href: "/om",
+    title: "Om oss",
+    text: "Et lite studio med én fast kontaktperson hele veien.",
+  },
+  {
+    href: "/kontakt",
+    title: "Kontakt",
+    text: "Fortell kort hva du trenger, så tar vi en uforpliktende prat.",
+  },
+];
 
 // ---------------------------------------------------------------------------
 // Tjenester
