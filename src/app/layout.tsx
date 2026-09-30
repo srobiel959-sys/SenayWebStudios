@@ -64,12 +64,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html
       lang="nb"
       className={`${bodoni.variable} ${jost.variable} h-full antialiased`}
-      suppressHydrationWarning
     >
-      <head>
-        {/* Slår på inntoning kun når JavaScript kjører (se .reveal i globals.css). */}
-        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
-      </head>
       <body className="flex min-h-full flex-col">
         <a
           href="#innhold"

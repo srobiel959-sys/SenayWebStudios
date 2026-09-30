@@ -11,6 +11,17 @@ const fieldClass =
 
 export function ContactForm() {
   const [sent, setSent] = useState(false);
+  const [copied, setCopied] = useState(false);
+
+  // Reserveløsning for dem som ikke har et e-postprogram satt opp.
+  async function copyEmail() {
+    try {
+      await navigator.clipboard.writeText(site.email);
+      setCopied(true);
+    } catch {
+      setCopied(false);
+    }
+  }
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -68,12 +79,24 @@ export function ContactForm() {
         >
           Send henvendelse
         </button>
-        <p role="status" aria-live="polite" className="text-sm text-cream-muted">
-          {sent
-            ? "Takk! E-postprogrammet ditt skal nå åpne seg med meldingen klar til sending."
-            : null}
+        <p role="status" aria-live="polite" className="text-sm text-cream-muted sm:text-right">
+          {sent ? "Takk! E-postprogrammet ditt skal nå åpne seg med meldingen klar til sending." : null}
         </p>
       </div>
+      {sent ? (
+        <div className="rounded-xl border border-cream-muted/30 p-5 text-sm text-cream-muted sm:col-span-2">
+          <p>
+            Åpnet det seg ikke noe? Send meldingen direkte til <span className="text-cream">{site.email}</span>.
+          </p>
+          <button
+            type="button"
+            onClick={copyEmail}
+            className="mt-3 rounded-full border border-cream-muted/60 px-4 py-2 text-cream transition-colors hover:bg-cream hover:text-navy"
+          >
+            {copied ? "Kopiert!" : "Kopier e-postadressen"}
+          </button>
+        </div>
+      ) : null}
     </form>
   );
 }

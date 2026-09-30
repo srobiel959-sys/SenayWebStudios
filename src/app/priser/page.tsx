@@ -1,5 +1,6 @@
 import { CtaBand } from "@/components/CtaBand";
 import { Faq } from "@/components/Faq";
+import { JsonLd } from "@/components/JsonLd";
 import { CheckIcon } from "@/components/Icons";
 import { PageHero } from "@/components/PageHero";
 import { PricingCards } from "@/components/PricingCards";
@@ -7,6 +8,7 @@ import { Reveal } from "@/components/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
 import { faqPricing, included, prices } from "@/content/site";
 import { pageMeta } from "@/lib/meta";
+import { pricingFaqSchema } from "@/lib/schema";
 import { container } from "@/lib/ui";
 
 export const metadata = pageMeta(
@@ -18,14 +20,18 @@ export const metadata = pageMeta(
 export default function PriserPage() {
   return (
     <>
+      <JsonLd data={pricingFaqSchema()} />
       <PageHero
         eyebrow="Priser"
         title="Prisen du ser er prisen du betaler."
         lead="To tydelige pakker med fast pris. Ingen timepriser, ingen skjulte tillegg og ingen overraskelser."
       />
 
-      <section aria-label="Pakker" className="py-20 sm:py-28">
+      <section aria-labelledby="pakker-tittel" className="py-20 sm:py-28">
         <div className={container}>
+          <h2 id="pakker-tittel" className="sr-only">
+            Pakker
+          </h2>
           <Reveal>
             <PricingCards />
           </Reveal>

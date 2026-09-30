@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { CtaBand } from "@/components/CtaBand";
 import { Faq } from "@/components/Faq";
+import { JsonLd } from "@/components/JsonLd";
 import { ArrowIcon, CheckIcon, CrossIcon } from "@/components/Icons";
 import { Monogram } from "@/components/Logo";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
 import { comparison, faqGeneral, hero, prices, process, services, site, why } from "@/content/site";
+import { businessSchema } from "@/lib/schema";
 import { btnLight, btnPrimary, btnSecondary, container } from "@/lib/ui";
 
 export const metadata: Metadata = {
@@ -17,6 +19,8 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
+      <JsonLd data={businessSchema()} />
+
       {/* Hero */}
       <section aria-labelledby="hero-tittel" className="relative overflow-hidden border-b border-line">
         <div className={`${container} grid min-h-[calc(100svh-5rem)] items-center gap-12 py-16 sm:py-24 lg:grid-cols-12`}>
@@ -24,7 +28,7 @@ export default function Home() {
             <p className="hero-in text-sm font-medium uppercase tracking-[0.22em] text-ink-muted">{hero.eyebrow}</p>
             <h1
               id="hero-tittel"
-              className="hero-in hero-in-2 mt-6 font-display text-[2.75rem] leading-[1.02] tracking-tight sm:text-7xl lg:text-[5.5rem]"
+              className="hero-in hero-in-2 mt-6 font-display text-[2.75rem] leading-[1.02] tracking-tight sm:text-7xl lg:text-[4.75rem] xl:text-[5.25rem]"
             >
               {hero.title} <em className="not-italic text-ink-muted">{hero.titleAccent}</em>
             </h1>

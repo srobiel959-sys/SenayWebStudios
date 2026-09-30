@@ -19,7 +19,7 @@ export function Header() {
     <header className="sticky top-0 z-40 border-b border-line bg-cream/90 backdrop-blur-md supports-[backdrop-filter]:bg-cream/80">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:h-20 sm:px-8">
         <Link href="/" aria-label="Senay Web Studio – til forsiden" onClick={close}>
-          <Logo alt="" priority className="h-7 w-auto sm:h-8" />
+          <Logo alt="" preload className="h-7 w-auto sm:h-8" />
         </Link>
 
         <nav aria-label="Hovedmeny" className="hidden md:block">
