@@ -1,11 +1,12 @@
 import Link from "next/link";
-import { packages } from "@/content/site";
+import type { Content } from "@/content";
+import { href, type Lang } from "@/lib/routes";
 import { CheckIcon } from "./Icons";
 
-export function PricingCards() {
+export function PricingCards({ lang, c }: { lang: Lang; c: Content }) {
   return (
     <ul className="grid gap-6 md:grid-cols-2">
-      {packages.map((pkg) => {
+      {c.pricing.packages.map((pkg) => {
         const muted = pkg.highlighted ? "text-cream-muted" : "text-ink-muted";
         return (
           <li
@@ -18,14 +19,14 @@ export function PricingCards() {
               <h3 className="font-display text-3xl">{pkg.name}</h3>
               {pkg.highlighted ? (
                 <span className="rounded-full border border-cream-muted/60 px-3 py-1 text-xs uppercase tracking-wider">
-                  Start her
+                  {c.ui.startHere}
                 </span>
               ) : null}
             </div>
             <p className={`mt-3 leading-relaxed ${muted}`}>{pkg.description}</p>
 
             <p className="mt-10 flex items-baseline gap-2">
-              <span className="text-sm">kr</span>
+              <span className="text-sm">{c.ui.kr}</span>
               <span className="text-5xl font-medium tracking-tight">{pkg.price}</span>
               <span className={`text-sm ${muted}`}>{pkg.period}</span>
             </p>
@@ -41,7 +42,7 @@ export function PricingCards() {
             </ul>
 
             <Link
-              href="/kontakt"
+              href={href(lang, "contact")}
               className={`mt-10 inline-flex items-center justify-center rounded-full px-6 py-3.5 font-medium transition-colors ${
                 pkg.highlighted ? "bg-cream text-navy hover:bg-sand" : "border border-navy hover:bg-navy hover:text-cream"
               }`}

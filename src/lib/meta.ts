@@ -1,18 +1,24 @@
 import type { Metadata } from "next";
-import { site } from "@/content/site";
+import { getContent } from "@/content";
+import { site } from "@/content/shared";
+import { alternates, href, type Lang, type PageKey } from "./routes";
 
-// Metadata per side: tittel, beskrivelse og riktig kanonisk adresse.
-export function pageMeta(title: string, description: string, path: string): Metadata {
+// Metadata per side og språk: tittel, beskrivelse, kanonisk adresse og språkversjoner.
+export function pageMeta(lang: Lang, key: PageKey): Metadata {
+  const c = getContent(lang);
+  const m = c.meta[key];
+  const description = m.description || c.site.description;
+  const path = href(lang, key);
   return {
-    title,
+    title: key === "home" ? { absolute: m.title } : m.title,
     description,
-    alternates: { canonical: path },
+    alternates: { canonical: path, languages: alternates(key) },
     openGraph: {
       type: "website",
-      locale: site.locale,
+      locale: c.site.locale,
       url: path,
       siteName: site.name,
-      title: `${title} | ${site.name}`,
+      title: key === "home" ? m.title : `${m.title} | ${site.name}`,
       description,
     },
   };

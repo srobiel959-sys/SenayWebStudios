@@ -11,14 +11,17 @@ type LogoProps = {
   tone?: Tone;
   /** Sett tom alt når logoen står i en lenke som allerede har tilgjengelig tekst */
   alt?: string;
-  priority?: boolean;
+  /** Last inn tidlig (logoen øverst på siden) */
+  preload?: boolean;
+  loading?: "eager" | "lazy";
 };
 
 export function Logo({
   className = "h-8 w-auto",
   tone = "dark",
   alt = "Senay Web Studio",
-  priority,
+  preload,
+  loading,
 }: LogoProps) {
   return (
     <Image
@@ -27,7 +30,8 @@ export function Logo({
       width={484}
       height={80}
       className={className}
-      priority={priority}
+      preload={preload}
+      loading={loading}
     />
   );
 }
