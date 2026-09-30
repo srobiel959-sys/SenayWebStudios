@@ -1,5 +1,6 @@
 import type { CSSProperties } from "react";
 import type { Demo } from "@/content/demos";
+import { Scene } from "./Scene";
 
 // En komplett eksempelnettside bygget fra bransjedataene i content/demos.ts.
 // Bruker container queries (@container), så den tilpasser seg bredden den får –
@@ -7,7 +8,12 @@ import type { Demo } from "@/content/demos";
 
 function Pattern({ color }: { color: string }) {
   return (
-    <svg className="absolute inset-0 h-full w-full" aria-hidden="true" preserveAspectRatio="xMidYMid slice" viewBox="0 0 400 400">
+    <svg
+      className="absolute inset-0 h-full w-full"
+      aria-hidden="true"
+      preserveAspectRatio="xMidYMid slice"
+      viewBox="0 0 400 400"
+    >
       {[60, 110, 160, 210, 260].map((r) => (
         <circle key={r} cx="330" cy="330" r={r} fill="none" stroke={color} strokeOpacity="0.2" strokeWidth="1" />
       ))}
@@ -21,7 +27,9 @@ const btn = "inline-flex items-center justify-center rounded-full px-6 py-3 text
 function Buttons({ cta, light = false }: { cta: string; light?: boolean }) {
   return (
     <div className="mt-8 flex flex-wrap gap-3">
-      <span className={`${btn} ${light ? "bg-[var(--d-on)] text-[var(--d-primary)]" : "bg-[var(--d-primary)] text-[var(--d-on)]"}`}>
+      <span
+        className={`${btn} ${light ? "bg-[var(--d-on)] text-[var(--d-primary)]" : "bg-[var(--d-primary)] text-[var(--d-on)]"}`}
+      >
         {cta}
       </span>
       <span
@@ -54,7 +62,9 @@ export function DemoSite({ demo, fictionalLabel }: { demo: Demo; fictionalLabel:
         {/* Meny */}
         <header className="flex items-center justify-between gap-4 border-b border-[var(--d-fg)]/10 px-5 py-4 @3xl:px-12 @3xl:py-5">
           <span className="flex items-center gap-3">
-            <span className={`flex h-9 w-9 items-center justify-center rounded-full bg-[var(--d-primary)] text-base text-[var(--d-on)] ${heading}`}>
+            <span
+              className={`flex h-9 w-9 items-center justify-center rounded-full bg-[var(--d-primary)] text-base text-[var(--d-on)] ${heading}`}
+            >
               {initial}
             </span>
             <span className={`text-lg ${heading}`}>{demo.name}</span>
@@ -64,7 +74,9 @@ export function DemoSite({ demo, fictionalLabel }: { demo: Demo; fictionalLabel:
             <span>Om oss</span>
             <span>Kontakt</span>
           </nav>
-          <span className={`${btn} hidden bg-[var(--d-primary)] px-5 py-2.5 text-[var(--d-on)] @md:inline-flex`}>{demo.cta}</span>
+          <span className={`${btn} hidden bg-[var(--d-primary)] px-5 py-2.5 text-[var(--d-on)] @md:inline-flex`}>
+            {demo.cta}
+          </span>
         </header>
 
         {/* Hero – tre varianter */}
@@ -76,9 +88,8 @@ export function DemoSite({ demo, fictionalLabel }: { demo: Demo; fictionalLabel:
               <p className="mt-6 max-w-md text-lg leading-relaxed text-[var(--d-muted)]">{demo.text}</p>
               <Buttons cta={demo.cta} />
             </div>
-            <div className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-[var(--d-primary)] text-[var(--d-on)]">
-              <Pattern color={theme.onPrimary} />
-              <span className={`absolute left-8 top-4 text-[9rem] leading-none opacity-90 @3xl:text-[12rem] ${heading}`}>{initial}</span>
+            <div className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-[var(--d-soft)]">
+              <Scene slug={demo.slug} className="absolute inset-0 h-full w-full p-4 pb-16 @3xl:p-8 @3xl:pb-20" />
               <div className="absolute bottom-5 right-5 rounded-2xl bg-[var(--d-bg)] p-5 text-[var(--d-fg)] shadow-lg">
                 <p className="text-xs font-medium uppercase tracking-[0.18em] text-[var(--d-muted)]">Åpningstider</p>
                 <ul className="mt-2 space-y-0.5 text-sm">
@@ -97,9 +108,15 @@ export function DemoSite({ demo, fictionalLabel }: { demo: Demo; fictionalLabel:
             <div className="flex justify-center">
               <Buttons cta={demo.cta} />
             </div>
-            <ul className="mx-auto mt-12 flex max-w-3xl flex-wrap justify-center gap-3">
+            <div className="mx-auto mt-12 aspect-[16/8] max-w-3xl overflow-hidden rounded-3xl bg-[var(--d-bg)]">
+              <Scene slug={demo.slug} className="h-full w-full p-4 @3xl:p-6" />
+            </div>
+            <ul className="mx-auto mt-8 flex max-w-3xl flex-wrap justify-center gap-3">
               {demo.services.slice(0, 3).map((s) => (
-                <li key={s.name} className="rounded-full border border-[var(--d-fg)]/15 bg-[var(--d-bg)] px-4 py-2 text-sm">
+                <li
+                  key={s.name}
+                  className="rounded-full border border-[var(--d-fg)]/15 bg-[var(--d-bg)] px-4 py-2 text-sm"
+                >
                   {s.name}
                 </li>
               ))}
@@ -115,14 +132,19 @@ export function DemoSite({ demo, fictionalLabel }: { demo: Demo; fictionalLabel:
                 <p className="mt-6 max-w-md text-lg leading-relaxed opacity-80">{demo.text}</p>
                 <Buttons cta={demo.cta} light />
               </div>
-              <ul className="divide-y divide-[var(--d-on)]/20 border-y border-[var(--d-on)]/20">
-                {demo.services.slice(0, 3).map((s) => (
-                  <li key={s.name} className="flex items-baseline justify-between gap-4 py-3">
-                    <span>{s.name}</span>
-                    <span className="text-sm opacity-75">{s.price}</span>
-                  </li>
-                ))}
-              </ul>
+              <div>
+                <div className="mb-6 aspect-[4/3] overflow-hidden rounded-3xl bg-[var(--d-soft)]">
+                  <Scene slug={demo.slug} className="h-full w-full p-4 @3xl:p-6" />
+                </div>
+                <ul className="divide-y divide-[var(--d-on)]/20 border-y border-[var(--d-on)]/20">
+                  {demo.services.slice(0, 3).map((s) => (
+                    <li key={s.name} className="flex items-baseline justify-between gap-4 py-3">
+                      <span>{s.name}</span>
+                      <span className="text-sm opacity-75">{s.price}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </section>
         )}
@@ -132,7 +154,10 @@ export function DemoSite({ demo, fictionalLabel }: { demo: Demo; fictionalLabel:
           <h2 className={`text-3xl @3xl:text-4xl ${heading}`}>Tjenester og priser</h2>
           <ul className="mt-8 grid gap-4 @3xl:grid-cols-2">
             {demo.services.map((s) => (
-              <li key={s.name} className="flex items-baseline justify-between gap-4 rounded-2xl bg-[var(--d-soft)] px-6 py-5">
+              <li
+                key={s.name}
+                className="flex items-baseline justify-between gap-4 rounded-2xl bg-[var(--d-soft)] px-6 py-5"
+              >
                 <span className="font-medium">{s.name}</span>
                 <span className="text-sm text-[var(--d-muted)]">{s.price}</span>
               </li>
