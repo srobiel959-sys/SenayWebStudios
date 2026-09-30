@@ -237,8 +237,8 @@ export const en: Content = {
       },
       {
         title: "Hosting and care",
-        text: "We keep your website live, secure and up to date, and take care of small changes, so you can spend your time on what you do best.",
-        includes: ["Hosting", "Security updates", "Small changes when needed"],
+        text: "The website is yours – we run it for you. We keep it live, secure and up to date, and make the changes you need, so you can spend your time on what you do best.",
+        includes: ["Hosting and operation", "Security updates", "Changes whenever you need them"],
       },
     ],
   },
@@ -308,8 +308,8 @@ export const en: Content = {
         price: prices.hosting,
         period: "per month",
         perDay: "Less than NOK 27 a day · no lock-in",
-        description: "We keep your website live, secure and up to date, so you can focus on your customers.",
-        features: ["Hosting", "Security updates", "Small changes when needed", "One dedicated contact", "No lock-in – cancel anytime"],
+        description: "The website is yours – we run it. We keep it live, secure and up to date, and make the changes you need.",
+        features: ["Hosting and operation", "Security updates", "Changes whenever you need them", "One dedicated contact", "No lock-in – cancel anytime"],
         cta: "Add hosting",
         highlighted: false,
       },
@@ -325,7 +325,8 @@ export const en: Content = {
         { feature: "Training in updating content", website: true, hosting: false },
         { feature: "Hosting", website: false, hosting: true },
         { feature: "Security updates", website: false, hosting: true },
-        { feature: "Small changes when needed", website: false, hosting: true },
+        { feature: "Changes whenever you need them", website: false, hosting: true },
+        { feature: "You own the website", website: true, hosting: true },
         { feature: "One dedicated contact", website: true, hosting: true },
         { feature: "No lock-in", website: true, hosting: true },
       ],
@@ -341,7 +342,7 @@ export const en: Content = {
       },
       {
         q: "Who owns the website?",
-        a: "You do. The website, domain and content are yours – even if you one day want to switch provider.",
+        a: "You do. The website, domain and content are yours. With Hosting, we take care of running it for you – ownership always stays with you, even if you one day want to switch provider.",
       },
       {
         q: "Is there anything extra?",
@@ -349,11 +350,11 @@ export const en: Content = {
       },
       {
         q: "What's the difference between Website and Hosting?",
-        a: "Website is the job itself: design, development and launch, paid once. Hosting is what happens afterwards: hosting, security updates and small changes, paid monthly.",
+        a: "Website is the job itself: design, development and launch, paid once. Hosting is what happens afterwards: we run your website, keep it up to date and make the changes you need, for a fixed monthly price.",
       },
       {
         q: "What if I want to change something later?",
-        a: "You can update the content yourself after the training. With Hosting, we make small changes for you. Larger changes are agreed at a fixed price in advance.",
+        a: "With Hosting, just let us know and we make the changes for you – it's included in the monthly price. If you want something completely new, like an online shop, you get a separate fixed-price quote first.",
       },
     ],
   },
@@ -381,7 +382,7 @@ export const en: Content = {
     },
     {
       q: "I'm not technical. Can I manage this?",
-      a: "Yes. We handle everything technical, and you get training in updating the content yourself. With Hosting, we make small changes for you.",
+      a: "Yes. We handle everything technical, and you get training in updating the content yourself. With Hosting, we make the changes for you.",
     },
     {
       q: "What do you need from me?",

@@ -253,8 +253,8 @@ export const no = {
       },
       {
         title: "Drift",
-        text: "Vi holder nettsiden oppe, trygg og oppdatert, og tar oss av små endringer, så du kan bruke tiden på det du er best på.",
-        includes: ["Hosting", "Sikkerhetsoppdateringer", "Små endringer ved behov"],
+        text: "Nettsiden er din – vi drifter den for deg. Vi holder den oppe, trygg og oppdatert, og gjør endringene du trenger, så du kan bruke tiden på det du er best på.",
+        includes: ["Hosting og drift", "Sikkerhetsoppdateringer", "Endringer når du trenger dem"],
       },
     ],
   },
@@ -330,8 +330,8 @@ export const no = {
         price: prices.hosting,
         period: "per måned",
         perDay: "Under 27 kr om dagen · ingen binding" as string | null,
-        description: "Vi holder nettsiden oppe, trygg og oppdatert, så du kan fokusere på kundene.",
-        features: ["Hosting", "Sikkerhetsoppdateringer", "Små endringer ved behov", "Fast kontaktperson", "Ingen binding – si opp når du vil"],
+        description: "Nettsiden er din – vi drifter den. Vi holder den oppe, trygg og oppdatert, og gjør endringene du trenger.",
+        features: ["Hosting og drift", "Sikkerhetsoppdateringer", "Endringer når du trenger dem", "Fast kontaktperson", "Ingen binding – si opp når du vil"],
         cta: "Legg til drift",
         highlighted: false,
       },
@@ -347,7 +347,8 @@ export const no = {
         { feature: "Opplæring i å oppdatere innhold", website: true, hosting: false },
         { feature: "Hosting", website: false, hosting: true },
         { feature: "Sikkerhetsoppdateringer", website: false, hosting: true },
-        { feature: "Små endringer ved behov", website: false, hosting: true },
+        { feature: "Endringer når du trenger dem", website: false, hosting: true },
+        { feature: "Du eier nettsiden", website: true, hosting: true },
         { feature: "Fast kontaktperson", website: true, hosting: true },
         { feature: "Ingen binding", website: true, hosting: true },
       ],
@@ -363,7 +364,7 @@ export const no = {
       },
       {
         q: "Hvem eier nettsiden?",
-        a: "Du. Nettsiden, domenet og innholdet er ditt – også hvis du en dag vil bytte leverandør.",
+        a: "Du. Nettsiden, domenet og innholdet er ditt. Med Drift tar vi oss av driften for deg – eierskapet blir alltid hos deg, også hvis du en dag vil bytte leverandør.",
       },
       {
         q: "Kommer det noe i tillegg?",
@@ -371,11 +372,11 @@ export const no = {
       },
       {
         q: "Hva er forskjellen på Nettside og Drift?",
-        a: "Nettside er selve jobben: design, utvikling og lansering, betalt én gang. Drift er det som skjer etterpå: hosting, sikkerhetsoppdateringer og små endringer, betalt månedlig.",
+        a: "Nettside er selve jobben: design, utvikling og lansering, betalt én gang. Drift er det som skjer etterpå: vi drifter nettsiden din, holder den oppdatert og gjør endringene du trenger, for en fast månedspris.",
       },
       {
         q: "Hva om jeg vil endre noe senere?",
-        a: "Du kan oppdatere innholdet selv etter opplæringen. Med Drift gjør vi små endringer for deg. Større endringer avtaler vi en fast pris for på forhånd.",
+        a: "Med Drift sier du bare fra, så gjør vi endringene for deg – det er inkludert i månedsprisen. Ønsker du noe helt nytt, som en nettbutikk, får du et eget tilbud med fast pris først.",
       },
     ],
   },
@@ -409,7 +410,7 @@ export const no = {
     },
     {
       q: "Jeg er ikke teknisk. Klarer jeg dette?",
-      a: "Ja. Vi tar oss av alt det tekniske, og du får opplæring i å oppdatere innholdet selv. Har du Drift, gjør vi små endringer for deg.",
+      a: "Ja. Vi tar oss av alt det tekniske, og du får opplæring i å oppdatere innholdet selv. Har du Drift, gjør vi endringene for deg.",
     },
     {
       q: "Hva trenger dere fra meg?",
