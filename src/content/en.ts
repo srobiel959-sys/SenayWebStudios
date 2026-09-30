@@ -7,7 +7,7 @@ export const en: Content = {
   site: {
     tagline: "Websites for businesses",
     description:
-      "Senay Web Studio builds fast, professional websites for businesses. We build your website for free – you pay NOK 4,599 only when you are happy and it goes live. Hosting NOK 799/mo, no lock-in.",
+      "Senay Web Studio builds fast, professional websites for businesses. We build your website for free – if you are happy, you pay NOK 4,599 when it goes live and NOK 799/mo for hosting and maintenance. No lock-in.",
     locale: "en_GB",
   },
 
@@ -78,7 +78,7 @@ export const en: Content = {
     },
     pricing: {
       title: "Pricing",
-      description: `NOK 0 to build your website. NOK ${prices.website} only when you are happy and it goes live. Hosting NOK ${prices.hosting}/mo with no lock-in.`,
+      description: `One package: NOK 0 to build your website, NOK ${prices.website} when it goes live and NOK ${prices.hosting}/mo for hosting and maintenance. No lock-in.`,
     },
     about: {
       title: "About",
@@ -99,7 +99,7 @@ export const en: Content = {
     lead: "Before anyone calls you, they google you. We build fast, professional websites that help customers find you, trust you and get in touch.",
     primaryCta: "Get a free proposal",
     secondaryCta: "See examples",
-    points: ["NOK 0 to build your website", `NOK ${prices.website} when it goes live`, "No lock-in"],
+    points: ["NOK 0 to build your website", `NOK ${prices.website} when it goes live`, `NOK ${prices.hosting}/mo for hosting`, "No lock-in"],
   },
 
   explore: {
@@ -113,7 +113,7 @@ export const en: Content = {
       {
         key: "pricing",
         title: "Pricing",
-        text: `NOK 0 to build your website. NOK ${prices.website} when it goes live. Hosting NOK ${prices.hosting}/mo.`,
+        text: `One package: NOK 0 to build your website, NOK ${prices.website} when it goes live and NOK ${prices.hosting}/mo for hosting.`,
       },
       { key: "about", title: "About", text: "A small studio with one dedicated contact all the way." },
       { key: "contact", title: "Contact", text: "Tell us briefly what you need and we'll have a no-obligation chat." },
@@ -161,7 +161,7 @@ export const en: Content = {
         "You own the website, domain and content",
       ],
     },
-    note: `We build your website for free. If you are happy and want it live, you pay NOK ${prices.website} – not before.`,
+    note: `We build your website for free. If you are happy, you pay NOK ${prices.website} when it goes live and NOK ${prices.hosting}/mo for hosting – not before.`,
     cta: "Get a free proposal",
   },
 
@@ -278,63 +278,46 @@ export const en: Content = {
 
   pricing: {
     eyebrow: "Pricing",
-    title: "NOK 0 to build your website.",
-    lead: "We build your website completely free and without obligation. You only pay when you are happy and want it live. No lock-in and no hidden fees.",
-    packagesHeading: "Packages",
-    note: "If you are not happy, you pay nothing. If you need something beyond the packages, you get a separate fixed-price quote before we start.",
-    overview: "Overview",
+    title: "One package. Everything included.",
+    lead: `We build your website completely free and without obligation. If you are happy, you pay NOK ${prices.website} when it goes live – and NOK ${prices.hosting} a month for us to run and maintain it. No lock-in.`,
+    packagesHeading: "The package",
+    note: "If you are not happy, you pay nothing. If you want something completely new, like an online shop, you get a separate fixed-price quote first.",
     faqTitle: "About price and payment.",
-    packages: [
-      {
-        name: "Website",
-        price: prices.website,
-        period: "when the site goes live",
-        perDay: "NOK 0 to build it – you only pay if you want it live",
-        description: "A complete, professional website – built for free, paid for only when you are happy.",
-        features: [
-          "First proposal within a few days",
-          "Custom design in your colours",
-          "Works on mobile, tablet and desktop",
-          "Contact form",
-          "Basic search engine optimisation",
-          "Training in updating content",
-          "You own the website, domain and content",
-        ],
-        cta: "Get a free proposal",
-        highlighted: true,
-      },
-      {
-        name: "Hosting",
-        price: prices.hosting,
-        period: "per month",
-        perDay: "Less than NOK 27 a day · no lock-in",
-        description: "The website is yours – we run it. We keep it live, secure and up to date, and make the changes you need.",
-        features: ["Hosting and operation", "Security updates", "Changes whenever you need them", "One dedicated contact", "No lock-in – cancel anytime"],
-        cta: "Add hosting",
-        highlighted: false,
-      },
-    ],
-    included: {
-      title: "What's included?",
-      rows: [
-        { feature: "Free proposal before you decide", website: true, hosting: false },
-        { feature: "Custom design", website: true, hosting: false },
-        { feature: "Works on mobile, tablet and desktop", website: true, hosting: false },
-        { feature: "Contact form", website: true, hosting: false },
-        { feature: "Basic search engine optimisation", website: true, hosting: false },
-        { feature: "Training in updating content", website: true, hosting: false },
-        { feature: "Hosting", website: false, hosting: true },
-        { feature: "Security updates", website: false, hosting: true },
-        { feature: "Changes whenever you need them", website: false, hosting: true },
-        { feature: "You own the website", website: true, hosting: true },
-        { feature: "One dedicated contact", website: true, hosting: true },
-        { feature: "No lock-in", website: true, hosting: true },
+    bundle: {
+      name: "Website + hosting",
+      badge: "All in one package",
+      description:
+        "A complete, professional website that we build for free – and then run, keep up to date and change for you afterwards.",
+      steps: [
+        { price: "0", label: "to build your website", note: "You see the result before you pay" },
+        { price: prices.website, label: "when the website goes live", note: "One-off – only if you are happy" },
+        { price: prices.hosting, label: "per month", note: "Hosting and maintenance · less than NOK 27 a day" },
       ],
+      featuresTitle: "What's included",
+      features: [
+        "First proposal within a few days",
+        "Custom design in your colours",
+        "Works on mobile, tablet and desktop",
+        "Contact form",
+        "Basic search engine optimisation",
+        "Hosting and operation",
+        "Security updates",
+        "Changes whenever you need them",
+        "Training in updating content",
+        "One dedicated contact",
+        "You own the website, domain and content",
+        "No lock-in – cancel anytime",
+      ],
+      cta: "Get a free proposal",
     },
     faq: [
       {
         q: "How much does it cost?",
-        a: `It costs NOK 0 to have your website built. If you are happy and want it live, you pay NOK ${prices.website} once. If you'd like us to host and look after it, that's NOK ${prices.hosting} per month – with no lock-in.`,
+        a: `It costs NOK 0 to have your website built. If you are happy and want it live, you pay NOK ${prices.website} once, and then NOK ${prices.hosting} a month for hosting and maintenance. No lock-in.`,
+      },
+      {
+        q: `What do I get for NOK ${prices.hosting} a month?`,
+        a: "We keep your website live, secure and up to date: hosting, security updates and the changes you need. Just let us know and we'll take care of it.",
       },
       {
         q: "What if I'm not happy?",
@@ -342,19 +325,15 @@ export const en: Content = {
       },
       {
         q: "Who owns the website?",
-        a: "You do. The website, domain and content are yours. With Hosting, we take care of running it for you – ownership always stays with you, even if you one day want to switch provider.",
+        a: "You do. The website, domain and content are yours. We run it for you – ownership always stays with you, even if you one day want to switch provider.",
       },
       {
         q: "Is there anything extra?",
-        a: "No. The price you see is the price you pay. If you need something beyond the packages, you get a separate fixed-price quote before we start – and you decide whether you want it.",
+        a: `No. NOK ${prices.website} when the site goes live and NOK ${prices.hosting} a month – that's it. If you want something completely new, like an online shop, you get a separate fixed-price quote first, and you decide whether you want it.`,
       },
       {
-        q: "What's the difference between Website and Hosting?",
-        a: "Website is the job itself: design, development and launch, paid once. Hosting is what happens afterwards: we run your website, keep it up to date and make the changes you need, for a fixed monthly price.",
-      },
-      {
-        q: "What if I want to change something later?",
-        a: "With Hosting, just let us know and we make the changes for you – it's included in the monthly price. If you want something completely new, like an online shop, you get a separate fixed-price quote first.",
+        q: "Can I cancel?",
+        a: "Yes. There is no lock-in on the monthly price. The website is still yours.",
       },
     ],
   },
@@ -382,7 +361,7 @@ export const en: Content = {
     },
     {
       q: "I'm not technical. Can I manage this?",
-      a: "Yes. We handle everything technical, and you get training in updating the content yourself. With Hosting, we make the changes for you.",
+      a: "Yes. We handle everything technical, and you get training in updating the content yourself. We make the changes for you – it's included in the hosting.",
     },
     {
       q: "What do you need from me?",
@@ -425,7 +404,7 @@ export const en: Content = {
 
   cta: {
     title: "Get your website built – for free.",
-    lead: `NOK 0 to build it. NOK ${prices.website} only when you are happy and want it live. No lock-in.`,
+    lead: `NOK 0 to build it. NOK ${prices.website} when it goes live, and NOK ${prices.hosting}/mo for hosting. No lock-in.`,
     primary: "Get a free proposal",
     secondary: "See what's included",
   },
