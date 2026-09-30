@@ -1,5 +1,5 @@
 import { getContent } from "@/content";
-import { site } from "@/content/shared";
+import { prices, site } from "@/content/shared";
 import type { Lang } from "./routes";
 
 const toNumber = (price: string) => Number(price.replace(/\s/g, ""));
@@ -17,23 +17,17 @@ export function businessSchema(lang: Lang) {
     description: c.site.description,
     slogan: c.site.tagline,
     areaServed: { "@type": "Country", name: "Norge" },
-    makesOffer: c.pricing.packages.map((pkg, i) => ({
+    makesOffer: {
       "@type": "Offer",
-      name: pkg.name,
-      description: pkg.description,
-      price: toNumber(pkg.price),
+      name: c.pricing.bundle.name,
+      description: c.pricing.bundle.description,
+      price: toNumber(prices.website),
       priceCurrency: "NOK",
-      ...(i === 1
-        ? {
-            priceSpecification: {
-              "@type": "UnitPriceSpecification",
-              price: toNumber(pkg.price),
-              priceCurrency: "NOK",
-              unitCode: "MON",
-            },
-          }
-        : {}),
-    })),
+      priceSpecification: [
+        { "@type": "UnitPriceSpecification", price: toNumber(prices.website), priceCurrency: "NOK" },
+        { "@type": "UnitPriceSpecification", price: toNumber(prices.hosting), priceCurrency: "NOK", unitCode: "MON" },
+      ],
+    },
   };
 }
 

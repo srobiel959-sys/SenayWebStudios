@@ -119,7 +119,60 @@ body {
   animation: demo-swap 450ms ease-out both;
 }
 
+/* Små, rolige bevegelser i bransjeillustrasjonene (demo-galleriet). */
+/* Bare de animerte delene får eget midtpunkt – ellers flyttes roterte deler. */
+.demo-scene [class*="scene-"] {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+@keyframes scene-steam {
+  0% { opacity: 0; transform: translateY(12px); }
+  40% { opacity: 0.5; }
+  100% { opacity: 0; transform: translateY(-18px); }
+}
+.scene-steam { animation: scene-steam 3s ease-in-out infinite; }
+@keyframes scene-flicker {
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(1.08) skewX(-2deg); }
+}
+.scene-flicker { transform-origin: bottom center; animation: scene-flicker 1.4s ease-in-out infinite; }
+@keyframes scene-glow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+.scene-glow { animation: scene-glow 2.4s ease-in-out infinite; }
+@keyframes scene-drip {
+  0% { opacity: 0; transform: translateY(-6px); }
+  20% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(40px); }
+}
+.scene-drip { animation: scene-drip 2.1s ease-in infinite; }
+@keyframes scene-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.scene-float { animation: scene-float 3.2s ease-in-out infinite; }
+@keyframes scene-sway {
+  0%, 100% { transform: rotate(-2deg); }
+  50% { transform: rotate(2deg); }
+}
+.scene-sway { transform-origin: top center; animation: scene-sway 4s ease-in-out infinite; }
+.scene-sway-rev { transform-origin: top center; animation: scene-sway 4s ease-in-out infinite reverse; }
+@keyframes scene-slide {
+  from { transform: translateY(0); }
+  to { transform: translateY(-50px); }
+}
+.scene-slide { animation: scene-slide 3s linear infinite; }
+@keyframes scene-slide-x {
+  0%, 100% { transform: translateX(-6px); }
+  50% { transform: translateX(6px); }
+}
+.scene-slide-x { animation: scene-slide-x 3s ease-in-out infinite; }
+
 @media (prefers-reduced-motion: reduce) {
+  .demo-scene * {
+    animation: none !important;
+  }
   .demo-swap {
     animation: none;
   }
