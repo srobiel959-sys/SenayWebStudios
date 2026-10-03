@@ -7,7 +7,7 @@ export const en: Content = {
   site: {
     tagline: "Websites for businesses",
     description:
-      "Senay Web Studio builds fast, professional websites for businesses. We build your website for free – if you are happy, you pay NOK 4,599 when it goes live and NOK 799/mo for hosting and maintenance. No lock-in.",
+      "Senay Studio builds fast, professional websites for businesses. We build your website for free – if you are happy, you pay NOK 4,599 when it goes live and NOK 799/mo for hosting and maintenance. No lock-in.",
     locale: "en_GB",
   },
 
@@ -25,7 +25,7 @@ export const en: Content = {
 
   ui: {
     skipToContent: "Skip to content",
-    homeLabel: "Senay Web Studio – home",
+    homeLabel: "Senay Studio – home",
     mainMenu: "Main menu",
     mobileMenu: "Mobile menu",
     openMenu: "Open menu",
@@ -58,7 +58,7 @@ export const en: Content = {
   },
 
   meta: {
-    home: { title: "Senay Web Studio – Websites for businesses", description: "" },
+    home: { title: "Senay Studio – Websites for businesses", description: "" },
     why: {
       title: "Why a website",
       description:
@@ -83,13 +83,13 @@ export const en: Content = {
     about: {
       title: "About",
       description:
-        "Senay Web Studio is a small studio building fast, professional websites for businesses – with one dedicated contact all the way.",
+        "Senay Studio is a small studio building fast, professional websites for businesses – with one dedicated contact all the way.",
     },
     contact: {
       title: "Contact",
       description: "Tell us briefly about your business and we'll get in touch for a no-obligation chat about your new website.",
     },
-    privacy: { title: "Privacy", description: "How Senay Web Studio handles personal data." },
+    privacy: { title: "Privacy", description: "How Senay Studio handles personal data." },
   },
 
   hero: {
@@ -130,7 +130,7 @@ export const en: Content = {
     showing: "Showing example for",
     fictional: "Example – fictional business",
     allExamples: "See all examples",
-    bannerText: "This is an example made by Senay Web Studio. The business is fictional.",
+    bannerText: "This is an example made by Senay Studio. The business is fictional.",
     bannerCta: "Want a website like this?",
     backToExamples: "← All examples",
     count: "industries",
@@ -151,7 +151,7 @@ export const en: Content = {
       ],
     },
     us: {
-      label: "Senay Web Studio",
+      label: "Senay Studio",
       title: "How we do it",
       items: [
         "NOK 0 to get started – no obligation",
@@ -203,7 +203,7 @@ export const en: Content = {
       ],
     },
     with: {
-      title: "With a website from Senay Web Studio",
+      title: "With a website from Senay Studio",
       items: [
         "You show up when customers search",
         "A professional first impression every time",
@@ -341,9 +341,9 @@ export const en: Content = {
   about: {
     eyebrow: "About",
     title: "A small studio with great care for the details.",
-    sectionLabel: "About Senay Web Studio",
+    sectionLabel: "About Senay Studio",
     paragraphs: [
-      "Senay Web Studio helps businesses look professional online. We believe a good website should be fast, easy to use and clear about what you offer – not full of features nobody needs.",
+      "Senay Studio helps businesses look professional online. We believe a good website should be fast, easy to use and clear about what you offer – not full of features nobody needs.",
       "When you work with us, you talk directly to the person who designs and builds your site. That means short decision paths, honest advice and a solution made for your business.",
     ],
     valuesHeading: "How we work",
@@ -415,7 +415,7 @@ export const en: Content = {
     sections: [
       {
         title: "Who is responsible",
-        text: "Senay Web Studio is responsible for processing personal data on this website. You can reach us at the email address at the bottom of the page.",
+        text: "Senay Studio is responsible for processing personal data on this website. You can reach us at the email address at the bottom of the page.",
       },
       {
         title: "What we collect",

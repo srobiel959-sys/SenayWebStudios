@@ -2,7 +2,6 @@ import Link from "next/link";
 import type { Content } from "@/content";
 import { href, type Lang } from "@/lib/routes";
 import { btnLight, btnOutlineLight, container } from "@/lib/ui";
-import { Monogram } from "./Logo";
 import { Reveal } from "./Reveal";
 
 // Avsluttende oppfordring nederst på sidene.
@@ -10,10 +9,6 @@ import { Reveal } from "./Reveal";
 export function CtaBand({ lang, c }: { lang: Lang; c: Content }) {
   return (
     <section aria-labelledby="cta-tittel" className="relative overflow-hidden bg-navy text-cream">
-      <Monogram
-        tone="light"
-        className="pointer-events-none absolute -right-10 -bottom-16 hidden h-auto w-[26rem] opacity-[0.07] lg:block"
-      />
       <div className={`${container} relative py-24 sm:py-32`}>
         <Reveal>
           <h2 id="cta-tittel" className="max-w-3xl font-display text-4xl leading-tight sm:text-5xl lg:text-6xl">

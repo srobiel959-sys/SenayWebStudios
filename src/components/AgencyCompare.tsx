@@ -6,7 +6,7 @@ import { ArrowIcon, CheckIcon, CrossIcon } from "./Icons";
 import { Reveal } from "./Reveal";
 import { SectionHeading } from "./SectionHeading";
 
-// «Andre byråer» mot «Senay Web Studio», side om side.
+// «Andre byråer» mot «Senay Studio», side om side.
 
 export function AgencyCompare({ lang, c }: { lang: Lang; c: Content }) {
   const a = c.agencies;

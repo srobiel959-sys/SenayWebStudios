@@ -91,7 +91,7 @@ body {
   animation-delay: 420ms;
 }
 
-/* S/W-monogrammet «tegnes» fram diagonalt, som streken i logoen. */
+/* Logoen i forsidens hero «tegnes» fram diagonalt. */
 @keyframes monogram-draw {
   from {
     clip-path: polygon(0 100%, 0 100%, 0 100%);

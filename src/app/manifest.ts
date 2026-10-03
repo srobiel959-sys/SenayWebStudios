@@ -5,7 +5,7 @@ import { site } from "@/content/shared";
 export default function manifest(): MetadataRoute.Manifest {
   return {
     name: site.name,
-    short_name: "Senay Web",
+    short_name: "Senay Studio",
     description: no.site.description,
     lang: "nb",
     start_url: "/",

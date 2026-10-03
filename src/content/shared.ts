@@ -1,10 +1,9 @@
 // Felles for begge språk.
 
 export const site = {
-  name: "Senay Web Studio",
-  url: "https://senaywebstudio.no",
-  // TODO: Bytt til riktig e-postadresse.
-  email: "post@senaywebstudio.no",
+  name: "Senay Studio",
+  url: "https://senaystudio.no",
+  email: "post@senaystudio.no",
   // TODO: Legg inn organisasjonsnummer, f.eks. "123 456 789".
   orgNr: null as string | null,
 };

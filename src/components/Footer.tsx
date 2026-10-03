@@ -3,15 +3,15 @@ import type { Content } from "@/content";
 import { site } from "@/content/shared";
 import { href, navKeys, type Lang } from "@/lib/routes";
 import { container } from "@/lib/ui";
-import { Logo } from "./Logo";
+import { MainLogo } from "./Logo";
 
 export function Footer({ lang, c }: { lang: Lang; c: Content }) {
   return (
     <footer className="bg-navy text-cream">
       <div className={`${container} grid gap-12 border-t border-cream-muted/20 py-16 md:grid-cols-12`}>
         <div className="flex flex-col items-start gap-4 md:col-span-5">
-          <Logo tone="light" loading="eager" className="h-8 w-auto" />
-          <p className="text-xs uppercase tracking-[0.3em] text-cream-muted">{c.site.tagline}</p>
+          {/* Hovedlogoen (med tagline). Krem-varianten, fordi footeren har mørk bakgrunn. */}
+          <MainLogo tone="light" loading="eager" className="h-auto w-56" />
         </div>
 
         <nav aria-label={c.ui.footerMenu} className="md:col-span-3">

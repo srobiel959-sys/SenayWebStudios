@@ -23,8 +23,8 @@ export default async function OpengraphImage() {
           background: "#071630",
         }}
       >
-        {/* logo-cream.svg er 520×366 */}
-        <img src={logoSrc} alt="" width={624} height={439} />
+        {/* logo-cream.svg er 390×114 (hovedlogoen med tagline) */}
+        <img src={logoSrc} alt="" width={780} height={228} />
       </div>
     ),
     size,

@@ -4,7 +4,7 @@ import { CtaBand } from "@/components/CtaBand";
 import { DemoGallery } from "@/components/demo/DemoGallery";
 import { ArrowIcon } from "@/components/Icons";
 import { JsonLd } from "@/components/JsonLd";
-import { Monogram } from "@/components/Logo";
+import { MainLogo } from "@/components/Logo";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
 import { getContent } from "@/content";
@@ -44,7 +44,7 @@ export function HomeView({ lang }: { lang: Lang }) {
           </div>
 
           <div className="flex flex-col gap-10 border-t border-line pt-10 lg:col-span-4 lg:h-full lg:justify-between lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0">
-            <Monogram className="monogram-draw hidden h-auto w-48 self-center lg:mt-6 lg:block xl:w-60" />
+            <MainLogo alt="" preload className="monogram-draw hidden h-auto w-60 self-center lg:mt-6 lg:block xl:w-72" />
             <ul className="hero-in hero-in-4 flex flex-col gap-4 lg:mb-2">
               {hero.points.map((point) => (
                 <li key={point} className="flex items-center gap-3 text-lg">

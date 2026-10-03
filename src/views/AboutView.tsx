@@ -1,5 +1,5 @@
 import { CtaBand } from "@/components/CtaBand";
-import { Monogram } from "@/components/Logo";
+import { MainLogo } from "@/components/Logo";
 import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
 import { getContent } from "@/content";
@@ -16,7 +16,7 @@ export function AboutView({ lang }: { lang: Lang }) {
       <section aria-label={about.sectionLabel} className="py-20 sm:py-28">
         <div className={`${container} grid gap-12 lg:grid-cols-12`}>
           <Reveal className="flex items-start justify-center lg:col-span-5">
-            <Monogram className="h-auto w-40 sm:w-56" />
+            <MainLogo alt="" className="h-auto w-56 sm:w-72" />
           </Reveal>
           <Reveal delay={100} className="space-y-6 text-lg leading-relaxed text-ink-muted sm:text-xl lg:col-span-7">
             {about.paragraphs.map((p) => (

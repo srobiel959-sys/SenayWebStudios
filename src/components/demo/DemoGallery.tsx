@@ -118,7 +118,7 @@ export function DemoGallery({ lang, labels }: { lang: Lang; labels: Labels }) {
                 <span className="h-2.5 w-2.5 rounded-full bg-[#62B36B]" />
               </span>
               <span className="min-w-0 flex-1 truncate rounded-md bg-cream px-3 py-1 text-xs text-ink-muted">
-                demo.senaywebstudio.no/{current.slug}
+                demo.senaystudio.no/{current.slug}
               </span>
             </div>
             <ScaledPreview id={current.slug}>

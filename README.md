@@ -1,6 +1,6 @@
-# Senay Web Studio
+# Senay Studio
 
-Nettsiden til [senaywebstudio.no](https://senaywebstudio.no) – Next.js (App Router), TypeScript og Tailwind CSS, klar for Vercel.
+Nettsiden til [senaystudio.no](https://senaystudio.no) – Next.js (App Router), TypeScript og Tailwind CSS, klar for Vercel.
 
 ## Kom i gang
 
@@ -26,7 +26,7 @@ npm run build
 - [ ] Bekreft e-postadresse (`site.email`) og legg inn org.nr. (`site.orgNr`) i `src/content/shared.ts`
 - [ ] Les gjennom personvernsiden (`src/app/personvern/page.tsx`)
 - [ ] Kontaktskjemaet åpner e-postprogrammet (mailto). Koble til et skjema-API ved behov.
-- [ ] Koble domenet `senaywebstudio.no` i Vercel
+- [ ] Koble domenet `senaystudio.no` i Vercel
 
 ## Deploy
 

@@ -7,7 +7,7 @@ export const no = {
   site: {
     tagline: "Nettsider for bedrifter",
     description:
-      "Senay Web Studio lager raske, profesjonelle nettsider for bedrifter. Vi lager nettsiden gratis – er du fornøyd, betaler du 4 599 kr når den går live og 799 kr/mnd for drift og vedlikehold. Ingen binding.",
+      "Senay Studio lager raske, profesjonelle nettsider for bedrifter. Vi lager nettsiden gratis – er du fornøyd, betaler du 4 599 kr når den går live og 799 kr/mnd for drift og vedlikehold. Ingen binding.",
     locale: "nb_NO",
   },
 
@@ -25,7 +25,7 @@ export const no = {
 
   ui: {
     skipToContent: "Hopp til innhold",
-    homeLabel: "Senay Web Studio – til forsiden",
+    homeLabel: "Senay Studio – til forsiden",
     mainMenu: "Hovedmeny",
     mobileMenu: "Mobilmeny",
     openMenu: "Åpne meny",
@@ -58,7 +58,7 @@ export const no = {
   },
 
   meta: {
-    home: { title: "Senay Web Studio – Nettsider for bedrifter", description: "" },
+    home: { title: "Senay Studio – Nettsider for bedrifter", description: "" },
     why: {
       title: "Hvorfor nettside",
       description:
@@ -71,7 +71,7 @@ export const no = {
     services: {
       title: "Tjenester",
       description:
-        "Design, utvikling, synlighet i søk og drift – alt du trenger for en god nettside, samlet hos Senay Web Studio.",
+        "Design, utvikling, synlighet i søk og drift – alt du trenger for en god nettside, samlet hos Senay Studio.",
     },
     process: {
       title: "Prosess",
@@ -84,13 +84,13 @@ export const no = {
     about: {
       title: "Om oss",
       description:
-        "Senay Web Studio er et lite studio som lager raske, profesjonelle nettsider for bedrifter – med én fast kontaktperson hele veien.",
+        "Senay Studio er et lite studio som lager raske, profesjonelle nettsider for bedrifter – med én fast kontaktperson hele veien.",
     },
     contact: {
       title: "Kontakt",
       description: "Fortell kort om bedriften din, så tar vi kontakt for en uforpliktende prat om ny nettside.",
     },
-    privacy: { title: "Personvern", description: "Slik behandler Senay Web Studio personopplysninger." },
+    privacy: { title: "Personvern", description: "Slik behandler Senay Studio personopplysninger." },
   },
 
   // -------------------------------------------------------------------------
@@ -137,7 +137,7 @@ export const no = {
     showing: "Viser eksempel for",
     fictional: "Eksempel – fiktiv bedrift",
     allExamples: "Se alle eksempler",
-    bannerText: "Dette er et eksempel laget av Senay Web Studio. Bedriften er oppdiktet.",
+    bannerText: "Dette er et eksempel laget av Senay Studio. Bedriften er oppdiktet.",
     bannerCta: "Vil du ha en slik nettside?",
     backToExamples: "← Alle eksempler",
     count: "bransjer",
@@ -161,7 +161,7 @@ export const no = {
       ],
     },
     us: {
-      label: "Senay Web Studio",
+      label: "Senay Studio",
       title: "Slik gjør vi det",
       items: [
         "0 kr i oppstart – helt uforpliktende",
@@ -216,7 +216,7 @@ export const no = {
       ],
     },
     with: {
-      title: "Med nettside fra Senay Web Studio",
+      title: "Med nettside fra Senay Studio",
       items: [
         "Du dukker opp når kundene søker",
         "Et profesjonelt førsteinntrykk hver gang",
@@ -366,9 +366,9 @@ export const no = {
   about: {
     eyebrow: "Om oss",
     title: "Et lite studio med stor omtanke for detaljene.",
-    sectionLabel: "Om Senay Web Studio",
+    sectionLabel: "Om Senay Studio",
     paragraphs: [
-      "Senay Web Studio hjelper bedrifter med å fremstå profesjonelt på nett. Vi mener en god nettside skal være rask, enkel å bruke og tydelig på hva du tilbyr – ikke full av unødvendige funksjoner.",
+      "Senay Studio hjelper bedrifter med å fremstå profesjonelt på nett. Vi mener en god nettside skal være rask, enkel å bruke og tydelig på hva du tilbyr – ikke full av unødvendige funksjoner.",
       "Når du jobber med oss, snakker du direkte med den som designer og bygger siden din. Det gir korte beslutningsveier, ærlige råd og en løsning som er tilpasset akkurat din bedrift.",
     ],
     valuesHeading: "Slik jobber vi",
@@ -449,7 +449,7 @@ export const no = {
     sections: [
       {
         title: "Hvem er ansvarlig",
-        text: "Senay Web Studio er ansvarlig for behandlingen av personopplysninger på denne nettsiden. Du når oss på e-postadressen nederst på siden.",
+        text: "Senay Studio er ansvarlig for behandlingen av personopplysninger på denne nettsiden. Du når oss på e-postadressen nederst på siden.",
       },
       {
         title: "Hva vi samler inn",
