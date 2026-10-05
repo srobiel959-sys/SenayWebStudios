@@ -42,7 +42,7 @@ export function RootShell({ lang, children }: { lang: Lang; children: React.Reac
           {children}
         </main>
         <Footer lang={lang} c={c} />
-        <ChatWidget lang={lang} labels={c.chat} />
+        <ChatWidget lang={lang} labels={c.chat} nav={c.nav} />
       </body>
     </html>
   );

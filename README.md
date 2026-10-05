@@ -21,14 +21,13 @@ npm run build
 - `src/components/` – felles deler: `Header`, `Footer`, `PageHero`, `PricingCards`, `AgencyCompare`, `Faq`, `CtaBand`, `Reveal`, og `demo/` (galleri og eksempelnettside).
 - `public/brand/` – logofilene. Navy #071630 · Krem #FAF8F5.
 
-## AI-chat
+## Chat-assistent
 
-«Spør oss»-boblen nederst til høyre er en AI-assistent som bruker Claude (Opus 5.5).
+«Spør oss»-boblen nederst til høyre er en chat-assistent med ferdige svar – ingen AI, ingen API-nøkkel og ingen kostnad. Alt skjer i nettleseren, og ingenting lagres.
 
-- `src/components/ChatWidget.tsx` – chatvinduet. `src/app/api/chat/route.ts` – API-ruten som strømmer svaret.
-- `src/lib/chat-prompt.ts` – instruksjonene til assistenten. De bygges fra innholdet i `src/content/`, så pris, prosess og FAQ alltid er de samme som på sidene.
-- Krever miljøvariabelen `ANTHROPIC_API_KEY` (se `.env.example`). Lokalt: legg den i `.env.local`. På Vercel: Settings → Environment Variables (Production og Preview). Uten nøkkel viser chatten en melding med lenke til kontaktsiden.
-- Sett en månedlig utgiftsgrense i Anthropic Console.
+- `src/content/chat-knowledge.ts` – emnene: nøkkelord og svar på norsk og engelsk. Svar om pris, prosess og innhold hentes fra resten av `src/content/`, så de alltid stemmer med sidene. Legg til et emne her for å lære assistenten noe nytt.
+- `src/lib/chat-match.ts` – finner emnet som passer best (tåler bøyninger og én skrivefeil). Finner den ingenting, henviser den til kontaktsiden.
+- `src/components/ChatWidget.tsx` – chatvinduet.
 
 ## Før lansering
 
@@ -36,7 +35,6 @@ npm run build
 - [ ] Les gjennom personvernsiden (`src/app/personvern/page.tsx`)
 - [ ] Kontaktskjemaet åpner e-postprogrammet (mailto). Koble til et skjema-API ved behov.
 - [ ] Koble domenet `senaystudio.no` i Vercel
-- [ ] Legg inn `ANTHROPIC_API_KEY` i Vercel for AI-chatten
 
 ## Deploy
 

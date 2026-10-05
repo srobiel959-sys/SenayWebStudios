@@ -4,21 +4,19 @@ import Link from "next/link";
 import { Fragment, useEffect, useRef, useState, type FormEvent, type KeyboardEvent } from "react";
 import type { Content } from "@/content";
 import { site } from "@/content/shared";
-import { href, type Lang } from "@/lib/routes";
+import { answer } from "@/lib/chat-match";
+import { href, type Lang, type PageKey } from "@/lib/routes";
 import { ArrowIcon } from "./Icons";
 
-// AI-chatten: en «Spør oss»-knapp nederst til høyre som åpner et chatvindu.
-// Svarene strømmes fra /api/chat. Samtalen ligger bare i minnet og lagres ikke.
+// Chat-assistenten: en «Spør oss»-knapp nederst til høyre som åpner et chatvindu.
+// Svarene kommer fra kunnskapsbasen i src/content/chat-knowledge.ts og finnes
+// i nettleseren (src/lib/chat-match.ts) – ingen AI, ingen API og ingenting lagres.
 
-type Message = {
-  role: "user" | "assistant";
-  content: string;
-  /** Feilmeldinger og spørsmålet som feilet sendes ikke med videre. */
-  local?: boolean;
-};
+type Message =
+  | { role: "user"; content: string }
+  | { role: "assistant"; content: string; links: PageKey[]; followUps: string[] };
 
-const MAX_CHARS = 2000;
-const MAX_HISTORY = 19; // Oddetall, så historikken alltid starter med brukeren.
+const MAX_CHARS = 500;
 
 // Gjør nettadresser og e-post i svarene klikkbare. Lenker til egen side blir interne.
 const linkPattern = /(https?:\/\/[^\s)]+[^\s).,!?:;]|[\w.+-]+@[\w-]+\.[\w.]*\w)/g;
@@ -68,7 +66,7 @@ function CloseIcon({ className = "h-5 w-5" }: { className?: string }) {
   );
 }
 
-export function ChatWidget({ lang, labels }: { lang: Lang; labels: Content["chat"] }) {
+export function ChatWidget({ lang, labels, nav }: { lang: Lang; labels: Content["chat"]; nav: Content["nav"] }) {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
@@ -76,7 +74,7 @@ export function ChatWidget({ lang, labels }: { lang: Lang; labels: Content["chat
   const buttonRef = useRef<HTMLButtonElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
-  const abortRef = useRef<AbortController | null>(null);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const wasOpen = useRef(false);
 
   // Fokus inn i chatten når den åpnes, og tilbake til knappen når den lukkes.
@@ -86,96 +84,61 @@ export function ChatWidget({ lang, labels }: { lang: Lang; labels: Content["chat
     wasOpen.current = open;
   }, [open]);
 
-  // Hold siste melding synlig mens svaret strømmer inn.
+  // Hold siste melding synlig.
   useEffect(() => {
     const list = listRef.current;
     if (list) list.scrollTop = list.scrollHeight;
-  }, [messages, open]);
+  }, [messages, busy, open]);
 
-  // Avbryt et pågående svar hvis komponenten forsvinner.
-  useEffect(() => () => abortRef.current?.abort(), []);
+  // Stopp et ventende svar hvis komponenten forsvinner.
+  useEffect(
+    () => () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+    },
+    [],
+  );
 
   function close() {
     setOpen(false);
   }
 
-  async function send(text: string) {
+  function send(text: string) {
     const question = text.trim().slice(0, MAX_CHARS);
     if (!question || busy) return;
 
-    const history = [...messages.filter((m) => !m.local), { role: "user" as const, content: question }];
-    setMessages((prev) => [...prev, { role: "user", content: question }, { role: "assistant", content: "" }]);
+    setMessages((prev) => [...prev, { role: "user", content: question }]);
     setInput("");
     setBusy(true);
 
-    // Oppdaterer det siste (assistent-)svaret i lista.
-    const setReply = (update: (reply: Message) => Message) =>
-      setMessages((prev) => [...prev.slice(0, -1), update(prev[prev.length - 1])]);
-    // Ved feil vises feilmeldingen, og spørsmålet holdes utenfor videre historikk.
-    const fail = (content: string) =>
+    // En kort «skriver …»-pause, så svaret føles naturlig. Kortere ved redusert bevegelse.
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const delay = reduced ? 150 : 500 + Math.min(question.length * 8, 400);
+    timerRef.current = setTimeout(() => {
+      const reply = answer(question, lang);
       setMessages((prev) => [
-        ...prev.slice(0, -2),
-        { ...prev[prev.length - 2], local: true },
-        { role: "assistant", content, local: true },
+        ...prev,
+        { role: "assistant", content: reply.text, links: reply.links, followUps: reply.followUps },
       ]);
-
-    const controller = new AbortController();
-    abortRef.current = controller;
-    try {
-      const response = await fetch("/api/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          lang,
-          messages: history.slice(-MAX_HISTORY).map(({ role, content }) => ({ role, content })),
-        }),
-        signal: controller.signal,
-      });
-
-      if (!response.ok || !response.body) {
-        fail(
-          response.status === 503
-            ? labels.errorNotConfigured
-            : response.status === 429
-              ? labels.errorRateLimited
-              : labels.errorGeneric,
-        );
-        return;
-      }
-
-      const reader = response.body.getReader();
-      const decoder = new TextDecoder();
-      let reply = "";
-      for (;;) {
-        const { done, value } = await reader.read();
-        if (done) break;
-        reply += decoder.decode(value, { stream: true });
-        setReply((m) => ({ ...m, content: reply }));
-      }
-      if (!reply.trim()) fail(labels.errorGeneric);
-    } catch (error) {
-      if (!(error instanceof DOMException && error.name === "AbortError")) fail(labels.errorGeneric);
-    } finally {
-      abortRef.current = null;
       setBusy(false);
-      inputRef.current?.focus();
-    }
+      timerRef.current = null;
+    }, delay);
   }
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    void send(input);
+    send(input);
   }
 
   // Enter sender, Shift+Enter gir ny linje.
   function handleKeyDown(event: KeyboardEvent<HTMLTextAreaElement>) {
     if (event.key === "Enter" && !event.shiftKey && !event.nativeEvent.isComposing) {
       event.preventDefault();
-      void send(input);
+      send(input);
     }
   }
 
-  const waiting = busy && messages[messages.length - 1]?.content === "";
+  const last = messages[messages.length - 1];
+  const suggestions = messages.length === 0 ? labels.suggestions : last?.role === "assistant" ? last.followUps : [];
 
   return (
     <>
@@ -225,39 +188,41 @@ export function ChatWidget({ lang, labels }: { lang: Lang; labels: Content["chat
               {labels.welcome}
             </div>
 
-            {messages.length === 0 && (
-              <ul className="flex flex-wrap gap-2" aria-label={labels.inputLabel}>
-                {labels.suggestions.map((suggestion) => (
-                  <li key={suggestion}>
-                    <button
-                      type="button"
-                      onClick={() => void send(suggestion)}
-                      className="rounded-full border border-navy/30 px-3.5 py-2 text-left text-sm transition-colors hover:bg-navy hover:text-cream"
-                    >
-                      {suggestion}
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            )}
-
             {messages.map((message, i) =>
-              message.role === "assistant" && message.content === "" ? null : (
+              message.role === "user" ? (
                 <div
                   key={i}
-                  className={
-                    message.role === "user"
-                      ? "ml-auto max-w-[85%] whitespace-pre-wrap rounded-2xl rounded-tr-md bg-navy px-4 py-3 leading-relaxed text-cream"
-                      : "max-w-[85%] whitespace-pre-wrap rounded-2xl rounded-tl-md bg-sand px-4 py-3 leading-relaxed"
-                  }
+                  className="ml-auto max-w-[85%] whitespace-pre-wrap rounded-2xl rounded-tr-md bg-navy px-4 py-3 leading-relaxed text-cream"
                 >
-                  <span className="sr-only">{message.role === "user" ? labels.youLabel : labels.assistantLabel}: </span>
-                  {message.role === "assistant" ? <RichText text={message.content} /> : message.content}
+                  <span className="sr-only">{labels.youLabel}: </span>
+                  {message.content}
+                </div>
+              ) : (
+                <div key={i} className="max-w-[85%] space-y-2">
+                  <div className="whitespace-pre-wrap rounded-2xl rounded-tl-md bg-sand px-4 py-3 leading-relaxed">
+                    <span className="sr-only">{labels.assistantLabel}: </span>
+                    <RichText text={message.content} />
+                  </div>
+                  {message.links.length > 0 && (
+                    <p className="flex flex-wrap gap-2">
+                      {message.links.map((key) => (
+                        <Link
+                          key={key}
+                          href={href(lang, key)}
+                          onClick={close}
+                          className="inline-flex items-center gap-1.5 rounded-full bg-navy px-3.5 py-1.5 text-sm font-medium text-cream transition-colors hover:bg-navy-soft"
+                        >
+                          {nav[key]}
+                          <ArrowIcon className="h-3.5 w-3.5" />
+                        </Link>
+                      ))}
+                    </p>
+                  )}
                 </div>
               ),
             )}
 
-            {waiting && (
+            {busy && (
               <div className="inline-flex items-center gap-1.5 rounded-2xl rounded-tl-md bg-sand px-4 py-3.5">
                 <span className="sr-only">{labels.thinking}</span>
                 {[0, 150, 300].map((delay) => (
@@ -269,6 +234,22 @@ export function ChatWidget({ lang, labels }: { lang: Lang; labels: Content["chat
                   />
                 ))}
               </div>
+            )}
+
+            {!busy && suggestions.length > 0 && (
+              <ul className="flex flex-wrap gap-2" aria-label={labels.suggestionsLabel}>
+                {suggestions.map((suggestion) => (
+                  <li key={suggestion}>
+                    <button
+                      type="button"
+                      onClick={() => send(suggestion)}
+                      className="rounded-full border border-navy/30 px-3.5 py-2 text-left text-sm transition-colors hover:bg-navy hover:text-cream"
+                    >
+                      {suggestion}
+                    </button>
+                  </li>
+                ))}
+              </ul>
             )}
           </div>
 

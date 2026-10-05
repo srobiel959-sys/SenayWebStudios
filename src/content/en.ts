@@ -411,22 +411,20 @@ export const en: Content = {
 
   chat: {
     open: "Ask us",
-    openLabel: "Open chat with Senay Studio's AI assistant",
+    openLabel: "Open chat with Senay Studio's assistant",
     close: "Close chat",
     title: "Ask us anything about websites",
-    subtitle: "AI assistant · replies instantly",
+    subtitle: "Assistant · replies instantly",
     welcome:
-      "Hi! I'm Senay Studio's AI assistant. Ask me anything about websites – price, domains, Google, design – and I'll answer right away.",
+      "Hi! I'm Senay Studio's assistant. Ask me about websites – price, domains, Google, design – and I'll answer right away.",
     suggestions: ["What does a website cost?", "How do I show up on Google?", "Do I need my own domain?"],
     placeholder: "Write your question …",
     send: "Send",
     inputLabel: "Your question",
+    suggestionsLabel: "Suggested questions",
     thinking: "Writing …",
-    disclaimer: "AI can make mistakes. Don't share sensitive information.",
+    disclaimer: "Automatic answers. For a specific quote, get in touch.",
     contact: "Contact a human",
-    errorNotConfigured: "The chat isn't available right now. Send us a message instead, and we'll get back to you.",
-    errorRateLimited: "You've sent a lot of messages in a short time. Please wait a little, or contact us directly.",
-    errorGeneric: "Something went wrong. Please try again, or contact us directly.",
     assistantLabel: "Assistant",
     youLabel: "You",
   },
@@ -448,8 +446,8 @@ export const en: Content = {
         text: "The contact form stores nothing on the website. It opens your email app with the message filled in, and you send it yourself.",
       },
       {
-        title: "The AI chat",
-        text: "When you use the chat, your messages are sent to Anthropic (Claude) to generate the reply. We do not store the conversation, and it disappears when you close or reload the page. Don't share sensitive personal information in the chat.",
+        title: "The chat assistant",
+        text: "The chat assistant gives automatic answers and runs only in your browser. What you write is not sent to us or anyone else and is not stored – the conversation disappears when you close or reload the page.",
       },
       {
         title: "Cookies",

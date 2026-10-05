@@ -441,26 +441,24 @@ export const no = {
   },
 
   // -------------------------------------------------------------------------
-  // AI-chat
+  // Chat-assistent
   // -------------------------------------------------------------------------
   chat: {
     open: "Spør oss",
-    openLabel: "Åpne chat med Senay Studios AI-assistent",
+    openLabel: "Åpne chat med Senay Studios assistent",
     close: "Lukk chat",
     title: "Spør om alt som har med nettsider å gjøre",
-    subtitle: "AI-assistent · svarer med en gang",
+    subtitle: "Assistent · svarer med en gang",
     welcome:
-      "Hei! Jeg er AI-assistenten til Senay Studio. Spør meg om hva som helst om nettsider – pris, domene, Google, design – så svarer jeg med en gang.",
+      "Hei! Jeg er assistenten til Senay Studio. Spør meg om nettsider – pris, domene, Google, design – så svarer jeg med en gang.",
     suggestions: ["Hva koster en nettside?", "Hvordan blir jeg synlig på Google?", "Trenger jeg eget domene?"],
     placeholder: "Skriv spørsmålet ditt …",
     send: "Send",
     inputLabel: "Spørsmålet ditt",
+    suggestionsLabel: "Forslag til spørsmål",
     thinking: "Skriver …",
-    disclaimer: "AI kan ta feil. Ikke del sensitive opplysninger.",
+    disclaimer: "Automatiske svar. For et konkret tilbud, ta kontakt.",
     contact: "Snakk med et menneske",
-    errorNotConfigured: "Chatten er ikke tilgjengelig akkurat nå. Send oss en melding i stedet, så svarer vi deg.",
-    errorRateLimited: "Du har sendt mange meldinger på kort tid. Vent litt, eller ta kontakt med oss direkte.",
-    errorGeneric: "Noe gikk galt. Prøv igjen, eller ta kontakt med oss direkte.",
     assistantLabel: "Assistent",
     youLabel: "Du",
   },
@@ -485,8 +483,8 @@ export const no = {
         text: "Kontaktskjemaet lagrer ingenting på nettsiden. Det åpner e-postprogrammet ditt med meldingen ferdig utfylt, og du sender den selv.",
       },
       {
-        title: "AI-chatten",
-        text: "Når du bruker chatten, sendes meldingene dine til Anthropic (Claude) for å lage svaret. Vi lagrer ikke samtalen, og den forsvinner når du lukker eller laster inn siden på nytt. Ikke del sensitive personopplysninger i chatten.",
+        title: "Chat-assistenten",
+        text: "Chat-assistenten gir automatiske svar og kjører bare i nettleseren din. Det du skriver, sendes ikke til oss eller andre og lagres ikke – samtalen forsvinner når du lukker eller laster inn siden på nytt.",
       },
       {
         title: "Informasjonskapsler",
