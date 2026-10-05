@@ -441,6 +441,31 @@ export const no = {
   },
 
   // -------------------------------------------------------------------------
+  // AI-chat
+  // -------------------------------------------------------------------------
+  chat: {
+    open: "Spør oss",
+    openLabel: "Åpne chat med Senay Studios AI-assistent",
+    close: "Lukk chat",
+    title: "Spør om alt som har med nettsider å gjøre",
+    subtitle: "AI-assistent · svarer med en gang",
+    welcome:
+      "Hei! Jeg er AI-assistenten til Senay Studio. Spør meg om hva som helst om nettsider – pris, domene, Google, design – så svarer jeg med en gang.",
+    suggestions: ["Hva koster en nettside?", "Hvordan blir jeg synlig på Google?", "Trenger jeg eget domene?"],
+    placeholder: "Skriv spørsmålet ditt …",
+    send: "Send",
+    inputLabel: "Spørsmålet ditt",
+    thinking: "Skriver …",
+    disclaimer: "AI kan ta feil. Ikke del sensitive opplysninger.",
+    contact: "Snakk med et menneske",
+    errorNotConfigured: "Chatten er ikke tilgjengelig akkurat nå. Send oss en melding i stedet, så svarer vi deg.",
+    errorRateLimited: "Du har sendt mange meldinger på kort tid. Vent litt, eller ta kontakt med oss direkte.",
+    errorGeneric: "Noe gikk galt. Prøv igjen, eller ta kontakt med oss direkte.",
+    assistantLabel: "Assistent",
+    youLabel: "Du",
+  },
+
+  // -------------------------------------------------------------------------
   // Personvern. TODO: Les gjennom og tilpass før lansering.
   // -------------------------------------------------------------------------
   privacy: {
@@ -458,6 +483,10 @@ export const no = {
       {
         title: "Hvordan skjemaet fungerer",
         text: "Kontaktskjemaet lagrer ingenting på nettsiden. Det åpner e-postprogrammet ditt med meldingen ferdig utfylt, og du sender den selv.",
+      },
+      {
+        title: "AI-chatten",
+        text: "Når du bruker chatten, sendes meldingene dine til Anthropic (Claude) for å lage svaret. Vi lagrer ikke samtalen, og den forsvinner når du lukker eller laster inn siden på nytt. Ikke del sensitive personopplysninger i chatten.",
       },
       {
         title: "Informasjonskapsler",

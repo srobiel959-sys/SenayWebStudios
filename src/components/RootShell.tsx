@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { getContent, site } from "@/content";
 import { bodoni, jost } from "@/lib/fonts";
 import type { Lang } from "@/lib/routes";
+import { ChatWidget } from "./ChatWidget";
 import { Footer } from "./Footer";
 import { Header } from "./Header";
 import "../app/globals.css";
@@ -41,6 +42,7 @@ export function RootShell({ lang, children }: { lang: Lang; children: React.Reac
           {children}
         </main>
         <Footer lang={lang} c={c} />
+        <ChatWidget lang={lang} labels={c.chat} />
       </body>
     </html>
   );
