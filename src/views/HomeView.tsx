@@ -2,9 +2,8 @@ import Link from "next/link";
 import { AgencyCompare } from "@/components/AgencyCompare";
 import { CtaBand } from "@/components/CtaBand";
 import { DemoGallery } from "@/components/demo/DemoGallery";
-import { ArrowIcon } from "@/components/Icons";
+import { ArrowIcon, CheckIcon } from "@/components/Icons";
 import { JsonLd } from "@/components/JsonLd";
-import { MainLogo } from "@/components/Logo";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
 import { getContent } from "@/content";
@@ -43,16 +42,34 @@ export function HomeView({ lang }: { lang: Lang }) {
             </div>
           </div>
 
-          <div className="flex flex-col gap-10 border-t border-line pt-10 lg:col-span-4 lg:h-full lg:justify-between lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0">
-            <MainLogo alt="" preload className="monogram-draw hidden h-auto w-60 self-center lg:mt-6 lg:block xl:w-72" />
-            <ul className="hero-in hero-in-4 flex flex-col gap-4 lg:mb-2">
-              {hero.points.map((point) => (
-                <li key={point} className="flex items-center gap-3 text-lg">
-                  <span aria-hidden="true" className="h-px w-6 bg-navy" />
-                  {point}
-                </li>
-              ))}
-            </ul>
+          {/* Prisen som blikkfang: hele tilbudet på ett kort. */}
+          <div className="hero-in hero-in-4 lg:col-span-4">
+            <div className="rounded-3xl bg-navy p-7 text-cream shadow-xl shadow-navy/10 sm:p-9">
+              <p className="text-xs font-medium uppercase tracking-[0.22em] text-cream-muted">{hero.offer.label}</p>
+              <ul className="mt-6 divide-y divide-cream-muted/20">
+                {hero.offer.items.map((item, i) => (
+                  <li key={item.amount} className={i === 0 ? "pb-5" : "py-5"}>
+                    <p className={`font-display leading-none ${i === 0 ? "text-5xl sm:text-6xl" : "text-3xl"}`}>{item.amount}</p>
+                    <p className="mt-2 text-cream-muted">{item.text}</p>
+                  </li>
+                ))}
+              </ul>
+              <ul className="flex flex-wrap gap-2 border-t border-cream-muted/20 pt-5">
+                {hero.offer.badges.map((badge) => (
+                  <li key={badge} className="inline-flex items-center gap-1.5 rounded-full border border-cream-muted/40 px-3 py-1 text-sm">
+                    <CheckIcon className="h-3.5 w-3.5" />
+                    {badge}
+                  </li>
+                ))}
+              </ul>
+              <Link
+                href={href(lang, "pricing")}
+                className="mt-6 inline-flex items-center gap-2 font-medium underline-offset-4 hover:underline"
+              >
+                {hero.offer.link}
+                <ArrowIcon />
+              </Link>
+            </div>
           </div>
         </div>
       </section>

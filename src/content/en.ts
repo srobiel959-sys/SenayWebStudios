@@ -99,7 +99,16 @@ export const en: Content = {
     lead: "Before anyone calls you, they google you. We build fast, professional websites that help customers find you, trust you and get in touch.",
     primaryCta: "Get a free proposal",
     secondaryCta: "See examples",
-    points: ["NOK 0 to build your website", `NOK ${prices.website} when it goes live`, `NOK ${prices.hosting}/mo for hosting`, "No lock-in"],
+    offer: {
+      label: "The price, made simple",
+      items: [
+        { amount: "NOK 0", text: "to build your website – you see it before you pay" },
+        { amount: `NOK ${prices.website}`, text: "when it goes live, only if you're happy" },
+        { amount: `NOK ${prices.hosting}/mo`, text: "for hosting, updates and changes" },
+      ],
+      badges: ["No lock-in", "You own the website"],
+      link: "See what's included",
+    },
   },
 
   explore: {

@@ -103,7 +103,16 @@ export const no = {
     lead: "Før noen ringer deg, googler de deg. Vi lager raske, profesjonelle nettsider som gjør at kundene finner deg, stoler på deg og tar kontakt.",
     primaryCta: "Få et gratis forslag",
     secondaryCta: "Se eksempler",
-    points: ["0 kr for å lage nettsiden", `${prices.website} kr når den går live`, `${prices.hosting} kr/mnd for drift`, "Ingen binding"],
+    offer: {
+      label: "Prisen, helt enkelt",
+      items: [
+        { amount: "0 kr", text: "for å lage nettsiden – du ser den før du betaler" },
+        { amount: `${prices.website} kr`, text: "når den går live, bare hvis du er fornøyd" },
+        { amount: `${prices.hosting} kr/mnd`, text: "for drift, oppdateringer og endringer" },
+      ],
+      badges: ["Ingen binding", "Du eier nettsiden"],
+      link: "Se hva som er inkludert",
+    },
   },
 
   explore: {

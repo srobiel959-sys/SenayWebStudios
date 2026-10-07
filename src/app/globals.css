@@ -91,7 +91,7 @@ body {
   animation-delay: 420ms;
 }
 
-/* Logoen i forsidens hero «tegnes» fram diagonalt. */
+/* Logoen på 404-sidene «tegnes» fram diagonalt. */
 @keyframes monogram-draw {
   from {
     clip-path: polygon(0 100%, 0 100%, 0 100%);
