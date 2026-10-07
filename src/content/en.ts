@@ -94,22 +94,14 @@ export const en: Content = {
 
   hero: {
     eyebrow: "Websites for businesses",
-    title: "Your customers are looking for you online.",
-    titleAccent: "Can they find you?",
-    lead: "Before anyone calls you, they google you. We build fast, professional websites that help customers find you, trust you and get in touch.",
+    title: "Customers google you.",
+    titleAccent: "What do they find?",
+    lead: "We build your website first. You see it finished – before you decide.",
     primaryCta: "Get a free proposal",
-    secondaryCta: "See examples",
-    offer: {
-      label: "The price, made simple",
-      items: [
-        { amount: "NOK 0", text: "to build your website – you see it before you pay" },
-        { amount: `NOK ${prices.website}`, text: "when it goes live, only if you're happy" },
-        { amount: `NOK ${prices.hosting}/mo`, text: "for hosting, updates and changes" },
-      ],
-      badges: ["No lock-in", "You own the website"],
-      link: "See what's included",
-    },
+    secondaryCta: "Find your industry",
+    showcaseLabel: "Choose industry",
   },
+
 
   explore: {
     eyebrow: "Explore",

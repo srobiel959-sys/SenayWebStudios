@@ -1,56 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import type { Content } from "@/content";
 import { demoGroups, demos, type DemoGroup } from "@/content/demos";
 import { demoHref, type Lang } from "@/lib/routes";
 import { ArrowIcon } from "../Icons";
 import { DemoSite } from "./DemoSite";
+import { ScaledPreview } from "./ScaledPreview";
 
 type Labels = Content["demos"];
-
-/** Skalerer en full nettside ned så den passer i rammen. */
-function ScaledPreview({ children, id }: { children: React.ReactNode; id: string }) {
-  const outer = useRef<HTMLDivElement>(null);
-  const [size, setSize] = useState<{ base: number; scale: number } | null>(null);
-
-  useEffect(() => {
-    const el = outer.current;
-    if (!el) return;
-    const measure = () => {
-      const w = el.clientWidth;
-      const base = w < 640 ? 390 : 1280;
-      setSize({ base, scale: w / base });
-    };
-    measure();
-    const ro = new ResizeObserver(measure);
-    ro.observe(el);
-    return () => ro.disconnect();
-  }, []);
-
-  const mobile = size ? size.base === 390 : false;
-  return (
-    <div
-      ref={outer}
-      className={`relative overflow-hidden ${mobile ? "h-[34rem]" : "aspect-[16/10]"}`}
-      // Forhåndsvisningen er dekor: skjult for skjermlesere og ikke fokuserbar.
-      aria-hidden="true"
-      inert
-    >
-      {size ? (
-        <div
-          key={id}
-          className="demo-swap origin-top-left"
-          style={{ width: size.base, transform: `scale(${size.scale})` }}
-        >
-          {children}
-        </div>
-      ) : null}
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/10 to-transparent" />
-    </div>
-  );
-}
 
 export function DemoGallery({ lang, labels }: { lang: Lang; labels: Labels }) {
   const [group, setGroup] = useState<DemoGroup | "all">("all");

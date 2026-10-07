@@ -98,22 +98,14 @@ export const no = {
   // -------------------------------------------------------------------------
   hero: {
     eyebrow: "Nettsider for bedrifter",
-    title: "Kundene dine leter etter deg på nett.",
-    titleAccent: "Finner de deg?",
-    lead: "Før noen ringer deg, googler de deg. Vi lager raske, profesjonelle nettsider som gjør at kundene finner deg, stoler på deg og tar kontakt.",
+    title: "Kundene googler deg.",
+    titleAccent: "Hva finner de?",
+    lead: "Vi lager nettsiden din først. Du ser den ferdig – før du bestemmer deg.",
     primaryCta: "Få et gratis forslag",
-    secondaryCta: "Se eksempler",
-    offer: {
-      label: "Prisen, helt enkelt",
-      items: [
-        { amount: "0 kr", text: "for å lage nettsiden – du ser den før du betaler" },
-        { amount: `${prices.website} kr`, text: "når den går live, bare hvis du er fornøyd" },
-        { amount: `${prices.hosting} kr/mnd`, text: "for drift, oppdateringer og endringer" },
-      ],
-      badges: ["Ingen binding", "Du eier nettsiden"],
-      link: "Se hva som er inkludert",
-    },
+    secondaryCta: "Finn din bransje",
+    showcaseLabel: "Velg bransje",
   },
+
 
   explore: {
     eyebrow: "Utforsk",
