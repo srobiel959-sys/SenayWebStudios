@@ -21,6 +21,16 @@ npm run build
 - `src/components/` – felles deler: `Header`, `Footer`, `PageHero`, `PricingCards`, `AgencyCompare`, `Faq`, `CtaBand`, `Reveal`, og `demo/` (galleri og eksempelnettside).
 - `public/brand/` – logofilene. Navy #071630 · Krem #FAF8F5.
 
+## Bilder til eksempelsidene
+
+Legg bildene i `public/demo/` med disse navnene, så kobles de til automatisk ved neste bygg (`scripts/demo-photos.mjs` kjøres før `dev` og `build`):
+
+- `<slug>-hero.jpg` – toppbildet, liggende 16:9
+- `<slug>-om.jpg` – ved «Om oss», stående 4:5
+- `<slug>-detalj.jpg` – ved tjenester og priser, kvadratisk 1:1
+
+`<slug>` er bransjen i adressen, f.eks. `frisor`, `pizzeria`, `bilverksted` (se `src/content/demos.ts`). Mangler et bilde, vises illustrasjonen som før. Bransjene i `bleedHero` (`src/content/demo-photos.ts`) får toppbildet over hele flaten med teksten oppå.
+
 ## Chat-assistent
 
 «Spør oss»-boblen nederst til høyre er en chat-assistent med ferdige svar – ingen AI, ingen API-nøkkel og ingen kostnad. Alt skjer i nettleseren, og ingenting lagres.

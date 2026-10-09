@@ -1,6 +1,6 @@
 import Image from "next/image";
 import type { CSSProperties } from "react";
-import { demoPhotos } from "@/content/demo-photos";
+import { bleedHero, demoPhotos } from "@/content/demo-photos";
 import type { Demo, DemoGroup } from "@/content/demos";
 import { Scene } from "./Scene";
 
@@ -66,8 +66,10 @@ function Perks({ group }: { group: DemoGroup }) {
   );
 }
 
-/** Mørke paletter (og restaurant/catering) får foto over hele toppen, som i referansen. */
-function isBleed(demo: Demo) {
+/** Foto over hele toppen for bransjer med mørk stemning (se bleedHero). Uten foto
+    styres det av fargene: mørke paletter får den fargede toppen. */
+function isBleed(demo: Demo, hasPhoto: boolean) {
+  if (hasPhoto) return bleedHero.has(demo.slug);
   const hex = demo.theme.bg.replace("#", "");
   const [r, g, b] = [0, 2, 4].map((i) => parseInt(hex.slice(i, i + 2), 16));
   return r * 0.299 + g * 0.587 + b * 0.114 < 90 || demo.slug === "restaurant" || demo.slug === "catering";
@@ -101,8 +103,9 @@ export function DemoSite({ demo, fictionalLabel }: { demo: Demo; fictionalLabel:
   } as CSSProperties;
 
   const heading = demo.font === "serif" ? "font-display" : "font-sans font-semibold tracking-tight";
-  const photo = demoPhotos[demo.slug];
-  const bleed = isBleed(demo);
+  const photos = demoPhotos[demo.slug] ?? {};
+  const photo = photos.hero;
+  const bleed = isBleed(demo, Boolean(photo));
 
   return (
     <div className="@container" style={vars}>
@@ -186,36 +189,66 @@ export function DemoSite({ demo, fictionalLabel }: { demo: Demo; fictionalLabel:
 
         <Perks group={demo.group} />
 
-        {/* Tjenester og priser */}
-        <section className="px-5 py-14 @3xl:px-12 @3xl:py-20">
-          <h2 className={`text-3xl @3xl:text-4xl ${heading}`}>Tjenester og priser</h2>
-          <ul className="mt-8 grid gap-4 @3xl:grid-cols-2">
-            {demo.services.map((s) => (
-              <li
-                key={s.name}
-                className="flex items-baseline justify-between gap-4 rounded-2xl bg-[var(--d-soft)] px-6 py-5"
-              >
-                <span className="font-medium">{s.name}</span>
-                <span className="text-sm text-[var(--d-muted)]">{s.price}</span>
-              </li>
-            ))}
-          </ul>
-        </section>
-
-        {/* Om oss og åpningstider */}
-        <section className="grid gap-10 border-t border-[var(--d-fg)]/10 px-5 py-14 @3xl:grid-cols-[1.4fr_1fr] @3xl:px-12 @3xl:py-20">
+        {/* Tjenester og priser – med detaljbilde ved siden av når det finnes */}
+        <section
+          className={`grid gap-10 px-5 py-14 @3xl:px-12 @3xl:py-20 ${photos.detalj ? "@3xl:grid-cols-[1.5fr_1fr] @3xl:items-center" : ""}`}
+        >
           <div>
-            <h2 className={`text-3xl @3xl:text-4xl ${heading}`}>Om oss</h2>
-            <p className="mt-4 max-w-xl text-lg leading-relaxed text-[var(--d-muted)]">{demo.about}</p>
-          </div>
-          <div className="rounded-2xl border border-[var(--d-fg)]/10 p-6">
-            <h2 className="text-xs font-medium uppercase tracking-[0.18em] text-[var(--d-muted)]">Åpningstider</h2>
-            <ul className="mt-3 space-y-1">
-              {demo.hours.map((h) => (
-                <li key={h}>{h}</li>
+            <h2 className={`text-3xl @3xl:text-4xl ${heading}`}>Tjenester og priser</h2>
+            <ul className={`mt-8 grid gap-4 ${photos.detalj ? "" : "@3xl:grid-cols-2"}`}>
+              {demo.services.map((s) => (
+                <li
+                  key={s.name}
+                  className="flex items-baseline justify-between gap-4 rounded-2xl bg-[var(--d-soft)] px-6 py-5"
+                >
+                  <span className="font-medium">{s.name}</span>
+                  <span className="text-sm text-[var(--d-muted)]">{s.price}</span>
+                </li>
               ))}
             </ul>
           </div>
+          {photos.detalj && (
+            <div className="relative aspect-square overflow-hidden rounded-3xl">
+              <Image src={photos.detalj} alt="" fill sizes="(min-width: 1024px) 35vw, 100vw" className="object-cover" />
+            </div>
+          )}
+        </section>
+
+        {/* Om oss og åpningstider – med portrettbilde når det finnes */}
+        <section
+          className={`grid gap-10 border-t border-[var(--d-fg)]/10 px-5 py-14 @3xl:px-12 @3xl:py-20 ${
+            photos.om ? "@3xl:grid-cols-[1fr_1.2fr] @3xl:items-center" : "@3xl:grid-cols-[1.4fr_1fr]"
+          }`}
+        >
+          {photos.om && (
+            <div className="relative aspect-[4/5] overflow-hidden rounded-3xl">
+              <Image src={photos.om} alt="" fill sizes="(min-width: 1024px) 40vw, 100vw" className="object-cover" />
+            </div>
+          )}
+          <div>
+            <h2 className={`text-3xl @3xl:text-4xl ${heading}`}>Om oss</h2>
+            <p className="mt-4 max-w-xl text-lg leading-relaxed text-[var(--d-muted)]">{demo.about}</p>
+            {photos.om && (
+              <div className="mt-8 max-w-sm rounded-2xl border border-[var(--d-fg)]/10 p-6">
+                <h3 className="text-xs font-medium uppercase tracking-[0.18em] text-[var(--d-muted)]">Åpningstider</h3>
+                <ul className="mt-3 space-y-1">
+                  {demo.hours.map((h) => (
+                    <li key={h}>{h}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+          {!photos.om && (
+            <div className="rounded-2xl border border-[var(--d-fg)]/10 p-6">
+              <h2 className="text-xs font-medium uppercase tracking-[0.18em] text-[var(--d-muted)]">Åpningstider</h2>
+              <ul className="mt-3 space-y-1">
+                {demo.hours.map((h) => (
+                  <li key={h}>{h}</li>
+                ))}
+              </ul>
+            </div>
+          )}
         </section>
 
         {/* Avslutning */}
