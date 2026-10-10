@@ -2,6 +2,7 @@ import Image from "next/image";
 import type { CSSProperties } from "react";
 import { bleedHero, demoPhotos } from "@/content/demo-photos";
 import type { Demo, DemoGroup } from "@/content/demos";
+import { DemoMotion } from "./DemoMotion";
 import { Scene } from "./Scene";
 
 // En komplett eksempelnettside bygget fra bransjedataene i content/demos.ts.
@@ -53,16 +54,27 @@ const perks: Record<DemoGroup, [keyof typeof icons, string][]> = {
 
 function Perks({ group }: { group: DemoGroup }) {
   return (
-    <ul className="grid grid-cols-2 gap-y-6 border-y border-[var(--d-fg)]/10 px-5 py-8 @3xl:grid-cols-4 @3xl:px-12">
+    <ul data-motion="stagger" className="grid grid-cols-2 gap-y-6 border-y border-[var(--d-fg)]/10 px-5 py-8 @3xl:grid-cols-4 @3xl:px-12">
       {perks[group].map(([icon, label]) => (
         <li key={label} className="flex flex-col items-center gap-2.5 text-center text-sm text-[var(--d-muted)]">
-          <svg viewBox="0 0 24 24" className="h-7 w-7 text-[var(--d-primary)]" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-            <path d={icons[icon]} />
+          <svg viewBox="0 0 24 24" className="dm-draw h-7 w-7 text-[var(--d-primary)]" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d={icons[icon]} pathLength={1} />
           </svg>
           {label}
         </li>
       ))}
     </ul>
+  );
+}
+
+/** Kort «åpent»-linje under knappene: rask info for lokale kunder. */
+function OpenLine({ hours, light = false }: { hours: string[]; light?: boolean }) {
+  const first = hours[0] ?? "";
+  return (
+    <p className={`mt-6 flex items-center gap-2.5 text-sm ${light ? "opacity-85" : "text-[var(--d-muted)]"}`}>
+      <span className="dm-pulse h-2 w-2 rounded-full bg-green-500" aria-hidden="true" />
+      Åpent {first.charAt(0).toLowerCase() + first.slice(1)}
+    </p>
   );
 }
 
@@ -75,7 +87,8 @@ function isBleed(demo: Demo, hasPhoto: boolean) {
   return r * 0.299 + g * 0.587 + b * 0.114 < 90 || demo.slug === "restaurant" || demo.slug === "catering";
 }
 
-const btn = "inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-medium";
+const btn =
+  "inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-medium transition-[translate,box-shadow] duration-300 hover:-translate-y-0.5 hover:shadow-lg";
 
 function Buttons({ cta, light = false }: { cta: string; light?: boolean }) {
   return (
@@ -108,7 +121,7 @@ export function DemoSite({ demo, fictionalLabel }: { demo: Demo; fictionalLabel:
   const bleed = isBleed(demo, Boolean(photo));
 
   return (
-    <div className="@container" style={vars}>
+    <DemoMotion className="@container" style={vars}>
       <div className="bg-[var(--d-bg)] font-sans text-[var(--d-fg)]">
         {/* Meny */}
         <header className="flex items-center justify-between gap-4 border-b border-[var(--d-fg)]/10 px-5 py-4 @3xl:px-12 @3xl:py-5">
@@ -130,7 +143,7 @@ export function DemoSite({ demo, fictionalLabel }: { demo: Demo; fictionalLabel:
           <section className="relative overflow-hidden bg-[var(--d-primary)] text-[var(--d-on)]">
             {photo ? (
               <>
-                <Image src={photo} alt="" fill sizes="(min-width: 1024px) 80vw, 100vw" className="object-cover" />
+                <Image src={photo} alt="" fill sizes="(min-width: 1024px) 80vw, 100vw" className="dm-kenburns object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/55 to-black/10" />
               </>
             ) : (
@@ -138,10 +151,13 @@ export function DemoSite({ demo, fictionalLabel }: { demo: Demo; fictionalLabel:
             )}
             <div className="relative grid gap-10 px-5 py-16 @3xl:grid-cols-[1.3fr_1fr] @3xl:items-center @3xl:px-12 @3xl:py-28">
               <div className={photo ? "text-white" : ""}>
-                <p className="text-xs font-medium uppercase tracking-[0.2em] opacity-75">{demo.tagline}</p>
-                <h1 className={`mt-4 text-5xl leading-[1.04] @3xl:text-7xl ${heading}`}>{demo.title}</h1>
-                <p className="mt-6 max-w-md text-lg leading-relaxed opacity-85">{demo.text}</p>
-                <Buttons cta={demo.cta} light />
+                <p className="dm-rise text-xs font-medium uppercase tracking-[0.2em] opacity-75">{demo.tagline}</p>
+                <h1 className={`dm-rise dm-d1 mt-4 text-5xl leading-[1.04] @3xl:text-7xl ${heading}`}>{demo.title}</h1>
+                <p className="dm-rise dm-d2 mt-6 max-w-md text-lg leading-relaxed opacity-85">{demo.text}</p>
+                <div className="dm-rise dm-d3">
+                  <Buttons cta={demo.cta} light />
+                  <OpenLine hours={demo.hours} light />
+                </div>
               </div>
               {!photo && (
                 <div className="aspect-[4/3] overflow-hidden rounded-3xl bg-[var(--d-soft)]">
@@ -159,16 +175,19 @@ export function DemoSite({ demo, fictionalLabel }: { demo: Demo; fictionalLabel:
                   alt=""
                   fill
                   sizes="(min-width: 1024px) 60vw, 100vw"
-                  className="object-cover [mask-image:linear-gradient(to_bottom,black_70%,transparent)] @3xl:[mask-image:linear-gradient(to_right,transparent,black_35%)]"
+                  className="dm-kenburns object-cover [mask-image:linear-gradient(to_bottom,black_70%,transparent)] @3xl:[mask-image:linear-gradient(to_right,transparent,black_35%)]"
                 />
               </div>
             )}
             <div className="relative grid items-center gap-10 px-5 py-12 @3xl:min-h-[34rem] @3xl:grid-cols-2 @3xl:px-12 @3xl:py-24">
               <div>
-                <p className="text-xs font-medium uppercase tracking-[0.2em] text-[var(--d-muted)]">{demo.tagline}</p>
-                <h1 className={`mt-4 text-4xl leading-[1.08] @3xl:text-6xl ${heading}`}>{demo.title}</h1>
-                <p className="mt-6 max-w-md text-lg leading-relaxed text-[var(--d-muted)]">{demo.text}</p>
-                <Buttons cta={demo.cta} />
+                <p className="dm-rise text-xs font-medium uppercase tracking-[0.2em] text-[var(--d-muted)]">{demo.tagline}</p>
+                <h1 className={`dm-rise dm-d1 mt-4 text-4xl leading-[1.08] @3xl:text-6xl ${heading}`}>{demo.title}</h1>
+                <p className="dm-rise dm-d2 mt-6 max-w-md text-lg leading-relaxed text-[var(--d-muted)]">{demo.text}</p>
+                <div className="dm-rise dm-d3">
+                  <Buttons cta={demo.cta} />
+                  <OpenLine hours={demo.hours} />
+                </div>
               </div>
               {!photo && (
                 <div className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-[var(--d-soft)]">
@@ -194,12 +213,14 @@ export function DemoSite({ demo, fictionalLabel }: { demo: Demo; fictionalLabel:
           className={`grid gap-10 px-5 py-14 @3xl:px-12 @3xl:py-20 ${photos.detalj ? "@3xl:grid-cols-[1.5fr_1fr] @3xl:items-center" : ""}`}
         >
           <div>
-            <h2 className={`text-3xl @3xl:text-4xl ${heading}`}>Tjenester og priser</h2>
-            <ul className={`mt-8 grid gap-4 ${photos.detalj ? "" : "@3xl:grid-cols-2"}`}>
+            <h2 data-motion="rise" className={`text-3xl @3xl:text-4xl ${heading}`}>
+              Tjenester og priser
+            </h2>
+            <ul data-motion="stagger" className={`mt-8 grid gap-4 ${photos.detalj ? "" : "@3xl:grid-cols-2"}`}>
               {demo.services.map((s) => (
                 <li
                   key={s.name}
-                  className="flex items-baseline justify-between gap-4 rounded-2xl bg-[var(--d-soft)] px-6 py-5"
+                  className="flex items-baseline justify-between gap-4 rounded-2xl bg-[var(--d-soft)] px-6 py-5 hover:-translate-y-0.5 hover:shadow-[inset_4px_0_0_var(--d-primary)]"
                 >
                   <span className="font-medium">{s.name}</span>
                   <span className="text-sm text-[var(--d-muted)]">{s.price}</span>
@@ -208,7 +229,7 @@ export function DemoSite({ demo, fictionalLabel }: { demo: Demo; fictionalLabel:
             </ul>
           </div>
           {photos.detalj && (
-            <div className="relative aspect-square overflow-hidden rounded-3xl">
+            <div data-motion="image" className="relative aspect-square overflow-hidden rounded-3xl">
               <Image src={photos.detalj} alt="" fill sizes="(min-width: 1024px) 35vw, 100vw" className="object-cover" />
             </div>
           )}
@@ -221,12 +242,14 @@ export function DemoSite({ demo, fictionalLabel }: { demo: Demo; fictionalLabel:
           }`}
         >
           {photos.om && (
-            <div className="relative aspect-[4/5] overflow-hidden rounded-3xl">
+            <div data-motion="image" className="relative aspect-[4/5] overflow-hidden rounded-3xl">
               <Image src={photos.om} alt="" fill sizes="(min-width: 1024px) 40vw, 100vw" className="object-cover" />
             </div>
           )}
           <div>
-            <h2 className={`text-3xl @3xl:text-4xl ${heading}`}>Om oss</h2>
+            <h2 data-motion="rise" className={`text-3xl @3xl:text-4xl ${heading}`}>
+              Om oss
+            </h2>
             <p className="mt-4 max-w-xl text-lg leading-relaxed text-[var(--d-muted)]">{demo.about}</p>
             {photos.om && (
               <div className="mt-8 max-w-sm rounded-2xl border border-[var(--d-fg)]/10 p-6">
@@ -252,16 +275,29 @@ export function DemoSite({ demo, fictionalLabel }: { demo: Demo; fictionalLabel:
         </section>
 
         {/* Avslutning */}
-        <section className="bg-[var(--d-primary)] px-5 py-14 text-center text-[var(--d-on)] @3xl:px-12">
-          <p className={`text-3xl @3xl:text-4xl ${heading}`}>Velkommen til {demo.name}</p>
-          <span className={`${btn} mt-6 bg-[var(--d-on)] text-[var(--d-primary)]`}>{demo.cta}</span>
+        <section className="dm-sheen bg-[var(--d-primary)] px-5 py-14 text-center text-[var(--d-on)] @3xl:px-12">
+          <p data-motion="rise" className={`relative text-3xl @3xl:text-4xl ${heading}`}>
+            Velkommen til {demo.name}
+          </p>
+          <span className={`${btn} relative mt-6 bg-[var(--d-on)] text-[var(--d-primary)]`}>{demo.cta}</span>
         </section>
 
         <footer className="flex flex-col gap-1 px-5 py-6 text-xs text-[var(--d-muted)] @md:flex-row @md:justify-between @3xl:px-12">
           <span>© {demo.name}</span>
           <span>{fictionalLabel}</span>
         </footer>
+
+        {/* Klebrig handlingslinje på mobil: ring eller bestill med tommelen. */}
+        <div className="sticky bottom-0 z-10 flex gap-2 border-t border-[var(--d-fg)]/10 bg-[var(--d-bg)]/95 p-3 backdrop-blur @md:hidden">
+          <span className={`${btn} flex-1 gap-2 border border-[var(--d-fg)]/20`}>
+            <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true">
+              <path d="M6.5 3.5h3l1.5 4-2 1.2a11 11 0 0 0 6.3 6.3l1.2-2 4 1.5v3a2 2 0 0 1-2 2A16 16 0 0 1 4.5 5.5a2 2 0 0 1 2-2z" strokeLinejoin="round" />
+            </svg>
+            Ring oss
+          </span>
+          <span className={`${btn} flex-1 bg-[var(--d-primary)] text-[var(--d-on)]`}>{demo.cta}</span>
+        </div>
       </div>
-    </div>
+    </DemoMotion>
   );
 }

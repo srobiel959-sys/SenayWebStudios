@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Fragment, useEffect, useRef, useState, type FormEvent, type KeyboardEvent } from "react";
 import type { Content } from "@/content";
 import { site } from "@/content/shared";
@@ -75,6 +76,7 @@ export function ChatWidget({ lang, labels, nav }: { lang: Lang; labels: Content[
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const pathname = usePathname();
   const wasOpen = useRef(false);
 
   // Fokus inn i chatten når den åpnes, og tilbake til knappen når den lukkes.
@@ -136,6 +138,9 @@ export function ChatWidget({ lang, labels, nav }: { lang: Lang; labels: Content[
       send(input);
     }
   }
+
+  // Eksempelsidene skal se ut som kundens egen nettside – uten vår chatboble.
+  if (/\/demo\//.test(pathname)) return null;
 
   const last = messages[messages.length - 1];
   const suggestions = messages.length === 0 ? labels.suggestions : last?.role === "assistant" ? last.followUps : [];

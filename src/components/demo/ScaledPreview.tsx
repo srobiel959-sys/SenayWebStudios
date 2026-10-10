@@ -42,7 +42,7 @@ export function ScaledPreview({
       {size ? (
         <div
           key={id}
-          className="demo-swap origin-top-left"
+          className="dm-swap origin-top-left"
           style={{ width: size.base, transform: `scale(${size.scale})` }}
         >
           {children}
