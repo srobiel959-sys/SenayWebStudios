@@ -21,3 +21,15 @@ export function ArrowIcon({ className = "h-4 w-4" }: { className?: string }) {
     </svg>
   );
 }
+
+/** Pil i egen sirkel, til knapper med btnArrow. Flytter seg litt når knappen holdes over. */
+export function ArrowCircle() {
+  return (
+    <span
+      aria-hidden="true"
+      className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/12 transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-0.5 group-hover:-translate-y-px group-hover:scale-105"
+    >
+      <ArrowIcon className="h-4 w-4" />
+    </span>
+  );
+}

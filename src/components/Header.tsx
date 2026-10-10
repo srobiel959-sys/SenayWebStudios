@@ -2,10 +2,14 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { Content } from "@/content";
 import { href, navKeys, translatePath, type Lang } from "@/lib/routes";
+import { ease } from "@/lib/ui";
 import { Logo } from "./Logo";
+
+// Flytende «glasspille»-meny. På mobil åpnes en meny over hele skjermen der
+// lenkene glir inn etter hverandre, og hamburgeren blir til et kryss.
 
 function isActive(pathname: string, target: string) {
   return pathname === target || pathname.startsWith(`${target}/`);
@@ -18,16 +22,33 @@ export function Header({ lang, nav, ui }: { lang: Lang; nav: Content["nav"]; ui:
   const other: Lang = lang === "no" ? "en" : "no";
   const switchHref = translatePath(pathname, other);
   const items = navKeys.map((key) => ({ key, href: href(lang, key), label: nav[key] }));
+  const mobileItems = [...items, { key: "contact", href: href(lang, "contact"), label: nav.contact }];
+
+  // Lås scrollingen bak menyen, og lukk den med Esc.
+  useEffect(() => {
+    if (!open) return;
+    const root = document.documentElement;
+    const previous = root.style.overflow;
+    root.style.overflow = "hidden";
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => {
+      root.style.overflow = previous;
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [open]);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-cream/90 backdrop-blur-md supports-[backdrop-filter]:bg-cream/80">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-6 px-5 sm:h-20 sm:px-8">
+    <header className={`sticky top-0 px-3 pt-3 sm:px-5 sm:pt-4 ${open ? "z-[60]" : "z-40"}`}>
+      <div className="relative z-10 mx-auto flex h-14 max-w-6xl items-center justify-between gap-6 rounded-full border border-white/10 bg-[#050d1a]/75 pl-5 pr-2 shadow-[0_12px_40px_-16px_rgba(0,0,0,0.8)] backdrop-blur-xl sm:h-16 sm:pl-7">
         <Link href={href(lang, "home")} aria-label={ui.homeLabel} onClick={close}>
-          <Logo alt="" preload className="h-7 w-auto sm:h-8" />
+          <Logo alt="" tone="light" preload className="h-6 w-auto sm:h-7" />
         </Link>
 
         <nav aria-label={ui.mainMenu} className="hidden xl:block">
-          <ul className="flex items-center gap-7 text-[0.95rem]">
+          <ul className="flex items-center gap-1 text-[0.95rem]">
             {items.map((item) => {
               const active = isActive(pathname, item.href);
               return (
@@ -35,8 +56,8 @@ export function Header({ lang, nav, ui }: { lang: Lang; nav: Content["nav"]; ui:
                   <Link
                     href={item.href}
                     aria-current={active ? "page" : undefined}
-                    className={`relative whitespace-nowrap py-2 transition-colors after:absolute after:inset-x-0 after:-bottom-0.5 after:h-px after:origin-left after:bg-navy after:transition-transform after:duration-300 ${
-                      active ? "after:scale-x-100" : "text-ink-muted hover:text-navy after:scale-x-0 hover:after:scale-x-100"
+                    className={`whitespace-nowrap rounded-full px-3.5 py-2 transition-colors duration-300 ${
+                      active ? "bg-white/10 text-white" : "text-ink-muted hover:bg-white/5 hover:text-white"
                     }`}
                   >
                     {item.label}
@@ -47,50 +68,65 @@ export function Header({ lang, nav, ui }: { lang: Lang; nav: Content["nav"]; ui:
           </ul>
         </nav>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2">
           <Link
             href={switchHref}
             hrefLang={other === "no" ? "nb" : "en"}
             aria-label={ui.switchLanguageLabel}
-            className="rounded-full border border-line px-3 py-1.5 text-xs font-medium uppercase tracking-wider text-ink-muted transition-colors hover:border-navy hover:text-navy"
+            className="rounded-full border border-white/10 px-3 py-1.5 text-xs font-medium uppercase tracking-wider text-ink-muted transition-colors hover:border-white/30 hover:text-white"
           >
             {other === "no" ? "NO" : "EN"}
           </Link>
           <Link
             href={href(lang, "contact")}
-            className="hidden whitespace-nowrap rounded-full bg-navy px-5 py-2.5 text-sm font-medium text-cream transition-colors hover:bg-navy-soft sm:inline-block"
+            className={`hidden whitespace-nowrap rounded-full bg-navy px-5 py-2.5 text-sm font-medium text-cream transition-[background-color,scale] duration-500 ${ease} hover:bg-navy-soft active:scale-[0.97] sm:inline-block`}
           >
             {ui.requestQuote}
           </Link>
           <button
             type="button"
-            className="-mr-2 inline-flex h-11 w-11 items-center justify-center xl:hidden"
+            className="relative inline-flex h-11 w-11 items-center justify-center rounded-full xl:hidden"
             aria-expanded={open}
             aria-controls="mobilmeny"
             onClick={() => setOpen((v) => !v)}
           >
             <span className="sr-only">{open ? ui.closeMenu : ui.openMenu}</span>
-            <svg viewBox="0 0 24 24" className="h-6 w-6" aria-hidden="true">
-              {open ? (
-                <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-              ) : (
-                <path d="M4 8h16M4 16h16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-              )}
-            </svg>
+            <span
+              aria-hidden="true"
+              className={`absolute h-px w-5 bg-current transition-transform duration-500 ${ease} ${open ? "rotate-45" : "-translate-y-1"}`}
+            />
+            <span
+              aria-hidden="true"
+              className={`absolute h-px w-5 bg-current transition-transform duration-500 ${ease} ${open ? "-rotate-45" : "translate-y-1"}`}
+            />
           </button>
         </div>
       </div>
 
-      <nav id="mobilmeny" aria-label={ui.mobileMenu} hidden={!open} className="border-t border-line bg-cream xl:hidden">
-        <ul className="mx-auto flex max-w-6xl flex-col px-5 py-4 sm:px-8">
-          {[...items, { key: "contact", href: href(lang, "contact"), label: nav.contact }].map((item) => {
+      {/* Mobilmeny over hele skjermen */}
+      <nav
+        id="mobilmeny"
+        aria-label={ui.mobileMenu}
+        inert={!open}
+        className={`fixed inset-0 bg-[#050d1a]/95 px-6 pt-28 backdrop-blur-2xl transition-opacity duration-500 xl:hidden ${ease} ${
+          open ? "opacity-100" : "pointer-events-none opacity-0"
+        }`}
+      >
+        <ul className="mx-auto flex max-w-xl flex-col">
+          {mobileItems.map((item, i) => {
             const active = isActive(pathname, item.href);
             return (
-              <li key={item.key} className="border-b border-line last:border-b-0">
+              <li
+                key={item.key}
+                className={`border-b border-white/10 transition-[opacity,translate] duration-700 ${ease} ${
+                  open ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+                }`}
+                style={{ transitionDelay: open ? `${80 + i * 45}ms` : "0ms" }}
+              >
                 <Link
                   href={item.href}
                   aria-current={active ? "page" : undefined}
-                  className={`flex items-center justify-between py-4 font-display text-2xl ${active ? "" : "text-ink-muted"}`}
+                  className={`flex items-center justify-between py-4 font-display text-3xl ${active ? "text-white" : "text-ink-muted"}`}
                   onClick={close}
                 >
                   {item.label}

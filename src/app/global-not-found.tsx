@@ -15,7 +15,7 @@ export default function GlobalNotFound() {
     <html lang="nb" className={`${bodoni.variable} ${jost.variable} h-full antialiased`}>
       <body className="h-full">
         <main className="flex min-h-full flex-col items-center justify-center px-5 py-24 text-center">
-        <MainLogo className="monogram-draw h-auto w-56" />
+        <MainLogo tone="light" className="monogram-draw h-auto w-56" />
         <h1 className="mt-10 font-display text-5xl sm:text-6xl">Siden finnes ikke.</h1>
         <p className="mt-4 max-w-md text-lg text-ink-muted">
           Lenken kan være feil, eller siden er flyttet. <span lang="en">Page not found.</span>

@@ -102,9 +102,43 @@ export const no = {
     titleAccent: "Hva finner de?",
     lead: "Vi lager nettsiden din først. Du ser den ferdig – før du bestemmer deg.",
     primaryCta: "Få et gratis forslag",
-    secondaryCta: "Finn din bransje",
-    showcaseLabel: "Velg bransje",
+    secondaryCta: "Se hvordan det fungerer",
+    scrollHint: "Rull ned",
   },
+  // Scroll-fortellingen på forsiden: et Google-søk som spilles av mens man scroller.
+  story: {
+    label: "Slik velger kundene",
+    query: "frisør i nærheten",
+    searchLabel: "Søk",
+    steps: [
+      { kicker: "Klokka er 20:14", text: "En kunde trenger en frisør. Hun tar opp telefonen og søker." },
+      { kicker: "Tre sekunder senere", text: "Hun ser på de første treffene. Hun leter ikke videre." },
+      { kicker: "Og du?", text: "Bedriften din er ikke der. For henne finnes du ikke." },
+      { kicker: "Med Senay Studio", text: "Nå er det deg hun finner – og deg hun ringer." },
+    ],
+    results: [
+      { name: "Salong Lykke", url: "salonglykke.no", text: "Frisør i sentrum · Åpent nå · Bestill time på nett" },
+      { name: "Klipp & Co", url: "klippogco.no", text: "Dame- og herreklipp · Bestill time på nett" },
+      { name: "Hårstudio Nord", url: "harstudionord.no", text: "Farge, striper og styling · Åpent til 21" },
+    ],
+    you: { name: "Din bedrift", missing: "Ingen nettside funnet", url: "dinbedrift.no", text: "Din frisørsalong · Åpent nå · Bestill time på nett" },
+    fictional: "Eksempel – bedriftene er oppdiktet",
+  },
+
+  statement: "En nettside er ikke pynt. Den er din beste selger – den svarer kundene mens du jobber, sover og har ferie.",
+
+  numbers: {
+    eyebrow: "Prisen",
+    title: "Like enkel som den høres ut.",
+    items: [
+      { value: 0, prefix: "", suffix: " kr", label: "for å lage nettsiden" },
+      { value: Number(prices.website.replace(/\s/g, "")), prefix: "", suffix: " kr", label: "når den går live" },
+      { value: Number(prices.hosting), prefix: "", suffix: " kr/mnd", label: "for drift og endringer" },
+    ],
+    note: "Ingen binding. Du eier nettsiden.",
+    link: "Se hva som er inkludert",
+  },
+
 
 
   explore: {

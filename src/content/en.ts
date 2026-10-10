@@ -98,9 +98,42 @@ export const en: Content = {
     titleAccent: "What do they find?",
     lead: "We build your website first. You see it finished – before you decide.",
     primaryCta: "Get a free proposal",
-    secondaryCta: "Find your industry",
-    showcaseLabel: "Choose industry",
+    secondaryCta: "See how it works",
+    scrollHint: "Scroll down",
   },
+  story: {
+    label: "How customers choose",
+    query: "hairdresser near me",
+    searchLabel: "Search",
+    steps: [
+      { kicker: "It's 8:14 pm", text: "A customer needs a hairdresser. She picks up her phone and searches." },
+      { kicker: "Three seconds later", text: "She looks at the first results. She doesn't look any further." },
+      { kicker: "And you?", text: "Your business isn't there. To her, you don't exist." },
+      { kicker: "With Senay Studio", text: "Now it's you she finds – and you she calls." },
+    ],
+    results: [
+      { name: "Salong Lykke", url: "salonglykke.no", text: "Hair salon in the city centre · Open now · Book online" },
+      { name: "Klipp & Co", url: "klippogco.no", text: "Women's and men's cuts · Book online" },
+      { name: "Hårstudio Nord", url: "harstudionord.no", text: "Colour, highlights and styling · Open until 9 pm" },
+    ],
+    you: { name: "Your business", missing: "No website found", url: "yourbusiness.no", text: "Your hair salon · Open now · Book online" },
+    fictional: "Example – the businesses are fictional",
+  },
+
+  statement: "A website isn't decoration. It's your best salesperson – it answers customers while you work, sleep and go on holiday.",
+
+  numbers: {
+    eyebrow: "The price",
+    title: "As simple as it sounds.",
+    items: [
+      { value: 0, suffix: "", prefix: "NOK ", label: "to build your website" },
+      { value: Number(prices.website.replace(/\s/g, "")), suffix: "", prefix: "NOK ", label: "when it goes live" },
+      { value: Number(prices.hosting), suffix: "/mo", prefix: "NOK ", label: "for hosting and changes" },
+    ],
+    note: "No lock-in. You own the website.",
+    link: "See what's included",
+  },
+
 
 
   explore: {

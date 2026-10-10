@@ -2,16 +2,16 @@ import { ContactForm } from "@/components/ContactForm";
 import { Reveal } from "@/components/Reveal";
 import { getContent, site } from "@/content";
 import type { Lang } from "@/lib/routes";
-import { container } from "@/lib/ui";
+import { container, eyebrowPill } from "@/lib/ui";
 
 export function ContactView({ lang }: { lang: Lang }) {
   const c = getContent(lang);
   const { contact } = c;
   return (
-    <section aria-labelledby="side-tittel" className="bg-navy text-cream">
+    <section aria-labelledby="side-tittel" className="bg-sand text-cream">
       <div className={`${container} grid gap-16 py-20 sm:py-28 lg:grid-cols-12 lg:py-32`}>
         <div className="lg:col-span-5">
-          <p className="hero-in text-sm font-medium uppercase tracking-[0.22em] text-cream-muted">{contact.eyebrow}</p>
+          <p className={`hero-in ${eyebrowPill}`}>{contact.eyebrow}</p>
           <h1 id="side-tittel" className="hero-in hero-in-2 mt-6 font-display text-[2.6rem] leading-[1.05] tracking-tight sm:text-6xl">
             {contact.title}
           </h1>
@@ -27,7 +27,7 @@ export function ContactView({ lang }: { lang: Lang }) {
           <ol className="mt-6 space-y-6">
             {contact.nextSteps.map((step, i) => (
               <li key={step.title} className="flex gap-5">
-                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-cream-muted/60 text-sm">
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/15 bg-white/[0.04] text-sm">
                   {i + 1}
                 </span>
                 <div>
@@ -40,8 +40,10 @@ export function ContactView({ lang }: { lang: Lang }) {
         </div>
 
         <Reveal className="lg:col-span-7">
-          <div className="rounded-2xl border border-cream-muted/25 bg-navy-soft/40 p-6 sm:p-10">
-            <ContactForm labels={contact.form} />
+          <div className="rounded-[2rem] border border-white/10 bg-white/[0.03] p-1.5">
+            <div className="rounded-[calc(2rem-0.375rem)] bg-[#0a1428] p-6 shadow-[inset_0_1px_1px_rgba(255,255,255,0.08)] sm:p-10">
+              <ContactForm labels={contact.form} />
+            </div>
           </div>
         </Reveal>
       </div>

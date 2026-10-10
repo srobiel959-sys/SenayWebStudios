@@ -11,14 +11,14 @@ import { SectionHeading } from "./SectionHeading";
 export function AgencyCompare({ lang, c }: { lang: Lang; c: Content }) {
   const a = c.agencies;
   return (
-    <section aria-labelledby="byraer-tittel" className="border-t border-line py-24 sm:py-32">
+    <section aria-labelledby="byraer-tittel" className="border-t border-line py-28 sm:py-40">
       <div className={container}>
         <Reveal>
           <SectionHeading id="byraer-tittel" eyebrow={a.eyebrow} title={a.title} />
         </Reveal>
 
         <div className="mt-14 grid gap-6 lg:grid-cols-2">
-          <Reveal className="h-full rounded-2xl border border-line bg-sand p-8 sm:p-10">
+          <Reveal className="h-full rounded-[2rem] border border-white/10 bg-white/[0.02] p-8 sm:p-10">
             <p className="text-xs font-medium uppercase tracking-[0.2em] text-ink-muted">{a.others.label}</p>
             <h3 className="mt-3 font-display text-3xl">{a.others.title}</h3>
             <ul className="mt-8 space-y-4 text-lg">
@@ -34,13 +34,14 @@ export function AgencyCompare({ lang, c }: { lang: Lang; c: Content }) {
             </ul>
           </Reveal>
 
-          <Reveal delay={120} className="h-full rounded-2xl bg-navy p-8 text-cream sm:p-10">
+          <Reveal delay={120} className="relative h-full overflow-hidden rounded-[2rem] bg-navy p-8 text-cream sm:p-10">
+            <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-[radial-gradient(closest-side,rgba(96,165,250,0.35),transparent)]" />
             <p className="text-xs font-medium uppercase tracking-[0.2em] text-cream-muted">{a.us.label}</p>
             <h3 className="mt-3 font-display text-3xl">{a.us.title}</h3>
             <ul className="mt-8 space-y-4 text-lg">
               {a.us.items.map((item) => (
-                <li key={item} className="flex gap-3">
-                  <CheckIcon className="mt-1.5 h-4 w-4 shrink-0" />
+                <li key={item} className="relative flex gap-3">
+                  <CheckIcon className="mt-1.5 h-4 w-4 shrink-0 text-[#93c5fd]" />
                   <span>
                     <span className="sr-only">{c.ui.upside}: </span>
                     {item}

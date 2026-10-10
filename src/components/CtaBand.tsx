@@ -1,25 +1,28 @@
 import Link from "next/link";
 import type { Content } from "@/content";
 import { href, type Lang } from "@/lib/routes";
-import { btnLight, btnOutlineLight, container } from "@/lib/ui";
+import { btnArrow, btnSecondary, container } from "@/lib/ui";
+import { ArrowCircle } from "./Icons";
 import { Reveal } from "./Reveal";
 
-// Avsluttende oppfordring nederst på sidene.
+// Avsluttende oppfordring nederst på sidene: sentrert, med blå glød bak.
 
 export function CtaBand({ lang, c }: { lang: Lang; c: Content }) {
   return (
-    <section aria-labelledby="cta-tittel" className="relative overflow-hidden bg-navy text-cream">
-      <div className={`${container} relative py-24 sm:py-32`}>
+    <section aria-labelledby="cta-tittel" className="relative overflow-hidden border-t border-line">
+      <div className="pointer-events-none absolute left-1/2 top-1/2 h-[40rem] w-[60rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(59,130,246,0.22),transparent)]" />
+      <div className={`${container} relative py-28 text-center sm:py-40`}>
         <Reveal>
-          <h2 id="cta-tittel" className="max-w-3xl font-display text-4xl leading-tight sm:text-5xl lg:text-6xl">
+          <h2 id="cta-tittel" className="mx-auto max-w-4xl text-balance font-display text-5xl leading-[1.02] tracking-tight sm:text-6xl lg:text-7xl">
             {c.cta.title}
           </h2>
-          <p className="mt-6 max-w-xl text-lg text-cream-muted">{c.cta.lead}</p>
-          <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:gap-4">
-            <Link href={href(lang, "contact")} className={btnLight}>
+          <p className="mx-auto mt-7 max-w-xl text-pretty text-lg text-ink-muted">{c.cta.lead}</p>
+          <div className="mt-11 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center sm:gap-4">
+            <Link href={href(lang, "contact")} className={btnArrow}>
               {c.cta.primary}
+              <ArrowCircle />
             </Link>
-            <Link href={href(lang, "pricing")} className={btnOutlineLight}>
+            <Link href={href(lang, "pricing")} className={btnSecondary}>
               {c.cta.secondary}
             </Link>
           </div>

@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { container } from "@/lib/ui";
+import { container, eyebrowPill } from "@/lib/ui";
 
 // Felles topp for undersidene.
 
@@ -17,7 +17,7 @@ export function PageHero({
   return (
     <section aria-labelledby="side-tittel" className="relative overflow-hidden border-b border-line">
       <div className={`${container} py-20 sm:py-28 lg:py-32`}>
-        <p className="hero-in text-sm font-medium uppercase tracking-[0.22em] text-ink-muted">{eyebrow}</p>
+        <p className={`hero-in ${eyebrowPill}`}>{eyebrow}</p>
         <h1
           id="side-tittel"
           className="hero-in hero-in-2 mt-6 max-w-4xl font-display text-[2.6rem] leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl"

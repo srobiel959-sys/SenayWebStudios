@@ -3,12 +3,14 @@
 import { useState, type FormEvent } from "react";
 import type { Content } from "@/content";
 import { site } from "@/content/shared";
+import { btnArrow } from "@/lib/ui";
+import { ArrowCircle } from "./Icons";
 
 // Skjemaet har ingen backend ennå. Ved innsending åpnes brukerens e-postprogram
 // med utfylt melding til site.email. Bytt ut handleSubmit når et skjema-API er på plass.
 
 const fieldClass =
-  "mt-2 block w-full rounded-md border border-cream-muted bg-navy-soft px-4 py-3 text-cream focus:border-cream";
+  "mt-2 block w-full rounded-2xl border border-white/15 bg-white/[0.04] px-4 py-3 text-white transition-colors duration-300 hover:border-white/25 focus:border-[#3b82f6] focus:bg-white/[0.06]";
 
 export function ContactForm({ labels }: { labels: Content["contact"]["form"] }) {
   const [sent, setSent] = useState(false);
@@ -74,25 +76,23 @@ export function ContactForm({ labels }: { labels: Content["contact"]["form"] }) 
         <textarea id="melding" name="melding" rows={5} required className={fieldClass} />
       </div>
       <div className="flex flex-col gap-4 sm:col-span-2 sm:flex-row sm:items-center sm:justify-between">
-        <button
-          type="submit"
-          className="inline-flex items-center justify-center rounded-full bg-cream px-7 py-3.5 font-medium text-navy transition-colors hover:bg-sand"
-        >
+        <button type="submit" className={btnArrow}>
           {labels.submit}
+          <ArrowCircle />
         </button>
         <p role="status" aria-live="polite" className="text-sm text-cream-muted sm:text-right">
           {sent ? labels.sent : null}
         </p>
       </div>
       {sent ? (
-        <div className="rounded-xl border border-cream-muted/30 p-5 text-sm text-cream-muted sm:col-span-2">
+        <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5 text-sm text-cream-muted sm:col-span-2">
           <p>
             {labels.fallback} <span className="text-cream">{site.email}</span>.
           </p>
           <button
             type="button"
             onClick={copyEmail}
-            className="mt-3 rounded-full border border-cream-muted/60 px-4 py-2 text-cream transition-colors hover:bg-cream hover:text-navy"
+            className="mt-3 rounded-full border border-white/20 px-4 py-2 text-cream transition-colors hover:border-white/40 hover:bg-white/10"
           >
             {copied ? labels.copied : labels.copy}
           </button>

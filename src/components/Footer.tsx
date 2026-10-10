@@ -7,8 +7,8 @@ import { MainLogo } from "./Logo";
 
 export function Footer({ lang, c }: { lang: Lang; c: Content }) {
   return (
-    <footer className="bg-navy text-cream">
-      <div className={`${container} grid gap-12 border-t border-cream-muted/20 py-16 md:grid-cols-12`}>
+    <footer className="border-t border-line bg-[#02060d] text-cream">
+      <div className={`${container} grid gap-12 py-16 md:grid-cols-12`}>
         <div className="flex flex-col items-start gap-4 md:col-span-5">
           {/* Hovedlogoen (med tagline). Krem-varianten, fordi footeren har mørk bakgrunn. */}
           <MainLogo tone="light" loading="eager" className="h-auto w-56" />
