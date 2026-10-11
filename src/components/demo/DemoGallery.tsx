@@ -5,6 +5,7 @@ import { useState } from "react";
 import type { Content } from "@/content";
 import { demoGroups, demos, type DemoGroup } from "@/content/demos";
 import { demoHref, type Lang } from "@/lib/routes";
+import { kicker } from "@/lib/ui";
 import { ArrowIcon } from "../Icons";
 import { DemoSite } from "./DemoSite";
 import { ScaledPreview } from "./ScaledPreview";
@@ -25,7 +26,7 @@ export function DemoGallery({ lang, labels }: { lang: Lang; labels: Labels }) {
 
   const tab = (active: boolean) =>
     `shrink-0 rounded-full px-4 py-2 text-sm transition-colors ${
-      active ? "bg-navy text-cream" : "border border-line text-ink-muted hover:border-navy hover:text-navy"
+      active ? "bg-navy text-cream" : "border border-white/10 text-ink-muted hover:border-white/30 hover:text-white"
     }`;
 
   return (
@@ -45,7 +46,7 @@ export function DemoGallery({ lang, labels }: { lang: Lang; labels: Labels }) {
       <div className="mt-8 grid gap-8 lg:grid-cols-12">
         {/* Bransjer */}
         <div className="min-w-0 lg:col-span-3">
-          <p className="text-xs font-medium uppercase tracking-[0.2em] text-ink-muted">{labels.choose}</p>
+          <p className={kicker}>{labels.choose}</p>
           <ul className="-mx-5 mt-4 flex gap-2 overflow-x-auto px-5 pb-2 lg:mx-0 lg:max-h-[34rem] lg:flex-col lg:gap-0 lg:overflow-y-auto lg:px-0 lg:pb-0">
             {visible.map((d) => {
               const active = d.slug === current.slug;
@@ -56,7 +57,7 @@ export function DemoGallery({ lang, labels }: { lang: Lang; labels: Labels }) {
                     aria-pressed={active}
                     onClick={() => setSlug(d.slug)}
                     className={`w-full rounded-full px-4 py-2 text-left text-sm transition-colors lg:rounded-lg lg:py-2.5 ${
-                      active ? "bg-navy text-cream" : "text-navy hover:bg-sand"
+                      active ? "bg-navy text-cream" : "text-ink-muted hover:bg-white/5 hover:text-white"
                     }`}
                   >
                     {d.label[lang]}
@@ -69,20 +70,23 @@ export function DemoGallery({ lang, labels }: { lang: Lang; labels: Labels }) {
 
         {/* Forhåndsvisning */}
         <div className="min-w-0 lg:col-span-9">
-          <div className="overflow-hidden rounded-2xl border border-line bg-cream shadow-[0_30px_80px_-40px_rgba(7,22,48,0.45)]">
-            <div className="flex items-center gap-3 border-b border-line bg-sand px-4 py-3">
-              <span className="flex gap-1.5" aria-hidden="true">
-                <span className="h-2.5 w-2.5 rounded-full bg-[#E36A5C]" />
-                <span className="h-2.5 w-2.5 rounded-full bg-[#E9B949]" />
-                <span className="h-2.5 w-2.5 rounded-full bg-[#62B36B]" />
-              </span>
-              <span className="min-w-0 flex-1 truncate rounded-md bg-cream px-3 py-1 text-xs text-ink-muted">
-                demo.senaystudio.no/{current.slug}
-              </span>
+          <div className="rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-1.5 shadow-[0_40px_120px_-50px_rgba(59,130,246,0.45)]">
+            <div className="overflow-hidden rounded-[calc(1.75rem-0.375rem)] bg-[#0a1428]">
+              <div className="flex items-center gap-3 border-b border-white/10 px-4 py-3">
+                <span className="flex gap-1.5" aria-hidden="true">
+                  <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
+                </span>
+                <span className="min-w-0 flex-1 truncate rounded-full bg-white/[0.06] px-3 py-1 text-center text-xs text-ink-muted">
+                  demo.senaystudio.no/{current.slug}
+                </span>
+                <span className="w-[2.625rem]" aria-hidden="true" />
+              </div>
+              <ScaledPreview id={current.slug}>
+                <DemoSite demo={current} fictionalLabel={labels.fictional} />
+              </ScaledPreview>
             </div>
-            <ScaledPreview id={current.slug}>
-              <DemoSite demo={current} fictionalLabel={labels.fictional} />
-            </ScaledPreview>
           </div>
 
           <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
@@ -90,7 +94,10 @@ export function DemoGallery({ lang, labels }: { lang: Lang; labels: Labels }) {
               {labels.showing} <span className="font-medium text-navy">{current.label[lang]}</span> · {current.name} ·{" "}
               <span className="text-sm">{labels.fictional}</span>
             </p>
-            <Link href={demoHref(lang, current.slug)} className="group inline-flex shrink-0 items-center gap-2 font-medium">
+            <Link
+              href={demoHref(lang, current.slug)}
+              className="group inline-flex shrink-0 items-center gap-2 self-start rounded-full border border-white/15 px-5 py-2.5 font-medium transition-colors hover:border-white/30 hover:bg-white/5 sm:self-auto"
+            >
               {labels.open}
               <ArrowIcon className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Link>
