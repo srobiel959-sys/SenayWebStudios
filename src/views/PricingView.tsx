@@ -35,7 +35,7 @@ export function PricingView({ lang }: { lang: Lang }) {
 
       <section aria-labelledby="prisfaq-tittel" className="py-20 sm:py-28">
         <div className={`${container} grid gap-12 lg:grid-cols-12`}>
-          <Reveal className="lg:col-span-4">
+          <Reveal className="lg:sticky lg:top-32 lg:col-span-4 lg:self-start">
             <SectionHeading id="prisfaq-tittel" eyebrow={c.ui.questions} title={pricing.faqTitle} />
           </Reveal>
           <Reveal delay={100} className="lg:col-span-8">

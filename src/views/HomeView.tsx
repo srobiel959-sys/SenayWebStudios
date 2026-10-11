@@ -15,7 +15,7 @@ import { SectionHeading } from "@/components/SectionHeading";
 import { getContent } from "@/content";
 import { href, type Lang, type PageKey } from "@/lib/routes";
 import { businessSchema } from "@/lib/schema";
-import { btnArrow, btnSecondary, container, eyebrowPill } from "@/lib/ui";
+import { bezel, bezelCore, btnArrow, btnSecondary, container, eyebrowPill } from "@/lib/ui";
 
 /** Ordene i overskriften reiser seg ett og ett (se .word-rise i globals.css). */
 function RisingWords({ text, start = 0 }: { text: string; start?: number }) {
@@ -126,8 +126,8 @@ export function HomeView({ lang }: { lang: Lang }) {
           <div className="space-y-4 lg:col-span-5">
             {numbers.items.slice(1).map((item, i) => (
               <Reveal key={item.label} delay={i * 120}>
-                <div className="rounded-[2rem] border border-white/10 bg-white/[0.03] p-1.5">
-                  <div className="rounded-[calc(2rem-0.375rem)] bg-[#0a1428] p-7 shadow-[inset_0_1px_1px_rgba(255,255,255,0.08)] sm:p-8">
+                <div className={bezel}>
+                  <div className={`${bezelCore} p-7 sm:p-8`}>
                     <p className="font-display text-5xl tracking-tight sm:text-6xl">
                       <CountUp value={item.value} prefix={item.prefix} suffix={item.suffix} />
                     </p>
