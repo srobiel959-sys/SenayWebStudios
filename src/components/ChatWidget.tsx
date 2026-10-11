@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 import { Fragment, useEffect, useRef, useState, type FormEvent, type KeyboardEvent } from "react";
 import type { Content } from "@/content";
 import { site } from "@/content/shared";
-import { answer } from "@/lib/chat-match";
 import { href, type Lang, type PageKey } from "@/lib/routes";
 import { ArrowIcon } from "./Icons";
 
@@ -18,6 +17,9 @@ type Message =
   | { role: "assistant"; content: string; links: PageKey[]; followUps: string[] };
 
 const MAX_CHARS = 500;
+
+// Kunnskapsbasen lastes først når chatten åpnes, så den ikke tynger sidelastingen.
+const loadMatcher = () => import("@/lib/chat-match");
 
 // Gjør nettadresser og e-post i svarene klikkbare. Lenker til egen side blir interne.
 const linkPattern = /(https?:\/\/[^\s)]+[^\s).,!?:;]|[\w.+-]+@[\w-]+\.[\w.]*\w)/g;
@@ -81,7 +83,10 @@ export function ChatWidget({ lang, labels, nav }: { lang: Lang; labels: Content[
 
   // Fokus inn i chatten når den åpnes, og tilbake til knappen når den lukkes.
   useEffect(() => {
-    if (open) inputRef.current?.focus();
+    if (open) {
+      inputRef.current?.focus();
+      void loadMatcher();
+    }
     else if (wasOpen.current) buttonRef.current?.focus();
     wasOpen.current = open;
   }, [open]);
@@ -116,13 +121,17 @@ export function ChatWidget({ lang, labels, nav }: { lang: Lang; labels: Content[
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const delay = reduced ? 150 : 500 + Math.min(question.length * 8, 400);
     timerRef.current = setTimeout(() => {
-      const reply = answer(question, lang);
-      setMessages((prev) => [
-        ...prev,
-        { role: "assistant", content: reply.text, links: reply.links, followUps: reply.followUps },
-      ]);
-      setBusy(false);
       timerRef.current = null;
+      loadMatcher()
+        .then(({ answer }) => {
+          const reply = answer(question, lang);
+          setMessages((prev) => [
+            ...prev,
+            { role: "assistant", content: reply.text, links: reply.links, followUps: reply.followUps },
+          ]);
+        })
+        .catch(() => {})
+        .finally(() => setBusy(false));
     }, delay);
   }
 
@@ -152,12 +161,12 @@ export function ChatWidget({ lang, labels, nav }: { lang: Lang; labels: Content[
           ref={buttonRef}
           type="button"
           onClick={() => setOpen(true)}
-          aria-label={labels.openLabel}
           aria-haspopup="dialog"
           className="fixed bottom-4 right-4 z-50 inline-flex items-center gap-2 rounded-full bg-navy px-5 py-3.5 font-medium text-cream transition-[background-color,transform] duration-300 hover:-translate-y-0.5 hover:bg-navy-soft motion-reduce:hover:translate-y-0 sm:bottom-6 sm:right-6"
         >
           <ChatIcon />
           {labels.open}
+          <span className="sr-only"> – {labels.openLabel}</span>
         </button>
       )}
 

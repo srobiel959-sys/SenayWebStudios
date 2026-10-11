@@ -72,10 +72,13 @@ export function Header({ lang, nav, ui }: { lang: Lang; nav: Content["nav"]; ui:
           <Link
             href={switchHref}
             hrefLang={other === "no" ? "nb" : "en"}
-            aria-label={ui.switchLanguageLabel}
             className="rounded-full border border-white/10 px-3 py-1.5 text-xs font-medium uppercase tracking-wider text-ink-muted transition-colors hover:border-white/30 hover:text-white"
           >
             {other === "no" ? "NO" : "EN"}
+            <span className="sr-only" lang={other === "no" ? "nb" : "en"}>
+              {" "}
+              – {ui.switchLanguageLabel}
+            </span>
           </Link>
           <Link
             href={href(lang, "contact")}

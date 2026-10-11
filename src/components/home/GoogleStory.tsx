@@ -243,7 +243,7 @@ export function GoogleStory({ story, id }: { story: Story; id: string }) {
       className="relative scroll-mt-0 border-t border-line"
       style={scrub ? { height: "400vh" } : undefined}
     >
-      <div className={scrub ? "sticky top-0 flex h-[100dvh] items-center overflow-hidden pb-4 pt-20 sm:pt-24" : "py-24 sm:py-32"}>
+      <div className={scrub ? "sticky top-0 flex h-[100dvh] items-center overflow-hidden pb-4 pt-20 sm:pt-24" : "overflow-hidden py-24 sm:py-32"}>
         <div className={`${container} grid items-center gap-6 sm:gap-10 lg:grid-cols-[1fr_auto] lg:gap-24`}>
           <div>
             <h2 id={id} className={`${eyebrowPill} ${scrub ? "max-lg:sr-only" : ""}`}>
