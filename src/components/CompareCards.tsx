@@ -4,7 +4,7 @@ import { ArrowCircle, CheckIcon, CrossIcon } from "./Icons";
 import { Reveal } from "./Reveal";
 
 // To kort side om side: «slik er det ofte» dempet til venstre, «slik gjør vi det»
-// blått med glød til høyre. Brukes av byrå-sammenligningen og «Hvorfor nettside».
+// mørkeblått med hvit tekst til høyre. Brukes av byrå-sammenligningen og «Hvorfor nettside».
 
 type Side = { label?: string; title: string; items: string[] };
 
@@ -27,7 +27,7 @@ export function CompareCards({
 }) {
   return (
     <div className="grid gap-6 lg:grid-cols-2">
-      <Reveal className="h-full rounded-[2rem] border border-white/10 bg-white/[0.02] p-8 sm:p-10">
+      <Reveal className="h-full rounded-[2rem] border border-line bg-sand/60 p-8 sm:p-10">
         {left.label ? <p className={kicker}>{left.label}</p> : null}
         <h3 className={`font-display text-3xl ${left.label ? "mt-3" : ""}`}>{left.title}</h3>
         <ul className="mt-8 space-y-4 text-lg">
@@ -50,7 +50,7 @@ export function CompareCards({
         <ul className="relative mt-8 space-y-4 text-lg">
           {right.items.map((item) => (
             <li key={item} className="flex gap-3">
-              <CheckIcon className="mt-1.5 h-4 w-4 shrink-0 text-[#93c5fd]" />
+              <CheckIcon className="mt-1.5 h-4 w-4 shrink-0 text-sky" />
               <span>
                 <span className="sr-only">{upside}: </span>
                 {item}

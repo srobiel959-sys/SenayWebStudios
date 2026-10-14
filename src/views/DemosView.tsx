@@ -30,14 +30,14 @@ export function DemosView({ lang }: { lang: Lang }) {
               <div key={g.key} className={bezel}>
                 <div className={`${bezelCore} h-full px-6 pb-3 pt-6`}>
                   <h3 className={kicker}>{g[lang]}</h3>
-                  <ul className="mt-3 divide-y divide-white/10">
+                  <ul className="mt-3 divide-y divide-line">
                     {demos
                       .filter((d) => d.group === g.key)
                       .map((d) => (
                         <li key={d.slug}>
                           <Link
                             href={demoHref(lang, d.slug)}
-                            className="group flex items-center justify-between gap-4 py-3 transition-colors hover:text-white"
+                            className="group flex items-center justify-between gap-4 py-3 transition-colors hover:text-accent"
                           >
                             <span>
                               <span className="font-medium">{d.label[lang]}</span>
@@ -45,7 +45,7 @@ export function DemosView({ lang }: { lang: Lang }) {
                             </span>
                             <span
                               aria-hidden="true"
-                              className="text-ink-muted transition-[translate,color] group-hover:translate-x-1 group-hover:text-[#60a5fa]"
+                              className="text-ink-muted transition-[translate,color] group-hover:translate-x-1 group-hover:text-accent"
                             >
                               →
                             </span>

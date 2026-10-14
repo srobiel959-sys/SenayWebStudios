@@ -10,7 +10,7 @@ import { ArrowCircle } from "./Icons";
 // med utfylt melding til site.email. Bytt ut handleSubmit når et skjema-API er på plass.
 
 const fieldClass =
-  "mt-2 block w-full rounded-2xl border border-white/15 bg-white/[0.04] px-4 py-3 text-white transition-colors duration-300 hover:border-white/25 focus:border-[#3b82f6] focus:bg-white/[0.06]";
+  "mt-2 block w-full rounded-2xl border border-line bg-white px-4 py-3 text-navy transition-colors duration-300 hover:border-navy/30 focus:border-navy";
 
 export function ContactForm({ labels }: { labels: Content["contact"]["form"] }) {
   const [sent, setSent] = useState(false);
@@ -65,7 +65,7 @@ export function ContactForm({ labels }: { labels: Content["contact"]["form"] }) 
       </div>
       <div className="sm:col-span-2">
         <label htmlFor="bedrift" className="text-sm font-medium">
-          {labels.company} <span className="font-normal text-cream-muted">{labels.optional}</span>
+          {labels.company} <span className="font-normal text-ink-muted">{labels.optional}</span>
         </label>
         <input id="bedrift" name="bedrift" type="text" autoComplete="organization" className={fieldClass} />
       </div>
@@ -80,19 +80,19 @@ export function ContactForm({ labels }: { labels: Content["contact"]["form"] }) 
           {labels.submit}
           <ArrowCircle />
         </button>
-        <p role="status" aria-live="polite" className="text-sm text-cream-muted sm:text-right">
+        <p role="status" aria-live="polite" className="text-sm text-ink-muted sm:text-right">
           {sent ? labels.sent : null}
         </p>
       </div>
       {sent ? (
-        <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5 text-sm text-cream-muted sm:col-span-2">
+        <div className="rounded-2xl border border-line bg-sand p-5 text-sm text-ink-muted sm:col-span-2">
           <p>
-            {labels.fallback} <span className="text-cream">{site.email}</span>.
+            {labels.fallback} <span className="text-navy">{site.email}</span>.
           </p>
           <button
             type="button"
             onClick={copyEmail}
-            className="mt-3 rounded-full border border-white/20 px-4 py-2 text-cream transition-colors hover:border-white/40 hover:bg-white/10"
+            className="mt-3 rounded-full border border-navy/20 px-4 py-2 text-navy transition-colors hover:border-navy/40 hover:bg-navy/5"
           >
             {copied ? labels.copied : labels.copy}
           </button>

@@ -5,7 +5,6 @@ import { CtaBand } from "@/components/CtaBand";
 import { DemoGallery } from "@/components/demo/DemoGallery";
 import { CountUp } from "@/components/home/CountUp";
 import { GoogleStory } from "@/components/home/GoogleStory";
-import { NetworkCanvas } from "@/components/home/NetworkCanvas";
 import { ProcessLine } from "@/components/home/ProcessLine";
 import { WordReveal } from "@/components/home/WordReveal";
 import { ArrowCircle, ArrowIcon, CheckIcon } from "@/components/Icons";
@@ -42,15 +41,11 @@ export function HomeView({ lang }: { lang: Lang }) {
     <>
       <JsonLd data={businessSchema(lang)} />
 
-      {/* 1. Hero: pitchen, alene, over et levende nettverk */}
+      {/* 1. Hero: pitchen, alene på ren hvit bakgrunn */}
       <section aria-labelledby="hero-tittel" className="relative -mt-[4.25rem] overflow-hidden sm:-mt-20">
-        <NetworkCanvas />
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(55%_45%_at_50%_42%,rgba(59,130,246,0.16),transparent_70%)]" />
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-[#050d1a]" />
-
         <div className={`${container} relative flex min-h-[100dvh] flex-col items-center justify-center pb-24 pt-32 text-center`}>
           <p className={`hero-in ${eyebrowPill}`}>
-            <span className="h-1.5 w-1.5 rounded-full bg-[#3b82f6] shadow-[0_0_10px_#3b82f6]" aria-hidden="true" />
+            <span className="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden="true" />
             {hero.eyebrow}
           </p>
           <h1
@@ -76,10 +71,10 @@ export function HomeView({ lang }: { lang: Lang }) {
 
         <a
           href="#slik"
-          className="hero-in hero-in-4 absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center gap-3 text-[11px] uppercase tracking-[0.25em] text-ink-muted transition-colors hover:text-white"
+          className="hero-in hero-in-4 absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center gap-3 text-[11px] uppercase tracking-[0.25em] text-ink-muted transition-colors hover:text-navy"
         >
           {hero.scrollHint}
-          <span className="scroll-line relative h-10 w-px overflow-hidden bg-white/15" aria-hidden="true" />
+          <span className="scroll-line relative h-10 w-px overflow-hidden bg-navy/10" aria-hidden="true" />
         </a>
       </section>
 
@@ -110,14 +105,13 @@ export function HomeView({ lang }: { lang: Lang }) {
 
       {/* 5. Prisen: «0 kr» som blikkfang, resten teller opp */}
       <section aria-labelledby="pris-tittel" className="relative overflow-hidden border-t border-line py-28 sm:py-40">
-        <div className="pointer-events-none absolute -left-40 top-1/2 h-[36rem] w-[36rem] -translate-y-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(59,130,246,0.14),transparent)]" />
         <div className={`${container} relative grid items-center gap-14 lg:grid-cols-12`}>
           <Reveal className="lg:col-span-7">
             <p className={eyebrowPill}>{numbers.eyebrow}</p>
             <h2 id="pris-tittel" className="mt-6 font-display text-3xl tracking-tight sm:text-4xl">
               {numbers.title}
             </h2>
-            <p className="mt-6 font-display text-[7.5rem] leading-[0.85] tracking-tight [text-shadow:0_0_60px_rgba(59,130,246,0.35)] sm:text-[11rem] lg:text-[13rem]">
+            <p className="mt-6 font-display text-[7.5rem] leading-[0.85] tracking-tight sm:text-[11rem] lg:text-[13rem]">
               <CountUp value={numbers.items[0].value} prefix={numbers.items[0].prefix} suffix={numbers.items[0].suffix} />
             </p>
             <p className="mt-4 text-xl text-ink-muted">{numbers.items[0].label}</p>
@@ -138,12 +132,12 @@ export function HomeView({ lang }: { lang: Lang }) {
             ))}
             <Reveal delay={240}>
               <p className="flex items-center gap-2.5 pt-2 text-ink-muted">
-                <CheckIcon className="h-4 w-4 shrink-0 text-[#60a5fa]" />
+                <CheckIcon className="h-4 w-4 shrink-0 text-accent" />
                 {numbers.note}
               </p>
               <Link
                 href={href(lang, "pricing")}
-                className="group mt-6 inline-flex items-center gap-2 font-medium underline decoration-white/30 underline-offset-8 transition-colors hover:decoration-white"
+                className="group mt-6 inline-flex items-center gap-2 font-medium underline decoration-navy/25 underline-offset-8 transition-colors hover:decoration-navy"
               >
                 {numbers.link}
                 <ArrowIcon className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-1" />
@@ -182,14 +176,14 @@ export function HomeView({ lang }: { lang: Lang }) {
                   <Reveal delay={(i % 3) * 90} className="h-full">
                     <Link
                       href={href(lang, item.key as PageKey)}
-                      className="group block h-full rounded-[2rem] border border-white/10 bg-white/[0.03] p-1.5 transition-colors duration-500 hover:border-white/20"
+                      className="group block h-full rounded-[2rem] border border-line bg-sand/70 p-1.5 transition-colors duration-500 hover:border-navy/20"
                     >
                       <span
-                        className={`flex h-full flex-col rounded-[calc(2rem-0.375rem)] p-8 shadow-[inset_0_1px_1px_rgba(255,255,255,0.08)] transition-colors duration-500 ${
-                          last ? "bg-navy" : "bg-[#0a1428] group-hover:bg-[#0d1a33]"
+                        className={`flex h-full flex-col rounded-[calc(2rem-0.375rem)] p-8 shadow-[0_1px_2px_rgba(7,22,48,0.06),0_12px_32px_-20px_rgba(7,22,48,0.25)] transition-colors duration-500 ${
+                          last ? "bg-navy text-cream" : "bg-white group-hover:bg-sand/40"
                         }`}
                       >
-                        <span className="text-sm tabular-nums text-ink-muted">{String(i + 1).padStart(2, "0")}</span>
+                        <span className={`text-sm tabular-nums ${last ? "text-cream-muted" : "text-ink-muted"}`}>{String(i + 1).padStart(2, "0")}</span>
                         <span className="mt-4 font-display text-3xl">{item.title}</span>
                         <span className={`mt-3 flex-1 leading-relaxed ${last ? "text-cream-muted" : "text-ink-muted"}`}>{item.text}</span>
                         <span className="mt-8 inline-flex items-center gap-2 font-medium">

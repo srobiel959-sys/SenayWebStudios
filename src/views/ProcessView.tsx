@@ -18,10 +18,10 @@ export function ProcessView({ lang }: { lang: Lang }) {
             <li key={step.title} className="relative grid gap-6 pb-16 last:pb-0 md:grid-cols-12 md:gap-10">
               <div className="flex items-start gap-6 md:col-span-4">
                 <div className="relative flex flex-col items-center self-stretch">
-                  <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-[#3b82f6]/60 bg-[#3b82f6]/10 font-display text-xl text-white shadow-[0_0_28px_rgba(59,130,246,0.35)]">
+                  <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-navy font-display text-xl text-cream shadow-[0_10px_24px_-10px_rgba(7,22,48,0.5)]">
                     {i + 1}
                   </span>
-                  {i < process.steps.length - 1 ? <span aria-hidden="true" className="mt-2 w-px flex-1 bg-gradient-to-b from-[#3b82f6]/50 to-white/10" /> : null}
+                  {i < process.steps.length - 1 ? <span aria-hidden="true" className="mt-2 w-px flex-1 bg-gradient-to-b from-navy/30 to-line" /> : null}
                 </div>
                 <Reveal className="pt-2.5">
                   <h2 className="font-display text-3xl sm:text-4xl">
@@ -35,13 +35,13 @@ export function ProcessView({ lang }: { lang: Lang }) {
 
               <Reveal delay={100} className="pl-20 md:col-span-8 md:pl-0 md:pt-2.5">
                 <p className="text-lg leading-relaxed text-ink-muted sm:text-xl">{step.text}</p>
-                <dl className="mt-8 grid gap-px overflow-hidden rounded-[1.5rem] border border-white/10 bg-white/10 sm:grid-cols-2">
-                  <div className="bg-[#0a1428] p-6">
+                <dl className="mt-8 grid gap-px overflow-hidden rounded-[1.5rem] border border-line bg-line sm:grid-cols-2">
+                  <div className="bg-white p-6">
                     <dt className={kicker}>{c.ui.you}</dt>
                     <dd className="mt-2">{step.you}</dd>
                   </div>
-                  <div className="bg-[#0d1b38] p-6">
-                    <dt className="text-xs font-medium uppercase tracking-[0.2em] text-[#93c5fd]">{c.ui.we}</dt>
+                  <div className="bg-sand p-6">
+                    <dt className="text-xs font-medium uppercase tracking-[0.2em] text-accent">{c.ui.we}</dt>
                     <dd className="mt-2">{step.we}</dd>
                   </div>
                 </dl>

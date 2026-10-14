@@ -8,17 +8,17 @@ export function ContactView({ lang }: { lang: Lang }) {
   const c = getContent(lang);
   const { contact } = c;
   return (
-    <section aria-labelledby="side-tittel" className="bg-sand text-cream">
+    <section aria-labelledby="side-tittel" className="bg-sand">
       <div className={`${container} grid gap-16 py-20 sm:py-28 lg:grid-cols-12 lg:py-32`}>
         <div className="lg:col-span-5">
           <p className={`hero-in ${eyebrowPill}`}>{contact.eyebrow}</p>
           <h1 id="side-tittel" className="hero-in hero-in-2 mt-6 font-display text-[2.6rem] leading-[1.05] tracking-tight sm:text-6xl">
             {contact.title}
           </h1>
-          <p className="hero-in hero-in-3 mt-8 text-lg leading-relaxed text-cream-muted">{contact.lead}</p>
-          <p className="hero-in hero-in-3 mt-6 text-cream-muted">
+          <p className="hero-in hero-in-3 mt-8 text-lg leading-relaxed text-ink-muted">{contact.lead}</p>
+          <p className="hero-in hero-in-3 mt-6 text-ink-muted">
             {contact.emailDirect}{" "}
-            <a href={`mailto:${site.email}`} className="text-cream underline underline-offset-4">
+            <a href={`mailto:${site.email}`} className="text-navy underline underline-offset-4">
               {site.email}
             </a>
           </p>
@@ -27,12 +27,12 @@ export function ContactView({ lang }: { lang: Lang }) {
           <ol className="mt-6 space-y-6">
             {contact.nextSteps.map((step, i) => (
               <li key={step.title} className="flex gap-5">
-                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/15 bg-white/[0.04] text-sm">
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-line bg-white text-sm">
                   {i + 1}
                 </span>
                 <div>
                   <p className="font-medium">{step.title}</p>
-                  <p className="mt-1 text-cream-muted">{step.text}</p>
+                  <p className="mt-1 text-ink-muted">{step.text}</p>
                 </div>
               </li>
             ))}

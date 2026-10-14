@@ -180,8 +180,8 @@ export function GoogleStory({ story, id }: { story: Story; id: string }) {
   const phone = (
     <div className="relative mx-auto w-[min(19rem,82vw)] sm:w-[21rem]" aria-hidden="true">
       {/* Blå glød bak telefonen */}
-      <div className="pointer-events-none absolute -inset-16 rounded-full bg-[radial-gradient(closest-side,rgba(59,130,246,0.28),transparent)]" />
-      <div className="relative rounded-[3rem] border border-white/15 bg-gradient-to-b from-white/12 to-white/[0.02] p-2 shadow-[0_40px_120px_-30px_rgba(0,0,0,0.9)]">
+      <div className="pointer-events-none absolute -inset-16 rounded-full bg-[radial-gradient(closest-side,rgba(29,78,216,0.14),transparent)]" />
+      <div className="relative rounded-[3rem] border border-navy/10 bg-gradient-to-b from-[#1c2740] to-[#0b1220] p-2 shadow-[0_40px_100px_-30px_rgba(7,22,48,0.55)]">
         <div className="relative overflow-hidden rounded-[2.5rem] bg-[#0b1220] px-3.5 pb-5 pt-10 shadow-[inset_0_1px_1px_rgba(255,255,255,0.12)] sm:pb-6 sm:pt-11">
           <span className="absolute left-1/2 top-3 h-6 w-24 -translate-x-1/2 rounded-full bg-black" />
           <div className="flex items-center gap-2.5 rounded-full border border-white/12 bg-white/[0.06] px-4 py-3 text-[14px] text-white">
@@ -252,8 +252,8 @@ export function GoogleStory({ story, id }: { story: Story; id: string }) {
             <div className="flex gap-6 lg:mt-8">
               {/* Fremdriftslinje */}
               {scrub && (
-                <span className="relative hidden w-px shrink-0 bg-white/10 lg:block" aria-hidden="true">
-                  <span ref={fillRef} className="absolute inset-0 origin-top bg-[#3b82f6] shadow-[0_0_12px_rgba(59,130,246,0.8)]" style={{ transform: "scaleY(0)" }} />
+                <span className="relative hidden w-px shrink-0 bg-line lg:block" aria-hidden="true">
+                  <span ref={fillRef} className="absolute inset-0 origin-top bg-accent" style={{ transform: "scaleY(0)" }} />
                 </span>
               )}
               <ol className={scrub ? "relative min-h-[6.5rem] flex-1 lg:min-h-0 lg:space-y-7" : "space-y-8"}>
@@ -267,7 +267,7 @@ export function GoogleStory({ story, id }: { story: Story; id: string }) {
                       } ${active ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0 lg:translate-y-0 lg:opacity-25"}`}
                       aria-current={scrub && active ? "step" : undefined}
                     >
-                      <p className="text-xs font-medium uppercase tracking-[0.22em] text-[#60a5fa]">{s.kicker}</p>
+                      <p className="text-xs font-medium uppercase tracking-[0.22em] text-accent">{s.kicker}</p>
                       <p className="mt-2 max-w-lg text-balance font-display text-xl leading-snug sm:text-3xl lg:mt-3 lg:text-[2rem]">{s.text}</p>
                     </li>
                   );

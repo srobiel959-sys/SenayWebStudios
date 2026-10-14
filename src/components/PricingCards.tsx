@@ -23,8 +23,8 @@ export function PricingCards({ lang, c }: { lang: Lang; c: Content }) {
 
           <ol className="mt-10 grid gap-px overflow-hidden rounded-[1.5rem] border border-white/15 bg-white/15 sm:grid-cols-3">
             {b.steps.map((step, i) => (
-              <li key={step.label} className="relative bg-[#0b2178] p-6">
-                <span className="text-xs font-medium uppercase tracking-[0.2em] text-[#93c5fd]">
+              <li key={step.label} className="relative bg-navy-soft p-6">
+                <span className="text-xs font-medium uppercase tracking-[0.2em] text-sky">
                   {c.ui.step} {i + 1}
                 </span>
                 <p className="mt-3 flex items-baseline gap-1.5 font-display text-4xl tracking-tight">
@@ -49,7 +49,7 @@ export function PricingCards({ lang, c }: { lang: Lang; c: Content }) {
           <ul className="mt-6 space-y-3">
             {b.features.map((feature) => (
               <li key={feature} className="flex gap-3">
-                <CheckIcon className="mt-1 h-4 w-4 shrink-0 text-[#93c5fd]" />
+                <CheckIcon className="mt-1 h-4 w-4 shrink-0 text-sky" />
                 {feature}
               </li>
             ))}

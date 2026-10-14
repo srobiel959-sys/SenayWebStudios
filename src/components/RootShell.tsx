@@ -24,7 +24,7 @@ export function rootMetadata(lang: Lang): Metadata {
   };
 }
 
-export const rootViewport: Viewport = { themeColor: "#071630" };
+export const rootViewport: Viewport = { themeColor: "#ffffff" };
 
 export function RootShell({ lang, children }: { lang: Lang; children: React.ReactNode }) {
   const c = getContent(lang);

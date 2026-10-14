@@ -26,7 +26,7 @@ export function DemoGallery({ lang, labels }: { lang: Lang; labels: Labels }) {
 
   const tab = (active: boolean) =>
     `shrink-0 rounded-full px-4 py-2 text-sm transition-colors ${
-      active ? "bg-navy text-cream" : "border border-white/10 text-ink-muted hover:border-white/30 hover:text-white"
+      active ? "bg-navy text-cream" : "border border-line text-ink-muted hover:border-navy/30 hover:text-navy"
     }`;
 
   return (
@@ -57,7 +57,7 @@ export function DemoGallery({ lang, labels }: { lang: Lang; labels: Labels }) {
                     aria-pressed={active}
                     onClick={() => setSlug(d.slug)}
                     className={`w-full rounded-full px-4 py-2 text-left text-sm transition-colors lg:rounded-lg lg:py-2.5 ${
-                      active ? "bg-navy text-cream" : "text-ink-muted hover:bg-white/5 hover:text-white"
+                      active ? "bg-navy text-cream" : "text-ink-muted hover:bg-navy/5 hover:text-navy"
                     }`}
                   >
                     {d.label[lang]}
@@ -70,15 +70,15 @@ export function DemoGallery({ lang, labels }: { lang: Lang; labels: Labels }) {
 
         {/* Forhåndsvisning */}
         <div className="min-w-0 lg:col-span-9">
-          <div className="rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-1.5 shadow-[0_40px_120px_-50px_rgba(59,130,246,0.45)]">
-            <div className="overflow-hidden rounded-[calc(1.75rem-0.375rem)] bg-[#0a1428]">
-              <div className="flex items-center gap-3 border-b border-white/10 px-4 py-3">
+          <div className="rounded-[1.75rem] border border-line bg-sand/70 p-1.5 shadow-[0_40px_100px_-50px_rgba(7,22,48,0.4)]">
+            <div className="overflow-hidden rounded-[calc(1.75rem-0.375rem)] bg-white">
+              <div className="flex items-center gap-3 border-b border-line px-4 py-3">
                 <span className="flex gap-1.5" aria-hidden="true">
-                  <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
-                  <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
-                  <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-navy/15" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-navy/15" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-navy/15" />
                 </span>
-                <span className="min-w-0 flex-1 truncate rounded-full bg-white/[0.06] px-3 py-1 text-center text-xs text-ink-muted">
+                <span className="min-w-0 flex-1 truncate rounded-full bg-sand px-3 py-1 text-center text-xs text-ink-muted">
                   demo.senaystudio.no/{current.slug}
                 </span>
                 <span className="w-[2.625rem]" aria-hidden="true" />
@@ -96,7 +96,7 @@ export function DemoGallery({ lang, labels }: { lang: Lang; labels: Labels }) {
             </p>
             <Link
               href={demoHref(lang, current.slug)}
-              className="group inline-flex shrink-0 items-center gap-2 self-start rounded-full border border-white/15 px-5 py-2.5 font-medium transition-colors hover:border-white/30 hover:bg-white/5 sm:self-auto"
+              className="group inline-flex shrink-0 items-center gap-2 self-start rounded-full border border-navy/20 px-5 py-2.5 font-medium transition-colors hover:border-navy/40 hover:bg-navy/5 sm:self-auto"
             >
               {labels.open}
               <ArrowIcon className="h-4 w-4 transition-transform group-hover:translate-x-1" />

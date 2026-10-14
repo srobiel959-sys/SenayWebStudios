@@ -25,7 +25,7 @@ export function WhyView({ lang }: { lang: Lang }) {
               <li key={item.title}>
                 <Reveal delay={(i % 2) * 90} className={`h-full ${bezel}`}>
                   <div className={`${bezelCore} h-full p-8 sm:p-10`}>
-                    <span className="font-display text-5xl leading-none text-[#60a5fa] [text-shadow:0_0_24px_rgba(59,130,246,0.45)]">
+                    <span className="font-display text-5xl leading-none text-accent">
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <h3 className="mt-6 font-display text-3xl leading-snug sm:text-4xl">{item.title}</h3>

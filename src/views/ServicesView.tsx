@@ -30,7 +30,7 @@ export function ServicesView({ lang }: { lang: Lang }) {
             <li key={item.title}>
               <Reveal className="grid gap-8 py-14 lg:grid-cols-12 lg:py-20">
                 <div className="lg:col-span-5">
-                  <span className="text-sm tabular-nums text-[#60a5fa]">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="text-sm tabular-nums text-accent">{String(i + 1).padStart(2, "0")}</span>
                   <h2 className="mt-3 font-display text-4xl tracking-tight sm:text-5xl">{item.title}</h2>
                 </div>
                 <div className="lg:col-span-7">
@@ -41,7 +41,7 @@ export function ServicesView({ lang }: { lang: Lang }) {
                       <ul className="mt-5 grid gap-3 sm:grid-cols-2">
                         {item.includes.map((inc) => (
                           <li key={inc} className="flex gap-3">
-                            <CheckIcon className="mt-1 h-4 w-4 shrink-0 text-[#60a5fa]" />
+                            <CheckIcon className="mt-1 h-4 w-4 shrink-0 text-accent" />
                             {inc}
                           </li>
                         ))}

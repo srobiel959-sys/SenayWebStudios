@@ -46,16 +46,16 @@ export function ProcessLine({ steps }: { steps: Step[] }) {
 
   return (
     <ol ref={ref} className="process-line relative space-y-14 pl-14 sm:pl-20">
-      <span className="absolute bottom-2 left-[1.1rem] top-2 w-px bg-white/10 sm:left-[1.6rem]" aria-hidden="true">
+      <span className="absolute bottom-2 left-[1.1rem] top-2 w-px bg-line sm:left-[1.6rem]" aria-hidden="true">
         <span
           ref={fillRef}
-          className="absolute inset-0 origin-top bg-[#3b82f6] shadow-[0_0_14px_rgba(59,130,246,0.9)]"
+          className="absolute inset-0 origin-top bg-navy"
           style={{ transform: "scaleY(1)" }}
         />
       </span>
       {steps.map((step, i) => (
         <li key={step.title} data-step className="relative">
-          <span className="process-dot absolute -left-14 top-0 flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-[#050d1a] text-sm tabular-nums text-ink-muted sm:-left-20 sm:h-[3.25rem] sm:w-[3.25rem]">
+          <span className="process-dot absolute -left-14 top-0 flex h-9 w-9 items-center justify-center rounded-full border border-line bg-white text-sm tabular-nums text-ink-muted sm:-left-20 sm:h-[3.25rem] sm:w-[3.25rem]">
             {String(i + 1).padStart(2, "0")}
           </span>
           <div className="process-body">

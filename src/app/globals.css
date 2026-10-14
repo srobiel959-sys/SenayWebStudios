@@ -1,21 +1,21 @@
 @import "tailwindcss";
 
-/* Mørkt tema (samme uttrykk som Receptria): nesten svart marineblå bakgrunn,
-   hvit tekst og blå glød. Fargenavnene er beholdt, men betyr nå:
-   - cream / sand: bakgrunn og litt lysere flater
-   - navy: lys tekst og linjer
-   - bg-navy / text-cream: blå flater med hvit tekst (se «Blå flater» under) */
+/* Lyst tema: hvit bakgrunn, mørkeblå tekst og knapper (samme blå som logoen).
+   - cream: sidebakgrunnen (hvit) – og hvit tekst på mørkeblå felt (text-cream)
+   - sand: annenhver seksjon og lyse flater
+   - navy: tekst, knapper og mørkeblå felt
+   - accent: diskret blå for tall, hakemerker og fremdrift */
 @theme inline {
-  --color-navy: #eef2f8;
-  --color-navy-soft: #1a3a9c;
-  --color-cream: #050d1a;
-  --color-sand: #0b1730;
-  /* Dempet tekst: ≥ 4.5:1 mot bakgrunnen (WCAG AA) */
-  --color-ink-muted: #a3aec2;
-  --color-cream-muted: #c0c8d8;
-  --color-line: #1c2a44;
-  --color-accent: #0a1f6e;
-  --color-glow: #3b82f6;
+  --color-navy: #071630;
+  --color-navy-soft: #13264a;
+  --color-cream: #ffffff;
+  --color-sand: #f4f6fa;
+  /* Dempet tekst: ≥ 4.5:1 mot hvitt/sand og mot navy (WCAG AA) */
+  --color-ink-muted: #46536b;
+  --color-cream-muted: #c3c9d4;
+  --color-line: #e3e8f0;
+  --color-accent: #1d4ed8;
+  --color-sky: #93c5fd;
 
   --font-display: var(--font-bodoni), "Bodoni Moda", Didot, Georgia, serif;
   --font-sans: var(--font-jost), "Jost", system-ui, sans-serif;
@@ -42,33 +42,14 @@ html {
 }
 
 body {
-  background: radial-gradient(ellipse at 50% 0%, #0a1628 0%, #050d1a 45%, #02060d 100%) fixed;
-  background-color: var(--color-cream);
+  background: var(--color-cream);
   color: var(--color-navy);
   font-family: var(--font-sans);
 }
 
 ::selection {
-  background: var(--color-glow);
-  color: #fff;
-}
-
-/* Blå flater: knapper, kort og bånd som var navy får Receptria-blå med glød,
-   og teksten på dem blir hvit. Står utenfor lagene, så de vinner over Tailwind. */
-.bg-navy,
-.hover\:bg-navy:hover {
-  background-color: var(--color-accent);
-}
-.bg-navy {
-  box-shadow: 0 0 24px -6px rgb(0 150 255 / 0.35);
-}
-.hover\:bg-navy-soft:hover {
-  background-color: var(--color-navy-soft);
-  box-shadow: 0 0 36px -4px rgb(0 150 255 / 0.55);
-}
-.text-cream,
-.hover\:text-cream:hover {
-  color: #fff;
+  background: var(--color-navy);
+  color: var(--color-cream);
 }
 
 :focus-visible {
@@ -149,11 +130,12 @@ body {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, transparent, #fff, transparent);
+  background: linear-gradient(to bottom, transparent, var(--color-navy), transparent);
   animation: scroll-line 2.2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
 }
 
-/* Prosesslinja: steg som ikke er nådd ennå, er dempet (se ProcessLine.tsx). */
+/* Prosesslinja: steg som ikke er nådd ennå, er litt dempet (se ProcessLine.tsx),
+   men teksten holder fortsatt 4.5:1 kontrast mot hvitt. */
 .process-line .process-body,
 .process-line .process-dot {
   transition:
@@ -164,14 +146,14 @@ body {
     box-shadow 0.5s ease;
 }
 .process-line[data-ready] [data-step]:not([data-lit]) .process-body {
-  opacity: 0.3;
+  opacity: 0.84;
 }
 .process-line:not([data-ready]) .process-dot,
 .process-line [data-lit] .process-dot {
-  border-color: #3b82f6;
-  background-color: #0a1f6e;
+  border-color: var(--color-navy);
+  background-color: var(--color-navy);
   color: #fff;
-  box-shadow: 0 0 22px -2px rgb(59 130 246 / 0.7);
+  box-shadow: 0 8px 20px -8px rgb(7 22 48 / 0.5);
 }
 
 /* Logoen på 404-sidene «tegnes» fram diagonalt. */

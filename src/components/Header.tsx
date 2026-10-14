@@ -42,9 +42,9 @@ export function Header({ lang, nav, ui }: { lang: Lang; nav: Content["nav"]; ui:
 
   return (
     <header className={`sticky top-0 px-3 pt-3 sm:px-5 sm:pt-4 ${open ? "z-[60]" : "z-40"}`}>
-      <div className="relative z-10 mx-auto flex h-14 max-w-6xl items-center justify-between gap-6 rounded-full border border-white/10 bg-[#050d1a]/75 pl-5 pr-2 shadow-[0_12px_40px_-16px_rgba(0,0,0,0.8)] backdrop-blur-xl sm:h-16 sm:pl-7">
+      <div className="relative z-10 mx-auto flex h-14 max-w-6xl items-center justify-between gap-6 rounded-full border border-line bg-white/80 pl-5 pr-2 shadow-[0_12px_40px_-20px_rgba(7,22,48,0.35)] backdrop-blur-xl sm:h-16 sm:pl-7">
         <Link href={href(lang, "home")} aria-label={ui.homeLabel} onClick={close}>
-          <Logo alt="" tone="light" preload className="h-6 w-auto sm:h-7" />
+          <Logo alt="" preload className="h-6 w-auto sm:h-7" />
         </Link>
 
         <nav aria-label={ui.mainMenu} className="hidden xl:block">
@@ -57,7 +57,7 @@ export function Header({ lang, nav, ui }: { lang: Lang; nav: Content["nav"]; ui:
                     href={item.href}
                     aria-current={active ? "page" : undefined}
                     className={`whitespace-nowrap rounded-full px-3.5 py-2 transition-colors duration-300 ${
-                      active ? "bg-white/10 text-white" : "text-ink-muted hover:bg-white/5 hover:text-white"
+                      active ? "bg-navy/[0.06] text-navy" : "text-ink-muted hover:bg-navy/[0.04] hover:text-navy"
                     }`}
                   >
                     {item.label}
@@ -72,7 +72,7 @@ export function Header({ lang, nav, ui }: { lang: Lang; nav: Content["nav"]; ui:
           <Link
             href={switchHref}
             hrefLang={other === "no" ? "nb" : "en"}
-            className="rounded-full border border-white/10 px-3 py-1.5 text-xs font-medium uppercase tracking-wider text-ink-muted transition-colors hover:border-white/30 hover:text-white"
+            className="rounded-full border border-line px-3 py-1.5 text-xs font-medium uppercase tracking-wider text-ink-muted transition-colors hover:border-navy/30 hover:text-navy"
           >
             {other === "no" ? "NO" : "EN"}
             <span className="sr-only" lang={other === "no" ? "nb" : "en"}>
@@ -111,7 +111,7 @@ export function Header({ lang, nav, ui }: { lang: Lang; nav: Content["nav"]; ui:
         id="mobilmeny"
         aria-label={ui.mobileMenu}
         inert={!open}
-        className={`fixed inset-0 bg-[#050d1a]/95 px-6 pt-28 backdrop-blur-2xl transition-opacity duration-500 xl:hidden ${ease} ${
+        className={`fixed inset-0 bg-white/95 px-6 pt-28 backdrop-blur-2xl transition-opacity duration-500 xl:hidden ${ease} ${
           open ? "opacity-100" : "pointer-events-none opacity-0"
         }`}
       >
@@ -121,7 +121,7 @@ export function Header({ lang, nav, ui }: { lang: Lang; nav: Content["nav"]; ui:
             return (
               <li
                 key={item.key}
-                className={`border-b border-white/10 transition-[opacity,translate] duration-700 ${ease} ${
+                className={`border-b border-line transition-[opacity,translate] duration-700 ${ease} ${
                   open ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
                 }`}
                 style={{ transitionDelay: open ? `${80 + i * 45}ms` : "0ms" }}
@@ -129,7 +129,7 @@ export function Header({ lang, nav, ui }: { lang: Lang; nav: Content["nav"]; ui:
                 <Link
                   href={item.href}
                   aria-current={active ? "page" : undefined}
-                  className={`flex items-center justify-between py-4 font-display text-3xl ${active ? "text-white" : "text-ink-muted"}`}
+                  className={`flex items-center justify-between py-4 font-display text-3xl ${active ? "text-navy" : "text-ink-muted"}`}
                   onClick={close}
                 >
                   {item.label}
