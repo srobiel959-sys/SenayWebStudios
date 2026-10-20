@@ -21,6 +21,16 @@ npm run build
 - `src/components/` – felles deler: `Header`, `Footer`, `PageHero`, `PricingCards`, `AgencyCompare`, `Faq`, `CtaBand`, `Reveal`, og `demo/` (galleri og eksempelnettside).
 - `public/brand/` – logofilene. Navy #071630 · Krem #FAF8F5.
 
+## Sikkerhet
+
+Nettsiden er statisk. Den har ingen innlogging, database, API-ruter eller hemmelige nøkler, så det finnes ingenting der å stjele eller logge inn på. Det som er på plass:
+
+- Sikkerhetshoder for alle sider i `next.config.ts`: Content-Security-Policy (bare innhold fra nettsiden selv), HSTS, `X-Frame-Options`, `nosniff`, Referrer-Policy, Permissions-Policy og Cross-Origin-Opener-Policy. `X-Powered-By` er slått av.
+- Det brukere skriver i skjemaet vises som ren tekst og sendes ikke til noen server. Skjemafeltene har maks lengde.
+- `.env*` er utelatt fra git. Sjekk `npm audit --omit=dev` før hver lansering.
+
+Kommer det senere et skjema-API, en innlogging eller en database: legg nøkler i Vercels miljøvariabler (aldri i koden), valider alt på serveren, og legg på rate limiting på endepunktene.
+
 ## Før lansering
 
 - [ ] Bekreft e-postadresse (`site.email`) og legg inn org.nr. (`site.orgNr`) i `src/content/shared.ts`

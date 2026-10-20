@@ -7,6 +7,9 @@ import { site } from "@/content/shared";
 // Skjemaet har ingen backend ennå. Ved innsending åpnes brukerens e-postprogram
 // med utfylt melding til site.email. Bytt ut handleSubmit når et skjema-API er på plass.
 
+/** Øvre grense for hvert felt (e-post: 254 tegn er maks for en adresse). */
+const maxLength = { navn: 100, epost: 254, bedrift: 120, melding: 2000 } as const;
+
 const fieldClass =
   "mt-2 block w-full rounded-md border border-cream-muted bg-navy-soft px-4 py-3 text-cream focus:border-cream";
 
@@ -27,10 +30,18 @@ export function ContactForm({ labels }: { labels: Content["contact"]["form"] }) 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    const name = String(data.get("navn") ?? "");
-    const email = String(data.get("epost") ?? "");
-    const company = String(data.get("bedrift") ?? "");
-    const message = String(data.get("melding") ?? "");
+    // Trimmes og kortes ned også her, i tilfelle maxLength i feltet er omgått.
+    const line = (key: keyof typeof maxLength) =>
+      String(data.get(key) ?? "")
+        .replace(/\s+/g, " ")
+        .trim()
+        .slice(0, maxLength[key]);
+    const name = line("navn");
+    const email = line("epost");
+    const company = line("bedrift");
+    const message = String(data.get("melding") ?? "")
+      .trim()
+      .slice(0, maxLength.melding);
 
     const subject = `${labels.subject}${company ? ` – ${company}` : ""}`;
     const body = [
@@ -53,25 +64,25 @@ export function ContactForm({ labels }: { labels: Content["contact"]["form"] }) 
         <label htmlFor="navn" className="text-sm font-medium">
           {labels.name}
         </label>
-        <input id="navn" name="navn" type="text" autoComplete="name" required className={fieldClass} />
+        <input id="navn" name="navn" type="text" autoComplete="name" required maxLength={maxLength.navn} className={fieldClass} />
       </div>
       <div>
         <label htmlFor="epost" className="text-sm font-medium">
           {labels.email}
         </label>
-        <input id="epost" name="epost" type="email" autoComplete="email" required className={fieldClass} />
+        <input id="epost" name="epost" type="email" autoComplete="email" required maxLength={maxLength.epost} className={fieldClass} />
       </div>
       <div className="sm:col-span-2">
         <label htmlFor="bedrift" className="text-sm font-medium">
           {labels.company} <span className="font-normal text-cream-muted">{labels.optional}</span>
         </label>
-        <input id="bedrift" name="bedrift" type="text" autoComplete="organization" className={fieldClass} />
+        <input id="bedrift" name="bedrift" type="text" autoComplete="organization" maxLength={maxLength.bedrift} className={fieldClass} />
       </div>
       <div className="sm:col-span-2">
         <label htmlFor="melding" className="text-sm font-medium">
           {labels.message}
         </label>
-        <textarea id="melding" name="melding" rows={5} required className={fieldClass} />
+        <textarea id="melding" name="melding" rows={5} required maxLength={maxLength.melding} className={fieldClass} />
       </div>
       <div className="flex flex-col gap-4 sm:col-span-2 sm:flex-row sm:items-center sm:justify-between">
         <button
