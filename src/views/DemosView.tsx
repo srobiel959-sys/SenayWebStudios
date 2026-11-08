@@ -4,7 +4,7 @@ import { DemoGallery } from "@/components/demo/DemoGallery";
 import { PageHero } from "@/components/PageHero";
 import { getContent } from "@/content";
 import { demoGroups, demos } from "@/content/demos";
-import { demoHref, type Lang } from "@/lib/routes";
+import { industryHref, type Lang } from "@/lib/routes";
 import { bezel, bezelCore, container, kicker } from "@/lib/ui";
 
 export function DemosView({ lang }: { lang: Lang }) {
@@ -36,7 +36,7 @@ export function DemosView({ lang }: { lang: Lang }) {
                       .map((d) => (
                         <li key={d.slug}>
                           <Link
-                            href={demoHref(lang, d.slug)}
+                            href={industryHref(lang, d.slug)}
                             className="group flex items-center justify-between gap-4 py-3 transition-colors hover:text-accent"
                           >
                             <span>

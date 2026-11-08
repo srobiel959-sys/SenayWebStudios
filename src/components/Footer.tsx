@@ -1,15 +1,19 @@
 import Link from "next/link";
 import type { Content } from "@/content";
+import { getDemo } from "@/content/demos";
 import { site } from "@/content/shared";
-import { href, navKeys, type Lang } from "@/lib/routes";
+import { href, industryHref, navKeys, type Lang } from "@/lib/routes";
 import { container } from "@/lib/ui";
 import { MainLogo } from "./Logo";
+
+/** Bransjene som lenkes fra footeren. */
+const footerIndustries = ["frisor", "tannlege", "restaurant", "elektriker", "rorlegger", "tomrer"];
 
 export function Footer({ lang, c }: { lang: Lang; c: Content }) {
   return (
     <footer className="bg-navy text-cream">
       <div className={`${container} grid gap-12 py-16 md:grid-cols-12`}>
-        <div className="flex flex-col items-start gap-4 md:col-span-5">
+        <div className="flex flex-col items-start gap-4 md:col-span-3">
           {/* Hovedlogoen (med tagline). Krem-varianten, fordi footeren har mørk bakgrunn. */}
           <MainLogo tone="light" loading="eager" className="h-auto w-56" />
         </div>
@@ -27,7 +31,28 @@ export function Footer({ lang, c }: { lang: Lang; c: Content }) {
           </ul>
         </nav>
 
-        <div className="md:col-span-4">
+        <nav aria-label={c.industry.footerTitle} className="md:col-span-3">
+          <h2 className="text-xs uppercase tracking-[0.2em] text-cream-muted">{c.industry.footerTitle}</h2>
+          <ul className="mt-4 space-y-2">
+            {footerIndustries.map((slug) => {
+              const demo = getDemo(slug);
+              return demo ? (
+                <li key={slug}>
+                  <Link href={industryHref(lang, slug)} className="hover:underline hover:underline-offset-4">
+                    {demo.label[lang]}
+                  </Link>
+                </li>
+              ) : null;
+            })}
+            <li>
+              <Link href={href(lang, "demos")} className="hover:underline hover:underline-offset-4">
+                {c.industry.allIndustries} →
+              </Link>
+            </li>
+          </ul>
+        </nav>
+
+        <div className="md:col-span-3">
           <h2 className="text-xs uppercase tracking-[0.2em] text-cream-muted">{c.ui.footerContact}</h2>
           <p className="mt-4">
             <a href={`mailto:${site.email}`} className="underline underline-offset-4 hover:text-cream-muted">

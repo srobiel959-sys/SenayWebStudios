@@ -5,6 +5,7 @@ import { CtaBand } from "@/components/CtaBand";
 import { DemoGallery } from "@/components/demo/DemoGallery";
 import { CountUp } from "@/components/home/CountUp";
 import { GoogleStory } from "@/components/home/GoogleStory";
+import { LighthouseScores } from "@/components/home/LighthouseScores";
 import { ProcessLine } from "@/components/home/ProcessLine";
 import { WordReveal } from "@/components/home/WordReveal";
 import { ArrowCircle, ArrowIcon, CheckIcon } from "@/components/Icons";
@@ -67,6 +68,14 @@ export function HomeView({ lang }: { lang: Lang }) {
               {hero.secondaryCta}
             </a>
           </div>
+          <ul className="hero-in hero-in-4 mt-8 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-ink-muted">
+            {hero.badges.map((badge) => (
+              <li key={badge} className="flex items-center gap-2">
+                <CheckIcon className="h-4 w-4 shrink-0 text-accent" />
+                {badge}
+              </li>
+            ))}
+          </ul>
         </div>
 
         <a
@@ -146,6 +155,9 @@ export function HomeView({ lang }: { lang: Lang }) {
           </div>
         </div>
       </section>
+
+      {/* Målte tall: bevis i stedet for skryt */}
+      <LighthouseScores proof={c.proof} />
 
       {/* 6. Forskjellen fra byråer */}
       <AgencyCompare lang={lang} c={c} />

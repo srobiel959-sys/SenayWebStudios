@@ -1,7 +1,7 @@
 // Norsk innhold. Den engelske filen (en.ts) har nøyaktig samme oppbygning.
 // Felter merket «TODO» må bekreftes før lansering.
 
-import { prices } from "./shared";
+import { draftDays, lighthouse, prices } from "./shared";
 
 export const no = {
   site: {
@@ -100,10 +100,45 @@ export const no = {
     eyebrow: "Nettsider for bedrifter",
     title: "Kundene googler deg.",
     titleAccent: "Hva finner de?",
-    lead: "Vi lager nettsiden din først. Du ser den ferdig – før du bestemmer deg.",
-    primaryCta: "Få et gratis forslag",
+    lead: `Se nettsiden din først. Du får et gratis utkast innen ${draftDays} virkedager, og betaler bare hvis du vil ha den live.`,
+    badges: ["0 kr for å se den", "Ingen binding", "Du eier siden"],
+    primaryCta: "Få et gratis utkast",
     secondaryCta: "Se hvordan det fungerer",
     scrollHint: "Rull ned",
+  },
+  // Egne sider per bransje (/nettside-for/[slug]). {bransje} byttes ut med bransjenavnet.
+  industry: {
+    eyebrow: "Nettside for {bransje}",
+    title: "Nettside for {bransje} – se den før du betaler.",
+    lead: `Vi lager nettsiden gratis. Du får et utkast innen ${draftDays} virkedager og betaler bare hvis du vil ha den live: ${prices.website} kr ved lansering og ${prices.hosting} kr/mnd for drift. Ingen binding.`,
+    metaDescription: `Nettside for {bransje}: gratis utkast innen ${draftDays} virkedager, ${prices.website} kr ved lansering og ${prices.hosting} kr/mnd. Ingen binding, og du eier siden.`,
+    primaryCta: "Få et gratis utkast",
+    needsTitle: "Dette bør nettsiden din ha",
+    needsLead: "Det kundene dine ser etter når de finner deg på Google – og det vi bygger inn fra start.",
+    exampleTitle: "Slik kan den se ut",
+    exampleNote: "Eksempel – bedriften er oppdiktet. Din nettside lages fra bunnen av for deg.",
+    openExample: "Åpne eksemplet i full størrelse",
+    pricingTitle: "Én pakke. Alt inkludert.",
+    otherTitle: "Andre bransjer",
+    footerTitle: "Bransjer",
+    allIndustries: "Alle bransjer",
+    needs: {
+      beauty: ["Timebestilling på nett, døgnet rundt", "Behandlinger og priser samlet", "Bilder som viser stemningen", "Åpningstider og veibeskrivelse"],
+      health: ["Timebestilling eller enkel kontakt", "Hva dere behandler, forklart enkelt", "Trygghet: hvem som jobber der", "Adresse, parkering og åpningstider"],
+      food: ["Meny og priser som er lette å lese", "Åpningstider og hvor dere ligger", "Bordbestilling eller bestilling", "Bilder av maten og stedet"],
+      trades: ["Tjenestene dine forklart kort", "Skjema for å be om tilbud", "Bilder fra jobber dere har gjort", "Hvilke områder dere dekker"],
+      services: ["Hva dere tilbyr, og for hvem", "Enkel måte å ta kontakt på", "Trygghet: hvem dere er", "Svar på de vanligste spørsmålene"],
+      retail: ["Utvalget vist med gode bilder", "Åpningstider og hvor butikken er", "Nyheter og tilbud", "Kontakt og bestilling"],
+    },
+  },
+  // Målte tall fra Google Lighthouse (se lighthouse i shared.ts).
+  proof: {
+    eyebrow: "Målt, ikke lovet",
+    title: "Raske nettsider får flere kunder.",
+    lead: "Vi måler hver nettside med Google Lighthouse, det samme verktøyet Google bruker. Dette er tallene for nettsiden du leser nå.",
+    outOf: "av 100",
+    labels: { performance: "Hastighet", accessibility: "Tilgjengelighet", bestPractices: "Beste praksis", seo: "SEO" },
+    note: `Målt på mobil ${lighthouse.measured.split("-").reverse().join(".")}.`,
   },
   // Scroll-fortellingen på forsiden: et Google-søk som spilles av mens man scroller.
   story: {
@@ -200,7 +235,7 @@ export const no = {
       title: "Slik gjør vi det",
       items: [
         "0 kr i oppstart – helt uforpliktende",
-        "Første forslag på få dager",
+        `Første utkast innen ${draftDays} virkedager`,
         "Du ser resultatet før du betaler",
         "Ingen binding, ingen skjulte gebyrer",
         "Du eier nettside, domene og innhold",
@@ -311,7 +346,7 @@ export const no = {
       },
       {
         title: "Gratis forslag",
-        text: "På få dager får du et første forslag til nettsiden din – helt gratis og uforpliktende.",
+        text: `Innen ${draftDays} virkedager får du et første utkast til nettsiden din – helt gratis og uforpliktende.`,
         you: "Ser på forslaget og sier hva du vil endre.",
         we: "Lager forslaget og justerer til du er fornøyd.",
       },
@@ -350,9 +385,13 @@ export const no = {
         { price: prices.website, label: "når nettsiden går live", note: "Engangsbeløp – bare hvis du er fornøyd" },
         { price: prices.hosting, label: "per måned", note: "Drift og vedlikehold · under 27 kr om dagen" },
       ],
+      guarantee: {
+        title: "Du eier nettsiden",
+        text: "Sier du opp, får du med deg domenet, tekstene og bildene, og vi hjelper deg å flytte.",
+      },
       featuresTitle: "Dette er inkludert",
       features: [
-        "Første forslag på få dager",
+        `Første utkast innen ${draftDays} virkedager`,
         "Skreddersydd design i dine farger",
         "Tilpasset mobil, nettbrett og PC",
         "Kontaktskjema",
@@ -390,7 +429,7 @@ export const no = {
       },
       {
         q: "Kan jeg si opp?",
-        a: "Ja. Det er ingen binding på den månedlige prisen. Nettsiden er fortsatt din.",
+        a: "Ja, når du vil. Det er ingen binding på den månedlige prisen. Sier du opp, får du med deg domenet, tekstene og bildene, og vi hjelper deg å flytte nettsiden.",
       },
     ],
   },
@@ -432,7 +471,7 @@ export const no = {
     },
     {
       q: "Hvordan kommer vi i gang?",
-      a: "Send en melding via kontaktsiden eller på e-post. Da tar vi en uforpliktende prat, og på få dager får du et gratis forslag til nettsiden din.",
+      a: `Send en melding via kontaktsiden eller på e-post. Da tar vi en uforpliktende prat, og innen ${draftDays} virkedager får du et gratis utkast til nettsiden din.`,
     },
   ],
 
@@ -448,23 +487,27 @@ export const no = {
     nextSteps: [
       { title: "Du sender en melding", text: "Via skjemaet eller på e-post – et par setninger holder." },
       { title: "Vi tar kontakt", text: "Vi avtaler en uforpliktende prat om hva du trenger." },
-      { title: "Du får et gratis forslag", text: "På få dager – og du betaler ingenting før du vil ha siden live." },
+      { title: "Du får et gratis utkast", text: `Innen ${draftDays} virkedager – og du betaler ingenting før du vil ha siden live.` },
     ],
     form: {
-      name: "Navn",
-      email: "E-post",
       company: "Bedrift",
+      contact: "E-post eller telefon",
+      name: "Navn",
       optional: "(valgfritt)",
       message: "Hva trenger du hjelp med?",
-      submit: "Send henvendelse",
-      sent: "Takk! E-postprogrammet ditt skal nå åpne seg med meldingen klar til sending.",
-      fallback: "Åpnet det seg ikke noe? Send meldingen direkte til",
+      submit: "Få et gratis utkast",
+      sending: "Sender …",
+      sent: "Takk! Vi har fått henvendelsen og tar kontakt med deg snart.",
+      sentMailto: "Takk! E-postprogrammet ditt skal nå åpne seg med meldingen klar til sending.",
+      error: "Noe gikk galt, og meldingen ble ikke sendt. Prøv igjen, eller send en e-post.",
+      fallback: "Du kan også sende meldingen direkte til",
       copy: "Kopier e-postadressen",
       copied: "Kopiert!",
       subject: "Henvendelse fra nettsiden",
-      bodyName: "Navn",
-      bodyEmail: "E-post",
       bodyCompany: "Bedrift",
+      bodyContact: "E-post eller telefon",
+      bodyName: "Navn",
+      bodyMessage: "Melding",
     },
   },
 

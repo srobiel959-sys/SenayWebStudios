@@ -1,7 +1,7 @@
 // English content. Same shape as no.ts (enforced by the Content type).
 
 import type { Content } from "./no";
-import { prices } from "./shared";
+import { draftDays, lighthouse, prices } from "./shared";
 
 export const en: Content = {
   site: {
@@ -96,10 +96,43 @@ export const en: Content = {
     eyebrow: "Websites for businesses",
     title: "Customers google you.",
     titleAccent: "What do they find?",
-    lead: "We build your website first. You see it finished – before you decide.",
-    primaryCta: "Get a free proposal",
+    lead: `See your website first. You get a free draft within ${draftDays} business days, and only pay if you want it live.`,
+    badges: ["NOK 0 to see it", "No lock-in", "You own the site"],
+    primaryCta: "Get a free draft",
     secondaryCta: "See how it works",
     scrollHint: "Scroll down",
+  },
+  industry: {
+    eyebrow: "Website for {bransje}",
+    title: "A website for {bransje} – see it before you pay.",
+    lead: `We build your website for free. You get a draft within ${draftDays} business days and only pay if you want it live: NOK ${prices.website} at launch and NOK ${prices.hosting}/mo for hosting. No lock-in.`,
+    metaDescription: `Website for {bransje}: free draft within ${draftDays} business days, NOK ${prices.website} at launch and NOK ${prices.hosting}/mo. No lock-in, and you own the site.`,
+    primaryCta: "Get a free draft",
+    needsTitle: "What your website should have",
+    needsLead: "What your customers look for when they find you on Google – and what we build in from the start.",
+    exampleTitle: "How it could look",
+    exampleNote: "Example – the business is fictional. Your website is built from scratch for you.",
+    openExample: "Open the example in full size",
+    pricingTitle: "One package. Everything included.",
+    otherTitle: "Other industries",
+    footerTitle: "Industries",
+    allIndustries: "All industries",
+    needs: {
+      beauty: ["Online booking, around the clock", "Treatments and prices in one place", "Photos that show the atmosphere", "Opening hours and directions"],
+      health: ["Online booking or easy contact", "What you treat, explained simply", "Trust: who works there", "Address, parking and opening hours"],
+      food: ["A menu with prices that is easy to read", "Opening hours and where you are", "Table booking or ordering", "Photos of the food and the place"],
+      trades: ["Your services explained briefly", "A form to request a quote", "Photos from jobs you have done", "Which areas you cover"],
+      services: ["What you offer, and for whom", "An easy way to get in touch", "Trust: who you are", "Answers to the most common questions"],
+      retail: ["Your range shown with good photos", "Opening hours and where the shop is", "News and offers", "Contact and ordering"],
+    },
+  },
+  proof: {
+    eyebrow: "Measured, not promised",
+    title: "Fast websites win more customers.",
+    lead: "We measure every website with Google Lighthouse, the same tool Google uses. These are the scores for the website you are reading now.",
+    outOf: "out of 100",
+    labels: { performance: "Performance", accessibility: "Accessibility", bestPractices: "Best practices", seo: "SEO" },
+    note: `Measured on mobile on ${lighthouse.measured}.`,
   },
   story: {
     label: "How customers choose",
@@ -189,7 +222,7 @@ export const en: Content = {
       title: "How we do it",
       items: [
         "NOK 0 to get started – no obligation",
-        "First proposal within a few days",
+        `First draft within ${draftDays} business days`,
         "You see the result before you pay",
         "No lock-in, no hidden fees",
         "You own the website, domain and content",
@@ -291,7 +324,7 @@ export const en: Content = {
       },
       {
         title: "Free proposal",
-        text: "Within a few days you get a first proposal for your website – completely free and without obligation.",
+        text: `Within ${draftDays} business days you get a first draft of your website – completely free and without obligation.`,
         you: "Look at the proposal and tell us what to change.",
         we: "Build the proposal and adjust it until you are happy.",
       },
@@ -327,9 +360,13 @@ export const en: Content = {
         { price: prices.website, label: "when the website goes live", note: "One-off – only if you are happy" },
         { price: prices.hosting, label: "per month", note: "Hosting and maintenance · less than NOK 27 a day" },
       ],
+      guarantee: {
+        title: "You own the website",
+        text: "If you cancel, you take the domain, texts and images with you, and we help you move.",
+      },
       featuresTitle: "What's included",
       features: [
-        "First proposal within a few days",
+        `First draft within ${draftDays} business days`,
         "Custom design in your colours",
         "Works on mobile, tablet and desktop",
         "Contact form",
@@ -367,7 +404,7 @@ export const en: Content = {
       },
       {
         q: "Can I cancel?",
-        a: "Yes. There is no lock-in on the monthly price. The website is still yours.",
+        a: "Yes, whenever you like. There is no lock-in on the monthly price. If you cancel, you take the domain, texts and images with you, and we help you move the website.",
       },
     ],
   },
@@ -403,7 +440,7 @@ export const en: Content = {
     },
     {
       q: "How do we get started?",
-      a: "Send a message through the contact page or by email. We'll have a no-obligation chat, and within a few days you'll get a free proposal for your website.",
+      a: `Send a message through the contact page or by email. We'll have a no-obligation chat, and within ${draftDays} business days you'll get a free draft of your website.`,
     },
   ],
 
@@ -416,23 +453,27 @@ export const en: Content = {
     nextSteps: [
       { title: "You send a message", text: "Through the form or by email – a couple of sentences is enough." },
       { title: "We get in touch", text: "We set up a no-obligation chat about what you need." },
-      { title: "You get a free proposal", text: "Within a few days – and you pay nothing until you want the site live." },
+      { title: "You get a free draft", text: `Within ${draftDays} business days – and you pay nothing until you want the site live.` },
     ],
     form: {
-      name: "Name",
-      email: "Email",
       company: "Company",
+      contact: "Email or phone",
+      name: "Name",
       optional: "(optional)",
       message: "What do you need help with?",
-      submit: "Send inquiry",
-      sent: "Thank you! Your email app should now open with the message ready to send.",
-      fallback: "Nothing opened? Send the message directly to",
+      submit: "Get a free draft",
+      sending: "Sending …",
+      sent: "Thank you! We have received your inquiry and will be in touch soon.",
+      sentMailto: "Thank you! Your email app should now open with the message ready to send.",
+      error: "Something went wrong and the message was not sent. Try again, or send us an email.",
+      fallback: "You can also send the message directly to",
       copy: "Copy email address",
       copied: "Copied!",
       subject: "Inquiry from the website",
-      bodyName: "Name",
-      bodyEmail: "Email",
       bodyCompany: "Company",
+      bodyContact: "Email or phone",
+      bodyName: "Name",
+      bodyMessage: "Message",
     },
   },
 

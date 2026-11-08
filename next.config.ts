@@ -15,11 +15,12 @@ const contentSecurityPolicy = [
   `style-src 'self' 'unsafe-inline'${vercelLive}`,
   `img-src 'self' data: blob:${isPreview ? " https://vercel.live https://vercel.com" : ""}`,
   `font-src 'self'${isPreview ? " https://vercel.live https://assets.vercel.com" : ""}`,
-  `connect-src 'self'${isPreview ? " https://vercel.live wss://ws-us3.pusher.com" : ""}`,
+  // Kontaktskjemaet sender til Formspree.
+  `connect-src 'self' https://formspree.io${isPreview ? " https://vercel.live wss://ws-us3.pusher.com" : ""}`,
   `frame-src 'self'${vercelLive}`,
   "frame-ancestors 'none'",
   "base-uri 'self'",
-  "form-action 'self'",
+  "form-action 'self' https://formspree.io",
   "object-src 'none'",
 ].join("; ");
 

@@ -2,7 +2,7 @@ import type { Lang, PageKey } from "@/lib/routes";
 import { demos } from "./demos";
 import { en } from "./en";
 import { no } from "./no";
-import { prices, site } from "./shared";
+import { draftDays, prices, site } from "./shared";
 
 // Kunnskapsbasen til chat-assistenten. Ingen AI: spørsmålet matches mot
 // nøkkelordene under (se src/lib/chat-match.ts), og beste emne gir svaret.
@@ -286,8 +286,8 @@ export const topics: Topic[] = [
     id: "ownership",
     strong: ["eier", "eie", "eierskap", "own", "owner", "owns", "ownership", "bytte leverandør", "switch provider", "flytte nettsiden", "move my website"],
     answer: {
-      no: "Du eier nettsiden, domenet og innholdet. Vi drifter den for deg, men eierskapet blir alltid hos deg – også hvis du en dag vil bytte leverandør.",
-      en: "You own the website, the domain and the content. We run it for you, but ownership always stays with you – even if you want to switch provider one day.",
+      no: "Du eier nettsiden, domenet og innholdet. Vi drifter den for deg, men eierskapet blir alltid hos deg. Sier du opp, får du med deg domenet, tekstene og bildene, og vi hjelper deg å flytte.",
+      en: "You own the website, the domain and the content. We run it for you, but ownership always stays with you. If you cancel, you take the domain, texts and images with you, and we help you move.",
     },
   },
   {
@@ -317,8 +317,8 @@ export const topics: Topic[] = [
     strong: ["hvor lang tid", "hvor fort", "hvor raskt", "leveringstid", "how long", "how fast", "how quickly", "timeline", "ferdig", "levering", "delivery"],
     weak: ["tid", "time", "dager", "uker", "days", "weeks", "raskt", "fast"],
     answer: {
-      no: "Du får et første forslag på få dager, helt gratis. Deretter justerer vi til du er fornøyd. Hvor lang tid resten tar, avhenger litt av hvor raskt vi får tekst og bilder – men du vet alltid hva som er neste steg.",
-      en: "You get a first proposal within a few days, completely free. Then we adjust it until you're happy. How long the rest takes depends a bit on how quickly we get text and images – but you always know what the next step is.",
+      no: `Du får et første utkast innen ${draftDays} virkedager, helt gratis. Deretter justerer vi til du er fornøyd. Hvor lang tid resten tar, avhenger litt av hvor raskt vi får tekst og bilder – men du vet alltid hva som er neste steg.`,
+      en: `You get a first draft within ${draftDays} business days, completely free. Then we adjust it until you're happy. How long the rest takes depends a bit on how quickly we get text and images – but you always know what the next step is.`,
     },
     links: ["process"],
   },
@@ -357,8 +357,8 @@ export const topics: Topic[] = [
     id: "start",
     strong: ["komme i gang", "i gang", "starte", "bestille", "kontakt", "kontakte", "ring", "ringe", "telefon", "tilbud", "møte", "get started", "start", "order", "contact", "call", "phone", "quote", "meeting", "e-post", "epost", "email", "mail"],
     answer: {
-      no: `Send en melding via kontaktsiden eller på e-post til ${site.email}. Da tar vi en uforpliktende prat, og på få dager får du et gratis forslag til nettsiden din.`,
-      en: `Send a message via the contact page or email ${site.email}. We'll have a no-obligation chat, and within a few days you'll get a free proposal for your website.`,
+      no: `Send en melding via kontaktsiden eller på e-post til ${site.email}. Da tar vi en uforpliktende prat, og innen ${draftDays} virkedager får du et gratis utkast til nettsiden din.`,
+      en: `Send a message via the contact page or email ${site.email}. We'll have a no-obligation chat, and within ${draftDays} business days you'll get a free draft of your website.`,
     },
     links: ["contact"],
   },

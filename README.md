@@ -39,12 +39,20 @@ Legg bildene i `public/demo/` med disse navnene, så kobles de til automatisk ve
 - `src/lib/chat-match.ts` – finner emnet som passer best (tåler bøyninger og én skrivefeil). Finner den ingenting, henviser den til kontaktsiden.
 - `src/components/ChatWidget.tsx` – chatvinduet.
 
+## Kontaktskjema
+
+Henvendelser sendes til [Formspree](https://formspree.io), som videresender dem på e-post (gratis inntil 50 i måneden). Lag et skjema der, og legg ID-en (for eksempel `xyzabcde` fra `https://formspree.io/f/xyzabcde`) i Vercel under Settings → Environment Variables som `NEXT_PUBLIC_FORMSPREE_ID`, og bygg på nytt. ID-en er ikke hemmelig. Uten den åpner skjemaet brukerens e-postprogram i stedet.
+
+## Bransjesider
+
+`/nettside-for/[slug]` (engelsk: `/en/website-for/[slug]`) er én side per bransje i `src/content/demos.ts`, laget for å bli funnet på Google. Teksten ligger i `industry` i `src/content/no.ts` og `en.ts`, og `{bransje}` byttes ut med bransjenavnet. Hastighetstallene på forsiden ligger i `lighthouse` i `src/content/shared.ts` – mål på nytt før du endrer dem.
+
 ## Sikkerhet
 
 Nettsiden er statisk. Den har ingen innlogging, database, API-ruter eller hemmelige nøkler, så det finnes ingenting der å stjele eller logge inn på. Det som er på plass:
 
 - Sikkerhetshoder for alle sider i `next.config.ts`: Content-Security-Policy (bare innhold fra nettsiden selv), HSTS, `X-Frame-Options`, `nosniff`, Referrer-Policy, Permissions-Policy og Cross-Origin-Opener-Policy. `X-Powered-By` er slått av.
-- Alt brukere skriver (chat og skjema) vises som ren tekst og sendes ikke til noen server. Skjemafeltene har maks lengde.
+- Alt brukere skriver (chat og skjema) vises som ren tekst. Chatten sender ingenting noe sted; kontaktskjemaet sender bare til Formspree. Skjemafeltene har maks lengde, og en skjult felle stopper enkle spamroboter.
 - `.env*` er utelatt fra git. Sjekk `npm audit --omit=dev` før hver lansering.
 
 Kommer det senere et skjema-API, en innlogging eller en database: legg nøkler i Vercels miljøvariabler (aldri i koden), valider alt på serveren, og legg på rate limiting på endepunktene.
@@ -53,7 +61,7 @@ Kommer det senere et skjema-API, en innlogging eller en database: legg nøkler i
 
 - [ ] Bekreft e-postadresse (`site.email`) og legg inn org.nr. (`site.orgNr`) i `src/content/shared.ts`
 - [ ] Les gjennom personvernsiden (`src/app/personvern/page.tsx`)
-- [ ] Kontaktskjemaet åpner e-postprogrammet (mailto). Koble til et skjema-API ved behov.
+- [ ] Lag et skjema på [formspree.io](https://formspree.io) og legg skjema-ID-en i Vercel som `NEXT_PUBLIC_FORMSPREE_ID` (se «Kontaktskjema»)
 - [ ] Koble domenet `senaystudio.no` i Vercel
 
 ## Deploy

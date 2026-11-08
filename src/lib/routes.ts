@@ -34,6 +34,11 @@ export function demoHref(lang: Lang, slug: string) {
   return lang === "no" ? `/demo/${slug}` : `/en/demo/${slug}`;
 }
 
+/** Egen side per bransje, laget for å bli funnet på Google («nettside for frisør»). */
+export function industryHref(lang: Lang, slug: string) {
+  return lang === "no" ? `/nettside-for/${slug}` : `/en/website-for/${slug}`;
+}
+
 /** Sidene i menyen, i rekkefølge. */
 export const navKeys: PageKey[] = ["why", "demos", "services", "process", "pricing", "about"];
 
@@ -42,6 +47,8 @@ export function translatePath(pathname: string, to: Lang): string {
   const clean = pathname.replace(/\/$/, "") || "/";
   const demo = clean.match(/^(?:\/en)?\/demo\/([^/]+)$/);
   if (demo) return demoHref(to, demo[1]);
+  const industry = clean.match(/^(?:\/nettside-for|\/en\/website-for)\/([^/]+)$/);
+  if (industry) return industryHref(to, industry[1]);
   for (const key of Object.keys(paths) as PageKey[]) {
     if (paths[key].no === clean || paths[key].en === clean) return paths[key][to];
   }
