@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import type { Content } from "@/content";
 import { site } from "@/content/shared";
 import { btnArrow } from "@/lib/ui";
@@ -20,9 +20,25 @@ const fieldClass =
 
 type Status = "idle" | "sending" | "sent" | "mailto" | "error";
 
-export function ContactForm({ labels }: { labels: Content["contact"]["form"] }) {
+export function ContactForm({ labels, prefillMessage }: { labels: Content["contact"]["form"]; prefillMessage: string }) {
   const [status, setStatus] = useState<Status>("idle");
   const [copied, setCopied] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
+
+  // Kommer kunden fra «Din nettside, live» på forsiden, fylles bedrift og melding ut.
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const company = (params.get("bedrift") ?? "").trim().slice(0, maxLength.bedrift);
+    const industry = (params.get("bransje") ?? "").trim().slice(0, 60);
+    const form = formRef.current;
+    if (!form) return;
+    const companyField = form.elements.namedItem("bedrift");
+    const messageField = form.elements.namedItem("melding");
+    if (company && companyField instanceof HTMLInputElement && !companyField.value) companyField.value = company;
+    if (industry && messageField instanceof HTMLTextAreaElement && !messageField.value) {
+      messageField.value = prefillMessage.replace("{bransje}", industry.toLowerCase()).slice(0, maxLength.melding);
+    }
+  }, [prefillMessage]);
 
   async function copyEmail() {
     try {
@@ -102,7 +118,7 @@ export function ContactForm({ labels }: { labels: Content["contact"]["form"] }) 
             : null;
 
   return (
-    <form onSubmit={handleSubmit} className="grid gap-5 sm:grid-cols-2">
+    <form ref={formRef} onSubmit={handleSubmit} className="grid gap-5 sm:grid-cols-2">
       <div>
         <label htmlFor="bedrift" className="text-sm font-medium">
           {labels.company}

@@ -156,6 +156,21 @@ body {
   box-shadow: 0 8px 20px -8px rgb(7 22 48 / 0.5);
 }
 
+/* «Din nettside, live»: svaret glir opp når byggingen er ferdig. */
+@keyframes build-done {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.build-done {
+  animation: build-done 0.6s cubic-bezier(0.32, 0.72, 0, 1) both;
+}
+
 /* Logoen på 404-sidene «tegnes» fram diagonalt. */
 @keyframes monogram-draw {
   from {
@@ -248,6 +263,7 @@ body {
     transition: none;
   }
   .hero-in,
+  .build-done,
   .monogram-draw,
   .word-rise,
   .scroll-line::after {

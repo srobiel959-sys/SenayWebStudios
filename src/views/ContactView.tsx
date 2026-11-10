@@ -42,7 +42,7 @@ export function ContactView({ lang }: { lang: Lang }) {
         <Reveal className="lg:col-span-7">
           <div className={bezel}>
             <div className={`${bezelCore} p-6 sm:p-10`}>
-              <ContactForm labels={contact.form} />
+              <ContactForm labels={contact.form} prefillMessage={c.builder.contactMessage} />
             </div>
           </div>
         </Reveal>

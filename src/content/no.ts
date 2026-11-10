@@ -100,11 +100,25 @@ export const no = {
     eyebrow: "Nettsider for bedrifter",
     title: "Kundene googler deg.",
     titleAccent: "Hva finner de?",
-    lead: `Se nettsiden din først. Du får et gratis utkast innen ${draftDays} virkedager, og betaler bare hvis du vil ha den live.`,
-    badges: ["0 kr for å se den", "Ingen binding", "Du eier siden"],
+    lead: "Skriv inn bedriften din, så viser vi deg nettsiden din. Nå.",
     primaryCta: "Få et gratis utkast",
     secondaryCta: "Se hvordan det fungerer",
     scrollHint: "Rull ned",
+  },
+  // «Din nettside, live» øverst på forsiden.
+  builder: {
+    nameLabel: "Bedriftens navn",
+    namePlaceholder: "Navnet på bedriften din",
+    industryLabel: "Bransje",
+    build: "Bygg nettsiden min",
+    fallbackName: "Din bedrift",
+    hint: "Skriv inn navnet – nettsiden oppdateres mens du skriver.",
+    steps: ["Design", "Tekst", "Mobil", "Ferdig"],
+    srPreview: "Forhåndsvisning av nettsiden for {navn}.",
+    doneTitle: "Dette er en skisse laget på sekunder.",
+    doneText: `Vil du ha den ekte? Vi lager den gratis innen ${draftDays} virkedager.`,
+    doneCta: "Ja, lag nettsiden min",
+    contactMessage: "Jeg vil ha en nettside som skissen for {bransje}.",
   },
   // Egne sider per bransje (/nettside-for/[slug]). {bransje} byttes ut med bransjenavnet.
   industry: {
@@ -200,6 +214,7 @@ export const no = {
   demos: {
     eyebrow: "Eksempler",
     title: "Se hvordan nettsiden din kan bli.",
+    homeTitle: "Eller se 30 ferdige eksempler.",
     lead: "Velg bransjen din og se et eksempel. Alle bedriftene er oppdiktet – nettsiden din lages alltid fra bunnen av for deg.",
     all: "Alle",
     open: "Åpne i full størrelse",

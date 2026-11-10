@@ -5,17 +5,18 @@ import { CtaBand } from "@/components/CtaBand";
 import { DemoGallery } from "@/components/demo/DemoGallery";
 import { CountUp } from "@/components/home/CountUp";
 import { GoogleStory } from "@/components/home/GoogleStory";
+import { LiveBuilder } from "@/components/home/LiveBuilder";
 import { LighthouseScores } from "@/components/home/LighthouseScores";
 import { ProcessLine } from "@/components/home/ProcessLine";
 import { WordReveal } from "@/components/home/WordReveal";
-import { ArrowCircle, ArrowIcon, CheckIcon } from "@/components/Icons";
+import { ArrowIcon, CheckIcon } from "@/components/Icons";
 import { JsonLd } from "@/components/JsonLd";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
 import { getContent } from "@/content";
 import { href, type Lang, type PageKey } from "@/lib/routes";
 import { businessSchema } from "@/lib/schema";
-import { bezel, bezelCore, btnArrow, btnSecondary, container, eyebrowPill } from "@/lib/ui";
+import { bezel, bezelCore, container, eyebrowPill } from "@/lib/ui";
 
 /** Ordene i overskriften reiser seg ett og ett (se .word-rise i globals.css). */
 function RisingWords({ text, start = 0 }: { text: string; start?: number }) {
@@ -42,9 +43,9 @@ export function HomeView({ lang }: { lang: Lang }) {
     <>
       <JsonLd data={businessSchema(lang)} />
 
-      {/* 1. Hero: pitchen, alene på ren hvit bakgrunn */}
-      <section aria-labelledby="hero-tittel" className="relative -mt-[4.25rem] overflow-hidden sm:-mt-20">
-        <div className={`${container} relative flex min-h-[100dvh] flex-col items-center justify-center pb-24 pt-32 text-center`}>
+      {/* 1. Hero: pitchen, og så bygger kundens egen nettside seg opp mens hen skriver */}
+      <section aria-labelledby="hero-tittel" className="relative -mt-[4.25rem] sm:-mt-20">
+        <div className={`${container} relative flex flex-col items-center pb-24 pt-32 text-center sm:pt-40`}>
           <p className={`hero-in ${eyebrowPill}`}>
             <span className="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden="true" />
             {hero.eyebrow}
@@ -59,32 +60,10 @@ export function HomeView({ lang }: { lang: Lang }) {
             </span>
           </h1>
           <p className="hero-in hero-in-3 mt-8 max-w-xl text-balance text-lg leading-relaxed text-ink-muted sm:text-xl">{hero.lead}</p>
-          <div className="hero-in hero-in-4 mt-10 flex w-full flex-col items-stretch justify-center gap-3 sm:w-auto sm:flex-row sm:items-center sm:gap-4">
-            <Link href={href(lang, "contact")} className={btnArrow}>
-              {hero.primaryCta}
-              <ArrowCircle />
-            </Link>
-            <a href="#slik" className={btnSecondary}>
-              {hero.secondaryCta}
-            </a>
+          <div className="hero-in hero-in-4 mt-10 w-full">
+            <LiveBuilder lang={lang} labels={c.builder} fictionalLabel={c.demos.fictional} contactPath={href(lang, "contact")} />
           </div>
-          <ul className="hero-in hero-in-4 mt-8 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-ink-muted">
-            {hero.badges.map((badge) => (
-              <li key={badge} className="flex items-center gap-2">
-                <CheckIcon className="h-4 w-4 shrink-0 text-accent" />
-                {badge}
-              </li>
-            ))}
-          </ul>
         </div>
-
-        <a
-          href="#slik"
-          className="hero-in hero-in-4 absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center gap-3 text-[11px] uppercase tracking-[0.25em] text-ink-muted transition-colors hover:text-navy"
-        >
-          {hero.scrollHint}
-          <span className="scroll-line relative h-10 w-px overflow-hidden bg-navy/10" aria-hidden="true" />
-        </a>
       </section>
 
       {/* 2. Google-historien: spilles av mens man scroller */}
@@ -104,7 +83,7 @@ export function HomeView({ lang }: { lang: Lang }) {
       <section id="eksempler" aria-labelledby="eksempler-tittel" className="scroll-mt-24 border-t border-line py-28 sm:py-36">
         <div className={container}>
           <Reveal>
-            <SectionHeading id="eksempler-tittel" eyebrow={c.demos.eyebrow} title={c.demos.title} lead={c.demos.lead} />
+            <SectionHeading id="eksempler-tittel" eyebrow={c.demos.eyebrow} title={c.demos.homeTitle} lead={c.demos.lead} />
           </Reveal>
           <div className="mt-14">
             <DemoGallery lang={lang} labels={c.demos} />
