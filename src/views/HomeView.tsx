@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { Fragment } from "react";
 import { CtaBand } from "@/components/CtaBand";
-import { DemoGallery } from "@/components/demo/DemoGallery";
 import { CountUp } from "@/components/home/CountUp";
+import { DemoShowcase } from "@/components/home/DemoShowcase";
 import { GoogleStory } from "@/components/home/GoogleStory";
 import { LiveBuilder } from "@/components/home/LiveBuilder";
 import { LighthouseScores } from "@/components/home/LighthouseScores";
@@ -15,7 +15,7 @@ import { SectionHeading } from "@/components/SectionHeading";
 import { getContent } from "@/content";
 import { href, type Lang } from "@/lib/routes";
 import { businessSchema } from "@/lib/schema";
-import { card, container } from "@/lib/ui";
+import { container } from "@/lib/ui";
 
 /** Ordene i overskriften reiser seg ett og ett (se .word-rise i globals.css). */
 function RisingWords({ text, start = 0 }: { text: string; start?: number }) {
@@ -81,16 +81,23 @@ export function HomeView({ lang }: { lang: Lang }) {
       <section id="eksempler" aria-labelledby="eksempler-tittel" className="scroll-mt-24 border-t border-line py-28 sm:py-36">
         <div className={container}>
           <Reveal>
-            <SectionHeading id="eksempler-tittel" title={c.demos.homeTitle} lead={c.demos.lead} />
+            <SectionHeading id="eksempler-tittel" title={c.demos.homeTitle} lead={c.demos.homeLead} />
           </Reveal>
           <div className="mt-14">
-            <DemoGallery lang={lang} labels={c.demos} />
+            <DemoShowcase lang={lang} />
           </div>
+          <Link
+            href={href(lang, "demos")}
+            className="group mt-8 inline-flex min-h-11 items-center gap-2 font-medium underline decoration-navy/25 underline-offset-8 transition-colors duration-150 hover:decoration-navy"
+          >
+            {c.demos.allExamples}
+            <ArrowIcon className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-1" />
+          </Link>
         </div>
       </section>
 
-      {/* 5. Prisen: «0 kr» som blikkfang, resten teller opp */}
-      <section aria-labelledby="pris-tittel" className="relative overflow-hidden border-t border-line py-28 sm:py-40">
+      {/* 5. Prisen: «0 kr» som blikkfang på mørk bunn, resten teller opp */}
+      <section aria-labelledby="pris-tittel" className="relative overflow-hidden bg-navy py-28 text-cream sm:py-40">
         <div className={`${container} relative grid items-center gap-14 lg:grid-cols-12`}>
           <Reveal className="lg:col-span-7">
             <h2 id="pris-tittel" className="font-display text-3xl tracking-tight sm:text-4xl">
@@ -99,28 +106,28 @@ export function HomeView({ lang }: { lang: Lang }) {
             <p className="mt-6 font-display text-[7.5rem] leading-[0.85] tracking-tight sm:text-[11rem] lg:text-[13rem]">
               <CountUp value={numbers.items[0].value} prefix={numbers.items[0].prefix} suffix={numbers.items[0].suffix} />
             </p>
-            <p className="mt-4 text-xl text-ink-muted">{numbers.items[0].label}</p>
+            <p className="mt-4 text-xl text-cream-muted">{numbers.items[0].label}</p>
           </Reveal>
 
           <div className="space-y-4 lg:col-span-5">
             {numbers.items.slice(1).map((item, i) => (
               <Reveal key={item.label} delay={i * 120}>
-                <div className={`${card} p-7 sm:p-8`}>
+                <div className="rounded-2xl border border-white/15 bg-white/[0.06] p-7 sm:p-8">
                   <p className="font-display text-5xl tracking-tight sm:text-6xl">
                     <CountUp value={item.value} prefix={item.prefix} suffix={item.suffix} />
                   </p>
-                  <p className="mt-2 text-ink-muted">{item.label}</p>
+                  <p className="mt-2 text-cream-muted">{item.label}</p>
                 </div>
               </Reveal>
             ))}
             <Reveal delay={240}>
-              <p className="flex items-center gap-2.5 pt-2 text-ink-muted">
-                <CheckIcon className="h-4 w-4 shrink-0 text-accent" />
+              <p className="flex items-center gap-2.5 pt-2 text-cream-muted">
+                <CheckIcon className="h-4 w-4 shrink-0 text-sky" />
                 {numbers.note}
               </p>
               <Link
                 href={href(lang, "pricing")}
-                className="group mt-4 inline-flex min-h-11 items-center gap-2 font-medium underline decoration-navy/25 underline-offset-8 transition-colors duration-150 hover:decoration-navy"
+                className="group mt-4 inline-flex min-h-11 items-center gap-2 font-medium underline decoration-white/30 underline-offset-8 transition-colors duration-150 hover:decoration-white"
               >
                 {numbers.link}
                 <ArrowIcon className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-1" />

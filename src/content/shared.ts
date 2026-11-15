@@ -13,7 +13,7 @@ export const draftDays = 3;
 
 /** Målte Lighthouse-tall for forsiden (mobil). Mål på nytt før tallene endres – vis aldri gjettede tall. */
 export const lighthouse = {
-  measured: "2026-11-08",
+  measured: "2026-11-15",
   scores: { performance: 90, accessibility: 100, bestPractices: 100, seo: 100 },
 };
 

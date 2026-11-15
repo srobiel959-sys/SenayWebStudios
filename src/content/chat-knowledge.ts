@@ -49,8 +49,8 @@ export const topics: Topic[] = [
     strong: ["hvorfor nettside", "flere kunder", "nye kunder", "more customers", "new customers", "trenger jeg en nettside", "verdt det", "lønner", "why a website", "do i need a website", "worth it"],
     weak: ["hvorfor", "why", "nødvendig", "necessary"],
     answer: {
-      no: "Folk sjekker bedrifter på nett før de handler. Står du ikke der, velger de ofte noen som gjør det. En god nettside gjør at kundene finner deg, gir et seriøst førsteinntrykk og tar imot henvendelser døgnet rundt.",
-      en: "People check businesses online before they buy. If you're not there, they often choose someone who is. A good website helps customers find you, makes a professional first impression and takes inquiries around the clock.",
+      no: "Folk sjekker bedrifter på nett før de handler. Står du ikke der, velger de ofte noen som gjør det. Med en nettside finner kundene deg, og de kan ta kontakt også når du har stengt.",
+      en: "People check businesses online before they buy. If you're not there, they often choose someone who is. With a website, customers find you, and they can get in touch even when you are closed.",
     },
     links: ["why"],
   },
@@ -68,8 +68,8 @@ export const topics: Topic[] = [
     strong: ["domene", "domenet", "domener", "domain", "domains", "nettadresse", "web address", "url"],
     weak: ["kjøpe", "buy", "adresse", "address", "registrere", "register", "koste", "pris", "cost", "price", "eget", "egen", "own", "trenger", "need"],
     answer: {
-      no: "Domenet er adressen til nettsiden, for eksempel dinbedrift.no. Et .no-domene koster vanligvis et par hundre kroner i året hos en domeneleverandør. Hos oss eier du domenet selv, og har du ikke ett ennå, hjelper vi deg gjerne i gang.",
-      en: "The domain is your website's address, for example yourbusiness.no. A .no domain usually costs a couple of hundred kroner a year from a domain registrar. With us you own the domain yourself, and if you don't have one yet, we're happy to help you get started.",
+      no: "Domenet er adressen til nettsiden, for eksempel dinbedrift.no. Et .no-domene koster vanligvis et par hundre kroner i året hos en domeneleverandør. Hos oss eier du domenet selv. Har du ikke ett ennå, hjelper vi deg med å skaffe det.",
+      en: "The domain is your website's address, for example yourbusiness.no. A .no domain usually costs a couple of hundred kroner a year from a domain registrar. With us you own the domain yourself. If you don't have one yet, we'll help you get it.",
     },
     followUps: {
       no: ["Hva er hosting?", "Kan jeg få e-post på domenet?"],
@@ -80,8 +80,8 @@ export const topics: Topic[] = [
     id: "businessEmail",
     strong: ["e-post på domenet", "epost på domenet", "e-post", "epost", "email address", "bedrifts-epost", "firma-epost", "email on my domain", "business email", "professional email"],
     answer: {
-      no: "En e-postadresse på eget domene (som post@dinbedrift.no) gjør bedriften mer profesjonell. Den settes vanligvis opp hos domeneleverandøren eller en e-posttjeneste. Spør oss gjerne, så ser vi på hva som passer for deg.",
-      en: "An email address on your own domain (like post@yourbusiness.no) makes your business look more professional. It's usually set up with your domain registrar or an email service. Ask us and we'll look at what suits you.",
+      no: "En e-postadresse på eget domene (som post@dinbedrift.no) ser ryddigere ut enn en Gmail-adresse. Den settes vanligvis opp hos domeneleverandøren eller en e-posttjeneste. Spør oss, så ser vi på hva som passer for deg.",
+      en: "An email address on your own domain (like post@yourbusiness.no) looks tidier than a Gmail address. It's usually set up with your domain registrar or an email service. Ask us and we'll look at what suits you.",
     },
     links: ["contact"],
   },
@@ -121,8 +121,8 @@ export const topics: Topic[] = [
     strong: ["bedriftsprofil", "google bedrift", "google maps", "maps", "kart", "kartet", "business profile", "my business", "omtaler", "reviews", "anmeldelser"],
     weak: ["google"],
     answer: {
-      no: "En Google-bedriftsprofil er gratis og gjør at du dukker opp i Google Maps og i søk i nærområdet, med adresse, åpningstider og omtaler. Lenk til nettsiden din fra profilen. Sammen gir de deg mye bedre synlighet lokalt.",
-      en: "A Google Business Profile is free and makes you show up in Google Maps and local search, with your address, opening hours and reviews. Link to your website from the profile. Together they give you much better local visibility.",
+      no: "En Google-bedriftsprofil er gratis og gjør at du dukker opp i Google Maps og i søk i nærområdet, med adresse, åpningstider og omtaler. Lenk til nettsiden din fra profilen. Da finner folk i nærheten deg lettere.",
+      en: "A Google Business Profile is free and makes you show up in Google Maps and local search, with your address, opening hours and reviews. Link to your website from the profile. That makes it easier for people nearby to find you.",
     },
   },
   {
@@ -153,8 +153,8 @@ export const topics: Topic[] = [
     id: "accessibility",
     strong: ["universell utforming", "tilgjengelig", "tilgjengelighet", "uu", "wcag", "accessibility", "accessible", "skjermleser", "screen reader", "blind", "svaksynt"],
     answer: {
-      no: "Universell utforming betyr at alle kan bruke nettsiden, også med skjermleser, tastatur eller nedsatt syn. Det handler om god kontrast, tydelig struktur og tekst på bilder. Vi bygger med tilgjengelighet i hver detalj.",
-      en: "Accessibility means everyone can use the website, including with a screen reader, keyboard or reduced vision. It's about good contrast, clear structure and text for images. We build with accessibility in every detail.",
+      no: "Universell utforming betyr at alle kan bruke nettsiden, også med skjermleser, tastatur eller nedsatt syn. Det handler om god kontrast, tydelig struktur og tekst på bilder. Vi tester tilgjengeligheten på alt vi lager.",
+      en: "Accessibility means everyone can use the website, including with a screen reader, keyboard or reduced vision. It's about good contrast, clear structure and text for images. We test accessibility on everything we build.",
     },
   },
   {
@@ -180,8 +180,8 @@ export const topics: Topic[] = [
     strong: ["design", "designet", "utseende", "layout", "mal", "template", "stil", "style", "look"],
     weak: ["pen", "fin", "moderne", "modern", "beautiful"],
     answer: {
-      no: "Vi lager et skreddersydd design i dine farger, ikke en ferdig mal. Typografi, farger og struktur skal gjøre det lett for besøkende å forstå hva du tilbyr og få dem til å ta kontakt.",
-      en: "We create a custom design in your colours, not an off-the-shelf template. Typography, colours and structure should make it easy for visitors to understand what you offer and get in touch.",
+      no: "Vi lager designet for deg, i dine farger. Vi bruker ikke ferdige maler. Besøkende skal raskt se hva du tilbyr og hvordan de tar kontakt.",
+      en: "We make the design for you, in your colours. We don't use off-the-shelf templates. Visitors should quickly see what you offer and how to get in touch.",
     },
     links: ["demos"],
   },
@@ -189,7 +189,7 @@ export const topics: Topic[] = [
     id: "privacy",
     strong: ["personvern", "gdpr", "cookies", "informasjonskapsler", "privacy", "personopplysninger", "personal data", "cookie"],
     answer: {
-      no: "Nettsider som samler inn personopplysninger, for eksempel via skjema, bør ha en personvernerklæring. Bruker du cookies til sporing eller annonser, må besøkende samtykke. Spør oss gjerne hvis du er usikker på hva som gjelder for din side.",
+      no: "Nettsider som samler inn personopplysninger, for eksempel via skjema, bør ha en personvernerklæring. Bruker du cookies til sporing eller annonser, må besøkende samtykke. Spør oss hvis du er usikker på hva som gjelder for din side.",
       en: "Websites that collect personal data, for example through a form, should have a privacy policy. If you use cookies for tracking or ads, visitors must give consent. Ask us if you're unsure what applies to your site.",
     },
     links: ["privacy"],
@@ -198,7 +198,7 @@ export const topics: Topic[] = [
     id: "analytics",
     strong: ["statistikk", "besøkende", "analytics", "trafikk", "besøkstall", "visitors", "traffic", "stats", "statistics"],
     answer: {
-      no: "Besøksstatistikk viser hvor mange som besøker nettsiden og hva de ser på. Det finnes personvernvennlige verktøy som ikke trenger cookies. Spør oss gjerne hvis du vil ha det på din side.",
+      no: "Besøksstatistikk viser hvor mange som besøker nettsiden og hva de ser på. Det finnes personvernvennlige verktøy som ikke trenger cookies. Si fra hvis du vil ha det på din side.",
       en: "Visitor statistics show how many people visit your website and what they look at. There are privacy-friendly tools that don't need cookies. Ask us if you'd like it on your site.",
     },
     links: ["contact"],
@@ -226,8 +226,8 @@ export const topics: Topic[] = [
     strong: ["wix", "wordpress", "squarespace", "webflow", "lage selv", "selv lage", "gjøre det selv", "diy", "builder", "byrå", "byråer", "agency", "agencies"],
     weak: ["forskjell", "forskjellen", "difference", "andre", "others"],
     answer: {
-      no: `Du kan lage en nettside selv med Wix eller WordPress, men det tar tid, og du må selv holde den oppdatert og synlig. Byråer tar ofte mange tusen kroner før du har sett noe. Hos oss koster det 0 kr å få den laget, ${W} kr når den går live og ${M} kr i måneden, og vi tar oss av alt.`,
-      en: `You can build a website yourself with Wix or WordPress, but it takes time, and you have to keep it updated and visible yourself. Agencies often charge thousands before you've seen anything. With us it costs NOK 0 to build, NOK ${W} when it goes live and NOK ${M} a month, and we take care of everything.`,
+      no: `Du kan lage en nettside selv med Wix eller WordPress, men det tar tid, og du må selv holde den oppdatert og synlig. Byråer tar ofte mange tusen kroner før du har sett noe. Hos oss koster det 0 kr å få den laget, ${W} kr når den går live og ${M} kr i måneden, og vi tar oss av driften.`,
+      en: `You can build a website yourself with Wix or WordPress, but it takes time, and you have to keep it updated and visible yourself. Agencies often charge thousands before you've seen anything. With us it costs NOK 0 to build, NOK ${W} when it goes live and NOK ${M} a month, and we handle the hosting.`,
     },
     links: ["why"],
   },
@@ -236,8 +236,8 @@ export const topics: Topic[] = [
     id: "monthly",
     strong: ["måned", "månedlig", "mnd", "month", "monthly", "799", "drift", "vedlikehold", "maintenance", "abonnement", "subscription"],
     answer: {
-      no: `For ${M} kr i måneden holder vi nettsiden oppe, trygg og oppdatert: hosting, sikkerhetsoppdateringer og endringene du trenger. Du sier bare fra, så fikser vi det. Det er under 27 kr om dagen, og ingen binding.`,
-      en: `For NOK ${M} a month we keep your website up, secure and up to date: hosting, security updates and the changes you need. Just tell us, and we'll fix it. No lock-in.`,
+      no: `For ${M} kr i måneden får du hosting, sikkerhetsoppdateringer og endringene du trenger. Du sier fra, så fikser vi det. Det er under 27 kr om dagen, og ingen binding.`,
+      en: `For NOK ${M} a month you get hosting, security updates and the changes you need. Tell us, and we'll fix it. No lock-in.`,
     },
     links: ["pricing"],
     followUps: {
@@ -317,8 +317,8 @@ export const topics: Topic[] = [
     strong: ["hvor lang tid", "hvor fort", "hvor raskt", "leveringstid", "how long", "how fast", "how quickly", "timeline", "ferdig", "levering", "delivery"],
     weak: ["tid", "time", "dager", "uker", "days", "weeks", "raskt", "fast"],
     answer: {
-      no: `Du får et første utkast innen ${draftDays} virkedager, helt gratis. Deretter justerer vi til du er fornøyd. Hvor lang tid resten tar, avhenger litt av hvor raskt vi får tekst og bilder, men du vet alltid hva som er neste steg.`,
-      en: `You get a first draft within ${draftDays} business days, completely free. Then we adjust it until you're happy. How long the rest takes depends a bit on how quickly we get text and images, but you always know what the next step is.`,
+      no: `Du får et første utkast innen ${draftDays} virkedager, gratis. Så justerer vi til du er fornøyd. Resten avhenger av hvor raskt vi får tekst og bilder fra deg.`,
+      en: `You get a first draft within ${draftDays} business days, free. Then we adjust it until you're happy. The rest depends on how quickly we get text and images from you.`,
     },
     links: ["process"],
   },
@@ -357,8 +357,8 @@ export const topics: Topic[] = [
     id: "start",
     strong: ["komme i gang", "i gang", "starte", "bestille", "kontakt", "kontakte", "ring", "ringe", "telefon", "tilbud", "møte", "get started", "start", "order", "contact", "call", "phone", "quote", "meeting", "e-post", "epost", "email", "mail"],
     answer: {
-      no: `Send en melding via kontaktsiden eller på e-post til ${site.email}. Da tar vi en uforpliktende prat, og innen ${draftDays} virkedager får du et gratis utkast til nettsiden din.`,
-      en: `Send a message via the contact page or email ${site.email}. We'll have a no-obligation chat, and within ${draftDays} business days you'll get a free draft of your website.`,
+      no: `Send en melding via kontaktsiden eller på e-post til ${site.email}. Vi tar en prat, og innen ${draftDays} virkedager får du et gratis utkast.`,
+      en: `Send a message via the contact page or email ${site.email}. We'll have a chat, and within ${draftDays} business days you'll get a free draft.`,
     },
     links: ["contact"],
   },
@@ -368,8 +368,8 @@ export const topics: Topic[] = [
     id: "demos",
     strong: ["eksempel", "eksempler", "demo", "demoer", "portefølje", "referanser", "tidligere arbeid", "example", "examples", "portfolio", "bransje", "bransjer", "industry", "industries", ...demoLabels],
     answer: {
-      no: `Vi har eksempelsider for rundt ${demos.length} bransjer, blant annet frisør, kafé, elektriker, tømrer og regnskap. Ta en titt for å se hvordan en nettside for din bransje kan se ut.`,
-      en: `We have example websites for around ${demos.length} industries, including hair salons, cafés, electricians, carpenters and accountants. Take a look to see what a website for your industry could look like.`,
+      no: `Vi har eksempelsider for ${demos.length} bransjer, blant annet frisør, kafé, elektriker, tømrer og regnskap. Se hvordan en nettside for din bransje kan se ut.`,
+      en: `We have example websites for ${demos.length} industries, including hair salons, cafés, electricians, carpenters and accountants. See what a website for your industry could look like.`,
     },
     links: ["demos"],
   },

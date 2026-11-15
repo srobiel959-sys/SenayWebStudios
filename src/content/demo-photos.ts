@@ -9,7 +9,3 @@ import { generatedDemoPhotos } from "./demo-photos.generated";
 export type DemoPhotos = { hero?: string; om?: string; detalj?: string };
 
 export const demoPhotos: Partial<Record<string, DemoPhotos>> = generatedDemoPhotos;
-
-/** Bransjer med mørk, filmatisk stemning: toppbildet dekker hele flaten og teksten står oppå.
-    De andre får bildet til høyre, der det glir over i bakgrunnen bak overskriften. */
-export const bleedHero = new Set(["restaurant", "catering", "treningssenter"]);
