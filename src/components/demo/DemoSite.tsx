@@ -82,25 +82,34 @@ function OpenLine({ hours, light = false }: { hours: string[]; light?: boolean }
     styres det av fargene: mørke paletter får den fargede toppen. */
 function isBleed(demo: Demo, hasPhoto: boolean) {
   if (hasPhoto) return bleedHero.has(demo.slug);
-  const hex = demo.theme.bg.replace("#", "");
-  const [r, g, b] = [0, 2, 4].map((i) => parseInt(hex.slice(i, i + 2), 16));
-  return r * 0.299 + g * 0.587 + b * 0.114 < 90 || demo.slug === "restaurant" || demo.slug === "catering";
+  return brightness(demo.theme.bg) < 90 || demo.slug === "restaurant" || demo.slug === "catering";
 }
 
 const btn =
   "inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-medium transition-[translate,box-shadow] duration-300 hover:-translate-y-0.5 hover:shadow-lg";
 
-function Buttons({ cta, light = false }: { cta: string; light?: boolean }) {
+/** Hvor knappene står: på sidens bakgrunn, på den fargede toppen eller oppå et mørkt foto. */
+type ButtonTone = "page" | "primary" | "photo";
+
+function Buttons({ cta, tone = "page", invert = false }: { cta: string; tone?: ButtonTone; invert?: boolean }) {
+  // På den fargede toppen byttes fargene om. Oppå et foto brukes den lyseste av de to som
+  // knappefarge (invert), ellers blir knappen mørk mot det mørke bildet.
+  const swapped = tone === "primary" || (tone === "photo" && !invert);
+  const main = swapped ? "bg-[var(--d-on)] text-[var(--d-primary)]" : "bg-[var(--d-primary)] text-[var(--d-on)]";
+  const second = tone === "photo" ? "text-white" : tone === "primary" ? "text-[var(--d-on)]" : "text-[var(--d-fg)]";
   return (
     <div className="mt-8 flex flex-wrap gap-3">
-      <span
-        className={`${btn} ${light ? "bg-[var(--d-on)] text-[var(--d-primary)]" : "bg-[var(--d-primary)] text-[var(--d-on)]"}`}
-      >
-        {cta}
-      </span>
-      <span className={`${btn} px-3 ${light ? "text-[var(--d-on)]" : "text-[var(--d-fg)]"}`}>Se våre tjenester</span>
+      <span className={`${btn} ${main}`}>{cta}</span>
+      <span className={`${btn} px-3 ${second}`}>Se våre tjenester</span>
     </div>
   );
+}
+
+/** Lysstyrken til en farge som «#AABBCC», fra 0 (svart) til 255 (hvit). */
+function brightness(color: string) {
+  const hex = color.replace("#", "");
+  const [r, g, b] = [0, 2, 4].map((i) => parseInt(hex.slice(i, i + 2), 16));
+  return r * 0.299 + g * 0.587 + b * 0.114;
 }
 
 export function DemoSite({
@@ -156,7 +165,8 @@ export function DemoSite({
             {photo ? (
               <>
                 <Image src={photo} alt="" fill sizes="(min-width: 1024px) 80vw, 100vw" className="dm-kenburns object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/55 to-black/10" />
+                {/* På smale skjermer ligger teksten over hele bildet, så det mørklegges mer der. */}
+                <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/75 to-black/55 @3xl:from-black/80 @3xl:via-black/55 @3xl:to-black/10" />
               </>
             ) : (
               <Pattern color={theme.onPrimary} />
@@ -167,7 +177,11 @@ export function DemoSite({
                 <h1 className={`dm-rise dm-d1 mt-4 text-5xl leading-[1.04] @3xl:text-7xl ${heading}`}>{demo.title}</h1>
                 <p className="dm-rise dm-d2 mt-6 max-w-md text-lg leading-relaxed opacity-85">{demo.text}</p>
                 <div className="dm-rise dm-d3">
-                  <Buttons cta={demo.cta} light />
+                  <Buttons
+                    cta={demo.cta}
+                    tone={photo ? "photo" : "primary"}
+                    invert={brightness(theme.primary) > brightness(theme.onPrimary)}
+                  />
                   <OpenLine hours={demo.hours} light />
                 </div>
               </div>
