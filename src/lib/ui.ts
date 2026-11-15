@@ -30,13 +30,8 @@ export const btnArrow = `${arrowButton} ${navyFill}`;
 /** Hvit variant til de mørkeblå feltene – bruk sammen med <ArrowCircle tone="light" />. */
 export const btnArrowLight = `${arrowButton} bg-white text-navy hover:bg-sand`;
 
-/** Pille-merkelapp over overskrifter. */
-export const eyebrowPill =
-  "inline-flex items-center gap-2 rounded-full border border-line bg-sand px-3.5 py-1.5 text-[11px] font-medium uppercase tracking-[0.22em] text-ink-muted";
+/** Hvitt kort med tynn kant. */
+export const card = "rounded-2xl border border-line bg-white";
 
-/** Kort med dobbel ramme: et tynt, lyst skall rundt en hvit kjerne. */
-export const bezel = "rounded-[2rem] border border-line bg-sand/70 p-1.5";
-export const bezelCore = "rounded-[calc(2rem-0.375rem)] bg-white shadow-[0_1px_2px_rgba(7,22,48,0.06),0_12px_32px_-20px_rgba(7,22,48,0.25)]";
-
-/** Liten etikett i versaler, for eksempel inne i kort. */
-export const kicker = "text-xs font-medium uppercase tracking-[0.2em] text-ink-muted";
+/** Liten etikett, for eksempel inne i kort. */
+export const kicker = "text-sm font-medium text-ink-muted";

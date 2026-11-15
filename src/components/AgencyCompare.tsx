@@ -13,7 +13,7 @@ export function AgencyCompare({ lang, c }: { lang: Lang; c: Content }) {
     <section aria-labelledby="byraer-tittel" className="border-t border-line py-28 sm:py-40">
       <div className={container}>
         <Reveal>
-          <SectionHeading id="byraer-tittel" eyebrow={a.eyebrow} title={a.title} />
+          <SectionHeading id="byraer-tittel" title={a.title} />
         </Reveal>
 
         <div className="mt-14">

@@ -2,7 +2,7 @@ import { ContactForm } from "@/components/ContactForm";
 import { Reveal } from "@/components/Reveal";
 import { getContent, site } from "@/content";
 import type { Lang } from "@/lib/routes";
-import { bezel, bezelCore, container, eyebrowPill, kicker } from "@/lib/ui";
+import { card, container, kicker } from "@/lib/ui";
 
 export function ContactView({ lang }: { lang: Lang }) {
   const c = getContent(lang);
@@ -11,8 +11,7 @@ export function ContactView({ lang }: { lang: Lang }) {
     <section aria-labelledby="side-tittel" className="bg-sand">
       <div className={`${container} grid gap-16 py-20 sm:py-28 lg:grid-cols-12 lg:py-32`}>
         <div className="lg:col-span-5">
-          <p className={`hero-in ${eyebrowPill}`}>{contact.eyebrow}</p>
-          <h1 id="side-tittel" className="hero-in hero-in-2 mt-6 font-display text-[2.6rem] leading-[1.05] tracking-tight sm:text-6xl">
+          <h1 id="side-tittel" className="hero-in font-display text-[2.6rem] leading-[1.05] tracking-tight sm:text-6xl">
             {contact.title}
           </h1>
           <p className="hero-in hero-in-3 mt-8 text-lg leading-relaxed text-ink-muted">{contact.lead}</p>
@@ -40,10 +39,8 @@ export function ContactView({ lang }: { lang: Lang }) {
         </div>
 
         <Reveal className="lg:col-span-7">
-          <div className={bezel}>
-            <div className={`${bezelCore} p-6 sm:p-10`}>
-              <ContactForm labels={contact.form} prefillMessage={c.builder.contactMessage} />
-            </div>
+          <div className={`${card} p-6 sm:p-10`}>
+            <ContactForm labels={contact.form} prefillMessage={c.builder.contactMessage} />
           </div>
         </Reveal>
       </div>

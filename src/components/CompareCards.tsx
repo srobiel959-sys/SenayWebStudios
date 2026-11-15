@@ -27,7 +27,7 @@ export function CompareCards({
 }) {
   return (
     <div className="grid gap-6 lg:grid-cols-2">
-      <Reveal className="h-full rounded-[2rem] border border-line bg-sand/60 p-8 sm:p-10">
+      <Reveal className="h-full rounded-3xl border border-line bg-sand p-8 sm:p-10">
         {left.label ? <p className={kicker}>{left.label}</p> : null}
         <h3 className={`font-display text-3xl ${left.label ? "mt-3" : ""}`}>{left.title}</h3>
         <ul className="mt-8 space-y-4 text-lg">
@@ -43,9 +43,8 @@ export function CompareCards({
         </ul>
       </Reveal>
 
-      <Reveal delay={120} className="relative h-full overflow-hidden rounded-[2rem] bg-navy p-8 text-cream sm:p-10">
-        <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-[radial-gradient(closest-side,rgba(96,165,250,0.35),transparent)]" />
-        {right.label ? <p className="relative text-xs font-medium uppercase tracking-[0.2em] text-cream-muted">{right.label}</p> : null}
+      <Reveal delay={120} className="relative h-full overflow-hidden rounded-3xl bg-navy p-8 text-cream sm:p-10">
+        {right.label ? <p className="relative text-sm font-medium text-cream-muted">{right.label}</p> : null}
         <h3 className={`relative font-display text-3xl ${right.label ? "mt-3" : ""}`}>{right.title}</h3>
         <ul className="relative mt-8 space-y-4 text-lg">
           {right.items.map((item) => (

@@ -20,20 +20,19 @@ export function PricingCards({ lang, c }: { lang: Lang; c: Content }) {
   // Norsk skrives «4 599 kr», engelsk «NOK 4,599».
   const currency = <span className="text-base font-normal text-cream-muted">{c.ui.kr}</span>;
   return (
-    <div className="relative overflow-hidden rounded-[2rem] bg-navy text-cream">
-      <div className="pointer-events-none absolute -left-32 -top-40 h-[28rem] w-[28rem] rounded-full bg-[radial-gradient(closest-side,rgba(96,165,250,0.3),transparent)]" />
+    <div className="relative overflow-hidden rounded-3xl bg-navy text-cream">
       <div className="relative grid lg:grid-cols-12">
         <div className="p-8 sm:p-12 lg:col-span-7">
           <div className="flex flex-wrap items-center gap-4">
             <h3 className="font-display text-4xl tracking-tight sm:text-5xl">{b.name}</h3>
-            <span className="rounded-full border border-white/25 bg-white/5 px-3 py-1 text-xs uppercase tracking-wider">{b.badge}</span>
+            <span className="rounded-full border border-white/25 px-3 py-1 text-sm">{b.badge}</span>
           </div>
           <p className="mt-4 max-w-xl text-lg leading-relaxed text-cream-muted">{b.description}</p>
 
           <ol className="mt-10 grid gap-px overflow-hidden rounded-[1.5rem] border border-white/15 bg-white/15 sm:grid-cols-3">
             {b.steps.map((step, i) => (
               <li key={step.label} className="relative bg-navy-soft p-6">
-                <span className="text-xs font-medium uppercase tracking-[0.2em] text-sky">
+                <span className="text-sm font-medium text-sky">
                   {c.ui.step} {i + 1}
                 </span>
                 <p className="mt-3 flex items-baseline gap-1.5 font-display text-4xl tracking-tight">
@@ -61,7 +60,7 @@ export function PricingCards({ lang, c }: { lang: Lang; c: Content }) {
             </p>
             <p className="mt-2 text-sm leading-relaxed text-cream-muted">{b.guarantee.text}</p>
           </div>
-          <h4 className="text-xs font-medium uppercase tracking-[0.2em] text-cream-muted">{b.featuresTitle}</h4>
+          <h4 className="text-sm font-medium text-cream-muted">{b.featuresTitle}</h4>
           <div className="mt-6 space-y-7">
             {b.featureGroups.map((group) => (
               <div key={group.title}>

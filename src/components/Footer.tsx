@@ -19,7 +19,7 @@ export function Footer({ lang, c }: { lang: Lang; c: Content }) {
         </div>
 
         <nav aria-label={c.ui.footerMenu} className="md:col-span-3">
-          <h2 className="text-xs uppercase tracking-[0.2em] text-cream-muted">{c.ui.footerPages}</h2>
+          <h2 className="text-sm font-medium text-cream-muted">{c.ui.footerPages}</h2>
           <ul className="mt-3">
             {(["home", ...navKeys, "contact"] as const).map((key) => (
               <li key={key}>
@@ -32,7 +32,7 @@ export function Footer({ lang, c }: { lang: Lang; c: Content }) {
         </nav>
 
         <nav aria-label={c.industry.footerTitle} className="md:col-span-3">
-          <h2 className="text-xs uppercase tracking-[0.2em] text-cream-muted">{c.industry.footerTitle}</h2>
+          <h2 className="text-sm font-medium text-cream-muted">{c.industry.footerTitle}</h2>
           <ul className="mt-3">
             {footerIndustries.map((slug) => {
               const demo = getDemo(slug);
@@ -53,7 +53,7 @@ export function Footer({ lang, c }: { lang: Lang; c: Content }) {
         </nav>
 
         <div className="md:col-span-3">
-          <h2 className="text-xs uppercase tracking-[0.2em] text-cream-muted">{c.ui.footerContact}</h2>
+          <h2 className="text-sm font-medium text-cream-muted">{c.ui.footerContact}</h2>
           <p className="mt-4">
             <a href={`mailto:${site.email}`} className="underline underline-offset-4 hover:text-cream-muted">
               {site.email}

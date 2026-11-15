@@ -7,7 +7,7 @@ export function PrivacyView({ lang }: { lang: Lang }) {
   const c = getContent(lang);
   return (
     <>
-      <PageHero eyebrow={c.privacy.eyebrow} title={c.privacy.title} />
+      <PageHero title={c.privacy.title} />
       <section className="py-16 sm:py-24">
         <div className={`${container} max-w-3xl space-y-10 text-lg leading-relaxed text-ink-muted`}>
           {c.privacy.sections.map((s) => (

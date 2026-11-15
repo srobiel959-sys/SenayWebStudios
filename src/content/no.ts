@@ -7,7 +7,7 @@ export const no = {
   site: {
     tagline: "Nettsider for bedrifter",
     description:
-      "Senay Studio lager raske, profesjonelle nettsider for bedrifter. Vi lager nettsiden gratis – er du fornøyd, betaler du 4 599 kr når den går live og 799 kr/mnd for drift og vedlikehold. Ingen binding.",
+      "Senay Studio lager raske, profesjonelle nettsider for bedrifter. Vi lager nettsiden gratis. Er du fornøyd, betaler du 4 599 kr når den går live og 799 kr/mnd for drift og vedlikehold. Ingen binding.",
     locale: "nb_NO",
   },
 
@@ -25,7 +25,7 @@ export const no = {
 
   ui: {
     skipToContent: "Hopp til innhold",
-    homeLabel: "Senay Studio – til forsiden",
+    homeLabel: "Senay Studio, til forsiden",
     mainMenu: "Hovedmeny",
     mobileMenu: "Mobilmeny",
     openMenu: "Åpne meny",
@@ -55,7 +55,7 @@ export const no = {
     perMonthShort: "kr/mnd",
     oneTime: "kr",
     questions: "Spørsmål",
-    whatYouWonder: "Det du lurer på.",
+    whatYouWonder: "Vanlige spørsmål",
   },
 
   meta: {
@@ -67,16 +67,16 @@ export const no = {
     },
     demos: {
       title: "Eksempler",
-      description: "Se eksempler på nettsider for rundt 30 bransjer – fra frisør og kafé til elektriker og tømrer.",
+      description: "Eksempler på nettsider for 30 bransjer, fra frisør og kafé til elektriker og tømrer.",
     },
     services: {
       title: "Tjenester",
       description:
-        "Design, utvikling, synlighet i søk og drift – alt du trenger for en god nettside, samlet hos Senay Studio.",
+        "Design, utvikling, synlighet i søk og drift av nettsiden, fra én leverandør.",
     },
     process: {
       title: "Prosess",
-      description: "Fra første samtale til ferdig nettside i fire tydelige steg – med fast pris før arbeidet starter.",
+      description: "Fire steg fra første samtale til ferdig nettside. Prisen er kjent før vi starter.",
     },
     pricing: {
       title: "Priser",
@@ -85,7 +85,7 @@ export const no = {
     about: {
       title: "Om oss",
       description:
-        "Senay Studio er et lite studio som lager raske, profesjonelle nettsider for bedrifter – med én fast kontaktperson hele veien.",
+        "Senay Studio lager raske nettsider for bedrifter. Du har samme kontaktperson hele veien.",
     },
     contact: {
       title: "Kontakt",
@@ -98,10 +98,9 @@ export const no = {
   // Forside
   // -------------------------------------------------------------------------
   hero: {
-    eyebrow: "Nettsider for bedrifter",
     title: "Kundene googler deg.",
     titleAccent: "Hva finner de?",
-    lead: "Skriv inn bedriften din, så viser vi deg nettsiden din. Nå.",
+    lead: "Skriv inn navnet på bedriften din og se hvordan nettsiden kan bli.",
     primaryCta: "Få et gratis utkast",
     secondaryCta: "Se hvordan det fungerer",
     scrollHint: "Rull ned",
@@ -113,27 +112,27 @@ export const no = {
     industryLabel: "Bransje",
     build: "Bygg nettsiden min",
     fallbackName: "Din bedrift",
-    hint: "Skriv inn navnet – nettsiden oppdateres mens du skriver.",
+    hint: "Nettsiden oppdateres mens du skriver.",
     steps: ["Design", "Tekst", "Mobil", "Ferdig"],
     srPreview: "Forhåndsvisning av nettsiden for {navn}.",
-    doneTitle: "Dette er en skisse laget på sekunder.",
-    doneText: `Vil du ha den ekte? Vi lager den gratis innen ${draftDays} virkedager.`,
-    doneCta: "Ja, lag nettsiden min",
+    doneTitle: "Dette er en rask skisse.",
+    doneText: `Den ekte nettsiden lager vi gratis innen ${draftDays} virkedager.`,
+    doneCta: "Lag nettsiden min",
     contactMessage: "Jeg vil ha en nettside som skissen for {bransje}.",
   },
   // Egne sider per bransje (/nettside-for/[slug]). {bransje} byttes ut med bransjenavnet.
   industry: {
     eyebrow: "Nettside for {bransje}",
-    title: "Nettside for {bransje} – se den før du betaler.",
+    title: "Nettside for {bransje}",
     lead: `Vi lager nettsiden gratis. Du får et utkast innen ${draftDays} virkedager og betaler bare hvis du vil ha den live: ${prices.website} kr ved lansering og ${prices.hosting} kr/mnd for drift. Ingen binding.`,
     metaDescription: `Nettside for {bransje}: gratis utkast innen ${draftDays} virkedager, ${prices.website} kr ved lansering og ${prices.hosting} kr/mnd. Ingen binding, og du eier siden.`,
     primaryCta: "Få et gratis utkast",
     needsTitle: "Dette bør nettsiden din ha",
-    needsLead: "Det kundene dine ser etter når de finner deg på Google – og det vi bygger inn fra start.",
+    needsLead: "Dette ser kundene etter når de finner deg på Google. Vi bygger det inn fra start.",
     exampleTitle: "Slik kan den se ut",
-    exampleNote: "Eksempel – bedriften er oppdiktet. Din nettside lages fra bunnen av for deg.",
+    exampleNote: "Bedriften i eksemplet er oppdiktet. Din nettside lages fra bunnen av.",
     openExample: "Åpne eksemplet i full størrelse",
-    pricingTitle: "Én pakke. Alt inkludert.",
+    pricingTitle: "Hva det koster",
     otherTitle: "Andre bransjer",
     footerTitle: "Bransjer",
     allIndustries: "Alle bransjer",
@@ -148,9 +147,8 @@ export const no = {
   },
   // Målte tall fra Google Lighthouse (se lighthouse i shared.ts).
   proof: {
-    eyebrow: "Målt, ikke lovet",
-    title: "Raske nettsider får flere kunder.",
-    lead: "Vi måler hver nettside med Google Lighthouse, det samme verktøyet Google bruker. Dette er tallene for nettsiden du leser nå.",
+    title: "Tallene for denne nettsiden",
+    lead: "Vi måler nettsidene vi lager med Google Lighthouse. Slik scorer siden du leser nå.",
     outOf: "av 100",
     labels: { performance: "Hastighet", accessibility: "Tilgjengelighet", bestPractices: "Beste praksis", seo: "SEO" },
     note: `Målt på mobil ${lighthouse.measured.split("-").reverse().join(".")}.`,
@@ -161,10 +159,10 @@ export const no = {
     query: "frisør i nærheten",
     searchLabel: "Søk",
     steps: [
-      { kicker: "Klokka er 20:14", text: "En kunde trenger en frisør. Hun tar opp telefonen og søker." },
-      { kicker: "Tre sekunder senere", text: "Hun ser på de første treffene. Hun leter ikke videre." },
-      { kicker: "Og du?", text: "Bedriften din er ikke der. For henne finnes du ikke." },
-      { kicker: "Med Senay Studio", text: "Nå er det deg hun finner – og deg hun ringer." },
+      { kicker: "Klokka er 20:14", text: "En kunde trenger en frisør og søker på telefonen." },
+      { kicker: "Tre sekunder senere", text: "Hun ser på de første treffene og velger blant dem." },
+      { kicker: "Bedriften din", text: "Du har ingen nettside, så du dukker ikke opp." },
+      { kicker: "Med en nettside", text: "Nå dukker du opp i søket, og hun ringer deg." },
     ],
     results: [
       { name: "Salong Lykke", url: "salonglykke.no", text: "Frisør i sentrum · Åpent nå · Bestill time på nett" },
@@ -172,14 +170,13 @@ export const no = {
       { name: "Hårstudio Nord", url: "harstudionord.no", text: "Farge, striper og styling · Åpent til 21" },
     ],
     you: { name: "Din bedrift", missing: "Ingen nettside funnet", url: "dinbedrift.no", text: "Din frisørsalong · Åpent nå · Bestill time på nett" },
-    fictional: "Eksempel – bedriftene er oppdiktet",
+    fictional: "Eksempel med oppdiktede bedrifter",
   },
 
-  statement: "En nettside er ikke pynt. Den er din beste selger – den svarer kundene mens du jobber, sover og har ferie.",
+  statement: "Når noen trenger det du tilbyr, søker de først. Det de finner der, avgjør hvem de ringer.",
 
   numbers: {
-    eyebrow: "Prisen",
-    title: "Like enkel som den høres ut.",
+    title: "Hva det koster",
     items: [
       { value: 0, prefix: "", suffix: " kr", label: "for å lage nettsiden" },
       { value: Number(prices.website.replace(/\s/g, "")), prefix: "", suffix: " kr", label: "når den går live" },
@@ -189,39 +186,18 @@ export const no = {
     link: "Se hva som er inkludert",
   },
 
-
-
-  explore: {
-    eyebrow: "Utforsk",
-    title: "Alt du trenger å vite, én side om gangen.",
-    lead: "Les deg opp i ditt eget tempo – eller gå rett til prisene.",
-    items: [
-      { key: "why", title: "Hvorfor nettside", text: "Hva en nettside gjør for bedriften din – og hva det koster å ikke ha en." },
-      { key: "services", title: "Tjenester", text: "Design, utvikling, synlighet i søk og drift. Alt samlet ett sted." },
-      { key: "process", title: "Prosess", text: "Fire tydelige steg fra første samtale til ferdig nettside." },
-      {
-        key: "pricing",
-        title: "Priser",
-        text: `Én pakke: 0 kr for å lage nettsiden, ${prices.website} kr når den går live og ${prices.hosting} kr/mnd for drift.`,
-      },
-      { key: "about", title: "Om oss", text: "Et lite studio med én fast kontaktperson hele veien." },
-      { key: "contact", title: "Kontakt", text: "Fortell kort hva du trenger, så tar vi en uforpliktende prat." },
-    ],
-  },
-
   // -------------------------------------------------------------------------
   // Eksempler (demo-galleri)
   // -------------------------------------------------------------------------
   demos: {
-    eyebrow: "Eksempler",
-    title: "Se hvordan nettsiden din kan bli.",
-    homeTitle: "Eller se 30 ferdige eksempler.",
-    lead: "Velg bransjen din og se et eksempel. Alle bedriftene er oppdiktet – nettsiden din lages alltid fra bunnen av for deg.",
+    title: "Eksempler på nettsider",
+    homeTitle: "Eksempler fra 30 bransjer",
+    lead: "Velg en bransje. Bedriftene er oppdiktet, og din nettside lages fra bunnen av.",
     all: "Alle",
     open: "Åpne i full størrelse",
     choose: "Velg bransje",
     showing: "Viser eksempel for",
-    fictional: "Eksempel – fiktiv bedrift",
+    fictional: "Eksempel, oppdiktet bedrift",
     allExamples: "Se alle eksempler",
     bannerText: "Dette er et eksempel laget av Senay Studio. Bedriften er oppdiktet.",
     bannerCta: "Vil du ha en slik nettside?",
@@ -233,11 +209,10 @@ export const no = {
   // Andre byråer mot oss
   // -------------------------------------------------------------------------
   agencies: {
-    eyebrow: "Hvorfor oss",
-    title: "Slik er det ofte hos byråer. Slik gjør vi det.",
+    title: "Forskjellen fra et vanlig byrå",
     others: {
-      label: "Andre byråer",
-      title: "Slik gjøres det ofte",
+      label: "",
+      title: "Vanlig byrå",
       items: [
         "Titusenvis av kroner i forskudd før du ser noe",
         "Uker med venting",
@@ -247,17 +222,17 @@ export const no = {
       ],
     },
     us: {
-      label: "Senay Studio",
-      title: "Slik gjør vi det",
+      label: "",
+      title: "Senay Studio",
       items: [
-        "0 kr i oppstart – helt uforpliktende",
+        "0 kr i oppstart",
         `Første utkast innen ${draftDays} virkedager`,
         "Du ser resultatet før du betaler",
-        "Ingen binding, ingen skjulte gebyrer",
+        "Ingen binding og ingen skjulte gebyrer",
         "Du eier nettside, domene og innhold",
       ],
     },
-    note: `Vi lager nettsiden helt gratis. Er du fornøyd, betaler du ${prices.website} kr når den går live og ${prices.hosting} kr/mnd for drift – ikke før.`,
+    note: `Vi lager nettsiden gratis. Du betaler ${prices.website} kr først når den går live, og deretter ${prices.hosting} kr/mnd for drift.`,
     cta: "Få et gratis utkast",
   },
 
@@ -266,7 +241,7 @@ export const no = {
   // -------------------------------------------------------------------------
   why: {
     eyebrow: "Hvorfor nettside",
-    title: "En nettside er ikke pynt. Den er din beste selger.",
+    title: "Hvorfor bedriften din trenger en nettside",
     lead: "Folk sjekker bedrifter på nett før de handler. Står du ikke der, velger de noen som gjør det.",
     reasonsHeading: "Fire grunner",
     items: [
@@ -275,23 +250,22 @@ export const no = {
         text: "Når noen trenger det du tilbyr, begynner de på Google. Uten en nettside er det konkurrentene dine som blir funnet.",
       },
       {
-        title: "Tillit på sekunder",
+        title: "Et seriøst førsteinntrykk",
         text: "En ryddig, profesjonell nettside viser at bedriften er seriøs. Et dårlig førsteinntrykk koster deg kunder du aldri får vite om.",
       },
       {
-        title: "Åpent døgnet rundt",
-        text: "Nettsiden svarer på spørsmål og tar imot henvendelser mens du jobber, sover eller har ferie.",
+        title: "Svar også når du har stengt",
+        text: "Nettsiden svarer på de vanlige spørsmålene og tar imot henvendelser når du er opptatt eller har stengt.",
       },
       {
-        title: "Din egen plattform",
+        title: "Du bestemmer selv",
         text: "Facebook og Instagram eies av andre, og algoritmen bestemmer hvem som ser deg. På din egen nettside er det du som bestemmer.",
       },
     ],
   },
 
   comparison: {
-    eyebrow: "Forskjellen",
-    title: "Uten nettside og med nettside.",
+    title: "Uten og med nettside",
     without: {
       title: "Uten nettside",
       items: [
@@ -310,36 +284,35 @@ export const no = {
         "Nye henvendelser døgnet rundt",
       ],
     },
-    cta: "Jeg vil bli funnet",
+    cta: "Få et gratis utkast",
   },
 
   // -------------------------------------------------------------------------
   // Tjenester
   // -------------------------------------------------------------------------
   services: {
-    eyebrow: "Tjenester",
-    title: "Alt du trenger for en god nettside, samlet ett sted.",
-    lead: "Vi tar hele jobben – fra første skisse til en nettside som er oppe, trygg og oppdatert. Du slipper å koordinere flere leverandører.",
+    title: "Dette gjør vi",
+    lead: "Vi lager nettsiden og holder den i gang etterpå. Du har én leverandør å forholde deg til.",
     listLabel: "Tjenestene våre",
     items: [
       {
         title: "Design",
-        text: "Et visuelt uttrykk som passer bedriften din. Typografi, farger og struktur som gjør det lett for besøkende å forstå hva du tilbyr – og får dem til å ta kontakt.",
+        text: "Farger, typografi og struktur som passer bedriften din, og som gjør det lett å se hva du tilbyr og ta kontakt.",
         includes: ["Design i dine farger og din stil", "Tydelig struktur og navigasjon", "Tilpasset mobil, nettbrett og PC"],
       },
       {
         title: "Utvikling",
-        text: "Moderne teknologi som gir raske sider, god sikkerhet og en løsning som fungerer like godt på alle skjermer.",
+        text: "Sidene lastes raskt, er sikre og fungerer på mobil, nettbrett og PC.",
         includes: ["Rask innlasting", "Kontaktskjema", "Opplæring i å oppdatere innhold"],
       },
       {
         title: "Synlighet i søk",
-        text: "En solid teknisk grunnmur for søkemotorer, så kundene finner deg når de leter etter det du tilbyr.",
+        text: "Teknisk oppsett som gjør at Google forstår siden din, så du kan bli funnet når folk søker etter det du tilbyr.",
         includes: ["Riktig struktur og metadata", "Bilde og tekst når siden deles", "Grunnleggende søkemotoroptimalisering"],
       },
       {
         title: "Drift",
-        text: "Nettsiden er din – vi drifter den for deg. Vi holder den oppe, trygg og oppdatert, og gjør endringene du trenger, så du kan bruke tiden på det du er best på.",
+        text: "Vi holder nettsiden oppe, trygg og oppdatert, og gjør endringene du ber om. Nettsiden er fortsatt din.",
         includes: ["Hosting og drift", "Sikkerhetsoppdateringer", "Endringer når du trenger dem"],
       },
     ],
@@ -349,9 +322,8 @@ export const no = {
   // Prosess
   // -------------------------------------------------------------------------
   process: {
-    eyebrow: "Prosess",
-    title: "En enkel og forutsigbar vei fra idé til ferdig nettside.",
-    lead: "Du vet hele tiden hva som skjer, hva som er neste steg, og hva det koster.",
+    title: "Fra første samtale til ferdig nettside",
+    lead: "Fire steg. Du vet hele tiden hva som kommer, og hva det koster.",
     listLabel: "Stegene",
     steps: [
       {
@@ -361,10 +333,10 @@ export const no = {
         we: "Lytter, stiller spørsmål og gir ærlige råd.",
       },
       {
-        title: "Gratis forslag",
-        text: `Innen ${draftDays} virkedager får du et første utkast til nettsiden din – helt gratis og uforpliktende.`,
-        you: "Ser på forslaget og sier hva du vil endre.",
-        we: "Lager forslaget og justerer til du er fornøyd.",
+        title: "Gratis utkast",
+        text: `Innen ${draftDays} virkedager får du et første utkast til nettsiden. Det er gratis og forplikter deg ikke til noe.`,
+        you: "Ser på utkastet og sier hva du vil endre.",
+        we: "Lager utkastet og justerer til du er fornøyd.",
       },
       {
         title: "Design og utvikling",
@@ -374,7 +346,7 @@ export const no = {
       },
       {
         title: "Lansering",
-        text: "Er du fornøyd, legger vi nettsiden ut live – først da betaler du. Vi viser deg hvordan du oppdaterer den.",
+        text: "Er du fornøyd, publiserer vi nettsiden. Først da betaler du. Vi viser deg hvordan du oppdaterer den.",
         you: "Deler nettsiden med kundene dine.",
         we: "Publiserer, lærer deg opp og holder siden oppdatert.",
       },
@@ -385,20 +357,19 @@ export const no = {
   // Priser
   // -------------------------------------------------------------------------
   pricing: {
-    eyebrow: "Priser",
-    title: "Én pakke. Alt inkludert.",
-    lead: `Vi lager nettsiden helt gratis og uforpliktende. Er du fornøyd, betaler du ${prices.website} kr når den går live – og ${prices.hosting} kr i måneden for at vi drifter og vedlikeholder den. Ingen binding.`,
+    title: "Hva det koster",
+    lead: `Vi lager nettsiden gratis. Er du fornøyd, betaler du ${prices.website} kr når den går live, og deretter ${prices.hosting} kr i måneden for drift og vedlikehold. Ingen binding.`,
     packagesHeading: "Pakken",
     note: "Er du ikke fornøyd, betaler du ingenting. Ønsker du noe helt nytt, som en nettbutikk, får du et eget tilbud med fast pris først.",
-    faqTitle: "Om pris og betaling.",
+    faqTitle: "Spørsmål om pris",
     bundle: {
       name: "Nettside + drift",
-      badge: "Alt i én pakke",
+      badge: "Drift inkludert",
       description:
-        "En komplett, profesjonell nettside som vi lager gratis – og som vi drifter, holder oppdatert og endrer for deg etterpå.",
+        "Vi lager nettsiden gratis, og drifter, oppdaterer og endrer den for deg etterpå.",
       steps: [
         { price: "0", label: "for å lage nettsiden", note: "Du ser resultatet før du betaler" },
-        { price: prices.website, label: "når nettsiden går live", note: "Engangsbeløp – bare hvis du er fornøyd" },
+        { price: prices.website, label: "når nettsiden går live", note: "Engangsbeløp, bare hvis du er fornøyd" },
         { price: prices.hosting, label: "per måned", note: "Drift og vedlikehold · under 27 kr om dagen" },
       ],
       guarantee: {
@@ -418,7 +389,7 @@ export const no = {
         },
         {
           title: "Deg og oss",
-          items: ["Opplæring i å oppdatere innhold", "Fast kontaktperson", "Du eier nettside, domene og innhold", "Ingen binding – si opp når du vil"],
+          items: ["Opplæring i å oppdatere innhold", "Fast kontaktperson", "Du eier nettside, domene og innhold", "Ingen binding, si opp når du vil"],
         },
       ],
       cta: "Få et gratis utkast",
@@ -438,11 +409,11 @@ export const no = {
       },
       {
         q: "Hvem eier nettsiden?",
-        a: "Du. Nettsiden, domenet og innholdet er ditt. Vi drifter den for deg – eierskapet blir alltid hos deg, også hvis du en dag vil bytte leverandør.",
+        a: "Du. Nettsiden, domenet og innholdet er ditt. Vi drifter den for deg, men eierskapet blir hos deg, også hvis du en dag vil bytte leverandør.",
       },
       {
         q: "Kommer det noe i tillegg?",
-        a: `Nei. ${prices.website} kr når siden går live og ${prices.hosting} kr i måneden – det er alt. Ønsker du noe helt nytt, som en nettbutikk, får du et eget tilbud med fast pris først, og du bestemmer selv om du vil ha det.`,
+        a: `Nei. ${prices.website} kr når siden går live og ${prices.hosting} kr i måneden. Det er alt. Ønsker du noe helt nytt, som en nettbutikk, får du et eget tilbud med fast pris først, og du bestemmer selv om du vil ha det.`,
       },
       {
         q: "Kan jeg si opp?",
@@ -455,18 +426,17 @@ export const no = {
   // Om
   // -------------------------------------------------------------------------
   about: {
-    eyebrow: "Om oss",
-    title: "Et lite studio med stor omtanke for detaljene.",
+    title: "Om Senay Studio",
     sectionLabel: "Om Senay Studio",
     paragraphs: [
-      "Senay Studio hjelper bedrifter med å fremstå profesjonelt på nett. Vi mener en god nettside skal være rask, enkel å bruke og tydelig på hva du tilbyr – ikke full av unødvendige funksjoner.",
-      "Når du jobber med oss, snakker du direkte med den som designer og bygger siden din. Det gir korte beslutningsveier, ærlige råd og en løsning som er tilpasset akkurat din bedrift.",
+      "Senay Studio hjelper bedrifter med å fremstå profesjonelt på nett. Vi mener en god nettside skal være rask, enkel å bruke og tydelig på hva du tilbyr, uten unødvendige funksjoner.",
+      "Når du jobber med oss, snakker du direkte med den som designer og bygger siden din. Spør du om noe, får du svar fra den som faktisk gjør jobben.",
     ],
     valuesHeading: "Slik jobber vi",
     values: [
-      { title: "Personlig", text: "Én fast kontaktperson fra første samtale til lansering – og etterpå." },
-      { title: "Ærlig", text: "0 kr for å lage nettsiden, ingen binding og ingen skjulte gebyrer." },
-      { title: "Grundig", text: "Hastighet, tilgjengelighet og kvalitet i hver detalj." },
+      { title: "Én kontaktperson", text: "Du snakker med den samme personen fra første samtale til lansering, og etterpå." },
+      { title: "Kjent pris", text: "0 kr for å lage nettsiden, ingen binding og ingen skjulte gebyrer." },
+      { title: "Målt kvalitet", text: "Vi måler hastighet og tilgjengelighet på alt vi lager, før det går live." },
     ],
   },
 
@@ -480,7 +450,7 @@ export const no = {
     },
     {
       q: "Jeg er ikke teknisk. Klarer jeg dette?",
-      a: "Ja. Vi tar oss av alt det tekniske, og du får opplæring i å oppdatere innholdet selv. Endringene gjør vi for deg – det er inkludert i driften.",
+      a: "Ja. Vi tar oss av alt det tekniske, og du får opplæring i å oppdatere innholdet selv. Endringene gjør vi for deg. Det er inkludert i driften.",
     },
     {
       q: "Hva trenger dere fra meg?",
@@ -496,15 +466,14 @@ export const no = {
   // Kontakt
   // -------------------------------------------------------------------------
   contact: {
-    eyebrow: "Kontakt",
-    title: "Klar for å bli funnet?",
+    title: "Ta kontakt",
     lead: "Fortell kort om bedriften din og hva du trenger. Så tar vi kontakt for en uforpliktende prat.",
     emailDirect: "Du kan også sende e-post direkte til",
     nextHeading: "Hva skjer videre?",
     nextSteps: [
-      { title: "Du sender en melding", text: "Via skjemaet eller på e-post – et par setninger holder." },
+      { title: "Du sender en melding", text: "Via skjemaet eller på e-post. Et par setninger holder." },
       { title: "Vi tar kontakt", text: "Vi avtaler en uforpliktende prat om hva du trenger." },
-      { title: "Du får et gratis utkast", text: `Innen ${draftDays} virkedager – og du betaler ingenting før du vil ha siden live.` },
+      { title: "Du får et gratis utkast", text: `Innen ${draftDays} virkedager. Du betaler ingenting før du vil ha siden live.` },
     ],
     form: {
       company: "Bedrift",
@@ -531,7 +500,7 @@ export const no = {
   },
 
   cta: {
-    title: "Få nettsiden laget – helt gratis.",
+    title: "Få et gratis utkast av nettsiden din",
     lead: `0 kr for å lage den. ${prices.website} kr når den går live, og ${prices.hosting} kr/mnd for drift. Ingen binding.`,
     primary: "Få et gratis utkast",
     secondary: "Se hva som er inkludert",
@@ -547,7 +516,7 @@ export const no = {
     title: "Spør om alt som har med nettsider å gjøre",
     subtitle: "Assistent · svarer med en gang",
     welcome:
-      "Hei! Jeg er assistenten til Senay Studio. Spør meg om nettsider – pris, domene, Google, design – så svarer jeg med en gang.",
+      "Hei! Jeg er assistenten til Senay Studio. Spør om pris, domene, Google eller design, så svarer jeg med en gang.",
     suggestions: ["Hva koster en nettside?", "Hvordan blir jeg synlig på Google?", "Trenger jeg eget domene?"],
     placeholder: "Skriv spørsmålet ditt …",
     send: "Send",
@@ -564,7 +533,6 @@ export const no = {
   // Personvern. TODO: Les gjennom og tilpass før lansering.
   // -------------------------------------------------------------------------
   privacy: {
-    eyebrow: "Personvern",
     title: "Slik behandler vi opplysningene dine.",
     sections: [
       {
@@ -573,15 +541,15 @@ export const no = {
       },
       {
         title: "Hva vi samler inn",
-        text: "Når du tar kontakt, får vi navnet ditt, e-postadressen din, eventuelt bedriftsnavn og meldingen du skriver. Vi bruker opplysningene kun til å svare på henvendelsen din og til å følge opp et eventuelt oppdrag.",
+        text: "Når du tar kontakt, får vi bedriftsnavnet, e-postadressen eller telefonnummeret ditt, eventuelt navnet ditt og meldingen du skriver. Vi bruker opplysningene bare til å svare på henvendelsen og følge opp et eventuelt oppdrag.",
       },
       {
         title: "Hvordan skjemaet fungerer",
-        text: "Kontaktskjemaet lagrer ingenting på nettsiden. Det åpner e-postprogrammet ditt med meldingen ferdig utfylt, og du sender den selv.",
+        text: "Meldingen fra kontaktskjemaet kommer til oss på e-post via tjenesten Formspree, eller via ditt eget e-postprogram. Nettsiden lagrer den ikke.",
       },
       {
         title: "Chat-assistenten",
-        text: "Chat-assistenten gir automatiske svar og kjører bare i nettleseren din. Det du skriver, sendes ikke til oss eller andre og lagres ikke – samtalen forsvinner når du lukker eller laster inn siden på nytt.",
+        text: "Chat-assistenten gir automatiske svar og kjører bare i nettleseren din. Det du skriver, sendes ikke til oss eller andre og lagres ikke. Samtalen forsvinner når du lukker eller laster inn siden på nytt.",
       },
       {
         title: "Informasjonskapsler",

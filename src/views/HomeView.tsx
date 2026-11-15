@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { Fragment } from "react";
-import { AgencyCompare } from "@/components/AgencyCompare";
 import { CtaBand } from "@/components/CtaBand";
 import { DemoGallery } from "@/components/demo/DemoGallery";
 import { CountUp } from "@/components/home/CountUp";
@@ -14,9 +13,9 @@ import { JsonLd } from "@/components/JsonLd";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
 import { getContent } from "@/content";
-import { href, type Lang, type PageKey } from "@/lib/routes";
+import { href, type Lang } from "@/lib/routes";
 import { businessSchema } from "@/lib/schema";
-import { bezel, bezelCore, container, eyebrowPill } from "@/lib/ui";
+import { card, container } from "@/lib/ui";
 
 /** Ordene i overskriften reiser seg ett og ett (se .word-rise i globals.css). */
 function RisingWords({ text, start = 0 }: { text: string; start?: number }) {
@@ -48,13 +47,9 @@ export function HomeView({ lang }: { lang: Lang }) {
         <div className={`${container} relative flex flex-col items-center pb-24 pt-32 text-center sm:pt-40`}>
           {/* Tones ned mens byggeren jobber, så blikket går til rammen (se LiveBuilder). */}
           <div className="hero-dim flex flex-col items-center">
-            <p className={`hero-in ${eyebrowPill}`}>
-              <span className="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden="true" />
-              {hero.eyebrow}
-            </p>
             <h1
               id="hero-tittel"
-              className="mt-8 max-w-6xl text-balance font-display text-[3.1rem] leading-[1] tracking-tight sm:text-7xl lg:text-[5.9rem]"
+              className="max-w-6xl text-balance font-display text-[3.1rem] leading-[1] tracking-tight sm:text-7xl lg:text-[5.9rem]"
             >
               <RisingWords text={hero.title} />{" "}
               <span className="block text-ink-muted">
@@ -86,7 +81,7 @@ export function HomeView({ lang }: { lang: Lang }) {
       <section id="eksempler" aria-labelledby="eksempler-tittel" className="scroll-mt-24 border-t border-line py-28 sm:py-36">
         <div className={container}>
           <Reveal>
-            <SectionHeading id="eksempler-tittel" eyebrow={c.demos.eyebrow} title={c.demos.homeTitle} lead={c.demos.lead} />
+            <SectionHeading id="eksempler-tittel" title={c.demos.homeTitle} lead={c.demos.lead} />
           </Reveal>
           <div className="mt-14">
             <DemoGallery lang={lang} labels={c.demos} />
@@ -98,8 +93,7 @@ export function HomeView({ lang }: { lang: Lang }) {
       <section aria-labelledby="pris-tittel" className="relative overflow-hidden border-t border-line py-28 sm:py-40">
         <div className={`${container} relative grid items-center gap-14 lg:grid-cols-12`}>
           <Reveal className="lg:col-span-7">
-            <p className={eyebrowPill}>{numbers.eyebrow}</p>
-            <h2 id="pris-tittel" className="mt-6 font-display text-3xl tracking-tight sm:text-4xl">
+            <h2 id="pris-tittel" className="font-display text-3xl tracking-tight sm:text-4xl">
               {numbers.title}
             </h2>
             <p className="mt-6 font-display text-[7.5rem] leading-[0.85] tracking-tight sm:text-[11rem] lg:text-[13rem]">
@@ -111,13 +105,11 @@ export function HomeView({ lang }: { lang: Lang }) {
           <div className="space-y-4 lg:col-span-5">
             {numbers.items.slice(1).map((item, i) => (
               <Reveal key={item.label} delay={i * 120}>
-                <div className={bezel}>
-                  <div className={`${bezelCore} p-7 sm:p-8`}>
-                    <p className="font-display text-5xl tracking-tight sm:text-6xl">
-                      <CountUp value={item.value} prefix={item.prefix} suffix={item.suffix} />
-                    </p>
-                    <p className="mt-2 text-ink-muted">{item.label}</p>
-                  </div>
+                <div className={`${card} p-7 sm:p-8`}>
+                  <p className="font-display text-5xl tracking-tight sm:text-6xl">
+                    <CountUp value={item.value} prefix={item.prefix} suffix={item.suffix} />
+                  </p>
+                  <p className="mt-2 text-ink-muted">{item.label}</p>
                 </div>
               </Reveal>
             ))}
@@ -141,14 +133,11 @@ export function HomeView({ lang }: { lang: Lang }) {
       {/* Målte tall: bevis i stedet for skryt */}
       <LighthouseScores proof={c.proof} />
 
-      {/* 6. Forskjellen fra byråer */}
-      <AgencyCompare lang={lang} c={c} />
-
-      {/* 7. Prosessen langs en linje som fylles opp */}
+      {/* 6. Prosessen langs en linje som fylles opp */}
       <section aria-labelledby="prosess-tittel" className="border-t border-line py-28 sm:py-40">
         <div className={`${container} grid gap-16 lg:grid-cols-12`}>
           <Reveal className="lg:sticky lg:top-32 lg:col-span-5 lg:self-start">
-            <SectionHeading id="prosess-tittel" eyebrow={c.process.eyebrow} title={c.process.title} lead={c.process.lead} />
+            <SectionHeading id="prosess-tittel" title={c.process.title} lead={c.process.lead} />
           </Reveal>
           <div className="lg:col-span-7">
             <ProcessLine steps={c.process.steps} />
@@ -156,45 +145,7 @@ export function HomeView({ lang }: { lang: Lang }) {
         </div>
       </section>
 
-      {/* 8. Innganger til sidene */}
-      <section aria-labelledby="utforsk-tittel" className="border-t border-line py-28 sm:py-36">
-        <div className={container}>
-          <Reveal>
-            <SectionHeading id="utforsk-tittel" eyebrow={c.explore.eyebrow} title={c.explore.title} lead={c.explore.lead} />
-          </Reveal>
-          <ul className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {c.explore.items.map((item, i) => {
-              const last = i === c.explore.items.length - 1;
-              return (
-                <li key={item.key}>
-                  <Reveal delay={(i % 3) * 90} className="h-full">
-                    <Link
-                      href={href(lang, item.key as PageKey)}
-                      className="group block h-full rounded-[2rem] border border-line bg-sand/70 p-1.5 transition-colors duration-500 hover:border-navy/20"
-                    >
-                      <span
-                        className={`flex h-full flex-col rounded-[calc(2rem-0.375rem)] p-8 shadow-[0_1px_2px_rgba(7,22,48,0.06),0_12px_32px_-20px_rgba(7,22,48,0.25)] transition-colors duration-500 ${
-                          last ? "bg-navy text-cream" : "bg-white group-hover:bg-sand/40"
-                        }`}
-                      >
-                        <span className={`text-sm tabular-nums ${last ? "text-cream-muted" : "text-ink-muted"}`}>{String(i + 1).padStart(2, "0")}</span>
-                        <span className="mt-4 font-display text-3xl">{item.title}</span>
-                        <span className={`mt-3 flex-1 leading-relaxed ${last ? "text-cream-muted" : "text-ink-muted"}`}>{item.text}</span>
-                        <span className="mt-8 inline-flex items-center gap-2 font-medium">
-                          {last ? c.ui.getInTouch : c.ui.readMore}
-                          <ArrowIcon className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-1.5" />
-                        </span>
-                      </span>
-                    </Link>
-                  </Reveal>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      </section>
-
-      {/* 9. Avslutning */}
+      {/* 7. Avslutning */}
       <CtaBand lang={lang} c={c} />
     </>
   );

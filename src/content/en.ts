@@ -7,7 +7,7 @@ export const en: Content = {
   site: {
     tagline: "Websites for businesses",
     description:
-      "Senay Studio builds fast, professional websites for businesses. We build your website for free – if you are happy, you pay NOK 4,599 when it goes live and NOK 799/mo for hosting and maintenance. No lock-in.",
+      "Senay Studio builds fast, professional websites for businesses. We build your website for free. If you are happy, you pay NOK 4,599 when it goes live and NOK 799/mo for hosting and maintenance. No lock-in.",
     locale: "en_GB",
   },
 
@@ -25,7 +25,7 @@ export const en: Content = {
 
   ui: {
     skipToContent: "Skip to content",
-    homeLabel: "Senay Studio – home",
+    homeLabel: "Senay Studio, home",
     mainMenu: "Main menu",
     mobileMenu: "Mobile menu",
     openMenu: "Open menu",
@@ -55,7 +55,7 @@ export const en: Content = {
     perMonthShort: "NOK/mo",
     oneTime: "NOK",
     questions: "Questions",
-    whatYouWonder: "What you might be wondering.",
+    whatYouWonder: "Common questions",
   },
 
   meta: {
@@ -67,15 +67,15 @@ export const en: Content = {
     },
     demos: {
       title: "Examples",
-      description: "See example websites for around 30 industries – from hair salons and cafés to electricians and carpenters.",
+      description: "Example websites for 30 industries, from hair salons and cafés to electricians and carpenters.",
     },
     services: {
       title: "Services",
-      description: "Design, development, search visibility and hosting – everything you need for a great website, in one place.",
+      description: "Design, development, search visibility and hosting for your website, from one supplier.",
     },
     process: {
       title: "Process",
-      description: "From the first conversation to a finished website in four clear steps – with a fixed price before work starts.",
+      description: "Four steps from the first conversation to a finished website. You know the price before we start.",
     },
     pricing: {
       title: "Pricing",
@@ -84,7 +84,7 @@ export const en: Content = {
     about: {
       title: "About",
       description:
-        "Senay Studio is a small studio building fast, professional websites for businesses – with one dedicated contact all the way.",
+        "Senay Studio builds fast websites for businesses. You deal with the same person all the way.",
     },
     contact: {
       title: "Contact",
@@ -94,10 +94,9 @@ export const en: Content = {
   },
 
   hero: {
-    eyebrow: "Websites for businesses",
     title: "Customers google you.",
     titleAccent: "What do they find?",
-    lead: "Type in your business, and we will show you your website. Right now.",
+    lead: "Type the name of your business and see what your website could look like.",
     primaryCta: "Get a free draft",
     secondaryCta: "See how it works",
     scrollHint: "Scroll down",
@@ -108,24 +107,24 @@ export const en: Content = {
     industryLabel: "Industry",
     build: "Build my website",
     fallbackName: "Your business",
-    hint: "Type the name – the website updates as you type.",
+    hint: "The website updates as you type.",
     steps: ["Design", "Text", "Mobile", "Done"],
     srPreview: "Preview of the website for {navn}.",
-    doneTitle: "This is a sketch made in seconds.",
-    doneText: `Want the real thing? We build it for free within ${draftDays} business days.`,
-    doneCta: "Yes, build my website",
+    doneTitle: "This is a quick sketch.",
+    doneText: `We build the real website for free within ${draftDays} business days.`,
+    doneCta: "Build my website",
     contactMessage: "I would like a website like the sketch for {bransje}.",
   },
   industry: {
     eyebrow: "Website for {bransje}",
-    title: "A website for {bransje} – see it before you pay.",
+    title: "Website for {bransje}",
     lead: `We build your website for free. You get a draft within ${draftDays} business days and only pay if you want it live: NOK ${prices.website} at launch and NOK ${prices.hosting}/mo for hosting. No lock-in.`,
     metaDescription: `Website for {bransje}: free draft within ${draftDays} business days, NOK ${prices.website} at launch and NOK ${prices.hosting}/mo. No lock-in, and you own the site.`,
     primaryCta: "Get a free draft",
     needsTitle: "What your website should have",
-    needsLead: "What your customers look for when they find you on Google – and what we build in from the start.",
+    needsLead: "This is what customers look for when they find you on Google. We build it in from the start.",
     exampleTitle: "How it could look",
-    exampleNote: "Example – the business is fictional. Your website is built from scratch for you.",
+    exampleNote: "The business in the example is fictional. Your website is built from scratch.",
     openExample: "Open the example in full size",
     pricingTitle: "One package. Everything included.",
     otherTitle: "Other industries",
@@ -141,9 +140,8 @@ export const en: Content = {
     },
   },
   proof: {
-    eyebrow: "Measured, not promised",
-    title: "Fast websites win more customers.",
-    lead: "We measure every website with Google Lighthouse, the same tool Google uses. These are the scores for the website you are reading now.",
+    title: "The scores for this website",
+    lead: "We measure the websites we build with Google Lighthouse. This is how the page you are reading scores.",
     outOf: "out of 100",
     labels: { performance: "Performance", accessibility: "Accessibility", bestPractices: "Best practices", seo: "SEO" },
     note: `Measured on mobile on ${lighthouse.measured}.`,
@@ -153,10 +151,10 @@ export const en: Content = {
     query: "hairdresser near me",
     searchLabel: "Search",
     steps: [
-      { kicker: "It's 8:14 pm", text: "A customer needs a hairdresser. She picks up her phone and searches." },
-      { kicker: "Three seconds later", text: "She looks at the first results. She doesn't look any further." },
-      { kicker: "And you?", text: "Your business isn't there. To her, you don't exist." },
-      { kicker: "With Senay Studio", text: "Now it's you she finds – and you she calls." },
+      { kicker: "It's 8:14 pm", text: "A customer needs a hairdresser and searches on her phone." },
+      { kicker: "Three seconds later", text: "She looks at the first results and picks one of them." },
+      { kicker: "Your business", text: "You have no website, so you don't show up." },
+      { kicker: "With a website", text: "Now you show up in the search, and she calls you." },
     ],
     results: [
       { name: "Salong Lykke", url: "salonglykke.no", text: "Hair salon in the city centre · Open now · Book online" },
@@ -164,14 +162,13 @@ export const en: Content = {
       { name: "Hårstudio Nord", url: "harstudionord.no", text: "Colour, highlights and styling · Open until 9 pm" },
     ],
     you: { name: "Your business", missing: "No website found", url: "yourbusiness.no", text: "Your hair salon · Open now · Book online" },
-    fictional: "Example – the businesses are fictional",
+    fictional: "Example with fictional businesses",
   },
 
-  statement: "A website isn't decoration. It's your best salesperson – it answers customers while you work, sleep and go on holiday.",
+  statement: "When people need what you offer, they search first. What they find decides who they call.",
 
   numbers: {
-    eyebrow: "The price",
-    title: "As simple as it sounds.",
+    title: "What it costs",
     items: [
       { value: 0, suffix: "", prefix: "NOK ", label: "to build your website" },
       { value: Number(prices.website.replace(/\s/g, "")), suffix: "", prefix: "NOK ", label: "when it goes live" },
@@ -181,36 +178,15 @@ export const en: Content = {
     link: "See what's included",
   },
 
-
-
-  explore: {
-    eyebrow: "Explore",
-    title: "Everything you need to know, one page at a time.",
-    lead: "Read up at your own pace – or go straight to pricing.",
-    items: [
-      { key: "why", title: "Why a website", text: "What a website does for your business – and what it costs not to have one." },
-      { key: "services", title: "Services", text: "Design, development, search visibility and hosting. All in one place." },
-      { key: "process", title: "Process", text: "Four clear steps from the first conversation to a finished website." },
-      {
-        key: "pricing",
-        title: "Pricing",
-        text: `One package: NOK 0 to build your website, NOK ${prices.website} when it goes live and NOK ${prices.hosting}/mo for hosting.`,
-      },
-      { key: "about", title: "About", text: "A small studio with one dedicated contact all the way." },
-      { key: "contact", title: "Contact", text: "Tell us briefly what you need and we'll have a no-obligation chat." },
-    ],
-  },
-
   demos: {
-    eyebrow: "Examples",
-    title: "See what your website could look like.",
-    homeTitle: "Or browse 30 finished examples.",
-    lead: "Pick your industry and see an example. All businesses are fictional – your website is always built from scratch for you.",
+    title: "Example websites",
+    homeTitle: "Examples from 30 industries",
+    lead: "Pick an industry. The businesses are fictional, and your website is built from scratch.",
     all: "All",
     open: "Open full size",
     choose: "Choose industry",
     showing: "Showing example for",
-    fictional: "Example – fictional business",
+    fictional: "Example, fictional business",
     allExamples: "See all examples",
     bannerText: "This is an example made by Senay Studio. The business is fictional.",
     bannerCta: "Want a website like this?",
@@ -219,11 +195,10 @@ export const en: Content = {
   },
 
   agencies: {
-    eyebrow: "Why us",
-    title: "How agencies often do it. How we do it.",
+    title: "How we differ from a typical agency",
     others: {
-      label: "Other agencies",
-      title: "How it's often done",
+      label: "",
+      title: "Typical agency",
       items: [
         "Tens of thousands of kroner upfront before you see anything",
         "Weeks of waiting",
@@ -233,23 +208,23 @@ export const en: Content = {
       ],
     },
     us: {
-      label: "Senay Studio",
-      title: "How we do it",
+      label: "",
+      title: "Senay Studio",
       items: [
-        "NOK 0 to get started – no obligation",
+        "NOK 0 to get started",
         `First draft within ${draftDays} business days`,
         "You see the result before you pay",
         "No lock-in, no hidden fees",
         "You own the website, domain and content",
       ],
     },
-    note: `We build your website for free. If you are happy, you pay NOK ${prices.website} when it goes live and NOK ${prices.hosting}/mo for hosting – not before.`,
+    note: `We build your website for free. You pay NOK ${prices.website} only when it goes live, and then NOK ${prices.hosting}/mo for hosting.`,
     cta: "Get a free draft",
   },
 
   why: {
     eyebrow: "Why a website",
-    title: "A website isn't decoration. It's your best salesperson.",
+    title: "Why your business needs a website",
     lead: "People check businesses online before they buy. If you're not there, they choose someone who is.",
     reasonsHeading: "Four reasons",
     items: [
@@ -258,23 +233,22 @@ export const en: Content = {
         text: "When someone needs what you offer, they start on Google. Without a website, it's your competitors who get found.",
       },
       {
-        title: "Trust in seconds",
+        title: "A serious first impression",
         text: "A clean, professional website shows that your business is serious. A poor first impression costs you customers you never hear about.",
       },
       {
-        title: "Open around the clock",
-        text: "Your website answers questions and takes inquiries while you work, sleep or are on holiday.",
+        title: "Answers when you are closed",
+        text: "Your website answers the common questions and takes inquiries when you are busy or closed.",
       },
       {
-        title: "Your own platform",
+        title: "You decide",
         text: "Facebook and Instagram are owned by others, and the algorithm decides who sees you. On your own website, you decide.",
       },
     ],
   },
 
   comparison: {
-    eyebrow: "The difference",
-    title: "Without a website and with one.",
+    title: "Without and with a website",
     without: {
       title: "Without a website",
       items: [
@@ -293,42 +267,40 @@ export const en: Content = {
         "New inquiries around the clock",
       ],
     },
-    cta: "I want to be found",
+    cta: "Get a free draft",
   },
 
   services: {
-    eyebrow: "Services",
-    title: "Everything you need for a great website, in one place.",
-    lead: "We handle the whole job – from the first sketch to a website that is live, secure and up to date. No juggling several suppliers.",
+    title: "What we do",
+    lead: "We build your website and keep it running afterwards. You deal with one supplier.",
     listLabel: "Our services",
     items: [
       {
         title: "Design",
-        text: "A visual identity that fits your business. Typography, colours and structure that make it easy for visitors to understand what you offer – and to get in touch.",
+        text: "Colours, typography and structure that fit your business, and make it easy to see what you offer and get in touch.",
         includes: ["Design in your colours and style", "Clear structure and navigation", "Works on mobile, tablet and desktop"],
       },
       {
         title: "Development",
-        text: "Modern technology for fast pages, solid security and a site that works just as well on every screen.",
+        text: "Pages load fast, are secure and work on phones, tablets and computers.",
         includes: ["Fast loading", "Contact form", "Training in updating content"],
       },
       {
         title: "Search visibility",
-        text: "A solid technical foundation for search engines, so customers find you when they look for what you offer.",
+        text: "Technical setup that helps Google understand your site, so you can be found when people search for what you offer.",
         includes: ["Correct structure and metadata", "Image and text when the site is shared", "Basic search engine optimisation"],
       },
       {
         title: "Hosting and care",
-        text: "The website is yours – we run it for you. We keep it live, secure and up to date, and make the changes you need, so you can spend your time on what you do best.",
+        text: "We keep the website live, secure and up to date, and make the changes you ask for. The website is still yours.",
         includes: ["Hosting and operation", "Security updates", "Changes whenever you need them"],
       },
     ],
   },
 
   process: {
-    eyebrow: "Process",
-    title: "A simple, predictable path from idea to finished website.",
-    lead: "You always know what's happening, what comes next and what it costs.",
+    title: "From the first conversation to a finished website",
+    lead: "Four steps. You always know what comes next and what it costs.",
     listLabel: "The steps",
     steps: [
       {
@@ -338,8 +310,8 @@ export const en: Content = {
         we: "Listen, ask questions and give honest advice.",
       },
       {
-        title: "Free proposal",
-        text: `Within ${draftDays} business days you get a first draft of your website – completely free and without obligation.`,
+        title: "Free draft",
+        text: `Within ${draftDays} business days you get a first draft of your website. It is free and commits you to nothing.`,
         you: "Look at the proposal and tell us what to change.",
         we: "Build the proposal and adjust it until you are happy.",
       },
@@ -351,7 +323,7 @@ export const en: Content = {
       },
       {
         title: "Launch",
-        text: "If you are happy, we put the website live – only then do you pay. We show you how to update it.",
+        text: "If you are happy, we publish the website. Only then do you pay. We show you how to update it.",
         you: "Share the website with your customers.",
         we: "Publish, train you and keep the site up to date.",
       },
@@ -359,20 +331,19 @@ export const en: Content = {
   },
 
   pricing: {
-    eyebrow: "Pricing",
-    title: "One package. Everything included.",
-    lead: `We build your website completely free and without obligation. If you are happy, you pay NOK ${prices.website} when it goes live – and NOK ${prices.hosting} a month for us to run and maintain it. No lock-in.`,
+    title: "What it costs",
+    lead: `We build your website for free. If you are happy, you pay NOK ${prices.website} when it goes live, and then NOK ${prices.hosting} a month for hosting and maintenance. No lock-in.`,
     packagesHeading: "The package",
     note: "If you are not happy, you pay nothing. If you want something completely new, like an online shop, you get a separate fixed-price quote first.",
-    faqTitle: "About price and payment.",
+    faqTitle: "Questions about price",
     bundle: {
       name: "Website + hosting",
-      badge: "All in one package",
+      badge: "Hosting included",
       description:
-        "A complete, professional website that we build for free – and then run, keep up to date and change for you afterwards.",
+        "We build your website for free, and then host, update and change it for you afterwards.",
       steps: [
         { price: "0", label: "to build your website", note: "You see the result before you pay" },
-        { price: prices.website, label: "when the website goes live", note: "One-off – only if you are happy" },
+        { price: prices.website, label: "when the website goes live", note: "One-off, only if you are happy" },
         { price: prices.hosting, label: "per month", note: "Hosting and maintenance · less than NOK 27 a day" },
       ],
       guarantee: {
@@ -391,7 +362,7 @@ export const en: Content = {
         },
         {
           title: "You and us",
-          items: ["Training in updating content", "One dedicated contact", "You own the website, domain and content", "No lock-in – cancel anytime"],
+          items: ["Training in updating content", "One dedicated contact", "You own the website, domain and content", "No lock-in, cancel anytime"],
         },
       ],
       cta: "Get a free draft",
@@ -411,11 +382,11 @@ export const en: Content = {
       },
       {
         q: "Who owns the website?",
-        a: "You do. The website, domain and content are yours. We run it for you – ownership always stays with you, even if you one day want to switch provider.",
+        a: "You do. The website, domain and content are yours. We run it for you, but ownership stays with you, even if you one day want to switch provider.",
       },
       {
         q: "Is there anything extra?",
-        a: `No. NOK ${prices.website} when the site goes live and NOK ${prices.hosting} a month – that's it. If you want something completely new, like an online shop, you get a separate fixed-price quote first, and you decide whether you want it.`,
+        a: `No. NOK ${prices.website} when the site goes live and NOK ${prices.hosting} a month. That's it. If you want something completely new, like an online shop, you get a separate fixed-price quote first, and you decide whether you want it.`,
       },
       {
         q: "Can I cancel?",
@@ -425,18 +396,17 @@ export const en: Content = {
   },
 
   about: {
-    eyebrow: "About",
-    title: "A small studio with great care for the details.",
+    title: "About Senay Studio",
     sectionLabel: "About Senay Studio",
     paragraphs: [
-      "Senay Studio helps businesses look professional online. We believe a good website should be fast, easy to use and clear about what you offer – not full of features nobody needs.",
-      "When you work with us, you talk directly to the person who designs and builds your site. That means short decision paths, honest advice and a solution made for your business.",
+      "Senay Studio helps businesses look professional online. We believe a good website should be fast, easy to use and clear about what you offer, without features nobody needs.",
+      "When you work with us, you talk directly to the person who designs and builds your site. When you ask something, the answer comes from the person doing the work.",
     ],
     valuesHeading: "How we work",
     values: [
-      { title: "Personal", text: "One dedicated contact from the first conversation to launch – and after." },
-      { title: "Honest", text: "NOK 0 to build your website, no lock-in and no hidden fees." },
-      { title: "Thorough", text: "Speed, accessibility and quality in every detail." },
+      { title: "One contact", text: "You talk to the same person from the first conversation to launch, and after." },
+      { title: "A known price", text: "NOK 0 to build your website, no lock-in and no hidden fees." },
+      { title: "Measured quality", text: "We measure speed and accessibility on everything we build before it goes live." },
     ],
   },
 
@@ -447,7 +417,7 @@ export const en: Content = {
     },
     {
       q: "I'm not technical. Can I manage this?",
-      a: "Yes. We handle everything technical, and you get training in updating the content yourself. We make the changes for you – it's included in the hosting.",
+      a: "Yes. We handle everything technical, and you get training in updating the content yourself. We make the changes for you. It's included in the hosting.",
     },
     {
       q: "What do you need from me?",
@@ -460,15 +430,14 @@ export const en: Content = {
   ],
 
   contact: {
-    eyebrow: "Contact",
-    title: "Ready to be found?",
+    title: "Get in touch",
     lead: "Tell us briefly about your business and what you need. We'll get in touch for a no-obligation chat.",
     emailDirect: "You can also email us directly at",
     nextHeading: "What happens next?",
     nextSteps: [
-      { title: "You send a message", text: "Through the form or by email – a couple of sentences is enough." },
+      { title: "You send a message", text: "Through the form or by email. A couple of sentences is enough." },
       { title: "We get in touch", text: "We set up a no-obligation chat about what you need." },
-      { title: "You get a free draft", text: `Within ${draftDays} business days – and you pay nothing until you want the site live.` },
+      { title: "You get a free draft", text: `Within ${draftDays} business days. You pay nothing until you want the site live.` },
     ],
     form: {
       company: "Company",
@@ -495,7 +464,7 @@ export const en: Content = {
   },
 
   cta: {
-    title: "Get your website built – for free.",
+    title: "Get a free draft of your website",
     lead: `NOK 0 to build it. NOK ${prices.website} when it goes live, and NOK ${prices.hosting}/mo for hosting. No lock-in.`,
     primary: "Get a free draft",
     secondary: "See what's included",
@@ -508,7 +477,7 @@ export const en: Content = {
     title: "Ask us anything about websites",
     subtitle: "Assistant · replies instantly",
     welcome:
-      "Hi! I'm Senay Studio's assistant. Ask me about websites – price, domains, Google, design – and I'll answer right away.",
+      "Hi! I'm Senay Studio's assistant. Ask about price, domains, Google or design, and I'll answer right away.",
     suggestions: ["What does a website cost?", "How do I show up on Google?", "Do I need my own domain?"],
     placeholder: "Write your question …",
     send: "Send",
@@ -522,7 +491,6 @@ export const en: Content = {
   },
 
   privacy: {
-    eyebrow: "Privacy",
     title: "How we handle your data.",
     sections: [
       {
@@ -531,15 +499,15 @@ export const en: Content = {
       },
       {
         title: "What we collect",
-        text: "When you contact us, we receive your name, your email address, your company name if given, and your message. We only use this to reply to your inquiry and to follow up on any assignment.",
+        text: "When you contact us, we receive your company name, your email address or phone number, and your name and message if you give them. We only use this to reply to your inquiry and to follow up on any assignment.",
       },
       {
         title: "How the form works",
-        text: "The contact form stores nothing on the website. It opens your email app with the message filled in, and you send it yourself.",
+        text: "Messages from the contact form reach us by email through the service Formspree, or through your own email app. The website does not store them.",
       },
       {
         title: "The chat assistant",
-        text: "The chat assistant gives automatic answers and runs only in your browser. What you write is not sent to us or anyone else and is not stored – the conversation disappears when you close or reload the page.",
+        text: "The chat assistant gives automatic answers and runs only in your browser. What you write is not sent to us or anyone else and is not stored. The conversation disappears when you close or reload the page.",
       },
       {
         title: "Cookies",

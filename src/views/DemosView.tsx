@@ -5,13 +5,13 @@ import { PageHero } from "@/components/PageHero";
 import { getContent } from "@/content";
 import { demoGroups, demos } from "@/content/demos";
 import { industryHref, type Lang } from "@/lib/routes";
-import { bezel, bezelCore, container, kicker } from "@/lib/ui";
+import { card, container, kicker } from "@/lib/ui";
 
 export function DemosView({ lang }: { lang: Lang }) {
   const c = getContent(lang);
   return (
     <>
-      <PageHero eyebrow={c.demos.eyebrow} title={c.demos.title} lead={c.demos.lead} />
+      <PageHero title={c.demos.title} lead={c.demos.lead} />
 
       <section aria-label={c.demos.choose} className="py-20 sm:py-28">
         <div className={container}>
@@ -27,8 +27,8 @@ export function DemosView({ lang }: { lang: Lang }) {
           </h2>
           <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {demoGroups.map((g) => (
-              <div key={g.key} className={bezel}>
-                <div className={`${bezelCore} h-full px-6 pb-3 pt-6`}>
+              <div key={g.key} className={`${card} h-full px-6 pb-3 pt-6`}>
+                <div>
                   <h3 className={kicker}>{g[lang]}</h3>
                   <ul className="mt-3 divide-y divide-line">
                     {demos

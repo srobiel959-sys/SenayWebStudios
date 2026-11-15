@@ -12,7 +12,7 @@ import { SectionHeading } from "@/components/SectionHeading";
 import { getContent } from "@/content";
 import { demos, getDemo } from "@/content/demos";
 import { demoHref, href, industryHref, type Lang } from "@/lib/routes";
-import { bezel, bezelCore, btnArrow, btnSecondary, container, kicker } from "@/lib/ui";
+import { card, btnArrow, btnSecondary, container, kicker } from "@/lib/ui";
 
 // Egen side per bransje («Nettside for frisør»), laget for å bli funnet på Google.
 // All tekst er felles; bare bransjenavnet, eksemplet og listen over behov varierer.
@@ -37,7 +37,7 @@ export function IndustryView({ lang, slug }: { lang: Lang; slug: string }) {
 
   return (
     <>
-      <PageHero eyebrow={fill(t.eyebrow)} title={fill(t.title)} lead={t.lead}>
+      <PageHero title={fill(t.title)} lead={t.lead}>
         <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:gap-4">
           <Link href={href(lang, "contact")} className={btnArrow}>
             {t.primaryCta}
@@ -52,13 +52,13 @@ export function IndustryView({ lang, slug }: { lang: Lang; slug: string }) {
       <section aria-labelledby="behov-tittel" className="py-20 sm:py-28">
         <div className={`${container} grid gap-12 lg:grid-cols-12`}>
           <Reveal className="lg:col-span-5">
-            <SectionHeading id="behov-tittel" eyebrow={label} title={t.needsTitle} lead={t.needsLead} />
+            <SectionHeading id="behov-tittel" title={t.needsTitle} lead={t.needsLead} />
           </Reveal>
           <ul className="grid gap-4 sm:grid-cols-2 lg:col-span-7">
             {t.needs[demo.group].map((need, i) => (
               <li key={need}>
-                <Reveal delay={(i % 2) * 90} className={`h-full ${bezel}`}>
-                  <div className={`${bezelCore} flex h-full gap-3 p-6`}>
+                <Reveal delay={(i % 2) * 90} className={`h-full`}>
+                  <div className={`${card} flex h-full gap-3 p-6`}>
                     <CheckIcon className="mt-1 h-4 w-4 shrink-0 text-accent" />
                     <span className="font-medium">{need}</span>
                   </div>
@@ -107,7 +107,7 @@ export function IndustryView({ lang, slug }: { lang: Lang; slug: string }) {
       <section aria-labelledby="sporsmal-tittel" className="border-t border-line py-20 sm:py-28">
         <div className={`${container} grid gap-12 lg:grid-cols-12`}>
           <Reveal className="lg:sticky lg:top-32 lg:col-span-4 lg:self-start">
-            <SectionHeading id="sporsmal-tittel" eyebrow={c.ui.questions} title={c.pricing.faqTitle} />
+            <SectionHeading id="sporsmal-tittel" title={c.pricing.faqTitle} />
           </Reveal>
           <Reveal delay={100} className="lg:col-span-8">
             <Faq items={c.pricing.faq} />

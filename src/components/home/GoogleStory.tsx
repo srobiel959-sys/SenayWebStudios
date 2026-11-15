@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import type { Content } from "@/content";
-import { container, eyebrowPill } from "@/lib/ui";
+import { container } from "@/lib/ui";
 
 // «Google-historien» på forsiden: en festet seksjon som spilles av mens man scroller.
 // Søket skrives, konkurrentene dukker opp, «Din bedrift» mangler – og til slutt
@@ -179,8 +179,6 @@ export function GoogleStory({ story, id }: { story: Story; id: string }) {
 
   const phone = (
     <div className="relative mx-auto w-[min(19rem,82vw)] sm:w-[21rem]" aria-hidden="true">
-      {/* Blå glød bak telefonen */}
-      <div className="pointer-events-none absolute -inset-16 rounded-full bg-[radial-gradient(closest-side,rgba(29,78,216,0.14),transparent)]" />
       <div className="relative rounded-[3rem] border border-navy/10 bg-gradient-to-b from-[#1c2740] to-[#0b1220] p-2 shadow-[0_40px_100px_-30px_rgba(7,22,48,0.55)]">
         <div className="relative overflow-hidden rounded-[2.5rem] bg-[#0b1220] px-3.5 pb-5 pt-10 shadow-[inset_0_1px_1px_rgba(255,255,255,0.12)] sm:pb-6 sm:pt-11">
           <span className="absolute left-1/2 top-3 h-6 w-24 -translate-x-1/2 rounded-full bg-black" />
@@ -246,7 +244,7 @@ export function GoogleStory({ story, id }: { story: Story; id: string }) {
       <div className={scrub ? "sticky top-0 flex h-[100dvh] items-center overflow-hidden pb-4 pt-20 sm:pt-24" : "overflow-hidden py-24 sm:py-32"}>
         <div className={`${container} grid items-center gap-6 sm:gap-10 lg:grid-cols-[1fr_auto] lg:gap-24`}>
           <div>
-            <h2 id={id} className={`${eyebrowPill} ${scrub ? "max-lg:sr-only" : ""}`}>
+            <h2 id={id} className={`text-sm font-medium text-ink-muted ${scrub ? "max-lg:sr-only" : ""}`}>
               {story.label}
             </h2>
             <div className="flex gap-6 lg:mt-8">
@@ -267,7 +265,7 @@ export function GoogleStory({ story, id }: { story: Story; id: string }) {
                       } ${active ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0 lg:translate-y-0 lg:opacity-25"}`}
                       aria-current={scrub && active ? "step" : undefined}
                     >
-                      <p className="text-xs font-medium uppercase tracking-[0.22em] text-accent">{s.kicker}</p>
+                      <p className="text-sm font-medium text-accent">{s.kicker}</p>
                       <p className="mt-2 max-w-lg text-balance font-display text-xl leading-snug sm:text-3xl lg:mt-3 lg:text-[2rem]">{s.text}</p>
                     </li>
                   );

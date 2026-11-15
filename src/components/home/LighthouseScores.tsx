@@ -39,7 +39,7 @@ export function LighthouseScores({ proof }: { proof: Content["proof"] }) {
     <section aria-labelledby="malt-tittel" className="border-t border-line py-24 sm:py-32">
       <div className={`${container} grid items-center gap-14 lg:grid-cols-12`}>
         <Reveal className="lg:col-span-5">
-          <SectionHeading id="malt-tittel" eyebrow={proof.eyebrow} title={proof.title} lead={proof.lead} />
+          <SectionHeading id="malt-tittel" title={proof.title} lead={proof.lead} />
         </Reveal>
         <Reveal delay={100} className="lg:col-span-7">
           <ul className="grid grid-cols-2 gap-4 sm:grid-cols-4">

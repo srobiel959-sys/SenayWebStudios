@@ -10,7 +10,7 @@ export function ProcessView({ lang }: { lang: Lang }) {
   const { process } = c;
   return (
     <>
-      <PageHero eyebrow={process.eyebrow} title={process.title} lead={process.lead} />
+      <PageHero title={process.title} lead={process.lead} />
 
       <section aria-label={process.listLabel} className="py-20 sm:py-28">
         <ol className={`${container} relative`}>
@@ -41,7 +41,7 @@ export function ProcessView({ lang }: { lang: Lang }) {
                     <dd className="mt-2">{step.you}</dd>
                   </div>
                   <div className="bg-sand p-6">
-                    <dt className="text-xs font-medium uppercase tracking-[0.2em] text-accent">{c.ui.we}</dt>
+                    <dt className="text-sm font-medium text-accent">{c.ui.we}</dt>
                     <dd className="mt-2">{step.we}</dd>
                   </div>
                 </dl>

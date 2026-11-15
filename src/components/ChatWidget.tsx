@@ -182,7 +182,6 @@ export function ChatWidget({ lang, labels, nav }: { lang: Lang; labels: Content[
           className="chat-open fixed inset-x-0 bottom-0 z-50 flex h-[85dvh] flex-col overflow-hidden rounded-t-3xl border border-line bg-white shadow-[0_30px_80px_-20px_rgba(7,22,48,0.4)] sm:inset-x-auto sm:bottom-6 sm:right-6 sm:h-[min(640px,calc(100dvh-3rem))] sm:w-[400px] sm:rounded-3xl"
         >
           <div className="relative flex items-start justify-between gap-4 overflow-hidden bg-navy px-5 py-4 text-cream">
-            <div className="pointer-events-none absolute -right-16 -top-20 h-48 w-48 rounded-full bg-[radial-gradient(closest-side,rgba(59,130,246,0.3),transparent)]" />
             <div className="relative">
               <h2 id="chat-title" className="font-display text-xl leading-tight">
                 {labels.title}
