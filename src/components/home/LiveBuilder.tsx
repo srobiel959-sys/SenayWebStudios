@@ -15,6 +15,8 @@ import { ArrowCircle } from "../Icons";
 // og viser veien videre til kontaktskjemaet, ferdig utfylt.
 
 const MAX_NAME = 40;
+/** Tid per byggesteg. */
+const STEP_MS = 420;
 
 /** «Bjørn Rør AS» → «bjornror.no»: brukes i adressefeltet i forhåndsvisningen. */
 export function domainFor(name: string) {
@@ -48,6 +50,7 @@ export function LiveBuilder({
   const [slug, setSlug] = useState(demos[0].slug);
   const [run, setRun] = useState(0);
   const [stage, setStage] = useState(-1);
+  const [typing, setTyping] = useState(false);
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
   const previewRef = useRef<HTMLDivElement>(null);
   const ids = useId();
@@ -55,10 +58,22 @@ export function LiveBuilder({
   // Stopp byggeanimasjonen hvis komponenten forsvinner.
   useEffect(() => () => timers.current.forEach(clearTimeout), []);
 
+  // Staging: mens byggingen pågår, tones resten av toppen ned (.hero-dim i globals.css).
+  const building = stage >= 0 && stage < labels.steps.length - 1;
+  useEffect(() => {
+    const section = previewRef.current?.closest("section");
+    if (!section) return;
+    if (building) section.setAttribute("data-building", "");
+    else section.removeAttribute("data-building");
+    return () => section.removeAttribute("data-building");
+  }, [building]);
+
   const base = demos.find((d) => d.slug === slug) ?? demos[0];
   const shownName = name.trim() || labels.fallbackName;
   const demo = { ...base, name: shownName };
   const done = stage >= labels.steps.length - 1;
+  // Rammen retter seg ut fra perspektivet så snart kunden tar byggeren i bruk.
+  const active = typing || name !== "" || stage >= 0;
   const contactHref = `${contactPath}?${new URLSearchParams({ bedrift: name.trim(), bransje: base.label[lang] }).toString()}`;
 
   function build(event: FormEvent<HTMLFormElement>) {
@@ -70,7 +85,8 @@ export function LiveBuilder({
       setStage(labels.steps.length - 1);
     } else {
       setStage(0);
-      timers.current = labels.steps.slice(1).map((_, i) => setTimeout(() => setStage(i + 1), 650 * (i + 1)));
+      // Under 2 sekunder totalt: raskt nok til å holde på oppmerksomheten.
+      timers.current = labels.steps.slice(1).map((_, i) => setTimeout(() => setStage(i + 1), STEP_MS * (i + 1)));
     }
     previewRef.current?.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" });
   }
@@ -81,19 +97,21 @@ export function LiveBuilder({
         onSubmit={build}
         className="mx-auto flex w-full max-w-3xl flex-col gap-3 rounded-[1.75rem] border border-line bg-white p-2 text-left shadow-[0_24px_60px_-30px_rgba(7,22,48,0.35)] sm:flex-row sm:items-center sm:rounded-full"
       >
-        <label htmlFor={`${ids}-navn`} className="sr-only">
+        <label htmlFor={`${ids}-navn`} className="px-5 pt-2 text-xs font-medium text-ink-muted sm:sr-only">
           {labels.nameLabel}
         </label>
         <input
           id={`${ids}-navn`}
           value={name}
           onChange={(e) => setName(e.target.value.slice(0, MAX_NAME))}
+          onFocus={() => setTyping(true)}
+          onBlur={() => setTyping(false)}
           maxLength={MAX_NAME}
           autoComplete="organization"
           placeholder={labels.namePlaceholder}
           className="min-w-0 flex-1 rounded-full bg-transparent px-5 py-3 text-lg text-navy placeholder:text-ink-muted focus:bg-sand/60"
         />
-        <label htmlFor={`${ids}-bransje`} className="sr-only">
+        <label htmlFor={`${ids}-bransje`} className="px-5 text-xs font-medium text-ink-muted sm:sr-only">
           {labels.industryLabel}
         </label>
         <select
@@ -125,7 +143,10 @@ export function LiveBuilder({
           {labels.srPreview.replace("{navn}", shownName)}
           {stage >= 0 ? ` ${labels.steps[stage]}` : ""}
         </p>
-        <div className="relative rounded-[1.75rem] border border-line bg-sand/70 p-1.5 text-left shadow-[0_50px_120px_-50px_rgba(7,22,48,0.45)]">
+        <div
+          data-active={active ? "" : undefined}
+          className="build-frame relative rounded-[1.75rem] border border-line bg-sand/70 p-1.5 text-left shadow-[0_50px_120px_-50px_rgba(7,22,48,0.45)]"
+        >
           <div className="overflow-hidden rounded-[calc(1.75rem-0.375rem)] bg-white">
             <div className="flex items-center gap-3 border-b border-line px-4 py-3" aria-hidden="true">
               <span className="flex gap-1.5">
@@ -133,14 +154,21 @@ export function LiveBuilder({
                 <span className="h-2.5 w-2.5 rounded-full bg-navy/15" />
                 <span className="h-2.5 w-2.5 rounded-full bg-navy/15" />
               </span>
-              <span className="min-w-0 flex-1 truncate rounded-full bg-sand px-3 py-1 text-center text-xs text-ink-muted">
+              {/* Adressefeltet blinker kort hver gang navnet endres (secondary action). */}
+              <span
+                key={name ? domainFor(name) : "tom"}
+                className={`min-w-0 flex-1 truncate rounded-full bg-sand px-3 py-1 text-center text-xs text-ink-muted ${name ? "url-flash" : ""}`}
+              >
                 {domainFor(name)}
               </span>
               <span className="w-[2.625rem]" />
             </div>
-            <ScaledPreview id={`${slug}-${run}`}>
-              <DemoSite demo={demo} fictionalLabel={fictionalLabel} />
-            </ScaledPreview>
+            {/* Pose til pose: hvert byggesteg gir forhåndsvisningen en egen positur (globals.css). */}
+            <div className="build-stage" data-stage={building ? stage : undefined}>
+              <ScaledPreview id={`${slug}-${run}`}>
+                <DemoSite demo={demo} fictionalLabel={fictionalLabel} caret={typing} />
+              </ScaledPreview>
+            </div>
           </div>
 
           {/* Byggestatus, og til slutt veien videre, flytende nederst i rammen */}
@@ -151,7 +179,8 @@ export function LiveBuilder({
                   {labels.steps.map((step, i) => (
                     <li
                       key={step}
-                      className={`rounded-full border px-3 py-1 shadow-sm transition-colors duration-300 ${
+                      data-on={i <= stage ? "" : undefined}
+                      className={`build-chip rounded-full border px-3 py-1 shadow-sm transition-colors duration-150 ${
                         i <= stage ? "border-navy bg-navy text-cream" : "border-line bg-white text-ink-muted"
                       }`}
                     >

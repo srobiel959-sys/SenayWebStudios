@@ -62,14 +62,21 @@ export function PricingCards({ lang, c }: { lang: Lang; c: Content }) {
             <p className="mt-2 text-sm leading-relaxed text-cream-muted">{b.guarantee.text}</p>
           </div>
           <h4 className="text-xs font-medium uppercase tracking-[0.2em] text-cream-muted">{b.featuresTitle}</h4>
-          <ul className="mt-6 space-y-3">
-            {b.features.map((feature) => (
-              <li key={feature} className="flex gap-3">
-                <CheckIcon className="mt-1 h-4 w-4 shrink-0 text-sky" />
-                {feature}
-              </li>
+          <div className="mt-6 space-y-7">
+            {b.featureGroups.map((group) => (
+              <div key={group.title}>
+                <h5 className="font-medium">{group.title}</h5>
+                <ul className="mt-3 space-y-2.5">
+                  {group.items.map((item) => (
+                    <li key={item} className="flex gap-3 text-cream-muted">
+                      <CheckIcon className="mt-1 h-4 w-4 shrink-0 text-sky" />
+                      <span className="text-cream">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             ))}
-          </ul>
+          </div>
         </div>
       </div>
     </div>

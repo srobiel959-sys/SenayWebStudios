@@ -46,20 +46,23 @@ export function HomeView({ lang }: { lang: Lang }) {
       {/* 1. Hero: pitchen, og så bygger kundens egen nettside seg opp mens hen skriver */}
       <section aria-labelledby="hero-tittel" className="relative -mt-[4.25rem] sm:-mt-20">
         <div className={`${container} relative flex flex-col items-center pb-24 pt-32 text-center sm:pt-40`}>
-          <p className={`hero-in ${eyebrowPill}`}>
-            <span className="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden="true" />
-            {hero.eyebrow}
-          </p>
-          <h1
-            id="hero-tittel"
-            className="mt-8 max-w-6xl text-balance font-display text-[3.1rem] leading-[1] tracking-tight sm:text-7xl lg:text-[5.9rem]"
-          >
-            <RisingWords text={hero.title} />{" "}
-            <span className="block text-ink-muted">
-              <RisingWords text={hero.titleAccent} start={titleWords + 1} />
-            </span>
-          </h1>
-          <p className="hero-in hero-in-3 mt-8 max-w-xl text-balance text-lg leading-relaxed text-ink-muted sm:text-xl">{hero.lead}</p>
+          {/* Tones ned mens byggeren jobber, så blikket går til rammen (se LiveBuilder). */}
+          <div className="hero-dim flex flex-col items-center">
+            <p className={`hero-in ${eyebrowPill}`}>
+              <span className="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden="true" />
+              {hero.eyebrow}
+            </p>
+            <h1
+              id="hero-tittel"
+              className="mt-8 max-w-6xl text-balance font-display text-[3.1rem] leading-[1] tracking-tight sm:text-7xl lg:text-[5.9rem]"
+            >
+              <RisingWords text={hero.title} />{" "}
+              <span className="block text-ink-muted">
+                <RisingWords text={hero.titleAccent} start={titleWords + 1} />
+              </span>
+            </h1>
+            <p className="hero-in hero-in-3 mt-8 max-w-xl text-balance text-lg leading-relaxed text-ink-muted sm:text-xl">{hero.lead}</p>
+          </div>
           <div className="hero-in hero-in-4 mt-10 w-full">
             <LiveBuilder lang={lang} labels={c.builder} fictionalLabel={c.demos.fictional} contactPath={href(lang, "contact")} />
           </div>
@@ -125,7 +128,7 @@ export function HomeView({ lang }: { lang: Lang }) {
               </p>
               <Link
                 href={href(lang, "pricing")}
-                className="group mt-6 inline-flex items-center gap-2 font-medium underline decoration-navy/25 underline-offset-8 transition-colors hover:decoration-navy"
+                className="group mt-4 inline-flex min-h-11 items-center gap-2 font-medium underline decoration-navy/25 underline-offset-8 transition-colors duration-150 hover:decoration-navy"
               >
                 {numbers.link}
                 <ArrowIcon className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-1" />

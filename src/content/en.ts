@@ -30,7 +30,8 @@ export const en: Content = {
     mobileMenu: "Mobile menu",
     openMenu: "Open menu",
     closeMenu: "Close menu",
-    requestQuote: "Get a quote",
+    requestQuote: "Get a free draft",
+    requestQuoteShort: "Free draft",
     switchLanguage: "Norsk",
     switchLanguageLabel: "Bytt til norsk",
     readMore: "Read more",
@@ -243,7 +244,7 @@ export const en: Content = {
       ],
     },
     note: `We build your website for free. If you are happy, you pay NOK ${prices.website} when it goes live and NOK ${prices.hosting}/mo for hosting – not before.`,
-    cta: "Get a free proposal",
+    cta: "Get a free draft",
   },
 
   why: {
@@ -379,21 +380,21 @@ export const en: Content = {
         text: "If you cancel, you take the domain, texts and images with you, and we help you move.",
       },
       featuresTitle: "What's included",
-      features: [
-        `First draft within ${draftDays} business days`,
-        "Custom design in your colours",
-        "Works on mobile, tablet and desktop",
-        "Contact form",
-        "Basic search engine optimisation",
-        "Hosting and operation",
-        "Security updates",
-        "Changes whenever you need them",
-        "Training in updating content",
-        "One dedicated contact",
-        "You own the website, domain and content",
-        "No lock-in – cancel anytime",
+      featureGroups: [
+        {
+          title: "The website",
+          items: [`First draft within ${draftDays} business days`, "Custom design in your colours", "Works on mobile, tablet and desktop", "Contact form"],
+        },
+        {
+          title: "Hosting and peace of mind",
+          items: ["Basic search engine optimisation", "Hosting and operation", "Security updates", "Changes whenever you need them"],
+        },
+        {
+          title: "You and us",
+          items: ["Training in updating content", "One dedicated contact", "You own the website, domain and content", "No lock-in – cancel anytime"],
+        },
       ],
-      cta: "Get a free proposal",
+      cta: "Get a free draft",
     },
     faq: [
       {
@@ -477,6 +478,8 @@ export const en: Content = {
       message: "What do you need help with?",
       submit: "Get a free draft",
       sending: "Sending …",
+      sentButton: "Sent",
+      contactInvalid: "Enter an email address (name@company.com) or a phone number with at least 8 digits.",
       sent: "Thank you! We have received your inquiry and will be in touch soon.",
       sentMailto: "Thank you! Your email app should now open with the message ready to send.",
       error: "Something went wrong and the message was not sent. Try again, or send us an email.",
@@ -494,7 +497,7 @@ export const en: Content = {
   cta: {
     title: "Get your website built – for free.",
     lead: `NOK 0 to build it. NOK ${prices.website} when it goes live, and NOK ${prices.hosting}/mo for hosting. No lock-in.`,
-    primary: "Get a free proposal",
+    primary: "Get a free draft",
     secondary: "See what's included",
   },
 

@@ -85,7 +85,7 @@ export function IndustryView({ lang, slug }: { lang: Lang; slug: string }) {
           </div>
           <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-sm text-ink-muted">{t.exampleNote}</p>
-            <Link href={demoHref(lang, demo.slug)} className="group inline-flex shrink-0 items-center gap-2 font-medium">
+            <Link href={demoHref(lang, demo.slug)} className="group -my-2 inline-flex min-h-11 shrink-0 items-center gap-2 font-medium">
               {t.openExample}
               <ArrowIcon className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Link>
@@ -126,7 +126,7 @@ export function IndustryView({ lang, slug }: { lang: Lang; slug: string }) {
                 <li key={d.slug}>
                   <Link
                     href={industryHref(lang, d.slug)}
-                    className="inline-block rounded-full border border-line px-4 py-2 text-sm transition-colors hover:border-navy/30 hover:bg-navy/5"
+                    className="inline-flex min-h-11 items-center rounded-full border border-line px-4 py-2 text-sm transition-colors duration-150 hover:border-navy/30 hover:bg-navy/5"
                   >
                     {fillIndustry(t.eyebrow, d.label[lang])}
                   </Link>

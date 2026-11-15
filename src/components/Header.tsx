@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import type { Content } from "@/content";
 import { href, navKeys, translatePath, type Lang } from "@/lib/routes";
-import { ease } from "@/lib/ui";
+import { ease, spring } from "@/lib/ui";
 import { Logo } from "./Logo";
 
 // Flytende «glasspille»-meny. På mobil åpnes en meny over hele skjermen der
@@ -43,7 +43,7 @@ export function Header({ lang, nav, ui }: { lang: Lang; nav: Content["nav"]; ui:
   return (
     <header className={`sticky top-0 px-3 pt-3 sm:px-5 sm:pt-4 ${open ? "z-[60]" : "z-40"}`}>
       <div className="relative z-10 mx-auto flex h-14 max-w-6xl items-center justify-between gap-6 rounded-full border border-line bg-white/80 pl-5 pr-2 shadow-[0_12px_40px_-20px_rgba(7,22,48,0.35)] backdrop-blur-xl sm:h-16 sm:pl-7">
-        <Link href={href(lang, "home")} aria-label={ui.homeLabel} onClick={close}>
+        <Link href={href(lang, "home")} aria-label={ui.homeLabel} onClick={close} className="inline-flex min-h-11 items-center">
           <Logo alt="" preload className="h-6 w-auto sm:h-7" />
         </Link>
 
@@ -72,7 +72,7 @@ export function Header({ lang, nav, ui }: { lang: Lang; nav: Content["nav"]; ui:
           <Link
             href={switchHref}
             hrefLang={other === "no" ? "nb" : "en"}
-            className="rounded-full border border-line px-3 py-1.5 text-xs font-medium uppercase tracking-wider text-ink-muted transition-colors hover:border-navy/30 hover:text-navy"
+            className="relative inline-flex h-9 items-center rounded-full border border-line px-3 text-xs font-medium uppercase tracking-wider text-ink-muted transition-colors duration-150 after:absolute after:-inset-1 after:content-[''] hover:border-navy/30 hover:text-navy"
           >
             {other === "no" ? "NO" : "EN"}
             <span className="sr-only" lang={other === "no" ? "nb" : "en"}>
@@ -82,9 +82,10 @@ export function Header({ lang, nav, ui }: { lang: Lang; nav: Content["nav"]; ui:
           </Link>
           <Link
             href={href(lang, "contact")}
-            className={`hidden whitespace-nowrap rounded-full bg-navy px-5 py-2.5 text-sm font-medium text-cream transition-[background-color,scale] duration-500 ${ease} hover:bg-navy-soft active:scale-[0.97] sm:inline-block`}
+            className={`inline-flex min-h-11 items-center whitespace-nowrap rounded-full bg-navy px-4 text-sm font-medium text-cream transition-[background-color,scale] duration-200 ${spring} hover:bg-navy-soft active:scale-[0.96] sm:px-5`}
           >
-            {ui.requestQuote}
+            <span className="sm:hidden">{ui.requestQuoteShort}</span>
+            <span className="hidden sm:inline">{ui.requestQuote}</span>
           </Link>
           <button
             type="button"

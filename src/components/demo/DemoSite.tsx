@@ -103,7 +103,16 @@ function Buttons({ cta, light = false }: { cta: string; light?: boolean }) {
   );
 }
 
-export function DemoSite({ demo, fictionalLabel }: { demo: Demo; fictionalLabel: string }) {
+export function DemoSite({
+  demo,
+  fictionalLabel,
+  caret = false,
+}: {
+  demo: Demo;
+  fictionalLabel: string;
+  /** Viser en blinkende skrivemarkør etter navnet (brukes i «Din nettside, live»). */
+  caret?: boolean;
+}) {
   const { theme } = demo;
   const vars = {
     "--d-bg": theme.bg,
@@ -125,7 +134,10 @@ export function DemoSite({ demo, fictionalLabel }: { demo: Demo; fictionalLabel:
       <div className="bg-[var(--d-bg)] font-sans text-[var(--d-fg)]">
         {/* Meny */}
         <header className="flex items-center justify-between gap-4 border-b border-[var(--d-fg)]/10 px-5 py-4 @3xl:px-12 @3xl:py-5">
-          <span className="text-sm font-semibold uppercase tracking-[0.18em]">{demo.name}</span>
+          <span className="text-sm font-semibold uppercase tracking-[0.18em]">
+            {demo.name}
+            {caret ? <span className="build-caret" aria-hidden="true" /> : null}
+          </span>
           <nav className="hidden items-center gap-8 text-sm text-[var(--d-muted)] @3xl:flex" aria-hidden="true">
             <span>Hjem</span>
             <span>Tjenester</span>

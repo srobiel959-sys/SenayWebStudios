@@ -25,7 +25,7 @@ export function DemoGallery({ lang, labels }: { lang: Lang; labels: Labels }) {
   };
 
   const tab = (active: boolean) =>
-    `shrink-0 rounded-full px-4 py-2 text-sm transition-colors ${
+    `min-h-11 shrink-0 rounded-full px-4 py-2 text-sm transition-[background-color,color,border-color,scale] duration-150 active:scale-[0.96] ${
       active ? "bg-navy text-cream" : "border border-line text-ink-muted hover:border-navy/30 hover:text-navy"
     }`;
 
@@ -56,7 +56,7 @@ export function DemoGallery({ lang, labels }: { lang: Lang; labels: Labels }) {
                     type="button"
                     aria-pressed={active}
                     onClick={() => setSlug(d.slug)}
-                    className={`w-full rounded-full px-4 py-2 text-left text-sm transition-colors lg:rounded-lg lg:py-2.5 ${
+                    className={`min-h-11 w-full rounded-full px-4 py-2 text-left text-sm transition-colors duration-150 lg:rounded-lg lg:py-2.5 ${
                       active ? "bg-navy text-cream" : "text-ink-muted hover:bg-navy/5 hover:text-navy"
                     }`}
                   >
@@ -96,7 +96,7 @@ export function DemoGallery({ lang, labels }: { lang: Lang; labels: Labels }) {
             </p>
             <Link
               href={demoHref(lang, current.slug)}
-              className="group inline-flex shrink-0 items-center gap-2 self-start rounded-full border border-navy/20 px-5 py-2.5 font-medium transition-colors hover:border-navy/40 hover:bg-navy/5 sm:self-auto"
+              className="group inline-flex min-h-11 shrink-0 items-center gap-2 self-start rounded-full border border-navy/20 px-5 py-2.5 font-medium transition-colors hover:border-navy/40 hover:bg-navy/5 sm:self-auto"
             >
               {labels.open}
               <ArrowIcon className="h-4 w-4 transition-transform group-hover:translate-x-1" />

@@ -30,7 +30,8 @@ export const no = {
     mobileMenu: "Mobilmeny",
     openMenu: "Åpne meny",
     closeMenu: "Lukk meny",
-    requestQuote: "Be om tilbud",
+    requestQuote: "Få et gratis utkast",
+    requestQuoteShort: "Gratis utkast",
     switchLanguage: "English",
     switchLanguageLabel: "Switch to English",
     readMore: "Les mer",
@@ -257,7 +258,7 @@ export const no = {
       ],
     },
     note: `Vi lager nettsiden helt gratis. Er du fornøyd, betaler du ${prices.website} kr når den går live og ${prices.hosting} kr/mnd for drift – ikke før.`,
-    cta: "Få et gratis forslag",
+    cta: "Få et gratis utkast",
   },
 
   // -------------------------------------------------------------------------
@@ -405,21 +406,22 @@ export const no = {
         text: "Sier du opp, får du med deg domenet, tekstene og bildene, og vi hjelper deg å flytte.",
       },
       featuresTitle: "Dette er inkludert",
-      features: [
-        `Første utkast innen ${draftDays} virkedager`,
-        "Skreddersydd design i dine farger",
-        "Tilpasset mobil, nettbrett og PC",
-        "Kontaktskjema",
-        "Grunnleggende søkemotoroptimalisering",
-        "Hosting og drift",
-        "Sikkerhetsoppdateringer",
-        "Endringer når du trenger dem",
-        "Opplæring i å oppdatere innhold",
-        "Fast kontaktperson",
-        "Du eier nettside, domene og innhold",
-        "Ingen binding – si opp når du vil",
+      // Tre grupper à fire, så listen er lett å skumme (Millers lov).
+      featureGroups: [
+        {
+          title: "Nettsiden",
+          items: [`Første utkast innen ${draftDays} virkedager`, "Skreddersydd design i dine farger", "Tilpasset mobil, nettbrett og PC", "Kontaktskjema"],
+        },
+        {
+          title: "Drift og trygghet",
+          items: ["Grunnleggende søkemotoroptimalisering", "Hosting og drift", "Sikkerhetsoppdateringer", "Endringer når du trenger dem"],
+        },
+        {
+          title: "Deg og oss",
+          items: ["Opplæring i å oppdatere innhold", "Fast kontaktperson", "Du eier nettside, domene og innhold", "Ingen binding – si opp når du vil"],
+        },
       ],
-      cta: "Få et gratis forslag",
+      cta: "Få et gratis utkast",
     },
     faq: [
       {
@@ -512,6 +514,8 @@ export const no = {
       message: "Hva trenger du hjelp med?",
       submit: "Få et gratis utkast",
       sending: "Sender …",
+      sentButton: "Sendt",
+      contactInvalid: "Skriv en e-postadresse (navn@firma.no) eller et telefonnummer med minst 8 sifre.",
       sent: "Takk! Vi har fått henvendelsen og tar kontakt med deg snart.",
       sentMailto: "Takk! E-postprogrammet ditt skal nå åpne seg med meldingen klar til sending.",
       error: "Noe gikk galt, og meldingen ble ikke sendt. Prøv igjen, eller send en e-post.",
@@ -529,7 +533,7 @@ export const no = {
   cta: {
     title: "Få nettsiden laget – helt gratis.",
     lead: `0 kr for å lage den. ${prices.website} kr når den går live, og ${prices.hosting} kr/mnd for drift. Ingen binding.`,
-    primary: "Få et gratis forslag",
+    primary: "Få et gratis utkast",
     secondary: "Se hva som er inkludert",
   },
 

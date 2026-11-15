@@ -119,7 +119,8 @@ export function ChatWidget({ lang, labels, nav }: { lang: Lang; labels: Content[
 
     // En kort «skriver …»-pause, så svaret føles naturlig. Kortere ved redusert bevegelse.
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const delay = reduced ? 150 : 500 + Math.min(question.length * 8, 400);
+    // Under Doherty-terskelen (400 ms), så svaret føles umiddelbart, men ikke maskinelt.
+    const delay = reduced ? 120 : 250 + Math.min(question.length * 3, 150);
     timerRef.current = setTimeout(() => {
       timerRef.current = null;
       loadMatcher()
@@ -178,7 +179,7 @@ export function ChatWidget({ lang, labels, nav }: { lang: Lang; labels: Content[
           onKeyDown={(event) => {
             if (event.key === "Escape") close();
           }}
-          className="fixed inset-x-0 bottom-0 z-50 flex h-[85dvh] flex-col overflow-hidden rounded-t-3xl border border-line bg-white shadow-[0_30px_80px_-20px_rgba(7,22,48,0.4)] sm:inset-x-auto sm:bottom-6 sm:right-6 sm:h-[min(640px,calc(100dvh-3rem))] sm:w-[400px] sm:rounded-3xl"
+          className="chat-open fixed inset-x-0 bottom-0 z-50 flex h-[85dvh] flex-col overflow-hidden rounded-t-3xl border border-line bg-white shadow-[0_30px_80px_-20px_rgba(7,22,48,0.4)] sm:inset-x-auto sm:bottom-6 sm:right-6 sm:h-[min(640px,calc(100dvh-3rem))] sm:w-[400px] sm:rounded-3xl"
         >
           <div className="relative flex items-start justify-between gap-4 overflow-hidden bg-navy px-5 py-4 text-cream">
             <div className="pointer-events-none absolute -right-16 -top-20 h-48 w-48 rounded-full bg-[radial-gradient(closest-side,rgba(59,130,246,0.3),transparent)]" />
@@ -192,7 +193,7 @@ export function ChatWidget({ lang, labels, nav }: { lang: Lang; labels: Content[
               type="button"
               onClick={close}
               aria-label={labels.close}
-              className="relative -mr-1 rounded-full p-2 transition-colors hover:bg-white/10"
+              className="relative -mr-2 -mt-1 inline-flex h-11 w-11 items-center justify-center rounded-full transition-colors duration-150 hover:bg-white/10"
             >
               <CloseIcon />
             </button>
@@ -225,7 +226,7 @@ export function ChatWidget({ lang, labels, nav }: { lang: Lang; labels: Content[
                           key={key}
                           href={href(lang, key)}
                           onClick={close}
-                          className="inline-flex items-center gap-1.5 rounded-full border border-navy/15 bg-navy/[0.04] px-3.5 py-1.5 text-sm font-medium text-navy transition-colors hover:bg-navy/10"
+                          className="inline-flex min-h-11 items-center gap-1.5 rounded-full border border-navy/15 bg-navy/[0.04] px-4 py-2 text-sm font-medium text-navy transition-colors duration-150 hover:bg-navy/10"
                         >
                           {nav[key]}
                           <ArrowIcon className="h-3.5 w-3.5" />
@@ -258,7 +259,7 @@ export function ChatWidget({ lang, labels, nav }: { lang: Lang; labels: Content[
                     <button
                       type="button"
                       onClick={() => send(suggestion)}
-                      className="rounded-full border border-navy/15 px-3.5 py-2 text-left text-sm transition-colors hover:border-navy/30 hover:bg-navy/5"
+                      className="min-h-11 rounded-full border border-navy/15 px-4 py-2 text-left text-sm transition-[background-color,border-color,scale] duration-150 hover:border-navy/30 hover:bg-navy/5 active:scale-[0.96]"
                     >
                       {suggestion}
                     </button>
@@ -288,14 +289,14 @@ export function ChatWidget({ lang, labels, nav }: { lang: Lang; labels: Content[
                 type="submit"
                 disabled={busy || !input.trim()}
                 aria-label={labels.send}
-                className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-navy text-cream transition-colors hover:bg-navy-soft disabled:opacity-40"
+                className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-navy text-cream transition-[background-color,scale] duration-150 hover:bg-navy-soft active:scale-90 disabled:opacity-40"
               >
                 <ArrowIcon className="h-5 w-5" />
               </button>
             </form>
             <div className="mt-2.5 flex flex-wrap items-center justify-between gap-x-4 gap-y-1 text-xs text-ink-muted">
               <p>{labels.disclaimer}</p>
-              <Link href={href(lang, "contact")} onClick={close} className="font-medium text-navy underline underline-offset-2">
+              <Link href={href(lang, "contact")} onClick={close} className="-my-2 py-2 font-medium text-navy underline underline-offset-2">
                 {labels.contact}
               </Link>
             </div>

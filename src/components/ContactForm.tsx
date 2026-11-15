@@ -4,7 +4,7 @@ import { useEffect, useRef, useState, type FormEvent } from "react";
 import type { Content } from "@/content";
 import { site } from "@/content/shared";
 import { btnArrow } from "@/lib/ui";
-import { ArrowCircle } from "./Icons";
+import { ArrowCircle, CheckIcon } from "./Icons";
 
 // Henvendelser sendes til Formspree (https://formspree.io), som videresender dem på e-post.
 // Skjema-ID-en settes i NEXT_PUBLIC_FORMSPREE_ID. Mangler den, åpnes brukerens
@@ -20,9 +20,19 @@ const fieldClass =
 
 type Status = "idle" | "sending" | "sent" | "mailto" | "error";
 
+/** Godtar e-post eller telefon slik folk faktisk skriver dem: «+47 912 34 567», «912-34-567», «ola@firma.no». */
+export function isContact(value: string) {
+  const v = value.trim();
+  if (/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)) return true;
+  const digits = v.replace(/[\s+().-]/g, "");
+  return /^\d{8,15}$/.test(digits);
+}
+
 export function ContactForm({ labels, prefillMessage }: { labels: Content["contact"]["form"]; prefillMessage: string }) {
   const [status, setStatus] = useState<Status>("idle");
   const [copied, setCopied] = useState(false);
+  const [contactError, setContactError] = useState(false);
+  const [shakeKey, setShakeKey] = useState(0);
   const formRef = useRef<HTMLFormElement>(null);
 
   // Kommer kunden fra «Din nettside, live» på forsiden, fylles bedrift og melding ut.
@@ -39,6 +49,13 @@ export function ContactForm({ labels, prefillMessage }: { labels: Content["conta
       messageField.value = prefillMessage.replace("{bransje}", industry.toLowerCase()).slice(0, maxLength.melding);
     }
   }, [prefillMessage]);
+
+  // Etter en feil: flytt fokus til feltet når det er tegnet på nytt (det ristes ved hjelp av key).
+  useEffect(() => {
+    if (!shakeKey) return;
+    const field = formRef.current?.elements.namedItem("kontakt");
+    if (field instanceof HTMLInputElement) field.focus();
+  }, [shakeKey]);
 
   async function copyEmail() {
     try {
@@ -66,6 +83,13 @@ export function ContactForm({ labels, prefillMessage }: { labels: Content["conta
       .trim()
       .slice(0, maxLength.melding);
     const subject = `${labels.subject} – ${company}`;
+
+    if (!isContact(contact)) {
+      setContactError(true);
+      setShakeKey((k) => k + 1);
+      return;
+    }
+    setContactError(false);
 
     if (!formspreeId) {
       const body = [
@@ -133,7 +157,7 @@ export function ContactForm({ labels, prefillMessage }: { labels: Content["conta
           className={fieldClass}
         />
       </div>
-      <div>
+      <div key={shakeKey} className={shakeKey ? "shake" : undefined}>
         <label htmlFor="kontakt" className="text-sm font-medium">
           {labels.contact}
         </label>
@@ -141,11 +165,20 @@ export function ContactForm({ labels, prefillMessage }: { labels: Content["conta
           id="kontakt"
           name="kontakt"
           type="text"
+          inputMode="email"
           autoComplete="email"
           required
           maxLength={maxLength.kontakt}
-          className={fieldClass}
+          aria-invalid={contactError || undefined}
+          aria-describedby={contactError ? "kontakt-feil" : undefined}
+          onChange={() => contactError && setContactError(false)}
+          className={`${fieldClass} ${contactError ? "border-[#b42318]" : ""}`}
         />
+        {contactError ? (
+          <p id="kontakt-feil" className="mt-2 text-sm text-[#b42318]">
+            {labels.contactInvalid}
+          </p>
+        ) : null}
       </div>
       <div className="sm:col-span-2">
         <label htmlFor="navn" className="text-sm font-medium">
@@ -165,9 +198,19 @@ export function ContactForm({ labels, prefillMessage }: { labels: Content["conta
         <input id="_gotcha" name="_gotcha" type="text" tabIndex={-1} autoComplete="off" />
       </div>
       <div className="flex flex-col gap-4 sm:col-span-2 sm:flex-row sm:items-center sm:justify-between">
-        <button type="submit" disabled={status === "sending"} className={`${btnArrow} disabled:opacity-60`}>
-          {status === "sending" ? labels.sending : labels.submit}
-          <ArrowCircle />
+        <button
+          type="submit"
+          disabled={status === "sending"}
+          className={`${btnArrow} disabled:opacity-60 ${status === "sent" ? "bg-[#0c7d4c] hover:bg-[#0c7d4c]" : ""}`}
+        >
+          {status === "sending" ? labels.sending : status === "sent" ? labels.sentButton : labels.submit}
+          {status === "sent" ? (
+            <span aria-hidden="true" className="pop flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/20">
+              <CheckIcon className="check-draw h-5 w-5" />
+            </span>
+          ) : (
+            <ArrowCircle />
+          )}
         </button>
         <p role="status" aria-live="polite" className={`text-sm sm:text-right ${status === "error" ? "text-[#b42318]" : "text-ink-muted"}`}>
           {statusText}
@@ -181,9 +224,16 @@ export function ContactForm({ labels, prefillMessage }: { labels: Content["conta
           <button
             type="button"
             onClick={copyEmail}
-            className="mt-3 rounded-full border border-navy/20 px-4 py-2 text-navy transition-colors hover:border-navy/40 hover:bg-navy/5"
+            className="mt-3 inline-flex min-h-11 items-center rounded-full border border-navy/20 px-4 py-2 text-navy transition-colors duration-150 hover:border-navy/40 hover:bg-navy/5"
           >
-            {copied ? labels.copied : labels.copy}
+            {copied ? (
+              <span className="inline-flex items-center gap-1.5">
+                <CheckIcon className="pop check-draw h-4 w-4" />
+                {labels.copied}
+              </span>
+            ) : (
+              labels.copy
+            )}
           </button>
         </div>
       ) : null}

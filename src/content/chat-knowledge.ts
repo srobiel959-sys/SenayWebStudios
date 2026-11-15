@@ -263,8 +263,8 @@ export const topics: Topic[] = [
     id: "included",
     strong: ["inkludert", "inkluderer", "inneholder", "included", "include", "includes", "hva får jeg", "what do i get", "pakken", "pakke", "package"],
     answer: {
-      no: `Dette er inkludert i pakken:\n${list(no.pricing.bundle.features)}`,
-      en: `This is included in the package:\n${list(en.pricing.bundle.features)}`,
+      no: `Dette er inkludert i pakken:\n${list(no.pricing.bundle.featureGroups.flatMap((g) => g.items))}`,
+      en: `This is included in the package:\n${list(en.pricing.bundle.featureGroups.flatMap((g) => g.items))}`,
     },
     links: ["pricing"],
     followUps: {
