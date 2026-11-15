@@ -1,10 +1,11 @@
 import Image from "next/image";
 
-// Logofilene ligger i /public/brand/ og er endelige – de skal aldri endres.
+// Logofilene ligger i /public/brand/. Ordmerket «Senay Studio» er endelig og skal aldri endres.
+// Linjen under ordmerket er satt i Jost 500 med store bokstaver og går like bredt som ordmerket.
 // All tekst i SVG-ene er konvertert til former, så logoen er uavhengig av fonter.
 // width/height under matcher filenes viewBox, så logoen aldri strekkes.
 //   logo-horizontal-*.svg  378×70   «Senay Studio» (navigasjon)
-//   logo-*.svg             390×114  «Senay Studio» + «Nettsider for bedrifter» (hovedlogo)
+//   logo-*.svg             390×114  «Senay Studio» + «Nettsider for små og store bedrifter» (hovedlogo)
 // S/-monogrammet brukes bare som ikon (favicon, app-ikon, profilbilde), ikke på sidene.
 
 type Tone = "dark" | "light";
@@ -35,7 +36,7 @@ export function Logo({ className = "h-8 w-auto", tone = "dark", alt = "Senay Stu
   );
 }
 
-/** Hovedlogoen: «Senay Studio» + «Nettsider for bedrifter». */
+/** Hovedlogoen: «Senay Studio» + «Nettsider for små og store bedrifter». */
 export function MainLogo({ className = "h-auto w-60", tone = "dark", alt = "Senay Studio", preload, loading }: LogoProps) {
   return (
     <Image

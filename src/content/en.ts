@@ -5,7 +5,7 @@ import { draftDays, lighthouse, prices } from "./shared";
 
 export const en: Content = {
   site: {
-    tagline: "Websites for businesses",
+    tagline: "Websites for small and large businesses",
     description:
       "Senay Studio builds fast websites for businesses. We build your website for free. If you are happy, you pay NOK 4,599 when it goes live and NOK 799/mo for hosting. No lock-in.",
     locale: "en_GB",
@@ -59,7 +59,7 @@ export const en: Content = {
   },
 
   meta: {
-    home: { title: "Senay Studio – Websites for businesses", description: "" },
+    home: { title: "Senay Studio – Websites for small and large businesses", description: "" },
     why: {
       title: "Why a website",
       description:

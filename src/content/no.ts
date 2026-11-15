@@ -5,7 +5,7 @@ import { draftDays, lighthouse, prices } from "./shared";
 
 export const no = {
   site: {
-    tagline: "Nettsider for bedrifter",
+    tagline: "Nettsider for små og store bedrifter",
     description:
       "Senay Studio lager raske nettsider for bedrifter. Vi lager nettsiden gratis. Er du fornøyd, betaler du 4 599 kr når den går live og 799 kr/mnd for drift. Ingen binding.",
     locale: "nb_NO",
@@ -59,7 +59,7 @@ export const no = {
   },
 
   meta: {
-    home: { title: "Senay Studio – Nettsider for bedrifter", description: "" },
+    home: { title: "Senay Studio – Nettsider for små og store bedrifter", description: "" },
     why: {
       title: "Hvorfor nettside",
       description:

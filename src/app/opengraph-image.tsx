@@ -3,7 +3,7 @@ import { join } from "node:path";
 import { ImageResponse } from "next/og";
 import { site } from "@/content/shared";
 
-export const alt = `${site.name} – Nettsider for bedrifter`;
+export const alt = `${site.name} – Nettsider for små og store bedrifter`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
