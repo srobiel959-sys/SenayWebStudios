@@ -9,15 +9,15 @@ import { Reveal } from "./Reveal";
 
 export function CtaBand({ lang, c }: { lang: Lang; c: Content }) {
   return (
-    <section aria-labelledby="cta-tittel" className="py-16 sm:py-24">
+    <section aria-labelledby="cta-tittel" className="py-10 sm:py-24">
       <div className={container}>
-        <Reveal className="relative overflow-hidden rounded-3xl bg-navy px-6 py-20 text-center text-cream sm:px-12 sm:py-28">
+        <Reveal className="relative overflow-hidden rounded-3xl bg-navy px-6 py-14 text-center text-cream sm:px-12 sm:py-28">
           <div className="relative">
-            <h2 id="cta-tittel" className="mx-auto max-w-4xl text-balance font-display text-5xl leading-[1.02] tracking-tight sm:text-6xl lg:text-7xl">
+            <h2 id="cta-tittel" className="mx-auto max-w-4xl text-balance font-display text-[2.25rem] leading-[1.08] tracking-tight sm:text-6xl sm:leading-[1.02] lg:text-7xl">
               {c.cta.title}
             </h2>
-            <p className="mx-auto mt-7 max-w-xl text-pretty text-lg text-cream-muted">{c.cta.lead}</p>
-            <div className="mt-11 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center sm:gap-4">
+            <p className="mx-auto mt-5 max-w-xl text-pretty text-base text-cream-muted sm:mt-7 sm:text-lg">{c.cta.lead}</p>
+            <div className="mt-8 flex flex-col items-stretch justify-center gap-3 sm:mt-11 sm:flex-row sm:items-center sm:gap-4">
               <Link href={href(lang, "contact")} className={btnArrowLight}>
                 {c.cta.primary}
                 <ArrowCircle tone="light" />

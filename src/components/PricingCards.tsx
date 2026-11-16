@@ -24,7 +24,7 @@ export function PricingCards({ lang, c }: { lang: Lang; c: Content }) {
       <div className="relative grid lg:grid-cols-12">
         <div className="p-8 sm:p-12 lg:col-span-7">
           <div className="flex flex-wrap items-center gap-4">
-            <h3 className="font-display text-4xl tracking-tight sm:text-5xl">{b.name}</h3>
+            <h3 className="font-display text-[2rem] tracking-tight sm:text-5xl">{b.name}</h3>
             <span className="rounded-full border border-white/25 px-3 py-1 text-sm">{b.badge}</span>
           </div>
           <p className="mt-4 max-w-xl text-lg leading-relaxed text-cream-muted">{b.description}</p>

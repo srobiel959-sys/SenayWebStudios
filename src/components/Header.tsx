@@ -42,9 +42,9 @@ export function Header({ lang, nav, ui }: { lang: Lang; nav: Content["nav"]; ui:
 
   return (
     <header className={`sticky top-0 px-3 pt-3 sm:px-5 sm:pt-4 ${open ? "z-[60]" : "z-40"}`}>
-      <div className="relative z-10 mx-auto flex h-14 max-w-6xl items-center justify-between gap-6 rounded-full border border-line bg-white/80 pl-5 pr-2 shadow-[0_12px_40px_-20px_rgba(7,22,48,0.35)] backdrop-blur-xl sm:h-16 sm:pl-7">
-        <Link href={href(lang, "home")} aria-label={ui.homeLabel} onClick={close} className="inline-flex min-h-11 items-center">
-          <Logo alt="" preload className="h-6 w-auto sm:h-7" />
+      <div className="relative z-10 mx-auto flex h-14 max-w-6xl items-center justify-between gap-3 rounded-full border border-line bg-white/80 pl-5 pr-2 sm:gap-6 shadow-[0_12px_40px_-20px_rgba(7,22,48,0.35)] backdrop-blur-xl sm:h-16 sm:pl-7">
+        <Link href={href(lang, "home")} aria-label={ui.homeLabel} onClick={close} className="inline-flex min-h-11 shrink-0 items-center">
+          <Logo alt="" preload className="h-6 w-auto shrink-0 sm:h-7" />
         </Link>
 
         <nav aria-label={ui.mainMenu} className="hidden xl:block">
@@ -82,7 +82,7 @@ export function Header({ lang, nav, ui }: { lang: Lang; nav: Content["nav"]; ui:
           </Link>
           <Link
             href={href(lang, "contact")}
-            className={`inline-flex min-h-11 items-center whitespace-nowrap rounded-full bg-navy px-4 text-sm font-medium text-cream transition-[background-color,scale] duration-200 ${spring} hover:bg-navy-soft active:scale-[0.96] sm:px-5`}
+            className={`inline-flex min-h-11 items-center whitespace-nowrap rounded-full bg-navy px-4 text-sm font-medium text-cream transition-[background-color,scale] duration-200 ${spring} hover:bg-navy-soft active:scale-[0.96] max-[389px]:hidden sm:px-5`}
           >
             <span className="sm:hidden">{ui.requestQuoteShort}</span>
             <span className="hidden sm:inline">{ui.requestQuote}</span>

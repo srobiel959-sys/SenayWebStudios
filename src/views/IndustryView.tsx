@@ -44,7 +44,7 @@ export function IndustryView({ lang, slug }: { lang: Lang; slug: string }) {
         </div>
       </PageHero>
 
-      <section aria-labelledby="behov-tittel" className="py-20 sm:py-28">
+      <section aria-labelledby="behov-tittel" className="py-14 sm:py-28">
         <div className={`${container} grid gap-12 lg:grid-cols-12`}>
           <Reveal className="lg:col-span-5">
             <SectionHeading id="behov-tittel" title={t.needsTitle} lead={t.needsLead} />
@@ -64,10 +64,10 @@ export function IndustryView({ lang, slug }: { lang: Lang; slug: string }) {
         </div>
       </section>
 
-      <section id="eksempel" aria-labelledby="eksempel-tittel" className="scroll-mt-24 border-t border-line bg-sand py-20 sm:py-28">
+      <section id="eksempel" aria-labelledby="eksempel-tittel" className="scroll-mt-24 border-t border-line bg-sand py-14 sm:py-28">
         <div className={container}>
           <Reveal>
-            <h2 id="eksempel-tittel" className="font-display text-4xl tracking-tight sm:text-5xl">
+            <h2 id="eksempel-tittel" className="font-display text-[2rem] tracking-tight sm:text-5xl">
               {t.exampleTitle}
             </h2>
           </Reveal>
@@ -88,9 +88,9 @@ export function IndustryView({ lang, slug }: { lang: Lang; slug: string }) {
         </div>
       </section>
 
-      <section aria-labelledby="pris-tittel" className="py-20 sm:py-28">
+      <section aria-labelledby="pris-tittel" className="py-14 sm:py-28">
         <div className={container}>
-          <h2 id="pris-tittel" className="font-display text-4xl tracking-tight sm:text-5xl">
+          <h2 id="pris-tittel" className="font-display text-[2rem] tracking-tight sm:text-5xl">
             {t.pricingTitle}
           </h2>
           <Reveal className="mt-10">
@@ -99,7 +99,7 @@ export function IndustryView({ lang, slug }: { lang: Lang; slug: string }) {
         </div>
       </section>
 
-      <section aria-labelledby="sporsmal-tittel" className="border-t border-line py-20 sm:py-28">
+      <section aria-labelledby="sporsmal-tittel" className="border-t border-line py-14 sm:py-28">
         <div className={`${container} grid gap-12 lg:grid-cols-12`}>
           <Reveal className="lg:sticky lg:top-32 lg:col-span-4 lg:self-start">
             <SectionHeading id="sporsmal-tittel" title={c.pricing.faqTitle} />

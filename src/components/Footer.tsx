@@ -12,8 +12,8 @@ const footerIndustries = ["frisor", "tannlege", "restaurant", "elektriker", "ror
 export function Footer({ lang, c }: { lang: Lang; c: Content }) {
   return (
     <footer className="bg-navy text-cream">
-      <div className={`${container} grid gap-12 py-16 md:grid-cols-12`}>
-        <div className="flex flex-col items-start gap-4 md:col-span-3">
+      <div className={`${container} grid grid-cols-2 gap-x-6 gap-y-10 py-12 md:grid-cols-12 md:gap-12 md:py-16`}>
+        <div className="col-span-2 flex flex-col items-start gap-4 md:col-span-3">
           {/* Hovedlogoen (med tagline). Krem-varianten, fordi footeren har mørk bakgrunn. */}
           <MainLogo tone="light" lang={lang} loading="eager" className="h-auto w-56" />
         </div>
@@ -52,7 +52,7 @@ export function Footer({ lang, c }: { lang: Lang; c: Content }) {
           </ul>
         </nav>
 
-        <div className="md:col-span-3">
+        <div className="col-span-2 md:col-span-3">
           <h2 className="text-sm font-medium text-cream-muted">{c.ui.footerContact}</h2>
           <p className="mt-4">
             <a href={`mailto:${site.email}`} className="underline underline-offset-4 hover:text-cream-muted">

@@ -80,6 +80,19 @@ export function ChatWidget({ lang, labels, nav }: { lang: Lang; labels: Content[
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const pathname = usePathname();
   const wasOpen = useRef(false);
+  // På mobil venter chat-knappen til man har scrollet litt, så den ikke dekker knappene øverst.
+  const [tucked, setTucked] = useState(true);
+  useEffect(() => {
+    const phone = window.matchMedia("(max-width: 639px)");
+    const update = () => setTucked(phone.matches && window.scrollY < 240);
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    phone.addEventListener("change", update);
+    return () => {
+      window.removeEventListener("scroll", update);
+      phone.removeEventListener("change", update);
+    };
+  }, []);
 
   // Fokus inn i chatten når den åpnes, og tilbake til knappen når den lukkes.
   useEffect(() => {
@@ -163,10 +176,14 @@ export function ChatWidget({ lang, labels, nav }: { lang: Lang; labels: Content[
           type="button"
           onClick={() => setOpen(true)}
           aria-haspopup="dialog"
-          className="fixed bottom-4 right-4 z-50 inline-flex items-center gap-2 rounded-full bg-navy px-5 py-3.5 font-medium text-cream shadow-[0_12px_30px_-12px_rgba(7,22,48,0.6)] ring-1 ring-white/20 transition-[background-color,transform] duration-300 hover:-translate-y-0.5 hover:bg-navy-soft motion-reduce:hover:translate-y-0 sm:bottom-6 sm:right-6"
+          inert={tucked || undefined}
+          className={`fixed bottom-4 right-4 z-50 inline-flex h-12 w-12 items-center justify-center gap-2 rounded-full bg-navy font-medium text-cream shadow-[0_12px_30px_-12px_rgba(7,22,48,0.6)] ring-1 ring-white/20 transition-[background-color,transform,opacity] duration-300 hover:-translate-y-0.5 hover:bg-navy-soft motion-reduce:hover:translate-y-0 sm:bottom-6 sm:right-6 sm:h-auto sm:w-auto sm:px-5 sm:py-3.5 ${
+            tucked ? "max-sm:translate-y-20 max-sm:opacity-0" : ""
+          }`}
         >
           <ChatIcon />
-          {labels.open}
+          {/* På mobil bare ikonet, så knappen ikke dekker innholdet. Teksten leses fortsatt opp. */}
+          <span className="max-sm:sr-only">{labels.open}</span>
           <span className="sr-only"> – {labels.openLabel}</span>
         </button>
       )}

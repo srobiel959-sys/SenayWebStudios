@@ -9,9 +9,9 @@ export function ContactView({ lang }: { lang: Lang }) {
   const { contact } = c;
   return (
     <section aria-labelledby="side-tittel" className="bg-sand">
-      <div className={`${container} grid gap-16 py-20 sm:py-28 lg:grid-cols-12 lg:py-32`}>
+      <div className={`${container} grid gap-10 py-12 sm:gap-16 sm:py-28 lg:grid-cols-12 lg:py-32`}>
         <div className="lg:col-span-5">
-          <h1 id="side-tittel" className="hero-in font-display text-[2.6rem] leading-[1.05] tracking-tight sm:text-6xl">
+          <h1 id="side-tittel" className="hero-in font-display text-[2.25rem] leading-[1.08] tracking-tight sm:text-6xl sm:leading-[1.05]">
             {contact.title}
           </h1>
           <p className="hero-in hero-in-3 mt-8 text-lg leading-relaxed text-ink-muted">{contact.lead}</p>

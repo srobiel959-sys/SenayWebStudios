@@ -34,7 +34,7 @@ export function ScaledPreview({
   return (
     <div
       ref={outer}
-      className={`relative overflow-hidden ${className ?? (mobile ? "h-[34rem]" : "aspect-[16/10]")}`}
+      className={`relative overflow-hidden ${className ?? (mobile ? "h-[28rem]" : "aspect-[16/10]")}`}
       // Forhåndsvisningen er dekor: skjult for skjermlesere og ikke fokuserbar.
       aria-hidden="true"
       inert
