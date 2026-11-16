@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { getContent, site } from "@/content";
 import { bodoni, jost } from "@/lib/fonts";
+import { shareImage } from "@/lib/meta";
 import type { Lang } from "@/lib/routes";
 import { ChatWidget } from "./ChatWidget";
 import { Footer } from "./Footer";
@@ -18,8 +19,8 @@ export function rootMetadata(lang: Lang): Metadata {
     title: { default: title, template: `%s | ${site.name}` },
     description: c.site.description,
     applicationName: site.name,
-    openGraph: { type: "website", locale: c.site.locale, siteName: site.name, title, description: c.site.description },
-    twitter: { card: "summary_large_image" },
+    openGraph: { type: "website", locale: c.site.locale, siteName: site.name, title, description: c.site.description, images: [shareImage(lang)] },
+    twitter: { card: "summary_large_image", images: [shareImage(lang).url] },
     robots: { index: true, follow: true },
   };
 }

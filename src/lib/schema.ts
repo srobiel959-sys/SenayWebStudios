@@ -13,7 +13,7 @@ export function businessSchema(lang: Lang) {
     url: site.url,
     email: site.email,
     logo: `${site.url}/brand/icon-512.png`,
-    image: `${site.url}/opengraph-image`,
+    image: `${site.url}/og/no.png`,
     description: c.site.description,
     slogan: c.site.tagline,
     areaServed: { "@type": "Country", name: "Norge" },
