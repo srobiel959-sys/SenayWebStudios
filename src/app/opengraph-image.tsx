@@ -3,7 +3,7 @@ import { join } from "node:path";
 import { ImageResponse } from "next/og";
 import { site } from "@/content/shared";
 
-export const alt = `${site.name} – Nettsider for bedrifter`;
+export const alt = `${site.name} – Nettsider for små og store bedrifter`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -23,8 +23,8 @@ export default async function OpengraphImage() {
           background: "#071630",
         }}
       >
-        {/* logo-cream.svg er 520×366 */}
-        <img src={logoSrc} alt="" width={624} height={439} />
+        {/* logo-cream.svg er 390×114 (hovedlogoen med tagline) */}
+        <img src={logoSrc} alt="" width={780} height={228} />
       </div>
     ),
     size,

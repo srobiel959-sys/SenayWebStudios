@@ -1,0 +1,148 @@
+/* Bevegelse i eksempelsidene (DemoSite + DemoMotion). Rolig og kort,
+   og helt av ved redusert bevegelse. */
+
+/* Toppen: teksten kommer inn trinnvis, bildet «puster» rolig inn. */
+@keyframes dm-rise {
+  from {
+    opacity: 0.01;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.dm-rise {
+  animation: dm-rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.dm-d1 { animation-delay: 90ms; }
+.dm-d2 { animation-delay: 200ms; }
+.dm-d3 { animation-delay: 320ms; }
+.dm-d4 { animation-delay: 440ms; }
+
+@keyframes dm-kenburns {
+  from {
+    transform: scale(1.12);
+    opacity: 0.4;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.dm-kenburns {
+  animation: dm-kenburns 1.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+/* Elementer som tones inn ved scroll. Skjules bare når JavaScript er klart. */
+.demo-motion[data-motion-ready] [data-motion="rise"]:not([data-shown]) {
+  opacity: 0;
+  transform: translateY(28px);
+}
+.demo-motion [data-motion="rise"] {
+  transition:
+    opacity 0.8s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+/* Lister: hvert punkt kommer inn etter hverandre. */
+.demo-motion[data-motion-ready] [data-motion="stagger"]:not([data-shown]) > * {
+  opacity: 0;
+  transform: translateY(18px);
+}
+.demo-motion [data-motion="stagger"] > * {
+  transition:
+    opacity 0.7s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1),
+    box-shadow 0.3s ease,
+    translate 0.3s ease;
+}
+.demo-motion [data-motion="stagger"] > :nth-child(2) { transition-delay: 80ms, 80ms, 0s, 0s; }
+.demo-motion [data-motion="stagger"] > :nth-child(3) { transition-delay: 160ms, 160ms, 0s, 0s; }
+.demo-motion [data-motion="stagger"] > :nth-child(4) { transition-delay: 240ms, 240ms, 0s, 0s; }
+.demo-motion [data-motion="stagger"] > :nth-child(5) { transition-delay: 320ms, 320ms, 0s, 0s; }
+.demo-motion [data-motion="stagger"] > :nth-child(6) { transition-delay: 400ms, 400ms, 0s, 0s; }
+
+/* Ikonene i fordelsraden tegnes når raden kommer til syne. */
+.demo-motion .dm-draw path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 1.1s cubic-bezier(0.65, 0, 0.35, 1) 0.15s;
+}
+.demo-motion[data-motion-ready] [data-motion]:not([data-shown]) .dm-draw path {
+  stroke-dashoffset: 1;
+}
+
+/* Bilder avsløres nedenfra med et lite zoom ut. */
+.demo-motion [data-motion="image"] {
+  transition: clip-path 1.1s cubic-bezier(0.65, 0, 0.35, 1);
+  clip-path: inset(0 0 0 0 round 1.5rem);
+}
+.demo-motion [data-motion="image"] img {
+  transition: transform 1.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.demo-motion[data-motion-ready] [data-motion="image"]:not([data-shown]) {
+  clip-path: inset(100% 0 0 0 round 1.5rem);
+}
+.demo-motion[data-motion-ready] [data-motion="image"]:not([data-shown]) img {
+  transform: scale(1.15);
+}
+
+/* Avslutningsbåndet: en rolig lysstripe som glir forbi. */
+@keyframes dm-sheen {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(100%); }
+}
+.dm-sheen {
+  position: relative;
+  overflow: hidden;
+}
+.dm-sheen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, transparent 30%, rgb(255 255 255 / 0.12) 50%, transparent 70%);
+  animation: dm-sheen 6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* Grønn «åpent»-prikk som pulserer rolig. */
+@keyframes dm-pulse {
+  0% { box-shadow: 0 0 0 0 rgb(34 197 94 / 0.55); }
+  70%, 100% { box-shadow: 0 0 0 7px rgb(34 197 94 / 0); }
+}
+.dm-pulse {
+  animation: dm-pulse 2.2s ease-out infinite;
+}
+
+/* Myk overgang når man bytter bransje i galleriet. */
+/* Bruker «translate», så skaleringen (transform) på forhåndsvisningen ikke overstyres. */
+@keyframes dm-swap {
+  from {
+    opacity: 0;
+    translate: 0 10px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+.dm-swap {
+  animation: dm-swap 0.55s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dm-rise,
+  .dm-kenburns,
+  .dm-pulse,
+  .dm-swap,
+  .dm-sheen::before {
+    animation: none;
+  }
+  .demo-motion [data-motion],
+  .demo-motion [data-motion] > *,
+  .demo-motion [data-motion] img,
+  .demo-motion .dm-draw path {
+    transition: none;
+  }
+}

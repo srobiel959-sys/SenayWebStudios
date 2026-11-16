@@ -1,6 +1,6 @@
-# Senay Web Studio
+# Senay Studio
 
-Nettsiden til [senaywebstudio.no](https://senaywebstudio.no) – Next.js (App Router), TypeScript og Tailwind CSS, klar for Vercel.
+Nettsiden til [senaystudio.no](https://senaystudio.no) – Next.js (App Router), TypeScript og Tailwind CSS, klar for Vercel.
 
 ## Kom i gang
 
@@ -21,22 +21,66 @@ npm run build
 - `src/components/` – felles deler: `Header`, `Footer`, `PageHero`, `PricingCards`, `AgencyCompare`, `Faq`, `CtaBand`, `Reveal`, og `demo/` (galleri og eksempelnettside).
 - `public/brand/` – logofilene. Navy #071630 · Krem #FAF8F5.
 
+## Bilder til eksempelsidene
+
+Legg bildene i `public/demo/` med disse navnene, så kobles de til automatisk ved neste bygg (`scripts/demo-photos.mjs` kjøres før `dev` og `build`):
+
+- `<slug>-hero.jpg` – toppbildet, liggende 16:9
+- `<slug>-om.jpg` – ved «Om oss», stående 4:5
+- `<slug>-detalj.jpg` – ved tjenester og priser, kvadratisk 1:1
+
+`<slug>` er bransjen i adressen, f.eks. `frisor`, `pizzeria`, `bilverksted` (se `src/content/demos.ts`). Mangler et bilde, vises illustrasjonen som før. Bransjene i `bleedHero` (`src/content/demo-photos.ts`) får toppbildet over hele flaten med teksten oppå.
+
+## Chat-assistent
+
+«Spør oss»-boblen nederst til høyre er en chat-assistent med ferdige svar – ingen AI, ingen API-nøkkel og ingen kostnad. Alt skjer i nettleseren, og ingenting lagres.
+
+- `src/content/chat-knowledge.ts` – emnene: nøkkelord og svar på norsk og engelsk. Svar om pris, prosess og innhold hentes fra resten av `src/content/`, så de alltid stemmer med sidene. Legg til et emne her for å lære assistenten noe nytt.
+- `src/lib/chat-match.ts` – finner emnet som passer best (tåler bøyninger og én skrivefeil). Finner den ingenting, henviser den til kontaktsiden.
+- `src/components/ChatWidget.tsx` – chatvinduet.
+
+## Kontaktskjema
+
+Henvendelser sendes til [Formspree](https://formspree.io), som videresender dem på e-post (gratis inntil 50 i måneden). Lag et skjema der, og legg ID-en (for eksempel `xyzabcde` fra `https://formspree.io/f/xyzabcde`) i Vercel under Settings → Environment Variables som `NEXT_PUBLIC_FORMSPREE_ID`, og bygg på nytt. ID-en er ikke hemmelig. Uten den åpner skjemaet brukerens e-postprogram i stedet.
+
+## Bransjesider
+
+`/nettside-for/[slug]` (engelsk: `/en/website-for/[slug]`) er én side per bransje i `src/content/demos.ts`, laget for å bli funnet på Google. Teksten ligger i `industry` i `src/content/no.ts` og `en.ts`, og `{bransje}` byttes ut med bransjenavnet. Hastighetstallene på forsiden ligger i `lighthouse` i `src/content/shared.ts` – mål på nytt før du endrer dem.
+
 ## Sikkerhet
 
-Nettsiden er statisk. Den har ingen innlogging, database, API-ruter eller hemmelige nøkler, så det finnes ingenting der å stjele eller logge inn på. Det som er på plass:
+Nettsiden er statisk. Den har ingen innlogging, API-ruter eller hemmelige nøkler i produksjon, så det finnes ingenting der å stjele eller logge inn på. Unntaket er engangslenkene til forhåndsvisningene (se under), som bare er aktive på Vercel-forhåndsvisninger. Det som er på plass:
 
 - Sikkerhetshoder for alle sider i `next.config.ts`: Content-Security-Policy (bare innhold fra nettsiden selv), HSTS, `X-Frame-Options`, `nosniff`, Referrer-Policy, Permissions-Policy og Cross-Origin-Opener-Policy. `X-Powered-By` er slått av.
-- Det brukere skriver i skjemaet vises som ren tekst og sendes ikke til noen server. Skjemafeltene har maks lengde.
+- Alt brukere skriver (chat og skjema) vises som ren tekst. Chatten sender ingenting noe sted; kontaktskjemaet sender bare til Formspree. Skjemafeltene har maks lengde, og en skjult felle stopper enkle spamroboter.
 - `.env*` er utelatt fra git. Sjekk `npm audit --omit=dev` før hver lansering.
 
 Kommer det senere et skjema-API, en innlogging eller en database: legg nøkler i Vercels miljøvariabler (aldri i koden), valider alt på serveren, og legg på rate limiting på endepunktene.
+
+## Engangslenker til forhåndsvisninger
+
+Forhåndsvisningene på Vercel (`VERCEL_ENV=preview`) er lukket bak engangslenker (`src/proxy.ts`). En lenke virker én gang: første gang noen trykker på knappen, får den nettleseren tilgang i 24 timer, og lenken er brukt opp. Chat-apper som henter lenken for å lage forhåndsvisning, bruker den ikke opp, fordi den først brukes når man trykker på knappen. Produksjonen påvirkes ikke.
+
+Oppsett i Vercel (én gang):
+
+1. **Storage → Create Database → Upstash (Redis)**, gratisnivået holder. Koble databasen til prosjektet, minst for *Preview*. Da får prosjektet `KV_REST_API_URL` og `KV_REST_API_TOKEN`.
+2. **Settings → Deployment Protection → Vercel Authentication**: slå av, ellers møter mottakeren Vercels innlogging før engangslenken. Eldre forhåndsvisninger som er bygget før dette, blir da åpne for alle som har adressen.
+3. Bygg forhåndsvisningen på nytt (push eller «Redeploy»), så den får miljøvariablene.
+
+Lage en lenke (lenken slutter å virke etter 24 timer hvis den ikke er brukt):
+
+```bash
+KV_REST_API_URL=… KV_REST_API_TOKEN=… node scripts/preview-link.mjs https://<forhåndsvisning>.vercel.app /en 24
+```
+
+Verdiene finner du under Storage → databasen → `.env.local`. Vil du trekke tilbake tilgangen for alle, setter du en ny verdi i `PREVIEW_ACCESS_SECRET` (valgfri) og bygger på nytt.
 
 ## Før lansering
 
 - [ ] Bekreft e-postadresse (`site.email`) og legg inn org.nr. (`site.orgNr`) i `src/content/shared.ts`
 - [ ] Les gjennom personvernsiden (`src/app/personvern/page.tsx`)
-- [ ] Kontaktskjemaet åpner e-postprogrammet (mailto). Koble til et skjema-API ved behov.
-- [ ] Koble domenet `senaywebstudio.no` i Vercel
+- [ ] Lag et skjema på [formspree.io](https://formspree.io) og legg skjema-ID-en i Vercel som `NEXT_PUBLIC_FORMSPREE_ID` (se «Kontaktskjema»)
+- [ ] Koble domenet `senaystudio.no` i Vercel
 
 ## Deploy
 

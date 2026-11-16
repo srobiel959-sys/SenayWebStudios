@@ -1,62 +1,32 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import type { Content } from "@/content";
-import { demoGroups, demos, type DemoGroup } from "@/content/demos";
+import { demoGroups, demos, localizeDemo, type DemoGroup } from "@/content/demos";
 import { demoHref, type Lang } from "@/lib/routes";
+import { kicker } from "@/lib/ui";
 import { ArrowIcon } from "../Icons";
 import { DemoSite } from "./DemoSite";
+import { ScaledPreview } from "./ScaledPreview";
 
 type Labels = Content["demos"];
 
-/** Skalerer en full nettside ned så den passer i rammen. */
-function ScaledPreview({ children, id }: { children: React.ReactNode; id: string }) {
-  const outer = useRef<HTMLDivElement>(null);
-  const [size, setSize] = useState<{ base: number; scale: number } | null>(null);
-
-  useEffect(() => {
-    const el = outer.current;
-    if (!el) return;
-    const measure = () => {
-      const w = el.clientWidth;
-      const base = w < 640 ? 390 : 1280;
-      setSize({ base, scale: w / base });
-    };
-    measure();
-    const ro = new ResizeObserver(measure);
-    ro.observe(el);
-    return () => ro.disconnect();
-  }, []);
-
-  const mobile = size ? size.base === 390 : false;
-  return (
-    <div
-      ref={outer}
-      className={`relative overflow-hidden ${mobile ? "h-[34rem]" : "aspect-[16/10]"}`}
-      // Forhåndsvisningen er dekor: skjult for skjermlesere og ikke fokuserbar.
-      aria-hidden="true"
-      inert
-    >
-      {size ? (
-        <div
-          key={id}
-          className="demo-swap origin-top-left"
-          style={{ width: size.base, transform: `scale(${size.scale})` }}
-        >
-          {children}
-        </div>
-      ) : null}
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/10 to-transparent" />
-    </div>
-  );
+/** «Carpenter / joiner» → «carpenter-joiner»: adressen som vises i rammen på engelsk. */
+function addressSlug(label: string) {
+  return label
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
 }
 
 export function DemoGallery({ lang, labels }: { lang: Lang; labels: Labels }) {
   const [group, setGroup] = useState<DemoGroup | "all">("all");
   const [slug, setSlug] = useState(demos[0].slug);
   const visible = group === "all" ? demos : demos.filter((d) => d.group === group);
-  const current = demos.find((d) => d.slug === slug) ?? demos[0];
+  const current = localizeDemo(demos.find((d) => d.slug === slug) ?? demos[0], lang);
 
   const chooseGroup = (g: DemoGroup | "all") => {
     setGroup(g);
@@ -65,8 +35,8 @@ export function DemoGallery({ lang, labels }: { lang: Lang; labels: Labels }) {
   };
 
   const tab = (active: boolean) =>
-    `shrink-0 rounded-full px-4 py-2 text-sm transition-colors ${
-      active ? "bg-navy text-cream" : "border border-line text-ink-muted hover:border-navy hover:text-navy"
+    `min-h-11 shrink-0 rounded-full px-4 py-2 text-sm transition-[background-color,color,border-color,scale] duration-150 active:scale-[0.96] ${
+      active ? "bg-navy text-cream" : "border border-line text-ink-muted hover:border-navy/30 hover:text-navy"
     }`;
 
   return (
@@ -86,7 +56,7 @@ export function DemoGallery({ lang, labels }: { lang: Lang; labels: Labels }) {
       <div className="mt-8 grid gap-8 lg:grid-cols-12">
         {/* Bransjer */}
         <div className="min-w-0 lg:col-span-3">
-          <p className="text-xs font-medium uppercase tracking-[0.2em] text-ink-muted">{labels.choose}</p>
+          <p className={kicker}>{labels.choose}</p>
           <ul className="-mx-5 mt-4 flex gap-2 overflow-x-auto px-5 pb-2 lg:mx-0 lg:max-h-[34rem] lg:flex-col lg:gap-0 lg:overflow-y-auto lg:px-0 lg:pb-0">
             {visible.map((d) => {
               const active = d.slug === current.slug;
@@ -96,8 +66,8 @@ export function DemoGallery({ lang, labels }: { lang: Lang; labels: Labels }) {
                     type="button"
                     aria-pressed={active}
                     onClick={() => setSlug(d.slug)}
-                    className={`w-full rounded-full px-4 py-2 text-left text-sm transition-colors lg:rounded-lg lg:py-2.5 ${
-                      active ? "bg-navy text-cream" : "text-navy hover:bg-sand"
+                    className={`min-h-11 w-full rounded-full px-4 py-2 text-left text-sm transition-colors duration-150 lg:rounded-lg lg:py-2.5 ${
+                      active ? "bg-navy text-cream" : "text-ink-muted hover:bg-navy/5 hover:text-navy"
                     }`}
                   >
                     {d.label[lang]}
@@ -110,20 +80,23 @@ export function DemoGallery({ lang, labels }: { lang: Lang; labels: Labels }) {
 
         {/* Forhåndsvisning */}
         <div className="min-w-0 lg:col-span-9">
-          <div className="overflow-hidden rounded-2xl border border-line bg-cream shadow-[0_30px_80px_-40px_rgba(7,22,48,0.45)]">
-            <div className="flex items-center gap-3 border-b border-line bg-sand px-4 py-3">
-              <span className="flex gap-1.5" aria-hidden="true">
-                <span className="h-2.5 w-2.5 rounded-full bg-[#E36A5C]" />
-                <span className="h-2.5 w-2.5 rounded-full bg-[#E9B949]" />
-                <span className="h-2.5 w-2.5 rounded-full bg-[#62B36B]" />
-              </span>
-              <span className="min-w-0 flex-1 truncate rounded-md bg-cream px-3 py-1 text-xs text-ink-muted">
-                demo.senaywebstudio.no/{current.slug}
-              </span>
+          <div className="rounded-[1.75rem] border border-line bg-sand/70 p-1.5 shadow-[0_40px_100px_-50px_rgba(7,22,48,0.4)]">
+            <div className="overflow-hidden rounded-[calc(1.75rem-0.375rem)] bg-white">
+              <div className="flex items-center gap-3 border-b border-line px-4 py-3">
+                <span className="flex gap-1.5" aria-hidden="true">
+                  <span className="h-2.5 w-2.5 rounded-full bg-navy/15" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-navy/15" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-navy/15" />
+                </span>
+                <span className="min-w-0 flex-1 truncate rounded-full bg-sand px-3 py-1 text-center text-xs text-ink-muted">
+                  demo.senaystudio.no/{lang === "en" ? addressSlug(current.label.en) : current.slug}
+                </span>
+                <span className="w-[2.625rem]" aria-hidden="true" />
+              </div>
+              <ScaledPreview id={current.slug}>
+                <DemoSite demo={current} lang={lang} fictionalLabel={labels.fictional} />
+              </ScaledPreview>
             </div>
-            <ScaledPreview id={current.slug}>
-              <DemoSite demo={current} fictionalLabel={labels.fictional} />
-            </ScaledPreview>
           </div>
 
           <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
@@ -131,7 +104,10 @@ export function DemoGallery({ lang, labels }: { lang: Lang; labels: Labels }) {
               {labels.showing} <span className="font-medium text-navy">{current.label[lang]}</span> · {current.name} ·{" "}
               <span className="text-sm">{labels.fictional}</span>
             </p>
-            <Link href={demoHref(lang, current.slug)} className="group inline-flex shrink-0 items-center gap-2 font-medium">
+            <Link
+              href={demoHref(lang, current.slug)}
+              className="group inline-flex min-h-11 shrink-0 items-center gap-2 self-start rounded-full border border-navy/20 px-5 py-2.5 font-medium transition-colors hover:border-navy/40 hover:bg-navy/5 sm:self-auto"
+            >
               {labels.open}
               <ArrowIcon className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Link>

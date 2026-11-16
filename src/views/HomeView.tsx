@@ -1,110 +1,158 @@
 import Link from "next/link";
-import { AgencyCompare } from "@/components/AgencyCompare";
+import { Fragment } from "react";
 import { CtaBand } from "@/components/CtaBand";
-import { DemoGallery } from "@/components/demo/DemoGallery";
-import { ArrowIcon } from "@/components/Icons";
+import { CountUp } from "@/components/home/CountUp";
+import { DemoShowcase } from "@/components/home/DemoShowcase";
+import { GoogleStory } from "@/components/home/GoogleStory";
+import { LiveBuilder } from "@/components/home/LiveBuilder";
+import { LighthouseScores } from "@/components/home/LighthouseScores";
+import { ProcessLine } from "@/components/home/ProcessLine";
+import { WordReveal } from "@/components/home/WordReveal";
+import { ArrowIcon, CheckIcon } from "@/components/Icons";
 import { JsonLd } from "@/components/JsonLd";
-import { Monogram } from "@/components/Logo";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
 import { getContent } from "@/content";
-import { href, type Lang, type PageKey } from "@/lib/routes";
+import { href, type Lang } from "@/lib/routes";
 import { businessSchema } from "@/lib/schema";
-import { btnPrimary, btnSecondary, container } from "@/lib/ui";
+import { container } from "@/lib/ui";
+
+/** Ordene i overskriften reiser seg ett og ett (se .word-rise i globals.css). */
+function RisingWords({ text, start = 0 }: { text: string; start?: number }) {
+  const words = text.split(" ");
+  // Mellomrommet står utenfor masken, ellers forsvinner det i inline-block.
+  return words.map((word, i) => (
+    <Fragment key={i}>
+      <span className="word-mask">
+        <span className="word-rise" style={{ animationDelay: `${(start + i) * 70}ms` }}>
+          {word}
+        </span>
+      </span>
+      {i < words.length - 1 ? " " : null}
+    </Fragment>
+  ));
+}
 
 export function HomeView({ lang }: { lang: Lang }) {
   const c = getContent(lang);
-  const { hero } = c;
+  const { hero, numbers } = c;
+  const titleWords = hero.title.split(" ").length;
 
   return (
     <>
       <JsonLd data={businessSchema(lang)} />
 
-      {/* Hero */}
-      <section aria-labelledby="hero-tittel" className="relative overflow-hidden border-b border-line">
-        <div className={`${container} grid min-h-[calc(100svh-5rem)] items-center gap-12 py-16 sm:py-24 lg:grid-cols-12`}>
-          <div className="lg:col-span-8">
-            <p className="hero-in text-sm font-medium uppercase tracking-[0.22em] text-ink-muted">{hero.eyebrow}</p>
+      {/* 1. Hero: pitchen, og så bygger kundens egen nettside seg opp mens hen skriver */}
+      <section aria-labelledby="hero-tittel" className="relative -mt-[4.25rem] sm:-mt-20">
+        <div className={`${container} relative flex flex-col items-center pb-24 pt-32 text-center sm:pt-40`}>
+          {/* Tones ned mens byggeren jobber, så blikket går til rammen (se LiveBuilder). */}
+          <div className="hero-dim flex flex-col items-center">
             <h1
               id="hero-tittel"
-              className="hero-in hero-in-2 mt-6 font-display text-[2.75rem] leading-[1.02] tracking-tight sm:text-7xl lg:text-[4.75rem] xl:text-[5.25rem]"
+              className="max-w-6xl text-balance font-display text-[3.1rem] leading-[1] tracking-tight sm:text-7xl lg:text-[5.9rem]"
             >
-              {hero.title} <em className="not-italic text-ink-muted">{hero.titleAccent}</em>
+              <RisingWords text={hero.title} />{" "}
+              <span className="block text-ink-muted">
+                <RisingWords text={hero.titleAccent} start={titleWords + 1} />
+              </span>
             </h1>
-            <p className="hero-in hero-in-3 mt-8 max-w-2xl text-lg leading-relaxed text-ink-muted sm:text-xl">{hero.lead}</p>
-            <div className="hero-in hero-in-4 mt-10 flex flex-col gap-3 sm:flex-row sm:gap-4">
-              <Link href={href(lang, "contact")} className={btnPrimary}>
-                {hero.primaryCta}
-                <ArrowIcon />
-              </Link>
-              <a href="#eksempler" className={btnSecondary}>
-                {hero.secondaryCta}
-              </a>
-            </div>
+            <p className="hero-in hero-in-3 mt-8 max-w-xl text-balance text-lg leading-relaxed text-ink-muted sm:text-xl">{hero.lead}</p>
           </div>
-
-          <div className="flex flex-col gap-10 border-t border-line pt-10 lg:col-span-4 lg:h-full lg:justify-between lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0">
-            <Monogram className="monogram-draw hidden h-auto w-48 self-center lg:mt-6 lg:block xl:w-60" />
-            <ul className="hero-in hero-in-4 flex flex-col gap-4 lg:mb-2">
-              {hero.points.map((point) => (
-                <li key={point} className="flex items-center gap-3 text-lg">
-                  <span aria-hidden="true" className="h-px w-6 bg-navy" />
-                  {point}
-                </li>
-              ))}
-            </ul>
+          <div className="hero-in hero-in-4 mt-10 w-full">
+            <LiveBuilder lang={lang} labels={c.builder} fictionalLabel={c.demos.fictional} contactPath={href(lang, "contact")} />
           </div>
         </div>
       </section>
 
-      {/* Eksempler rett under forsiden */}
-      <section id="eksempler" aria-labelledby="eksempler-tittel" className="scroll-mt-24 py-24 sm:py-32">
+      {/* 2. Google-historien: spilles av mens man scroller */}
+      <GoogleStory story={c.story} id="historien-tittel" />
+
+      {/* 3. Utsagnet: ordene lyser opp */}
+      <section aria-label={c.why.eyebrow} className="py-32 sm:py-48">
         <div className={container}>
-          <Reveal className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
-            <SectionHeading id="eksempler-tittel" eyebrow={c.demos.eyebrow} title={c.demos.title} lead={c.demos.lead} />
-          </Reveal>
-          <div className="mt-12">
-            <DemoGallery lang={lang} labels={c.demos} />
-          </div>
+          <WordReveal
+            text={c.statement}
+            className="mx-auto max-w-5xl text-balance text-center font-display text-4xl leading-[1.15] tracking-tight sm:text-6xl lg:text-7xl"
+          />
         </div>
       </section>
 
-      <AgencyCompare lang={lang} c={c} />
-
-      {/* Innganger til sidene */}
-      <section aria-labelledby="utforsk-tittel" className="border-t border-line bg-sand py-24 sm:py-32">
+      {/* 4. Eksempler */}
+      <section id="eksempler" aria-labelledby="eksempler-tittel" className="scroll-mt-24 border-t border-line py-28 sm:py-36">
         <div className={container}>
           <Reveal>
-            <SectionHeading id="utforsk-tittel" eyebrow={c.explore.eyebrow} title={c.explore.title} lead={c.explore.lead} />
+            <SectionHeading id="eksempler-tittel" title={c.demos.homeTitle} lead={c.demos.homeLead} />
           </Reveal>
-          <ul className="mt-16 grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
-            {c.explore.items.map((item, i) => {
-              const last = i === c.explore.items.length - 1;
-              return (
-                <li key={item.key} className={last ? "bg-navy text-cream" : "bg-cream"}>
-                  <Link
-                    href={href(lang, item.key as PageKey)}
-                    className={`group flex h-full flex-col p-8 transition-colors duration-300 sm:p-10 ${
-                      last ? "hover:bg-navy-soft" : "hover:bg-sand"
-                    }`}
-                  >
-                    <span className={`text-sm font-medium ${last ? "text-cream-muted" : "text-ink-muted"}`}>
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <h3 className="mt-4 font-display text-3xl">{item.title}</h3>
-                    <p className={`mt-3 flex-1 leading-relaxed ${last ? "text-cream-muted" : "text-ink-muted"}`}>{item.text}</p>
-                    <span className="mt-8 inline-flex items-center gap-2 font-medium">
-                      {last ? c.ui.getInTouch : c.ui.readMore}
-                      <ArrowIcon className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1.5" />
-                    </span>
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
+          <div className="mt-14">
+            <DemoShowcase lang={lang} />
+          </div>
+          <Link
+            href={href(lang, "demos")}
+            className="group mt-8 inline-flex min-h-11 items-center gap-2 font-medium underline decoration-navy/25 underline-offset-8 transition-colors duration-150 hover:decoration-navy"
+          >
+            {c.demos.allExamples}
+            <ArrowIcon className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-1" />
+          </Link>
         </div>
       </section>
 
+      {/* 5. Prisen: «0 kr» som blikkfang på mørk bunn, resten teller opp */}
+      <section aria-labelledby="pris-tittel" className="relative overflow-hidden bg-navy py-28 text-cream sm:py-40">
+        <div className={`${container} relative grid items-center gap-14 lg:grid-cols-12`}>
+          <Reveal className="lg:col-span-7">
+            <h2 id="pris-tittel" className="font-display text-3xl tracking-tight sm:text-4xl">
+              {numbers.title}
+            </h2>
+            <p className="mt-6 font-display text-[7.5rem] leading-[0.85] tracking-tight sm:text-[11rem] lg:text-[13rem]">
+              <CountUp value={numbers.items[0].value} prefix={numbers.items[0].prefix} suffix={numbers.items[0].suffix} lang={lang} />
+            </p>
+            <p className="mt-4 text-xl text-cream-muted">{numbers.items[0].label}</p>
+          </Reveal>
+
+          <div className="space-y-4 lg:col-span-5">
+            {numbers.items.slice(1).map((item, i) => (
+              <Reveal key={item.label} delay={i * 120}>
+                <div className="rounded-2xl border border-white/15 bg-white/[0.06] p-7 sm:p-8">
+                  <p className="font-display text-5xl tracking-tight sm:text-6xl">
+                    <CountUp value={item.value} prefix={item.prefix} suffix={item.suffix} lang={lang} />
+                  </p>
+                  <p className="mt-2 text-cream-muted">{item.label}</p>
+                </div>
+              </Reveal>
+            ))}
+            <Reveal delay={240}>
+              <p className="flex items-center gap-2.5 pt-2 text-cream-muted">
+                <CheckIcon className="h-4 w-4 shrink-0 text-sky" />
+                {numbers.note}
+              </p>
+              <Link
+                href={href(lang, "pricing")}
+                className="group mt-4 inline-flex min-h-11 items-center gap-2 font-medium underline decoration-white/30 underline-offset-8 transition-colors duration-150 hover:decoration-white"
+              >
+                {numbers.link}
+                <ArrowIcon className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-1" />
+              </Link>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* Målte tall: bevis i stedet for skryt */}
+      <LighthouseScores proof={c.proof} />
+
+      {/* 6. Prosessen langs en linje som fylles opp */}
+      <section aria-labelledby="prosess-tittel" className="border-t border-line py-28 sm:py-40">
+        <div className={`${container} grid gap-16 lg:grid-cols-12`}>
+          <Reveal className="lg:sticky lg:top-32 lg:col-span-5 lg:self-start">
+            <SectionHeading id="prosess-tittel" title={c.process.title} lead={c.process.lead} />
+          </Reveal>
+          <div className="lg:col-span-7">
+            <ProcessLine steps={c.process.steps} />
+          </div>
+        </div>
+      </section>
+
+      {/* 7. Avslutning */}
       <CtaBand lang={lang} c={c} />
     </>
   );

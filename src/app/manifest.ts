@@ -5,12 +5,12 @@ import { site } from "@/content/shared";
 export default function manifest(): MetadataRoute.Manifest {
   return {
     name: site.name,
-    short_name: "Senay Web",
+    short_name: "Senay Studio",
     description: no.site.description,
     lang: "nb",
     start_url: "/",
     display: "standalone",
-    background_color: "#FAF8F5",
+    background_color: "#FFFFFF",
     theme_color: "#071630",
     icons: [
       { src: "/brand/favicon-32.png", sizes: "32x32", type: "image/png" },

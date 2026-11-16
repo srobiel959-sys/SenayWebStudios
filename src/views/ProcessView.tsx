@@ -3,14 +3,14 @@ import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
 import { getContent } from "@/content";
 import type { Lang } from "@/lib/routes";
-import { container } from "@/lib/ui";
+import { container, kicker } from "@/lib/ui";
 
 export function ProcessView({ lang }: { lang: Lang }) {
   const c = getContent(lang);
   const { process } = c;
   return (
     <>
-      <PageHero eyebrow={process.eyebrow} title={process.title} lead={process.lead} />
+      <PageHero title={process.title} lead={process.lead} />
 
       <section aria-label={process.listLabel} className="py-20 sm:py-28">
         <ol className={`${container} relative`}>
@@ -18,10 +18,10 @@ export function ProcessView({ lang }: { lang: Lang }) {
             <li key={step.title} className="relative grid gap-6 pb-16 last:pb-0 md:grid-cols-12 md:gap-10">
               <div className="flex items-start gap-6 md:col-span-4">
                 <div className="relative flex flex-col items-center self-stretch">
-                  <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-navy font-display text-xl">
+                  <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-navy font-display text-xl text-cream shadow-[0_10px_24px_-10px_rgba(7,22,48,0.5)]">
                     {i + 1}
                   </span>
-                  {i < process.steps.length - 1 ? <span aria-hidden="true" className="mt-2 w-px flex-1 bg-line" /> : null}
+                  {i < process.steps.length - 1 ? <span aria-hidden="true" className="mt-2 w-px flex-1 bg-gradient-to-b from-navy/30 to-line" /> : null}
                 </div>
                 <Reveal className="pt-2.5">
                   <h2 className="font-display text-3xl sm:text-4xl">
@@ -35,13 +35,13 @@ export function ProcessView({ lang }: { lang: Lang }) {
 
               <Reveal delay={100} className="pl-20 md:col-span-8 md:pl-0 md:pt-2.5">
                 <p className="text-lg leading-relaxed text-ink-muted sm:text-xl">{step.text}</p>
-                <dl className="mt-8 grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2">
-                  <div className="bg-cream p-6">
-                    <dt className="text-xs font-medium uppercase tracking-[0.2em] text-ink-muted">{c.ui.you}</dt>
+                <dl className="mt-8 grid gap-px overflow-hidden rounded-[1.5rem] border border-line bg-line sm:grid-cols-2">
+                  <div className="bg-white p-6">
+                    <dt className={kicker}>{c.ui.you}</dt>
                     <dd className="mt-2">{step.you}</dd>
                   </div>
                   <div className="bg-sand p-6">
-                    <dt className="text-xs font-medium uppercase tracking-[0.2em] text-ink-muted">{c.ui.we}</dt>
+                    <dt className="text-sm font-medium text-accent">{c.ui.we}</dt>
                     <dd className="mt-2">{step.we}</dd>
                   </div>
                 </dl>

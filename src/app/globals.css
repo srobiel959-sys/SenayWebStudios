@@ -1,14 +1,21 @@
 @import "tailwindcss";
 
+/* Lyst tema: hvit bakgrunn, mørkeblå tekst og knapper (samme blå som logoen).
+   - cream: sidebakgrunnen (hvit) – og hvit tekst på mørkeblå felt (text-cream)
+   - sand: annenhver seksjon og lyse flater
+   - navy: tekst, knapper og mørkeblå felt
+   - accent: diskret blå for tall, hakemerker og fremdrift */
 @theme inline {
   --color-navy: #071630;
   --color-navy-soft: #13264a;
-  --color-cream: #faf8f5;
-  --color-sand: #efe9e0;
-  /* Dempet tekst: ≥ 4.5:1 mot krem og navy (WCAG AA) */
+  --color-cream: #ffffff;
+  --color-sand: #f4f6fa;
+  /* Dempet tekst: ≥ 4.5:1 mot hvitt/sand og mot navy (WCAG AA) */
   --color-ink-muted: #46536b;
   --color-cream-muted: #c3c9d4;
-  --color-line: #ddd5c8;
+  --color-line: #e3e8f0;
+  --color-accent: #1d4ed8;
+  --color-sky: #93c5fd;
 
   --font-display: var(--font-bodoni), "Bodoni Moda", Didot, Georgia, serif;
   --font-sans: var(--font-jost), "Jost", system-ui, sans-serif;
@@ -58,8 +65,8 @@ body {
 /* Inntoning ved scrolling (se Reveal.tsx). Kun innhold under skjermkanten skjules. */
 .reveal[data-reveal="shown"] {
   transition:
-    opacity 900ms cubic-bezier(0.2, 0.7, 0.2, 1),
-    transform 900ms cubic-bezier(0.2, 0.7, 0.2, 1);
+    opacity 600ms cubic-bezier(0.32, 0.72, 0, 1),
+    transform 600ms cubic-bezier(0.32, 0.72, 0, 1);
 }
 .reveal[data-reveal="hidden"] {
   opacity: 0;
@@ -91,7 +98,205 @@ body {
   animation-delay: 420ms;
 }
 
-/* S/W-monogrammet «tegnes» fram diagonalt, som streken i logoen. */
+/* Forsiden: ordene i overskriften reiser seg ett og ett bak en usynlig maske. */
+.word-mask {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-bottom: 0.1em;
+  margin-bottom: -0.1em;
+}
+@keyframes word-rise {
+  from {
+    opacity: 0.01;
+    transform: translateY(105%);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.word-rise {
+  display: inline-block;
+  animation: word-rise 1.1s cubic-bezier(0.2, 0.75, 0.15, 1) both;
+}
+
+/* Scroll-hint i heroen: en lysstripe som glir nedover. */
+@keyframes scroll-line {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+.scroll-line::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent, var(--color-navy), transparent);
+  animation: scroll-line 2.2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+/* Prosesslinja: steg som ikke er nådd ennå, er litt dempet (se ProcessLine.tsx),
+   men teksten holder fortsatt 4.5:1 kontrast mot hvitt. */
+.process-line .process-body,
+.process-line .process-dot {
+  transition:
+    opacity 0.7s cubic-bezier(0.32, 0.72, 0, 1),
+    background-color 0.5s ease,
+    border-color 0.5s ease,
+    color 0.5s ease,
+    box-shadow 0.5s ease;
+}
+.process-line[data-ready] [data-step]:not([data-lit]) .process-body {
+  opacity: 0.84;
+}
+.process-line:not([data-ready]) .process-dot,
+.process-line [data-lit] .process-dot {
+  border-color: var(--color-navy);
+  background-color: var(--color-navy);
+  color: #fff;
+  box-shadow: 0 8px 20px -8px rgb(7 22 48 / 0.5);
+}
+
+/* ------------------------------------------------------------------ */
+/* Tilbakemelding (prinsippene for UX og animasjon)                    */
+/* ------------------------------------------------------------------ */
+
+/* Pilen i knappene rykker litt tilbake før den går frem (anticipation). */
+@keyframes arrow-nudge {
+  0% { transform: none; }
+  30% { transform: translateX(-3px); }
+  70% { transform: translateX(4px); }
+  100% { transform: translateX(2px); }
+}
+.group:hover .arrow-nudge,
+.group:focus-visible .arrow-nudge {
+  animation: arrow-nudge 420ms cubic-bezier(0.32, 0.72, 0, 1) both;
+}
+
+/* Feil i et felt: en kort risting (exaggerated feedback). */
+@keyframes shake {
+  0%, 100% { transform: none; }
+  20% { transform: translateX(-6px); }
+  40% { transform: translateX(5px); }
+  60% { transform: translateX(-3px); }
+  80% { transform: translateX(2px); }
+}
+.shake {
+  animation: shake 300ms cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+/* En hake som tegnes opp (sendt, kopiert). */
+@keyframes check-draw {
+  from { stroke-dashoffset: 24; }
+  to { stroke-dashoffset: 0; }
+}
+.check-draw path {
+  stroke-dasharray: 24;
+  animation: check-draw 450ms 120ms cubic-bezier(0.32, 0.72, 0, 1) both;
+}
+
+/* Små ting som dukker opp: litt for stor, så på plass (follow through). */
+@keyframes pop {
+  0% { opacity: 0; transform: scale(0.6); }
+  60% { opacity: 1; transform: scale(1.08); }
+  100% { transform: none; }
+}
+.pop {
+  animation: pop 380ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+/* ------------------------------------------------------------------ */
+/* «Din nettside, live»                                               */
+/* ------------------------------------------------------------------ */
+
+/* Rammen hviler med litt perspektiv og retter seg ut når kunden tar den i bruk (3D). */
+.build-frame {
+  transform: perspective(1600px) rotateX(7deg) scale(0.97);
+  transform-origin: 50% 100%;
+  transition: transform 700ms cubic-bezier(0.32, 0.72, 0, 1);
+}
+.build-frame[data-active] {
+  transform: none;
+}
+
+/* Staging: under byggingen tones resten av toppen ned, så blikket går til rammen. */
+.hero-dim {
+  transition: opacity 400ms cubic-bezier(0.32, 0.72, 0, 1);
+}
+[data-building] .hero-dim {
+  opacity: 0.35;
+}
+
+/* Pose til pose: hvert byggesteg er en egen «positur» i forhåndsvisningen. */
+.build-stage {
+  margin-inline: auto;
+  max-width: 100%;
+  transition:
+    filter 420ms cubic-bezier(0.32, 0.72, 0, 1),
+    opacity 420ms cubic-bezier(0.32, 0.72, 0, 1),
+    max-width 420ms cubic-bezier(0.32, 0.72, 0, 1);
+}
+/* Design: bare farger og former, teksten er ennå ikke på plass. */
+.build-stage[data-stage="0"] {
+  filter: saturate(0.4) blur(2px);
+  opacity: 0.85;
+}
+/* Mobil: rammen smalner inn til telefonbredde, og forhåndsvisningen bytter til den ekte
+   mobilversjonen av siden (ScaledPreview måler bredden på nytt). */
+.build-stage[data-stage="2"] {
+  max-width: 390px;
+}
+
+/* Stegmerkene spretter inn (follow through). */
+.build-chip[data-on] {
+  animation: pop 380ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+/* Svaret kommer inn i en bue nedenfra og fra siden (moving in arcs). */
+@keyframes build-done {
+  0% { opacity: 0; transform: translate(-28px, 36px) rotate(-1.5deg); }
+  55% { opacity: 1; transform: translate(-6px, -4px) rotate(0.3deg); }
+  100% { opacity: 1; transform: none; }
+}
+.build-done {
+  animation: build-done 600ms cubic-bezier(0.32, 0.72, 0, 1) both;
+}
+
+/* Adressefeltet blinker kort når navnet endres (secondary action). */
+@keyframes url-flash {
+  0% { background-color: color-mix(in srgb, var(--color-accent) 18%, white); color: var(--color-accent); }
+  100% { background-color: var(--color-sand); }
+}
+.url-flash {
+  animation: url-flash 600ms cubic-bezier(0.32, 0.72, 0, 1) both;
+}
+
+/* Skrivemarkør etter navnet i forhåndsvisningen mens kunden skriver. */
+@keyframes caret-blink {
+  0%, 45% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+.build-caret {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  margin-left: 3px;
+  vertical-align: -0.15em;
+  background: currentColor;
+  animation: caret-blink 1s steps(1) infinite;
+}
+
+/* Chatvinduet åpner seg fra knappen i hjørnet, i en bue (moving in arcs). */
+@keyframes chat-open {
+  0% { opacity: 0; transform: translate(24px, 40px) scale(0.92); }
+  60% { opacity: 1; transform: translate(-2px, -4px) scale(1.01); }
+  100% { transform: none; }
+}
+.chat-open {
+  transform-origin: 100% 100%;
+  animation: chat-open 380ms cubic-bezier(0.32, 0.72, 0, 1) both;
+}
+
+/* Logoen på 404-sidene «tegnes» fram diagonalt. */
 @keyframes monogram-draw {
   from {
     clip-path: polygon(0 100%, 0 100%, 0 100%);
@@ -183,7 +388,28 @@ body {
     transition: none;
   }
   .hero-in,
-  .monogram-draw {
+  .build-done,
+  .arrow-nudge,
+  .shake,
+  .check-draw path,
+  .pop,
+  .build-chip[data-on],
+  .url-flash,
+  .build-caret,
+  .chat-open,
+  .monogram-draw,
+  .word-rise,
+  .scroll-line::after {
     animation: none;
+  }
+  .build-frame,
+  .build-stage,
+  .hero-dim {
+    transform: none;
+    filter: none;
+    transition: none;
+  }
+  [data-building] .hero-dim {
+    opacity: 1;
   }
 }
