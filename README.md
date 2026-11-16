@@ -49,13 +49,31 @@ Henvendelser sendes til [Formspree](https://formspree.io), som videresender dem 
 
 ## Sikkerhet
 
-Nettsiden er statisk. Den har ingen innlogging, database, API-ruter eller hemmelige nøkler, så det finnes ingenting der å stjele eller logge inn på. Det som er på plass:
+Nettsiden er statisk. Den har ingen innlogging, API-ruter eller hemmelige nøkler i produksjon, så det finnes ingenting der å stjele eller logge inn på. Unntaket er engangslenkene til forhåndsvisningene (se under), som bare er aktive på Vercel-forhåndsvisninger. Det som er på plass:
 
 - Sikkerhetshoder for alle sider i `next.config.ts`: Content-Security-Policy (bare innhold fra nettsiden selv), HSTS, `X-Frame-Options`, `nosniff`, Referrer-Policy, Permissions-Policy og Cross-Origin-Opener-Policy. `X-Powered-By` er slått av.
 - Alt brukere skriver (chat og skjema) vises som ren tekst. Chatten sender ingenting noe sted; kontaktskjemaet sender bare til Formspree. Skjemafeltene har maks lengde, og en skjult felle stopper enkle spamroboter.
 - `.env*` er utelatt fra git. Sjekk `npm audit --omit=dev` før hver lansering.
 
 Kommer det senere et skjema-API, en innlogging eller en database: legg nøkler i Vercels miljøvariabler (aldri i koden), valider alt på serveren, og legg på rate limiting på endepunktene.
+
+## Engangslenker til forhåndsvisninger
+
+Forhåndsvisningene på Vercel (`VERCEL_ENV=preview`) er lukket bak engangslenker (`src/proxy.ts`). En lenke virker én gang: første gang noen trykker på knappen, får den nettleseren tilgang i 24 timer, og lenken er brukt opp. Chat-apper som henter lenken for å lage forhåndsvisning, bruker den ikke opp, fordi den først brukes når man trykker på knappen. Produksjonen påvirkes ikke.
+
+Oppsett i Vercel (én gang):
+
+1. **Storage → Create Database → Upstash (Redis)**, gratisnivået holder. Koble databasen til prosjektet, minst for *Preview*. Da får prosjektet `KV_REST_API_URL` og `KV_REST_API_TOKEN`.
+2. **Settings → Deployment Protection → Vercel Authentication**: slå av, ellers møter mottakeren Vercels innlogging før engangslenken. Eldre forhåndsvisninger som er bygget før dette, blir da åpne for alle som har adressen.
+3. Bygg forhåndsvisningen på nytt (push eller «Redeploy»), så den får miljøvariablene.
+
+Lage en lenke (lenken slutter å virke etter 24 timer hvis den ikke er brukt):
+
+```bash
+KV_REST_API_URL=… KV_REST_API_TOKEN=… node scripts/preview-link.mjs https://<forhåndsvisning>.vercel.app /en 24
+```
+
+Verdiene finner du under Storage → databasen → `.env.local`. Vil du trekke tilbake tilgangen for alle, setter du en ny verdi i `PREVIEW_ACCESS_SECRET` (valgfri) og bygger på nytt.
 
 ## Før lansering
 
