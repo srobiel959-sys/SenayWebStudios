@@ -1,8 +1,15 @@
 // Felles for begge språk.
 
+function productionUrl() {
+  const host = process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL ?? process.env.VERCEL_PROJECT_PRODUCTION_URL;
+  return host ? `https://${host.replace(/^https?:\/\//, "").replace(/\/$/, "")}` : "https://senaystudio.no";
+}
+
 export const site = {
   name: "Senay Studio",
-  url: "https://senaystudio.no",
+  // Den ekte adressen kommer fra Vercel: kortest mulige produksjonsdomene, altså senaywebstudios.vercel.app
+  // til senaystudio.no er koblet til, og deretter senaystudio.no. Brukes til delingsbilder, sidekart og Google.
+  url: productionUrl(),
   email: "post@senaystudio.no",
   // TODO: Legg inn organisasjonsnummer, f.eks. "123 456 789".
   orgNr: null as string | null,
