@@ -22,3 +22,9 @@ export const prices = {
   website: "4 599",
   hosting: "799",
 };
+
+/** Samme priser skrevet på engelsk: «4,599» i stedet for «4 599». */
+export const pricesEn = {
+  website: prices.website.replace(/\s/g, ","),
+  hosting: prices.hosting.replace(/\s/g, ","),
+};

@@ -17,7 +17,7 @@ export function AboutView({ lang }: { lang: Lang }) {
         <div className={`${container} grid gap-12 lg:grid-cols-12`}>
           <Reveal className={`lg:col-span-5 lg:self-start`}>
             <div className={`${card} relative flex items-center justify-center overflow-hidden px-8 py-14 sm:py-20`}>
-                            <MainLogo alt="" className="relative h-auto w-56 sm:w-64" />
+                            <MainLogo alt="" lang={lang} className="relative h-auto w-56 sm:w-64" />
             </div>
           </Reveal>
           <Reveal delay={100} className="space-y-6 text-lg leading-relaxed text-ink-muted sm:text-xl lg:col-span-7">

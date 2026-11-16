@@ -10,29 +10,24 @@ import { PricingCards } from "@/components/PricingCards";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
 import { getContent } from "@/content";
-import { demos, getDemo } from "@/content/demos";
+import { demos, getDemo, industryPhrase, type Demo } from "@/content/demos";
 import { demoHref, href, industryHref, type Lang } from "@/lib/routes";
 import { card, btnArrow, btnSecondary, container, kicker } from "@/lib/ui";
 
 // Egen side per bransje («Nettside for frisør»), laget for å bli funnet på Google.
 // All tekst er felles; bare bransjenavnet, eksemplet og listen over behov varierer.
 
-/** «Frisør» → «frisør», men «Treningssenter / PT» beholder «PT». */
-export function industryName(label: string) {
-  return label.charAt(0).toLowerCase() + label.slice(1);
-}
-
-export function fillIndustry(text: string, label: string) {
-  return text.replaceAll("{bransje}", industryName(label));
+/** Setter bransjen inn i teksten: «Nettside for frisør» / «Websites for hair salons». */
+export function fillIndustry(text: string, demo: Demo, lang: Lang) {
+  return text.replaceAll("{bransje}", industryPhrase(demo, lang));
 }
 
 export function IndustryView({ lang, slug }: { lang: Lang; slug: string }) {
-  const demo = getDemo(slug);
+  const demo = getDemo(slug, lang);
   if (!demo) notFound();
   const c = getContent(lang);
   const t = c.industry;
-  const label = demo.label[lang];
-  const fill = (text: string) => fillIndustry(text, label);
+  const fill = (text: string) => fillIndustry(text, demo, lang);
   const others = demos.filter((d) => d.group === demo.group && d.slug !== demo.slug);
 
   return (
@@ -79,7 +74,7 @@ export function IndustryView({ lang, slug }: { lang: Lang; slug: string }) {
           <div className="mt-10 rounded-[1.75rem] border border-line bg-sand/70 p-1.5 shadow-[0_40px_100px_-50px_rgba(7,22,48,0.4)]">
             <div className="overflow-hidden rounded-[calc(1.75rem-0.375rem)] bg-white">
               <ScaledPreview id={demo.slug}>
-                <DemoSite demo={demo} fictionalLabel={c.demos.fictional} />
+                <DemoSite demo={demo} lang={lang} fictionalLabel={c.demos.fictional} />
               </ScaledPreview>
             </div>
           </div>
@@ -128,7 +123,7 @@ export function IndustryView({ lang, slug }: { lang: Lang; slug: string }) {
                     href={industryHref(lang, d.slug)}
                     className="inline-flex min-h-11 items-center rounded-full border border-line px-4 py-2 text-sm transition-colors duration-150 hover:border-navy/30 hover:bg-navy/5"
                   >
-                    {fillIndustry(t.eyebrow, d.label[lang])}
+                    {fillIndustry(t.eyebrow, d, lang)}
                   </Link>
                 </li>
               ))}

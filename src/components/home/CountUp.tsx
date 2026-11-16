@@ -5,12 +5,15 @@ import { useEffect, useRef } from "react";
 // Tall som teller opp når de kommer til syne. Serveren viser sluttverdien,
 // så tallet alltid står riktig uten JavaScript og for søkemotorer.
 
-const format = (n: number) => new Intl.NumberFormat("nb-NO").format(n).replace(/\s/g, " ");
+/** «4 599» på norsk (hardt mellomrom), «4,599» på engelsk. */
+const formatFor = (lang: "no" | "en") => (n: number) =>
+  lang === "en" ? new Intl.NumberFormat("en-GB").format(n) : new Intl.NumberFormat("nb-NO").format(n).replace(/\s/g, " ");
 
-export function CountUp({ value, prefix = "", suffix = "" }: { value: number; prefix?: string; suffix?: string }) {
+export function CountUp({ value, prefix = "", suffix = "", lang = "no" }: { value: number; prefix?: string; suffix?: string; lang?: "no" | "en" }) {
   const ref = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
+    const format = formatFor(lang);
     const el = ref.current;
     if (!el || value === 0 || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     // Allerede synlig ved lasting: la tallet stå.
@@ -39,12 +42,12 @@ export function CountUp({ value, prefix = "", suffix = "" }: { value: number; pr
       observer.disconnect();
       cancelAnimationFrame(frame);
     };
-  }, [value, prefix, suffix]);
+  }, [value, prefix, suffix, lang]);
 
   return (
     <span ref={ref} className="tabular-nums">
       {prefix}
-      {format(value)}
+      {formatFor(lang)(value)}
       {suffix}
     </span>
   );

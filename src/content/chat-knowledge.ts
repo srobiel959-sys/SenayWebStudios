@@ -2,7 +2,7 @@ import type { Lang, PageKey } from "@/lib/routes";
 import { demos } from "./demos";
 import { en } from "./en";
 import { no } from "./no";
-import { draftDays, prices, site } from "./shared";
+import { draftDays, prices, pricesEn, site } from "./shared";
 
 // Kunnskapsbasen til chat-assistenten. Ingen AI: spørsmålet matches mot
 // nøkkelordene under (se src/lib/chat-match.ts), og beste emne gir svaret.
@@ -25,6 +25,8 @@ export type Topic = {
 
 const W = prices.website;
 const M = prices.hosting;
+const WE = pricesEn.website;
+const ME = pricesEn.hosting;
 const list = (items: string[]) => items.map((item) => `- ${item}`).join("\n");
 const demoLabels = demos.flatMap((d) => [d.label.no.toLowerCase(), d.label.en.toLowerCase()]);
 
@@ -90,7 +92,7 @@ export const topics: Topic[] = [
     strong: ["hosting", "host", "webhotell", "server", "servere", "web host", "nede", "oppetid", "uptime", "downtime"],
     answer: {
       no: `Hosting er der nettsiden «bor» på internett, så den er tilgjengelig for alle. Hos oss er hosting og drift inkludert i ${M} kr i måneden. Du trenger ikke tenke på det.`,
-      en: `Hosting is where your website "lives" on the internet so everyone can reach it. With us, hosting and maintenance are included in NOK ${M} a month. You don't need to think about it.`,
+      en: `Hosting is where your website "lives" on the internet so everyone can reach it. With us, hosting and maintenance are included in NOK ${ME} a month. You don't need to think about it.`,
     },
     links: ["pricing"],
   },
@@ -108,7 +110,7 @@ export const topics: Topic[] = [
     weak: ["finne", "find", "found", "søk", "søke"],
     answer: {
       no: "For å bli funnet på Google trenger du en rask nettside med riktig struktur, gode titler og tekst som bruker ordene kundene dine søker på, for eksempel «frisør Bergen». Grunnleggende søkemotoroptimalisering er inkludert hos oss. Lag også en gratis Google-bedriftsprofil, og be fornøyde kunder om omtaler.",
-      en: "To be found on Google you need a fast website with the right structure, good titles and text that uses the words your customers search for, like \"hairdresser Bergen\". Basic SEO is included with us. Also create a free Google Business Profile and ask happy customers for reviews.",
+      en: "To be found on Google you need a fast website with the right structure, good titles and text that uses the words your customers search for, like \"hairdresser Bergen\". Basic SEO is included. Also create a free Google Business Profile and ask happy customers for reviews.",
     },
     links: ["services"],
     followUps: {
@@ -130,7 +132,7 @@ export const topics: Topic[] = [
     strong: ["mobil", "mobilen", "mobiltilpasset", "responsiv", "nettbrett", "mobile", "responsive", "tablet", "smartphone"],
     answer: {
       no: "De fleste besøker nettsider fra mobilen, så siden må fungere like godt der som på PC. Alle nettsidene vi lager er tilpasset mobil, nettbrett og PC.",
-      en: "Most people visit websites on their phone, so the site has to work just as well there as on a computer. Every website we make is adapted for phone, tablet and computer.",
+      en: "Most people visit websites on their phone, so the site has to work just as well there as on a computer. Every website we make works on phones, tablets and computers.",
     },
   },
   {
@@ -163,7 +165,7 @@ export const topics: Topic[] = [
     weak: ["skrive", "write"],
     answer: {
       no: "Gode bilder og korte, tydelige tekster selger mest. Fortell hva du tilbyr, hvem det er for og hvordan man tar kontakt. Har du egne bilder og logo, bruker vi dem, ellers finner vi ut av det sammen i første samtale.",
-      en: "Good photos and short, clear text sell best. Say what you offer, who it's for and how to get in touch. If you have your own photos and logo, we use them, otherwise we'll figure it out together in the first conversation.",
+      en: "Good photos and short, clear text sell best. Say what you offer, who it's for and how to get in touch. If you have your own photos and logo, we use them. Otherwise we'll work it out together in the first conversation.",
     },
   },
   {
@@ -227,7 +229,7 @@ export const topics: Topic[] = [
     weak: ["forskjell", "forskjellen", "difference", "andre", "others"],
     answer: {
       no: `Du kan lage en nettside selv med Wix eller WordPress, men det tar tid, og du må selv holde den oppdatert og synlig. Byråer tar ofte mange tusen kroner før du har sett noe. Hos oss koster det 0 kr å få den laget, ${W} kr når den går live og ${M} kr i måneden, og vi tar oss av driften.`,
-      en: `You can build a website yourself with Wix or WordPress, but it takes time, and you have to keep it updated and visible yourself. Agencies often charge thousands before you've seen anything. With us it costs NOK 0 to build, NOK ${W} when it goes live and NOK ${M} a month, and we handle the hosting.`,
+      en: `You can build a website yourself with Wix or WordPress, but it takes time, and you have to keep it updated and visible yourself. Agencies often charge thousands before you've seen anything. With us it costs NOK 0 to build, NOK ${WE} when it goes live and NOK ${ME} a month, and we handle the hosting.`,
     },
     links: ["why"],
   },
@@ -237,7 +239,7 @@ export const topics: Topic[] = [
     strong: ["måned", "månedlig", "mnd", "month", "monthly", "799", "drift", "vedlikehold", "maintenance", "abonnement", "subscription"],
     answer: {
       no: `For ${M} kr i måneden får du hosting, sikkerhetsoppdateringer og endringene du trenger. Du sier fra, så fikser vi det. Det er under 27 kr om dagen, og ingen binding.`,
-      en: `For NOK ${M} a month you get hosting, security updates and the changes you need. Tell us, and we'll fix it. No lock-in.`,
+      en: `For NOK ${ME} a month you get hosting, security updates and the changes you need. Tell us, and we'll fix it. No lock-in.`,
     },
     links: ["pricing"],
     followUps: {
@@ -251,12 +253,12 @@ export const topics: Topic[] = [
     weak: ["kr", "kroner", "nok", "penger", "money"],
     answer: {
       no: `Det koster 0 kr å få laget nettsiden, og du ser resultatet før du betaler noe. Er du fornøyd, betaler du ${W} kr én gang når den går live, og deretter ${M} kr i måneden for drift og vedlikehold. Ingen binding.`,
-      en: `It costs NOK 0 to get your website built, and you see the result before you pay anything. If you're happy, you pay NOK ${W} once when it goes live, then NOK ${M} a month for hosting and maintenance. No lock-in.`,
+      en: `It costs NOK 0 to get your website built, and you see the result before you pay anything. If you're happy, you pay NOK ${WE} once when it goes live, then NOK ${ME} a month for hosting and maintenance. No lock-in.`,
     },
     links: ["pricing"],
     followUps: {
       no: ["Hva er inkludert?", `Hva får jeg for ${M} kr i måneden?`, "Kan jeg si opp?"],
-      en: ["What's included?", `What do I get for NOK ${M} a month?`, "Can I cancel?"],
+      en: ["What's included?", `What do I get for NOK ${ME} a month?`, "Can I cancel?"],
     },
   },
   {
@@ -306,7 +308,7 @@ export const topics: Topic[] = [
     weak: ["selge", "sell", "butikk", "store", "betaling", "payment", "vipps"],
     answer: {
       no: "Ønsker du noe helt nytt, som en nettbutikk, får du et eget tilbud med fast pris først, og du bestemmer selv om du vil ha det. Send oss en melding om hva du trenger.",
-      en: "If you want something completely new, like an online store, you get a separate fixed-price quote first, and you decide whether you want it. Send us a message about what you need.",
+      en: "If you want something completely new, like an online shop, you get a separate fixed-price quote first, and you decide whether you want it. Send us a message about what you need.",
     },
     links: ["contact"],
   },

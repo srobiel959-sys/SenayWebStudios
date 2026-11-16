@@ -3,7 +3,7 @@ import { CtaBand } from "@/components/CtaBand";
 import { DemoGallery } from "@/components/demo/DemoGallery";
 import { PageHero } from "@/components/PageHero";
 import { getContent } from "@/content";
-import { demoGroups, demos } from "@/content/demos";
+import { demoGroups, demos, localizeDemo } from "@/content/demos";
 import { industryHref, type Lang } from "@/lib/routes";
 import { card, container, kicker } from "@/lib/ui";
 
@@ -41,7 +41,7 @@ export function DemosView({ lang }: { lang: Lang }) {
                           >
                             <span>
                               <span className="font-medium">{d.label[lang]}</span>
-                              <span className="block text-sm text-ink-muted">{d.name}</span>
+                              <span className="block text-sm text-ink-muted">{localizeDemo(d, lang).name}</span>
                             </span>
                             <span
                               aria-hidden="true"

@@ -1,13 +1,21 @@
 // English content. Same shape as no.ts (enforced by the Content type).
 
 import type { Content } from "./no";
-import { draftDays, lighthouse, prices } from "./shared";
+import { draftDays, lighthouse, prices, pricesEn } from "./shared";
+
+// "2026-11-15" → "15 November 2026"
+const measuredDate = new Date(`${lighthouse.measured}T12:00:00Z`).toLocaleDateString("en-GB", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+  timeZone: "UTC",
+});
 
 export const en: Content = {
   site: {
     tagline: "Websites for small and large businesses",
     description:
-      "Senay Studio builds fast websites for businesses. We build your website for free. If you are happy, you pay NOK 4,599 when it goes live and NOK 799/mo for hosting. No lock-in.",
+      `Senay Studio builds fast websites for businesses. We build your website for free. If you are happy, you pay NOK ${pricesEn.website} when it goes live and NOK ${pricesEn.hosting}/mo for hosting. No lock-in.`,
     locale: "en_GB",
   },
 
@@ -32,19 +40,18 @@ export const en: Content = {
     closeMenu: "Close menu",
     requestQuote: "Get a free draft",
     requestQuoteShort: "Free draft",
-    switchLanguage: "Norsk",
-    switchLanguageLabel: "Bytt til norsk",
+    switchLanguageLabel: "Switch to Norwegian",
     readMore: "Read more",
     getInTouch: "Get in touch",
     footerPages: "Pages",
     footerContact: "Contact",
-    sendInquiry: "Send an inquiry →",
+    sendInquiry: "Send an enquiry →",
     footerMenu: "Footer menu",
     orgNr: "Org. no.",
     startHere: "Start here",
     youGet: "You get",
     you: "You",
-    we: "Us",
+    we: "We",
     step: "Step",
     included: "Included",
     notIncluded: "Not included",
@@ -79,7 +86,7 @@ export const en: Content = {
     },
     pricing: {
       title: "Pricing",
-      description: `One package: NOK 0 to build your website, NOK ${prices.website} when it goes live and NOK ${prices.hosting}/mo for hosting and maintenance. No lock-in.`,
+      description: `One package: NOK 0 to build your website, NOK ${pricesEn.website} when it goes live and NOK ${pricesEn.hosting}/mo for hosting and maintenance. No lock-in.`,
     },
     about: {
       title: "About",
@@ -116,17 +123,17 @@ export const en: Content = {
     contactMessage: "I would like a website like the sketch for {bransje}.",
   },
   industry: {
-    eyebrow: "Website for {bransje}",
-    title: "Website for {bransje}",
-    lead: `We build your website for free. You get a draft within ${draftDays} business days and only pay if you want it live: NOK ${prices.website} at launch and NOK ${prices.hosting}/mo for hosting. No lock-in.`,
-    metaDescription: `Website for {bransje}: free draft within ${draftDays} business days, NOK ${prices.website} at launch and NOK ${prices.hosting}/mo. No lock-in, and you own the site.`,
+    eyebrow: "Websites for {bransje}",
+    title: "Websites for {bransje}",
+    lead: `We build your website for free. You get a draft within ${draftDays} business days and only pay if you want it live: NOK ${pricesEn.website} at launch and NOK ${pricesEn.hosting}/mo for hosting. No lock-in.`,
+    metaDescription: `Websites for {bransje}: free draft within ${draftDays} business days, NOK ${pricesEn.website} at launch and NOK ${pricesEn.hosting}/mo. No lock-in, and you own the site.`,
     primaryCta: "Get a free draft",
     needsTitle: "What your website should have",
     needsLead: "This is what customers look for when they find you on Google. We build it in from the start.",
     exampleTitle: "How it could look",
     exampleNote: "The business in the example is fictional. Your website is built from scratch.",
     openExample: "Open the example in full size",
-    pricingTitle: "One package. Everything included.",
+    pricingTitle: "What it costs",
     otherTitle: "Other industries",
     footerTitle: "Industries",
     allIndustries: "All industries",
@@ -144,12 +151,13 @@ export const en: Content = {
     lead: "We measure the websites we build with Google Lighthouse. This is how the page you are reading scores.",
     outOf: "out of 100",
     labels: { performance: "Performance", accessibility: "Accessibility", bestPractices: "Best practices", seo: "SEO" },
-    note: `Measured on mobile on ${lighthouse.measured}.`,
+    note: `Measured on mobile on ${measuredDate}.`,
   },
   story: {
     label: "How customers choose",
     query: "hairdresser near me",
     searchLabel: "Search",
+    tabs: ["All", "Maps", "Images"],
     steps: [
       { kicker: "It's 8:14 pm", text: "A customer needs a hairdresser and searches on her phone." },
       { kicker: "Three seconds later", text: "She looks at the first results and picks one of them." },
@@ -157,9 +165,9 @@ export const en: Content = {
       { kicker: "With a website", text: "Now you show up in the search, and she calls you." },
     ],
     results: [
-      { name: "Salong Lykke", url: "salonglykke.no", text: "Hair salon in the city centre · Open now · Book online" },
-      { name: "Klipp & Co", url: "klippogco.no", text: "Women's and men's cuts · Book online" },
-      { name: "Hårstudio Nord", url: "harstudionord.no", text: "Colour, highlights and styling · Open until 9 pm" },
+      { name: "Lykke Salon", url: "lykkesalon.no", text: "Hair salon in the city centre · Open now · Book online" },
+      { name: "Cut & Co", url: "cutandco.no", text: "Women's and men's cuts · Book online" },
+      { name: "North Hair Studio", url: "northhairstudio.no", text: "Colour, highlights and styling · Open until 9 pm" },
     ],
     you: { name: "Your business", missing: "No website found", url: "yourbusiness.no", text: "Your hair salon · Open now · Book online" },
     fictional: "Example with fictional businesses",
@@ -184,9 +192,9 @@ export const en: Content = {
     homeLead: "The businesses are fictional. Your website is built from scratch.",
     lead: "Pick an industry. The businesses are fictional, and your website is built from scratch.",
     all: "All",
-    open: "Open full size",
-    choose: "Choose industry",
-    showing: "Showing example for",
+    open: "Open in full size",
+    choose: "Choose an industry",
+    showing: "Showing the example for",
     fictional: "Example, fictional business",
     allExamples: "See all examples",
     bannerText: "This is an example made by Senay Studio. The business is fictional.",
@@ -219,7 +227,7 @@ export const en: Content = {
         "You own the website, domain and content",
       ],
     },
-    note: `We build your website for free. You pay NOK ${prices.website} only when it goes live, and then NOK ${prices.hosting}/mo for hosting.`,
+    note: `We build your website for free. You pay NOK ${pricesEn.website} only when it goes live, and then NOK ${pricesEn.hosting}/mo for hosting.`,
     cta: "Get a free draft",
   },
 
@@ -238,8 +246,8 @@ export const en: Content = {
         text: "A tidy website shows that your business is serious. A poor first impression costs you customers you never hear about.",
       },
       {
-        title: "Answers when you are closed",
-        text: "Your website answers the common questions and takes inquiries when you are busy or closed.",
+        title: "Answers even when you are closed",
+        text: "Your website answers the common questions and takes enquiries when you are busy or closed.",
       },
       {
         title: "You decide",
@@ -249,14 +257,14 @@ export const en: Content = {
   },
 
   comparison: {
-    title: "Without and with a website",
+    title: "Without a website and with one",
     without: {
       title: "Without a website",
       items: [
         "Customers find your competitor on Google",
         "You seem less serious than you are",
         "Information is scattered and hard to find",
-        "You miss inquiries outside business hours",
+        "You miss enquiries outside opening hours",
       ],
     },
     with: {
@@ -265,7 +273,7 @@ export const en: Content = {
         "You show up when customers search",
         "A tidy first impression",
         "Services, prices and contact details in one place",
-        "Inquiries even when you are closed",
+        "Enquiries even when you are closed",
       ],
     },
     cta: "Get a free draft",
@@ -292,9 +300,9 @@ export const en: Content = {
         includes: ["Correct structure and metadata", "Image and text when the site is shared", "Basic search engine optimisation"],
       },
       {
-        title: "Hosting and care",
+        title: "Hosting and maintenance",
         text: "We keep the website live and up to date, and make the changes you ask for. The website is still yours.",
-        includes: ["Hosting and operation", "Security updates", "Changes whenever you need them"],
+        includes: ["Hosting and uptime", "Security updates", "Changes whenever you need them"],
       },
     ],
   },
@@ -313,8 +321,8 @@ export const en: Content = {
       {
         title: "Free draft",
         text: `Within ${draftDays} business days you get a first draft of your website. It is free and commits you to nothing.`,
-        you: "Look at the proposal and tell us what to change.",
-        we: "Build the proposal and adjust it until you are happy.",
+        you: "Look at the draft and tell us what to change.",
+        we: "Make the draft and adjust it until you are happy.",
       },
       {
         title: "Design and development",
@@ -333,7 +341,7 @@ export const en: Content = {
 
   pricing: {
     title: "What it costs",
-    lead: `We build your website for free. If you are happy, you pay NOK ${prices.website} when it goes live, and then NOK ${prices.hosting} a month for hosting and maintenance. No lock-in.`,
+    lead: `We build your website for free. If you are happy, you pay NOK ${pricesEn.website} when it goes live, and then NOK ${pricesEn.hosting} a month for hosting and maintenance. No lock-in.`,
     packagesHeading: "The package",
     note: "If you are not happy, you pay nothing. If you want something completely new, like an online shop, you get a separate fixed-price quote first.",
     faqTitle: "Questions about price",
@@ -344,8 +352,8 @@ export const en: Content = {
         "We build your website for free and take care of hosting afterwards.",
       steps: [
         { price: "0", label: "to build your website", note: "You see the result before you pay" },
-        { price: prices.website, label: "when the website goes live", note: "One-off, only if you are happy" },
-        { price: prices.hosting, label: "per month", note: "Hosting and maintenance · less than NOK 27 a day" },
+        { price: pricesEn.website, label: "when the website goes live", note: "One-off payment, only if you are happy" },
+        { price: pricesEn.hosting, label: "per month", note: "Hosting and maintenance · less than NOK 27 a day" },
       ],
       guarantee: {
         title: "You own the website",
@@ -358,12 +366,12 @@ export const en: Content = {
           items: [`First draft within ${draftDays} business days`, "A design made for you, in your colours", "Works on mobile, tablet and desktop", "Contact form"],
         },
         {
-          title: "Hosting and peace of mind",
-          items: ["Basic search engine optimisation", "Hosting and operation", "Security updates", "Changes whenever you need them"],
+          title: "Hosting and security",
+          items: ["Basic search engine optimisation", "Hosting and uptime", "Security updates", "Changes whenever you need them"],
         },
         {
           title: "You and us",
-          items: ["Training in updating content", "One dedicated contact", "You own the website, domain and content", "No lock-in, cancel anytime"],
+          items: ["Training in updating content", "One dedicated contact", "You own the website, domain and content", "No lock-in, cancel any time"],
         },
       ],
       cta: "Get a free draft",
@@ -371,10 +379,10 @@ export const en: Content = {
     faq: [
       {
         q: "How much does it cost?",
-        a: `It costs NOK 0 to have your website built. If you are happy and want it live, you pay NOK ${prices.website} once, and then NOK ${prices.hosting} a month for hosting and maintenance. No lock-in.`,
+        a: `It costs NOK 0 to have your website built. If you are happy and want it live, you pay NOK ${pricesEn.website} once, and then NOK ${pricesEn.hosting} a month for hosting and maintenance. No lock-in.`,
       },
       {
-        q: `What do I get for NOK ${prices.hosting} a month?`,
+        q: `What do I get for NOK ${pricesEn.hosting} a month?`,
         a: "Hosting, security updates and the changes you need. Let us know and we'll take care of it.",
       },
       {
@@ -387,7 +395,7 @@ export const en: Content = {
       },
       {
         q: "Is there anything extra?",
-        a: `No. NOK ${prices.website} when the site goes live and NOK ${prices.hosting} a month. That's it. If you want something completely new, like an online shop, you get a separate fixed-price quote first, and you decide whether you want it.`,
+        a: `No. NOK ${pricesEn.website} when the site goes live and NOK ${pricesEn.hosting} a month. That's it. If you want something completely new, like an online shop, you get a separate fixed-price quote first, and you decide whether you want it.`,
       },
       {
         q: "Can I cancel?",
@@ -405,7 +413,7 @@ export const en: Content = {
     ],
     valuesHeading: "How we work",
     values: [
-      { title: "One contact", text: "You talk to the same person from the first conversation to launch, and after." },
+      { title: "One contact", text: "You talk to the same person from the first conversation to launch, and afterwards." },
       { title: "A known price", text: "NOK 0 to build your website, no lock-in and no hidden fees." },
       { title: "Measured quality", text: "We measure speed and accessibility on everything we build before it goes live." },
     ],
@@ -450,13 +458,13 @@ export const en: Content = {
       sending: "Sending …",
       sentButton: "Sent",
       contactInvalid: "Enter an email address (name@company.com) or a phone number with at least 8 digits.",
-      sent: "Thank you! We have received your inquiry and will be in touch soon.",
+      sent: "Thank you! We have received your enquiry and will be in touch soon.",
       sentMailto: "Thank you! Your email app should now open with the message ready to send.",
       error: "Something went wrong and the message was not sent. Try again, or send us an email.",
       fallback: "You can also send the message directly to",
       copy: "Copy email address",
       copied: "Copied!",
-      subject: "Inquiry from the website",
+      subject: "Enquiry from the website",
       bodyCompany: "Company",
       bodyContact: "Email or phone",
       bodyName: "Name",
@@ -466,7 +474,7 @@ export const en: Content = {
 
   cta: {
     title: "Get a free draft of your website",
-    lead: `NOK 0 to build it. NOK ${prices.website} when it goes live, and NOK ${prices.hosting}/mo for hosting. No lock-in.`,
+    lead: `NOK 0 to build it. NOK ${pricesEn.website} when it goes live, and NOK ${pricesEn.hosting}/mo for hosting. No lock-in.`,
     primary: "Get a free draft",
     secondary: "See what's included",
   },
@@ -480,11 +488,11 @@ export const en: Content = {
     welcome:
       "Hi! I'm Senay Studio's assistant. Ask about price, domains, Google or design, and I'll answer right away.",
     suggestions: ["What does a website cost?", "How do I show up on Google?", "Do I need my own domain?"],
-    placeholder: "Write your question …",
+    placeholder: "Type your question …",
     send: "Send",
     inputLabel: "Your question",
     suggestionsLabel: "Suggested questions",
-    thinking: "Writing …",
+    thinking: "Typing …",
     disclaimer: "Automatic answers. For a specific quote, get in touch.",
     contact: "Contact a human",
     assistantLabel: "Assistant",
@@ -500,11 +508,11 @@ export const en: Content = {
       },
       {
         title: "What we collect",
-        text: "When you contact us, we receive your company name, your email address or phone number, and your name and message if you give them. We only use this to reply to your inquiry and to follow up on any assignment.",
+        text: "When you contact us, we receive your company name, your email address or phone number, and your name and message if you give them. We only use this to reply to your enquiry and to follow up on any assignment.",
       },
       {
         title: "How the form works",
-        text: "Messages from the contact form reach us by email through the service Formspree, or through your own email app. The website does not store them.",
+        text: "Messages from the contact form reach us by email via the Formspree service, or through your own email app. The website does not store them.",
       },
       {
         title: "The chat assistant",
@@ -528,6 +536,6 @@ export const en: Content = {
   notFound: {
     title: "Page not found",
     text: "The link may be wrong, or the page has moved.",
-    back: "Back to home",
+    back: "Go to the homepage",
   },
 };

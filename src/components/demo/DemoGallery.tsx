@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import type { Content } from "@/content";
-import { demoGroups, demos, type DemoGroup } from "@/content/demos";
+import { demoGroups, demos, localizeDemo, type DemoGroup } from "@/content/demos";
 import { demoHref, type Lang } from "@/lib/routes";
 import { kicker } from "@/lib/ui";
 import { ArrowIcon } from "../Icons";
@@ -12,11 +12,21 @@ import { ScaledPreview } from "./ScaledPreview";
 
 type Labels = Content["demos"];
 
+/** «Carpenter / joiner» → «carpenter-joiner»: adressen som vises i rammen på engelsk. */
+function addressSlug(label: string) {
+  return label
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
 export function DemoGallery({ lang, labels }: { lang: Lang; labels: Labels }) {
   const [group, setGroup] = useState<DemoGroup | "all">("all");
   const [slug, setSlug] = useState(demos[0].slug);
   const visible = group === "all" ? demos : demos.filter((d) => d.group === group);
-  const current = demos.find((d) => d.slug === slug) ?? demos[0];
+  const current = localizeDemo(demos.find((d) => d.slug === slug) ?? demos[0], lang);
 
   const chooseGroup = (g: DemoGroup | "all") => {
     setGroup(g);
@@ -79,12 +89,12 @@ export function DemoGallery({ lang, labels }: { lang: Lang; labels: Labels }) {
                   <span className="h-2.5 w-2.5 rounded-full bg-navy/15" />
                 </span>
                 <span className="min-w-0 flex-1 truncate rounded-full bg-sand px-3 py-1 text-center text-xs text-ink-muted">
-                  demo.senaystudio.no/{current.slug}
+                  demo.senaystudio.no/{lang === "en" ? addressSlug(current.label.en) : current.slug}
                 </span>
                 <span className="w-[2.625rem]" aria-hidden="true" />
               </div>
               <ScaledPreview id={current.slug}>
-                <DemoSite demo={current} fictionalLabel={labels.fictional} />
+                <DemoSite demo={current} lang={lang} fictionalLabel={labels.fictional} />
               </ScaledPreview>
             </div>
           </div>

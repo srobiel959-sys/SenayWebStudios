@@ -20,7 +20,7 @@ const layout = [
 
 export function DemoShowcase({ lang }: { lang: Lang }) {
   const tiles = featured.flatMap((slug) => {
-    const demo = getDemo(slug);
+    const demo = getDemo(slug, lang);
     const photo = demoPhotos[slug]?.hero;
     return demo && photo ? [{ demo, photo }] : [];
   });

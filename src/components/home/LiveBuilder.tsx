@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useId, useRef, useState, type FormEvent } from "react";
 import type { Content } from "@/content";
-import { demoGroups, demos } from "@/content/demos";
+import { demoGroups, demos, industryPhrase, localizeDemo } from "@/content/demos";
 import type { Lang } from "@/lib/routes";
 import { btnArrow } from "@/lib/ui";
 import { DemoSite } from "../demo/DemoSite";
@@ -19,7 +19,7 @@ const MAX_NAME = 40;
 const STEP_MS = 420;
 
 /** «Bjørn Rør AS» → «bjornror.no»: brukes i adressefeltet i forhåndsvisningen. */
-export function domainFor(name: string) {
+export function domainFor(name: string, lang: Lang = "no") {
   const base = name
     .toLowerCase()
     .replace(/æ/g, "ae")
@@ -30,7 +30,7 @@ export function domainFor(name: string) {
     .replace(/\b(as|asa|ans|da|enk)\b/g, "")
     .replace(/[^a-z0-9]/g, "")
     .slice(0, 30);
-  return `${base || "dinbedrift"}.no`;
+  return `${base || (lang === "en" ? "yourbusiness" : "dinbedrift")}.no`;
 }
 
 type Labels = Content["builder"];
@@ -68,13 +68,13 @@ export function LiveBuilder({
     return () => section.removeAttribute("data-building");
   }, [building]);
 
-  const base = demos.find((d) => d.slug === slug) ?? demos[0];
+  const chosen = demos.find((d) => d.slug === slug) ?? demos[0];
   const shownName = name.trim() || labels.fallbackName;
-  const demo = { ...base, name: shownName };
+  const demo = { ...localizeDemo(chosen, lang), name: shownName };
   const done = stage >= labels.steps.length - 1;
   // Rammen retter seg ut fra perspektivet så snart kunden tar byggeren i bruk.
   const active = typing || name !== "" || stage >= 0;
-  const contactHref = `${contactPath}?${new URLSearchParams({ bedrift: name.trim(), bransje: base.label[lang] }).toString()}`;
+  const contactHref = `${contactPath}?${new URLSearchParams({ bedrift: name.trim(), bransje: industryPhrase(chosen, lang) }).toString()}`;
 
   function build(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -156,17 +156,17 @@ export function LiveBuilder({
               </span>
               {/* Adressefeltet blinker kort hver gang navnet endres (secondary action). */}
               <span
-                key={name ? domainFor(name) : "tom"}
+                key={name ? domainFor(name, lang) : "tom"}
                 className={`min-w-0 flex-1 truncate rounded-full bg-sand px-3 py-1 text-center text-xs text-ink-muted ${name ? "url-flash" : ""}`}
               >
-                {domainFor(name)}
+                {domainFor(name, lang)}
               </span>
               <span className="w-[2.625rem]" />
             </div>
             {/* Pose til pose: hvert byggesteg gir forhåndsvisningen en egen positur (globals.css). */}
             <div className="build-stage" data-stage={building ? stage : undefined}>
               <ScaledPreview id={`${slug}-${run}`}>
-                <DemoSite demo={demo} fictionalLabel={fictionalLabel} caret={typing} />
+                <DemoSite demo={demo} lang={lang} fictionalLabel={fictionalLabel} caret={typing} />
               </ScaledPreview>
             </div>
           </div>

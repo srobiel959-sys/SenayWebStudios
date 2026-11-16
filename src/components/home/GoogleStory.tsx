@@ -192,9 +192,11 @@ export function GoogleStory({ story, id }: { story: Story; id: string }) {
             </span>
           </div>
           <p className="mt-3 flex gap-4 px-2 text-[11px] text-white/45">
-            <span className="border-b border-white/70 pb-1 text-white/85">Alle</span>
-            <span>Kart</span>
-            <span>Bilder</span>
+            {story.tabs.map((tab, i) => (
+              <span key={tab} className={i === 0 ? "border-b border-white/70 pb-1 text-white/85" : undefined}>
+                {tab}
+              </span>
+            ))}
           </p>
 
           {scrub ? (

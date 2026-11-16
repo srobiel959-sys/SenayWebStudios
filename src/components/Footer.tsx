@@ -15,7 +15,7 @@ export function Footer({ lang, c }: { lang: Lang; c: Content }) {
       <div className={`${container} grid gap-12 py-16 md:grid-cols-12`}>
         <div className="flex flex-col items-start gap-4 md:col-span-3">
           {/* Hovedlogoen (med tagline). Krem-varianten, fordi footeren har mørk bakgrunn. */}
-          <MainLogo tone="light" loading="eager" className="h-auto w-56" />
+          <MainLogo tone="light" lang={lang} loading="eager" className="h-auto w-56" />
         </div>
 
         <nav aria-label={c.ui.footerMenu} className="md:col-span-3">

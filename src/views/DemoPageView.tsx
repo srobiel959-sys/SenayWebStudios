@@ -7,7 +7,7 @@ import { href, type Lang } from "@/lib/routes";
 import { container } from "@/lib/ui";
 
 export function DemoPageView({ lang, slug }: { lang: Lang; slug: string }) {
-  const demo = getDemo(slug);
+  const demo = getDemo(slug, lang);
   if (!demo) notFound();
   const c = getContent(lang);
 
@@ -26,7 +26,7 @@ export function DemoPageView({ lang, slug }: { lang: Lang; slug: string }) {
           </Link>
         </div>
       </div>
-      <DemoSite demo={demo} fictionalLabel={c.demos.fictional} />
+      <DemoSite demo={demo} lang={lang} fictionalLabel={c.demos.fictional} />
     </>
   );
 }

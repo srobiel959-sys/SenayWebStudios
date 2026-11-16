@@ -32,8 +32,7 @@ export const no = {
     closeMenu: "Lukk meny",
     requestQuote: "Få et gratis utkast",
     requestQuoteShort: "Gratis utkast",
-    switchLanguage: "English",
-    switchLanguageLabel: "Switch to English",
+    switchLanguageLabel: "Bytt til engelsk",
     readMore: "Les mer",
     getInTouch: "Ta kontakt",
     footerPages: "Sider",
@@ -158,6 +157,7 @@ export const no = {
     label: "Slik velger kundene",
     query: "frisør i nærheten",
     searchLabel: "Søk",
+    tabs: ["Alle", "Kart", "Bilder"],
     steps: [
       { kicker: "Klokka er 20:14", text: "En kunde trenger en frisør og søker på telefonen." },
       { kicker: "Tre sekunder senere", text: "Hun ser på de første treffene og velger blant dem." },

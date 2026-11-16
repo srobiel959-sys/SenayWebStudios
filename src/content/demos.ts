@@ -1,6 +1,8 @@
 // Eksempelnettsider for demo-galleriet. ALLE bedriftene er oppdiktet.
-// Innholdet i selve demoene er på norsk (kundene er norske bedrifter);
-// bare bransjenavnene har engelsk oversettelse.
+// Denne filen har det norske innholdet. Den engelske teksten ligger i demos.en.ts,
+// og localizeDemo() slår dem sammen når siden vises på engelsk.
+
+import { demoEn } from "./demos.en";
 
 export type DemoGroup = "beauty" | "health" | "food" | "trades" | "services" | "retail";
 
@@ -142,7 +144,7 @@ export const demos: Demo[] = [
   {
     slug: "hudpleie",
     group: "beauty",
-    label: { no: "Hudpleie", en: "Skincare" },
+    label: { no: "Hudpleie", en: "Skincare clinic" },
     name: "Hudklinikken Aura",
     tagline: "Hudpleie og ansiktsbehandlinger",
     title: "Behandlinger tilpasset huden din.",
@@ -228,7 +230,7 @@ export const demos: Demo[] = [
   {
     slug: "veterinaer",
     group: "health",
-    label: { no: "Veterinær", en: "Veterinarian" },
+    label: { no: "Veterinær", en: "Vet" },
     name: "Poter Dyreklinikk",
     tagline: "Veterinær for hund og katt",
     title: "Vi tar oss tid til dyret ditt.",
@@ -442,7 +444,7 @@ export const demos: Demo[] = [
   {
     slug: "tomrer",
     group: "trades",
-    label: { no: "Tømrer / snekker", en: "Carpenter" },
+    label: { no: "Tømrer / snekker", en: "Carpenter / joiner" },
     name: "Laftet Bygg",
     tagline: "Tømrer og snekker",
     title: "Tilbygg, terrasse og kjøkken, bygget av egne fagfolk.",
@@ -505,7 +507,7 @@ export const demos: Demo[] = [
   {
     slug: "anleggsgartner",
     group: "trades",
-    label: { no: "Anleggsgartner", en: "Landscaper" },
+    label: { no: "Anleggsgartner", en: "Landscape gardener" },
     name: "Grønn Hage",
     tagline: "Anleggsgartner",
     title: "Vi bygger hagen fra grunnen av.",
@@ -526,7 +528,7 @@ export const demos: Demo[] = [
   {
     slug: "murer",
     group: "trades",
-    label: { no: "Murer", en: "Mason" },
+    label: { no: "Murer", en: "Bricklayer / tiler" },
     name: "Mur og Flis",
     tagline: "Murer og flislegger",
     title: "Flislegging og mur med rette fuger.",
@@ -633,7 +635,7 @@ export const demos: Demo[] = [
   {
     slug: "bilverksted",
     group: "services",
-    label: { no: "Bilverksted", en: "Car repair" },
+    label: { no: "Bilverksted", en: "Garage" },
     name: "Motorgarasjen",
     tagline: "Bilverksted og EU-kontroll",
     title: "Verksted for alle bilmerker, også elbil.",
@@ -698,7 +700,7 @@ export const demos: Demo[] = [
   {
     slug: "klesbutikk",
     group: "retail",
-    label: { no: "Klesbutikk", en: "Clothing store" },
+    label: { no: "Klesbutikk", en: "Clothing shop" },
     name: "Atelier Nord",
     tagline: "Klær og tilbehør",
     title: "Klær du bruker i mange år.",
@@ -718,6 +720,26 @@ export const demos: Demo[] = [
   },
 ];
 
-export function getDemo(slug: string) {
-  return demos.find((d) => d.slug === slug);
+/** Teksten som oversettes: alt en besøkende leser på eksempelsiden. */
+export type DemoText = Pick<Demo, "name" | "tagline" | "title" | "text" | "cta" | "services" | "about" | "hours">;
+
+type DemoLang = "no" | "en";
+
+/** Eksemplet på valgt språk. Norsk er grunnteksten, engelsk hentes fra demos.en.ts. */
+export function localizeDemo(demo: Demo, lang: DemoLang): Demo {
+  const text = lang === "en" ? demoEn[demo.slug] : undefined;
+  if (!text) return demo;
+  return { ...demo, name: text.name, tagline: text.tagline, title: text.title, text: text.text, cta: text.cta, services: text.services, about: text.about, hours: text.hours };
+}
+
+export function getDemo(slug: string, lang: DemoLang = "no") {
+  const demo = demos.find((d) => d.slug === slug);
+  return demo ? localizeDemo(demo, lang) : undefined;
+}
+
+/** Bransjen slik den står inne i en setning: «Nettside for frisør» / «Websites for hair salons». */
+export function industryPhrase(demo: Demo, lang: DemoLang) {
+  if (lang === "en") return demoEn[demo.slug]?.plural ?? demo.label.en.toLowerCase();
+  // «Frisør» → «frisør», men «Treningssenter / PT» beholder «PT».
+  return demo.label.no.charAt(0).toLowerCase() + demo.label.no.slice(1);
 }

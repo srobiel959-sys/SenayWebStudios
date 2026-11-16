@@ -46,7 +46,7 @@ export function ContactForm({ labels, prefillMessage }: { labels: Content["conta
     const messageField = form.elements.namedItem("melding");
     if (company && companyField instanceof HTMLInputElement && !companyField.value) companyField.value = company;
     if (industry && messageField instanceof HTMLTextAreaElement && !messageField.value) {
-      messageField.value = prefillMessage.replace("{bransje}", industry.toLowerCase()).slice(0, maxLength.melding);
+      messageField.value = prefillMessage.replace("{bransje}", industry).slice(0, maxLength.melding);
     }
   }, [prefillMessage]);
 
@@ -194,8 +194,7 @@ export function ContactForm({ labels, prefillMessage }: { labels: Content["conta
       </div>
       {/* Felle for spamroboter: skjult for mennesker, Formspree avviser innsendinger der den er fylt ut. */}
       <div className="hidden" aria-hidden="true">
-        <label htmlFor="_gotcha">Ikke fyll ut</label>
-        <input id="_gotcha" name="_gotcha" type="text" tabIndex={-1} autoComplete="off" />
+        <input name="_gotcha" type="text" tabIndex={-1} autoComplete="off" />
       </div>
       <div className="flex flex-col gap-4 sm:col-span-2 sm:flex-row sm:items-center sm:justify-between">
         <button

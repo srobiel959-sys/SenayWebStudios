@@ -17,8 +17,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!demo) return { title: "Page not found" };
   const t = getContent("en").industry;
   return {
-    title: fillIndustry(t.title, demo.label.en),
-    description: fillIndustry(t.metaDescription, demo.label.en),
+    title: fillIndustry(t.title, demo, "en"),
+    description: fillIndustry(t.metaDescription, demo, "en"),
     alternates: {
       canonical: industryHref("en", slug),
       languages: { "nb-NO": industryHref("no", slug), en: industryHref("en", slug) },

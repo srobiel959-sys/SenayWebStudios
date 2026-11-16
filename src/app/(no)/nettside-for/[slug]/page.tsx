@@ -17,8 +17,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!demo) return { title: "Siden finnes ikke" };
   const t = getContent("no").industry;
   return {
-    title: fillIndustry(t.title, demo.label.no),
-    description: fillIndustry(t.metaDescription, demo.label.no),
+    title: fillIndustry(t.title, demo, "no"),
+    description: fillIndustry(t.metaDescription, demo, "no"),
     alternates: {
       canonical: industryHref("no", slug),
       languages: { "nb-NO": industryHref("no", slug), en: industryHref("en", slug) },

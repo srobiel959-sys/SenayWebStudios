@@ -6,6 +6,7 @@ import Image from "next/image";
 // width/height under matcher filenes viewBox, så logoen aldri strekkes.
 //   logo-horizontal-*.svg  378×70   «Senay Studio» (navigasjon)
 //   logo-*.svg             390×114  «Senay Studio» + «Nettsider for små og store bedrifter» (hovedlogo)
+//   logo-*-en.svg          390×114  samme logo med engelsk linje, til de engelske sidene
 // S/-monogrammet brukes bare som ikon (favicon, app-ikon, profilbilde), ikke på sidene.
 
 type Tone = "dark" | "light";
@@ -19,6 +20,11 @@ type LogoProps = {
   /** Last inn tidlig (logoen øverst på siden) */
   preload?: boolean;
   loading?: "eager" | "lazy";
+};
+
+type MainLogoProps = LogoProps & {
+  /** Språket på linjen under ordmerket. */
+  lang?: "no" | "en";
 };
 
 /** Navigasjonslogoen: bare «Senay Studio». */
@@ -36,11 +42,11 @@ export function Logo({ className = "h-8 w-auto", tone = "dark", alt = "Senay Stu
   );
 }
 
-/** Hovedlogoen: «Senay Studio» + «Nettsider for små og store bedrifter». */
-export function MainLogo({ className = "h-auto w-60", tone = "dark", alt = "Senay Studio", preload, loading }: LogoProps) {
+/** Hovedlogoen: «Senay Studio» + «Nettsider for små og store bedrifter» (på engelsk: «Websites for small and large businesses»). */
+export function MainLogo({ className = "h-auto w-60", tone = "dark", lang = "no", alt = "Senay Studio", preload, loading }: MainLogoProps) {
   return (
     <Image
-      src={tone === "dark" ? "/brand/logo-navy.svg" : "/brand/logo-cream.svg"}
+      src={`/brand/logo-${tone === "dark" ? "navy" : "cream"}${lang === "en" ? "-en" : ""}.svg`}
       alt={alt}
       width={390}
       height={114}

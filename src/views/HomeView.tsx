@@ -104,7 +104,7 @@ export function HomeView({ lang }: { lang: Lang }) {
               {numbers.title}
             </h2>
             <p className="mt-6 font-display text-[7.5rem] leading-[0.85] tracking-tight sm:text-[11rem] lg:text-[13rem]">
-              <CountUp value={numbers.items[0].value} prefix={numbers.items[0].prefix} suffix={numbers.items[0].suffix} />
+              <CountUp value={numbers.items[0].value} prefix={numbers.items[0].prefix} suffix={numbers.items[0].suffix} lang={lang} />
             </p>
             <p className="mt-4 text-xl text-cream-muted">{numbers.items[0].label}</p>
           </Reveal>
@@ -114,7 +114,7 @@ export function HomeView({ lang }: { lang: Lang }) {
               <Reveal key={item.label} delay={i * 120}>
                 <div className="rounded-2xl border border-white/15 bg-white/[0.06] p-7 sm:p-8">
                   <p className="font-display text-5xl tracking-tight sm:text-6xl">
-                    <CountUp value={item.value} prefix={item.prefix} suffix={item.suffix} />
+                    <CountUp value={item.value} prefix={item.prefix} suffix={item.suffix} lang={lang} />
                   </p>
                   <p className="mt-2 text-cream-muted">{item.label}</p>
                 </div>

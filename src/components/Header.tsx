@@ -75,7 +75,7 @@ export function Header({ lang, nav, ui }: { lang: Lang; nav: Content["nav"]; ui:
             className="relative inline-flex h-9 items-center rounded-full border border-line px-3 text-xs font-medium uppercase tracking-wider text-ink-muted transition-colors duration-150 after:absolute after:-inset-1 after:content-[''] hover:border-navy/30 hover:text-navy"
           >
             {other === "no" ? "NO" : "EN"}
-            <span className="sr-only" lang={other === "no" ? "nb" : "en"}>
+            <span className="sr-only">
               {" "}
               – {ui.switchLanguageLabel}
             </span>
