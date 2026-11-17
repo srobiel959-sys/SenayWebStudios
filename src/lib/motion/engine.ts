@@ -9,13 +9,24 @@
 // - Animasjonene kjører i nettleserens egen motor (Web Animations API via motion/mini),
 //   ikke i JavaScript for hvert bilde.
 //
-// Importer bare fra "motion/mini" her (3 kB). Hovedpakken "motion" drar med seg langt mer,
-// og den skal bare lastes der den trengs (parallax.ts, som lastes etter behov).
+// Motion (motion/mini, 3 kB) lastes først når siden er ferdig lastet, ikke ved oppstart: ingenting
+// animeres før brukeren scroller, og all JavaScript ved oppstart gjør siden tregere å vise (LCP).
+// Hovedpakken "motion" drar med seg langt mer og brukes bare i parallax.ts, som også lastes etter behov.
 
-import { animate } from "motion/mini";
 import { DISTANCE, DURATION, EASE, REDUCED_MOTION, SMALL_SCREEN, STAGGER, presetKeyframes, type Preset } from "./presets";
 
 const noop = () => {};
+
+type Mini = typeof import("motion/mini");
+let mini: Promise<Mini> | null = null;
+/** Henter motion/mini én gang. */
+const loadMini = () => (mini ??= import("motion/mini"));
+/** Henter motion/mini når siden er ferdig lastet og nettleseren har tid, så den er klar før brukeren scroller. */
+function preloadMini() {
+  const idle = () => ("requestIdleCallback" in window ? requestIdleCallback(() => loadMini(), { timeout: 2000 }) : setTimeout(loadMini, 200));
+  if (document.readyState === "complete") idle();
+  else window.addEventListener("load", idle, { once: true });
+}
 
 const matches = (query: string) => typeof window !== "undefined" && window.matchMedia(query).matches;
 export const prefersReducedMotion = () => matches(REDUCED_MOTION);
@@ -40,6 +51,7 @@ function whenRevealed(targets: Targets, pendingValue: string, onEnter: (batch: H
   );
   if (pending.length === 0) return noop;
   for (const el of pending) el.dataset.motionPending = pendingValue;
+  preloadMini();
 
   let queue: HTMLElement[] = [];
   let frame = 0;
@@ -101,21 +113,29 @@ export function reveal(targets: Targets, options: RevealOptions = {}) {
   const distance = motionDistance();
 
   return whenRevealed(targets, preset, (batch) => {
-    const controls = animate(batch, presetKeyframes(preset, distance) as Parameters<typeof animate>[1], {
-      duration,
-      ease: EASE,
-      // Elementer som kommer til syne samtidig, kommer etter hverandre.
-      delay: (i: number) => delay + i * step,
-    });
-    // Animasjonen holder første bilde mens den venter (fill: both), så det skjulte
-    // utgangspunktet kan tas bort med en gang uten at noe blinker.
-    for (const el of batch) delete el.dataset.motionPending;
-    controls.then(() => {
-      for (const el of batch) {
-        el.style.removeProperty("opacity");
-        el.style.removeProperty("transform");
-      }
-    });
+    loadMini().then(
+      ({ animate }) => {
+        const controls = animate(batch, presetKeyframes(preset, distance) as Parameters<typeof animate>[1], {
+          duration,
+          ease: EASE,
+          // Elementer som kommer til syne samtidig, kommer etter hverandre.
+          delay: (i: number) => delay + i * step,
+        });
+        // Animasjonen holder første bilde mens den venter (fill: both), så det skjulte
+        // utgangspunktet kan tas bort med en gang uten at noe blinker.
+        for (const el of batch) delete el.dataset.motionPending;
+        controls.then(() => {
+          for (const el of batch) {
+            el.style.removeProperty("opacity");
+            el.style.removeProperty("transform");
+          }
+        });
+      },
+      // Kunne ikke hente Motion (f.eks. uten nett): vis innholdet uten animasjon.
+      () => {
+        for (const el of batch) delete el.dataset.motionPending;
+      },
+    );
   });
 }
 

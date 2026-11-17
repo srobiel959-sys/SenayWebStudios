@@ -36,7 +36,7 @@ Ett felles system for Senay-siden og alle eksempelsidene. Biblioteket er **Motio
 |---|---|
 | `src/lib/motion/presets.ts` | `EASE`, `DURATION` (0.2 / 0.4 / 0.6 s), `DISTANCE` (24 px PC, 12 px mobil), `STAGGER` (0.08 s), presetene `fade`, `slideUp`, `scale` |
 | `src/app/globals.css` | De samme verdiene som CSS-variabler (`--motion-ease`, `--motion-fast/base/slow`, `--motion-distance`), Tailwind-klassen `ease-calm`, det skjulte utgangspunktet (`[data-motion-pending]`), sideovergangene og reglene for redusert bevegelse |
-| `src/lib/motion/engine.ts` | `reveal()` og `revealWithCss()` – motoren. Importerer bare `motion/mini` (3 kB) |
+| `src/lib/motion/engine.ts` | `reveal()` og `revealWithCss()` – motoren. Henter `motion/mini` (3 kB) først når siden er ferdig lastet |
 | `src/lib/motion/parallax.ts` | `parallax()` med `scroll` fra hovedpakken. Lastes bare med `import()` på store skjermer |
 | `src/components/motion/` | `Reveal`, `Stagger`, `ScrollParallax`, `PageTransition`, `useReducedMotion`, `useIsSmallScreen`, `useMediaQuery` |
 | `src/app/(no)/template.tsx`, `src/app/(en)/en/template.tsx` | Sideovergangene (lages på nytt ved hver navigasjon) |
@@ -77,7 +77,7 @@ import { Reveal, Stagger, ScrollParallax } from "@/components/motion";
 4. **`prefers-reduced-motion`: ingenting beveger seg.** Hver ny CSS-animasjon skal ha `motion-reduce:` eller en linje i reduced-motion-blokken i `globals.css`. Også løkker som `animate-pulse`.
 5. **Mobil:** kortere avstand (12 px), ingen parallakse, mindre zoom.
 6. **Lighthouse (mobil) skal ikke under 90** på `/`, `/en`, `/priser` og `/demo/frisor`. All JavaScript som lastes ved oppstart, forsinker LCP i målingen, så hver kB teller.
-7. **Bare `motion/mini` i kode som lastes ved oppstart.** Hovedpakken (`import … from "motion"`) bare i filer som lastes med `import()`. Turbopack klarer ikke å fjerne ubrukt kode fra hovedpakken (målt: 25–54 kB ekstra). Ikke bruk `motion/react` / `<motion.div>` (rundt 43 kB).
+7. **Ingen Motion-kode ved oppstart.** Motoren henter `motion/mini` med `import()` etter at siden er lastet (ingenting animeres før man scroller). Hovedpakken (`import … from "motion"`) bare i filer som lastes med `import()`: Turbopack klarer ikke å fjerne ubrukt kode fra den (målt: 25–54 kB ekstra). Ikke bruk `motion/react` / `<motion.div>` (rundt 43 kB). Statisk `import { animate } from "motion/mini"` kostet 3–4 kB ved oppstart og nok til at forsiden falt under 90.
 8. **Toppbildet på en side** (LCP) skal ha `preload`, ikke lazy loading. `DemoSite` har `preloadHero` til dette, bare på selve eksempelsiden.
 
 ### Sjekk før du pusher
@@ -88,4 +88,15 @@ npx next start -p 3200 &
 node scripts/motion-check.mjs   # uten JS, redusert bevegelse, alt synlig etter scrolling, parallakse, sideoverganger
 ```
 
-Lighthouse (mobil, median av flere kjøringer, se `scripts/motion-check.mjs` for oppsettet av Chromium) på de fire sidene over. Målt 17.11.2026 før og etter bevegelsessystemet: JavaScript ved oppstart +3,9–4,9 kB gzip per side.
+Lighthouse (mobil): ta median av minst tre kjøringer. Én kjøring svinger ±3–4 poeng. Sammenlign helst gammel og ny versjon vekselvis på to porter.
+
+Målt 17.11.2026 (Lighthouse 13.5, mobil, lokal produksjonsbygg):
+
+| Side | Før bevegelsessystemet | Etter |
+|---|---|---|
+| `/` | 89–91 | 91 |
+| `/en` | 90–91 | 90–93 |
+| `/priser` | 94 | 93 |
+| `/demo/frisor` | 91 | 91 |
+
+JavaScript ved oppstart: +0,9–1,5 kB gzip per side (174,4 → 175,9 kB på forsiden).
