@@ -109,7 +109,7 @@ export function LiveBuilder({
           maxLength={MAX_NAME}
           autoComplete="organization"
           placeholder={labels.namePlaceholder}
-          className="min-w-0 flex-1 rounded-full bg-transparent px-5 py-3 text-lg text-navy placeholder:text-ink-muted focus:bg-sand/60"
+          className="min-w-0 flex-1 rounded-full bg-transparent px-5 py-3 text-base text-navy placeholder:text-ink-muted focus:bg-sand/60 sm:text-lg"
         />
         <label htmlFor={`${ids}-bransje`} className="px-5 text-xs font-medium text-ink-muted sm:sr-only">
           {labels.industryLabel}
@@ -138,7 +138,7 @@ export function LiveBuilder({
         </button>
       </form>
 
-      <div ref={previewRef} className="mx-auto mt-10 max-w-5xl scroll-mt-28 sm:mt-14">
+      <div ref={previewRef} className="mx-auto mt-8 max-w-5xl scroll-mt-28 sm:mt-14">
         <p className="sr-only" aria-live="polite">
           {labels.srPreview.replace("{navn}", shownName)}
           {stage >= 0 ? ` ${labels.steps[stage]}` : ""}

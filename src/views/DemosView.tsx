@@ -13,17 +13,17 @@ export function DemosView({ lang }: { lang: Lang }) {
     <>
       <PageHero title={c.demos.title} lead={c.demos.lead} />
 
-      <section aria-label={c.demos.choose} className="py-20 sm:py-28">
+      <section aria-label={c.demos.choose} className="py-14 sm:py-28">
         <div className={container}>
           <DemoGallery lang={lang} labels={c.demos} />
         </div>
       </section>
 
       {/* Alle eksempler som lenker, gruppert */}
-      <section aria-labelledby="alle-tittel" className="border-t border-line bg-sand py-20 sm:py-28">
+      <section aria-labelledby="alle-tittel" className="border-t border-line bg-sand py-14 sm:py-28">
         <div className={container}>
           <h2 id="alle-tittel" className="font-display text-4xl">
-            {c.demos.allExamples} <span className="font-sans text-lg text-ink-muted">· {demos.length} {c.demos.count}</span>
+            {c.demos.allExamples} <span className="whitespace-nowrap font-sans text-lg text-ink-muted">· {demos.length} {c.demos.count}</span>
           </h2>
           <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {demoGroups.map((g) => (

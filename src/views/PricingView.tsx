@@ -19,7 +19,7 @@ export function PricingView({ lang }: { lang: Lang }) {
       <JsonLd data={pricingFaqSchema(lang)} />
       <PageHero title={pricing.title} lead={pricing.lead} />
 
-      <section aria-labelledby="pakker-tittel" className="py-20 sm:py-28">
+      <section aria-labelledby="pakker-tittel" className="py-14 sm:py-28">
         <div className={container}>
           <h2 id="pakker-tittel" className="sr-only">
             {pricing.packagesHeading}
@@ -33,7 +33,7 @@ export function PricingView({ lang }: { lang: Lang }) {
 
       <AgencyCompare lang={lang} c={c} />
 
-      <section aria-labelledby="prisfaq-tittel" className="py-20 sm:py-28">
+      <section aria-labelledby="prisfaq-tittel" className="py-14 sm:py-28">
         <div className={`${container} grid gap-12 lg:grid-cols-12`}>
           <Reveal className="lg:sticky lg:top-32 lg:col-span-4 lg:self-start">
             <SectionHeading id="prisfaq-tittel" title={pricing.faqTitle} />

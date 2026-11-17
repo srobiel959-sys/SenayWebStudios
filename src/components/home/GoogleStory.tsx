@@ -17,7 +17,9 @@ const smooth = (t: number) => {
   return x * x * (3 - 2 * x);
 };
 
-const reducedQuery = "(prefers-reduced-motion: reduce)";
+// Historien spilles av mens man scroller bare på store skjermer. Med redusert bevegelse, og på
+// mobil og nettbrett (der telefonen og teksten ikke får plass i én skjermhøyde), vises sluttbildet.
+const reducedQuery = "(prefers-reduced-motion: reduce), (max-width: 1023px)";
 function subscribe(callback: () => void) {
   const media = window.matchMedia(reducedQuery);
   media.addEventListener("change", callback);
@@ -178,7 +180,7 @@ export function GoogleStory({ story, id }: { story: Story; id: string }) {
   }, [scrub, story.query]);
 
   const phone = (
-    <div className="relative mx-auto w-[min(19rem,82vw)] sm:w-[21rem]" aria-hidden="true">
+    <div className="relative mx-auto w-[min(17.5rem,78vw)] sm:w-[21rem]" aria-hidden="true">
       <div className="relative rounded-[3rem] border border-navy/10 bg-gradient-to-b from-[#1c2740] to-[#0b1220] p-2 shadow-[0_40px_100px_-30px_rgba(7,22,48,0.55)]">
         <div className="relative overflow-hidden rounded-[2.5rem] bg-[#0b1220] px-3.5 pb-5 pt-10 shadow-[inset_0_1px_1px_rgba(255,255,255,0.12)] sm:pb-6 sm:pt-11">
           <span className="absolute left-1/2 top-3 h-6 w-24 -translate-x-1/2 rounded-full bg-black" />
@@ -243,7 +245,7 @@ export function GoogleStory({ story, id }: { story: Story; id: string }) {
       className="relative scroll-mt-0 border-t border-line"
       style={scrub ? { height: "400vh" } : undefined}
     >
-      <div className={scrub ? "sticky top-0 flex h-[100dvh] items-center overflow-hidden pb-4 pt-20 sm:pt-24" : "overflow-hidden py-24 sm:py-32"}>
+      <div className={scrub ? "sticky top-0 flex h-[100dvh] items-center overflow-hidden pb-4 pt-20 sm:pt-24" : "overflow-hidden py-14 sm:py-32"}>
         <div className={`${container} grid items-center gap-6 sm:gap-10 lg:grid-cols-[1fr_auto] lg:gap-24`}>
           <div>
             <h2 id={id} className={`text-sm font-medium text-ink-muted ${scrub ? "max-lg:sr-only" : ""}`}>
@@ -256,19 +258,22 @@ export function GoogleStory({ story, id }: { story: Story; id: string }) {
                   <span ref={fillRef} className="absolute inset-0 origin-top bg-accent" style={{ transform: "scaleY(0)" }} />
                 </span>
               )}
-              <ol className={scrub ? "relative min-h-[6.5rem] flex-1 lg:min-h-0 lg:space-y-7" : "space-y-8"}>
+              <ol className={scrub ? "relative flex-1 space-y-7" : "space-y-5 sm:space-y-8"}>
                 {story.steps.map((s, i) => {
                   const active = !scrub || i === step;
+                  // Stegene som ikke er aktive, tones ned, men holder nok kontrast til å leses
+                  // (grå etikett, og stor tekst på halv styrke: over 3:1 mot hvit bakgrunn).
+                  const fade = "transition-[opacity,color] duration-700 ease-[cubic-bezier(0.32,0.72,0,1)]";
                   return (
-                    <li
-                      key={s.kicker}
-                      className={`transition-[opacity,translate] duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] ${
-                        scrub ? "max-lg:absolute max-lg:inset-x-0 max-lg:top-0" : ""
-                      } ${active ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0 lg:translate-y-0 lg:opacity-25"}`}
-                      aria-current={scrub && active ? "step" : undefined}
-                    >
-                      <p className="text-sm font-medium text-accent">{s.kicker}</p>
-                      <p className="mt-2 max-w-lg text-balance font-display text-xl leading-snug sm:text-3xl lg:mt-3 lg:text-[2rem]">{s.text}</p>
+                    <li key={s.kicker} aria-current={scrub && active ? "step" : undefined}>
+                      <p className={`text-sm font-medium ${fade} ${active ? "text-accent" : "text-ink-muted"}`}>{s.kicker}</p>
+                      <p
+                        className={`mt-2 max-w-lg text-balance font-display text-xl leading-snug sm:text-3xl lg:mt-3 lg:text-[2rem] ${fade} ${
+                          active ? "opacity-100" : "opacity-50"
+                        }`}
+                      >
+                        {s.text}
+                      </p>
                     </li>
                   );
                 })}

@@ -30,7 +30,7 @@ export function ServicesView({ lang }: { lang: Lang }) {
             <li key={item.title}>
               <Reveal className="grid gap-8 py-14 lg:grid-cols-12 lg:py-20">
                 <div className="lg:col-span-5">
-                  <h2 className="font-display text-4xl tracking-tight sm:text-5xl">{item.title}</h2>
+                  <h2 className="font-display text-[2rem] tracking-tight sm:text-5xl">{item.title}</h2>
                 </div>
                 <div className="lg:col-span-7">
                   <p className="text-lg leading-relaxed text-ink-muted sm:text-xl">{item.text}</p>

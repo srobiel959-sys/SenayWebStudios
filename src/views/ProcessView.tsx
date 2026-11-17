@@ -12,7 +12,7 @@ export function ProcessView({ lang }: { lang: Lang }) {
     <>
       <PageHero title={process.title} lead={process.lead} />
 
-      <section aria-label={process.listLabel} className="py-20 sm:py-28">
+      <section aria-label={process.listLabel} className="py-14 sm:py-28">
         <ol className={`${container} relative`}>
           {process.steps.map((step, i) => (
             <li key={step.title} className="relative grid gap-6 pb-16 last:pb-0 md:grid-cols-12 md:gap-10">

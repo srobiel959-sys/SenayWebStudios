@@ -12,6 +12,9 @@ import { NextResponse, type NextRequest } from "next/server";
 //
 // Lenker lages med scripts/preview-link.mjs. Databasen er Upstash Redis (REST-API), satt opp
 // som integrasjon i Vercel. Produksjonen (VERCEL_ENV=production) påvirkes ikke.
+//
+// Vakten slår seg først på når databasen er koblet til. Til da beskytter Vercel Authentication
+// forhåndsvisningene som før, så eieren ser dem bare ved å logge inn på Vercel.
 
 const COOKIE = "senay_preview";
 const PARAM = "access";
@@ -25,11 +28,11 @@ export const config = {
 };
 
 function gateActive() {
-  return (
+  const preview =
     process.env.VERCEL_ENV === "preview" ||
     process.env.NEXT_PUBLIC_VERCEL_ENV === "preview" ||
-    process.env.PREVIEW_ACCESS_GATE === "on"
-  );
+    process.env.PREVIEW_ACCESS_GATE === "on";
+  return preview && redisConfig() !== null;
 }
 
 function redisConfig() {

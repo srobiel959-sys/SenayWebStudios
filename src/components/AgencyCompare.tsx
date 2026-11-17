@@ -10,7 +10,7 @@ import { SectionHeading } from "./SectionHeading";
 export function AgencyCompare({ lang, c }: { lang: Lang; c: Content }) {
   const a = c.agencies;
   return (
-    <section aria-labelledby="byraer-tittel" className="border-t border-line py-28 sm:py-40">
+    <section aria-labelledby="byraer-tittel" className="border-t border-line py-16 sm:py-40">
       <div className={container}>
         <Reveal>
           <SectionHeading id="byraer-tittel" title={a.title} />

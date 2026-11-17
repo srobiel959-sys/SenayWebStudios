@@ -15,7 +15,7 @@ export function WhyView({ lang }: { lang: Lang }) {
     <>
       <PageHero title={why.title} lead={why.lead} />
 
-      <section aria-labelledby="grunner-tittel" className="py-20 sm:py-28">
+      <section aria-labelledby="grunner-tittel" className="py-14 sm:py-28">
         <div className={container}>
           <h2 id="grunner-tittel" className="sr-only">
             {why.reasonsHeading}
@@ -25,7 +25,7 @@ export function WhyView({ lang }: { lang: Lang }) {
               <li key={item.title}>
                 <Reveal delay={(i % 2) * 90} className={`h-full`}>
                   <div className={`${card} h-full p-8 sm:p-10`}>
-                    <h3 className="font-display text-3xl leading-snug sm:text-4xl">{item.title}</h3>
+                    <h3 className="font-display text-2xl leading-snug sm:text-4xl">{item.title}</h3>
                     <p className="mt-4 max-w-xl text-lg leading-relaxed text-ink-muted">{item.text}</p>
                   </div>
                 </Reveal>
@@ -35,7 +35,7 @@ export function WhyView({ lang }: { lang: Lang }) {
         </div>
       </section>
 
-      <section aria-labelledby="forskjell-tittel" className="border-y border-line bg-sand py-20 sm:py-28">
+      <section aria-labelledby="forskjell-tittel" className="border-y border-line bg-sand py-14 sm:py-28">
         <div className={container}>
           <Reveal>
             <SectionHeading id="forskjell-tittel" title={comparison.title} />
@@ -53,7 +53,7 @@ export function WhyView({ lang }: { lang: Lang }) {
         </div>
       </section>
 
-      <section aria-labelledby="sporsmal-tittel" className="py-20 sm:py-28">
+      <section aria-labelledby="sporsmal-tittel" className="py-14 sm:py-28">
         <div className={`${container} grid gap-12 lg:grid-cols-12`}>
           <Reveal className="lg:sticky lg:top-32 lg:col-span-4 lg:self-start">
             <SectionHeading id="sporsmal-tittel" title={c.ui.whatYouWonder} />

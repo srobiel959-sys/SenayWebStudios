@@ -13,7 +13,7 @@ export function AboutView({ lang }: { lang: Lang }) {
     <>
       <PageHero title={about.title} />
 
-      <section aria-label={about.sectionLabel} className="py-20 sm:py-28">
+      <section aria-label={about.sectionLabel} className="py-14 sm:py-28">
         <div className={`${container} grid gap-12 lg:grid-cols-12`}>
           <Reveal className={`lg:col-span-5 lg:self-start`}>
             <div className={`${card} relative flex items-center justify-center overflow-hidden px-8 py-14 sm:py-20`}>
@@ -28,7 +28,7 @@ export function AboutView({ lang }: { lang: Lang }) {
         </div>
       </section>
 
-      <section aria-labelledby="verdier-tittel" className="border-t border-line bg-sand py-20 sm:py-28">
+      <section aria-labelledby="verdier-tittel" className="border-t border-line bg-sand py-14 sm:py-28">
         <div className={container}>
           <h2 id="verdier-tittel" className="font-display text-3xl tracking-tight sm:text-4xl">
             {about.valuesHeading}

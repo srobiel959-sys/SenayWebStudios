@@ -36,7 +36,7 @@ function Ring({ value }: { value: number }) {
 
 export function LighthouseScores({ proof }: { proof: Content["proof"] }) {
   return (
-    <section aria-labelledby="malt-tittel" className="border-t border-line py-24 sm:py-32">
+    <section aria-labelledby="malt-tittel" className="border-t border-line py-16 sm:py-32">
       <div className={`${container} grid items-center gap-14 lg:grid-cols-12`}>
         <Reveal className="lg:col-span-5">
           <SectionHeading id="malt-tittel" title={proof.title} lead={proof.lead} />
