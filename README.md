@@ -61,10 +61,12 @@ Kommer det senere et skjema-API, en innlogging eller en database: legg nøkler i
 
 Forhåndsvisningene på Vercel (`VERCEL_ENV=preview`) er lukket bak engangslenker (`src/proxy.ts`). En lenke virker én gang: første gang noen trykker på knappen, får den nettleseren tilgang i 24 timer, og lenken er brukt opp. Chat-apper som henter lenken for å lage forhåndsvisning, bruker den ikke opp, fordi den først brukes når man trykker på knappen. Produksjonen påvirkes ikke.
 
+Til databasen er koblet til, er vakten av, og Vercel Authentication beskytter forhåndsvisningene som før: du ser dem ved å logge inn på Vercel.
+
 Oppsett i Vercel (én gang):
 
 1. **Storage → Create Database → Upstash (Redis)**, gratisnivået holder. Koble databasen til prosjektet, minst for *Preview*. Da får prosjektet `KV_REST_API_URL` og `KV_REST_API_TOKEN`.
-2. **Settings → Deployment Protection → Vercel Authentication**: slå av, ellers møter mottakeren Vercels innlogging før engangslenken. Eldre forhåndsvisninger som er bygget før dette, blir da åpne for alle som har adressen.
+2. **Settings → Deployment Protection → Vercel Authentication**: slå av, ellers møter mottakeren Vercels innlogging før engangslenken. Gjør dette først når databasen er koblet til og forhåndsvisningen er bygget på nytt, ellers står forhåndsvisningene åpne. Eldre forhåndsvisninger som er bygget før dette, blir da åpne for alle som har adressen.
 3. Bygg forhåndsvisningen på nytt (push eller «Redeploy»), så den får miljøvariablene.
 
 Lage en lenke (lenken slutter å virke etter 24 timer hvis den ikke er brukt):

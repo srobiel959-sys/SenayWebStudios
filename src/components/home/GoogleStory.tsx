@@ -258,19 +258,22 @@ export function GoogleStory({ story, id }: { story: Story; id: string }) {
                   <span ref={fillRef} className="absolute inset-0 origin-top bg-accent" style={{ transform: "scaleY(0)" }} />
                 </span>
               )}
-              <ol className={scrub ? "relative min-h-[6.5rem] flex-1 lg:min-h-0 lg:space-y-7" : "space-y-5 sm:space-y-8"}>
+              <ol className={scrub ? "relative flex-1 space-y-7" : "space-y-5 sm:space-y-8"}>
                 {story.steps.map((s, i) => {
                   const active = !scrub || i === step;
+                  // Stegene som ikke er aktive, tones ned, men holder nok kontrast til å leses
+                  // (grå etikett, og stor tekst på halv styrke: over 3:1 mot hvit bakgrunn).
+                  const fade = "transition-[opacity,color] duration-700 ease-[cubic-bezier(0.32,0.72,0,1)]";
                   return (
-                    <li
-                      key={s.kicker}
-                      className={`transition-[opacity,translate] duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] ${
-                        scrub ? "max-lg:absolute max-lg:inset-x-0 max-lg:top-0" : ""
-                      } ${active ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0 lg:translate-y-0 lg:opacity-25"}`}
-                      aria-current={scrub && active ? "step" : undefined}
-                    >
-                      <p className="text-sm font-medium text-accent">{s.kicker}</p>
-                      <p className="mt-2 max-w-lg text-balance font-display text-xl leading-snug sm:text-3xl lg:mt-3 lg:text-[2rem]">{s.text}</p>
+                    <li key={s.kicker} aria-current={scrub && active ? "step" : undefined}>
+                      <p className={`text-sm font-medium ${fade} ${active ? "text-accent" : "text-ink-muted"}`}>{s.kicker}</p>
+                      <p
+                        className={`mt-2 max-w-lg text-balance font-display text-xl leading-snug sm:text-3xl lg:mt-3 lg:text-[2rem] ${fade} ${
+                          active ? "opacity-100" : "opacity-50"
+                        }`}
+                      >
+                        {s.text}
+                      </p>
                     </li>
                   );
                 })}
