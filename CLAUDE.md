@@ -14,6 +14,15 @@ Les denne filen først i hver økt. Next.js-reglene (les dokumentasjonen i `node
 - Aldri modell-ID i commits, PR-er eller kode.
 - Eierens e-postadresse er privat.
 
+## Sikkerhet
+
+- **Aldri API-nøkler eller hemmeligheter i `NEXT_PUBLIC_`-variabler eller i koden.** Alt med `NEXT_PUBLIC_` bakes inn i JavaScript som hvem som helst kan lese. Hemmeligheter hører hjemme i miljøvariabler uten prefiks, og leses bare på serveren. (`NEXT_PUBLIC_FORMSPREE_ID` er offentlig med vilje: et skjema-ID, ikke en nøkkel.)
+- **Kobles chat-assistenten noen gang til AI, skal det bare skje via en serverrute** (route handler), aldri direkte fra nettleseren. Ruten skal ha rate limiting per besøkende og grenser for lengden på meldingene og samtalen. Nøkkelen ligger bare på serveren.
+- **Tekst fra besøkende vises alltid som ren tekst, aldri som HTML.** Bruk vanlig `{tekst}` i JSX. Aldri `dangerouslySetInnerHTML`, `innerHTML` eller markdown-til-HTML på noe en besøkende har skrevet. (Eneste `dangerouslySetInnerHTML` i dag er `JsonLd.tsx`, med våre egne data og `<` escapet.)
+- **Kjør `npm audit --omit=dev` før hver lansering.** Den skal vise 0. Funn i utviklerverktøyene (eslint o.l.) havner ikke på nettsiden; fiks dem med `npm audit fix`, aldri `--force` uten å spørre.
+- Videresendinger (`redirect`) bygges aldri direkte fra en adresse brukeren har sendt inn. Se `safePath` og `sameOriginUrl` i `src/proxy.ts`: samme origin, ingen `\` og ingen kontrolltegn.
+- Sikkerhetshodene (CSP, HSTS, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy) står i `next.config.ts`. Legger du til en ekstern tjeneste, må den inn i CSP-en, og bare den.
+
 ## Verktøy
 
 MCP-serverne står i `.mcp.json` og er slått på i `.claude/settings.json`. De lastes når en økt starter.

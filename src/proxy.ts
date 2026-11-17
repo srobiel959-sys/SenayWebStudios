@@ -104,9 +104,28 @@ async function validPass(value: string | undefined) {
 
 const validId = (id: string) => /^[a-f0-9]{32}$/.test(id);
 
-/** Bare stier på samme nettsted, aldri «//annet-nettsted». */
+// Omvendt skråstrek og kontrolltegn (tab, linjeskift, \r …) hvor som helst i stien.
+const UNSAFE_PATH = /[\\\u0000-\u001f\u007f]/;
+
+/**
+ * Bare stier på samme nettsted. «next» kommer fra et skjema og kan være laget av hvem som helst.
+ * URL-parseren fjerner tab og linjeskift og gjør «\» om til «/», så «/\t/evil.com» eller
+ * «/\evil.com» blir til «//evil.com» – en lenke til et annet nettsted (open redirect).
+ * Derfor avvises slike tegn overalt, ikke bare i starten.
+ */
 function safePath(path: string) {
-  return path.startsWith("/") && !path.startsWith("//") && !path.startsWith("/\\") ? path : "/";
+  return path.startsWith("/") && !path.startsWith("//") && !UNSAFE_PATH.test(path) ? path : "/";
+}
+
+/** Adressen det sendes videre til. Sjekkes også etter at den er satt sammen: annet origin gir «/». */
+function sameOriginUrl(path: string, request: NextRequest) {
+  const fallback = new URL("/", request.nextUrl.origin);
+  try {
+    const url = new URL(safePath(path), request.url);
+    return url.origin === request.nextUrl.origin ? url : fallback;
+  } catch {
+    return fallback;
+  }
 }
 
 // ---------------------------------------------------------------- Sidene som vises før tilgang
@@ -210,8 +229,8 @@ export async function proxy(request: NextRequest) {
     if (request.method !== "POST") return NextResponse.redirect(new URL("/", request.url), 303);
     const form = await request.formData().catch(() => null);
     const id = String(form?.get(PARAM) ?? "");
-    const next = safePath(String(form?.get("next") ?? "/"));
-    if (hasAccess) return NextResponse.redirect(new URL(next, request.url), 303);
+    const next = sameOriginUrl(String(form?.get("next") ?? "/"), request);
+    if (hasAccess) return NextResponse.redirect(next, 303);
     if (!validId(id)) return gatePage("used", 410);
     if (!redisConfig()) return gatePage("setup", 503);
 
@@ -227,7 +246,7 @@ export async function proxy(request: NextRequest) {
     const expires = Math.floor(Date.now() / 1000) + ACCESS_SECONDS;
     const pass = await createPass(id, expires);
     if (!pass) return gatePage("setup", 503);
-    const response = NextResponse.redirect(new URL(next, request.url), 303);
+    const response = NextResponse.redirect(next, 303);
     response.cookies.set(COOKIE, pass, {
       httpOnly: true,
       secure: url.protocol === "https:",
