@@ -18,7 +18,7 @@ npm run build
 - `src/content/demos.ts` – de 30 eksempelbedriftene (alle oppdiktet) i demo-galleriet.
 - `src/views/` – sidene, skrevet én gang og brukt på begge språk. `src/app/(no|en)/…/page.tsx` er tynne innganger med metadata.
 - `src/lib/routes.ts` – adressene på begge språk og språkvelgeren.
-- `src/components/` – felles deler: `Header`, `Footer`, `PageHero`, `PricingCards`, `AgencyCompare`, `Faq`, `CtaBand`, `Reveal`, og `demo/` (galleri og eksempelnettside).
+- `src/components/` – felles deler: `Header`, `Footer`, `PageHero`, `PricingCards`, `AgencyCompare`, `Faq`, `CtaBand`, `motion/` (felles bevegelse, se CLAUDE.md) og `demo/` (galleri og eksempelnettside).
 - `public/brand/` – logofilene. Navy #071630 · Krem #FAF8F5.
 
 ## Bilder til eksempelsidene

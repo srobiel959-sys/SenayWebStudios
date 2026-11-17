@@ -7,7 +7,7 @@ import { Faq } from "@/components/Faq";
 import { ArrowCircle, ArrowIcon, CheckIcon } from "@/components/Icons";
 import { PageHero } from "@/components/PageHero";
 import { PricingCards } from "@/components/PricingCards";
-import { Reveal } from "@/components/Reveal";
+import { Reveal } from "@/components/motion";
 import { SectionHeading } from "@/components/SectionHeading";
 import { getContent } from "@/content";
 import { demos, getDemo, industryPhrase, type Demo } from "@/content/demos";

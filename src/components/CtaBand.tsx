@@ -3,7 +3,7 @@ import type { Content } from "@/content";
 import { href, type Lang } from "@/lib/routes";
 import { btnArrowLight, btnSecondaryLight, container } from "@/lib/ui";
 import { ArrowCircle } from "./Icons";
-import { Reveal } from "./Reveal";
+import { Reveal } from "@/components/motion";
 
 // Avsluttende oppfordring nederst på sidene: et mørkeblått kort med hvit tekst.
 

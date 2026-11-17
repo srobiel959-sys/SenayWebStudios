@@ -189,7 +189,7 @@ export function GoogleStory({ story, id }: { story: Story; id: string }) {
             <span className="min-w-0 flex-1 truncate">
               <span ref={queryRef}>{scrub ? "" : story.query}</span>
               <span ref={caretRef} className="ml-px inline-block translate-y-0.5" style={scrub ? undefined : { opacity: 0 }}>
-                <span className="block h-4 w-px animate-pulse bg-white" />
+                <span className="block h-4 w-px animate-pulse bg-white motion-reduce:animate-none" />
               </span>
             </span>
           </div>
@@ -263,7 +263,7 @@ export function GoogleStory({ story, id }: { story: Story; id: string }) {
                   const active = !scrub || i === step;
                   // Stegene som ikke er aktive, tones ned, men holder nok kontrast til å leses
                   // (grå etikett, og stor tekst på halv styrke: over 3:1 mot hvit bakgrunn).
-                  const fade = "transition-[opacity,color] duration-700 ease-[cubic-bezier(0.32,0.72,0,1)]";
+                  const fade = "transition-[opacity,color] duration-700 ease-calm";
                   return (
                     <li key={s.kicker} aria-current={scrub && active ? "step" : undefined}>
                       <p className={`text-sm font-medium ${fade} ${active ? "text-accent" : "text-ink-muted"}`}>{s.kicker}</p>

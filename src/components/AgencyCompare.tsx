@@ -2,7 +2,7 @@ import type { Content } from "@/content";
 import { href, type Lang } from "@/lib/routes";
 import { container } from "@/lib/ui";
 import { CompareCards } from "./CompareCards";
-import { Reveal } from "./Reveal";
+import { Reveal } from "@/components/motion";
 import { SectionHeading } from "./SectionHeading";
 
 // «Andre byråer» mot «Senay Studio», side om side.

@@ -2,17 +2,16 @@
 
 export const container = "mx-auto w-full max-w-6xl px-5 sm:px-8";
 
-// Bevegelse: tre faste varigheter og tre kurver, så alt føles likt (se også globals.css).
-//   fast 150 ms: farge og hover · base 250 ms: knapper og små overganger · slow 500 ms: store flater
-/** Ting som kommer inn: rask start, myk landing (slow out). */
-export const ease = "ease-[cubic-bezier(0.32,0.72,0,1)]";
-/** Ting som forsvinner: myk start, rask slutt (slow in). */
+// Bevegelse: samme kurve og varigheter som src/lib/motion/presets.ts og globals.css.
+//   200 ms: farge, hover og trykk · 400 ms: små overganger · 600 ms: store flater
+// Ingen kurve går forbi målet og tilbake (ingen sprett).
+/** Ting som kommer inn: rask start, myk landing. Samme som --motion-ease. */
+export const ease = "ease-calm";
+/** Ting som forsvinner: myk start, rask slutt. */
 export const easeIn = "ease-[cubic-bezier(0.55,0,0.85,0.3)]";
-/** Tilbakemelding: litt forbi målet og tilbake (follow through). Bare til små elementer. */
-export const spring = "ease-[cubic-bezier(0.34,1.56,0.64,1)]";
 
-/** Felles trykk: knappen presses ned og fjærer tilbake. */
-const press = `transition-[background-color,color,translate,scale,box-shadow,border-color] duration-200 ${spring} hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.96] active:duration-100 motion-reduce:hover:translate-y-0 motion-reduce:active:scale-100`;
+/** Felles trykk: knappen løftes litt ved hover og presses rolig ned ved klikk. */
+const press = `transition-[background-color,color,translate,scale,box-shadow,border-color] duration-200 ${ease} hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.97] active:duration-100 motion-reduce:hover:translate-y-0 motion-reduce:active:scale-100`;
 
 const button = `inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-7 py-3.5 font-medium ${press}`;
 

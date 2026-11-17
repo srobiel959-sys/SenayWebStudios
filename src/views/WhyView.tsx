@@ -2,7 +2,7 @@ import { CompareCards } from "@/components/CompareCards";
 import { CtaBand } from "@/components/CtaBand";
 import { Faq } from "@/components/Faq";
 import { PageHero } from "@/components/PageHero";
-import { Reveal } from "@/components/Reveal";
+import { Reveal } from "@/components/motion";
 import { SectionHeading } from "@/components/SectionHeading";
 import { getContent } from "@/content";
 import { href, type Lang } from "@/lib/routes";

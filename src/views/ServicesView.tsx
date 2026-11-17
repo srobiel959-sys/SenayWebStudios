@@ -2,7 +2,7 @@ import Link from "next/link";
 import { CtaBand } from "@/components/CtaBand";
 import { ArrowCircle, CheckIcon } from "@/components/Icons";
 import { PageHero } from "@/components/PageHero";
-import { Reveal } from "@/components/Reveal";
+import { Reveal } from "@/components/motion";
 import { getContent } from "@/content";
 import { href, type Lang } from "@/lib/routes";
 import { card, btnArrow, btnSecondary, container, kicker } from "@/lib/ui";

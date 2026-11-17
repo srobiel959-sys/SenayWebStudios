@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import type { Content } from "@/content";
 import { href, navKeys, translatePath, type Lang } from "@/lib/routes";
-import { ease, spring } from "@/lib/ui";
+import { ease } from "@/lib/ui";
 import { Logo } from "./Logo";
 
 // Flytende «glasspille»-meny. På mobil åpnes en meny over hele skjermen der
@@ -82,7 +82,7 @@ export function Header({ lang, nav, ui }: { lang: Lang; nav: Content["nav"]; ui:
           </Link>
           <Link
             href={href(lang, "contact")}
-            className={`inline-flex min-h-11 items-center whitespace-nowrap rounded-full bg-navy px-4 text-sm font-medium text-cream transition-[background-color,scale] duration-200 ${spring} hover:bg-navy-soft active:scale-[0.96] max-[389px]:hidden sm:px-5`}
+            className={`inline-flex min-h-11 items-center whitespace-nowrap rounded-full bg-navy px-4 text-sm font-medium text-cream transition-[background-color,scale] duration-200 ${ease} hover:bg-navy-soft active:scale-[0.97] max-[389px]:hidden sm:px-5`}
           >
             <span className="sm:hidden">{ui.requestQuoteShort}</span>
             <span className="hidden sm:inline">{ui.requestQuote}</span>

@@ -1,5 +1,5 @@
 import { ContactForm } from "@/components/ContactForm";
-import { Reveal } from "@/components/Reveal";
+import { Reveal } from "@/components/motion";
 import { getContent, site } from "@/content";
 import type { Lang } from "@/lib/routes";
 import { card, container, kicker } from "@/lib/ui";

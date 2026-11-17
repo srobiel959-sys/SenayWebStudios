@@ -26,7 +26,7 @@ export function DemoPageView({ lang, slug }: { lang: Lang; slug: string }) {
           </Link>
         </div>
       </div>
-      <DemoSite demo={demo} lang={lang} fictionalLabel={c.demos.fictional} />
+      <DemoSite demo={demo} lang={lang} fictionalLabel={c.demos.fictional} preloadHero />
     </>
   );
 }

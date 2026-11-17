@@ -10,7 +10,7 @@ import { ProcessLine } from "@/components/home/ProcessLine";
 import { WordReveal } from "@/components/home/WordReveal";
 import { ArrowIcon, CheckIcon } from "@/components/Icons";
 import { JsonLd } from "@/components/JsonLd";
-import { Reveal } from "@/components/Reveal";
+import { Reveal, Stagger } from "@/components/motion";
 import { SectionHeading } from "@/components/SectionHeading";
 import { getContent } from "@/content";
 import { href, type Lang } from "@/lib/routes";
@@ -109,18 +109,16 @@ export function HomeView({ lang }: { lang: Lang }) {
             <p className="mt-4 text-xl text-cream-muted">{numbers.items[0].label}</p>
           </Reveal>
 
-          <div className="space-y-4 lg:col-span-5">
-            {numbers.items.slice(1).map((item, i) => (
-              <Reveal key={item.label} delay={i * 120}>
-                <div className="rounded-2xl border border-white/15 bg-white/[0.06] p-7 sm:p-8">
-                  <p className="whitespace-nowrap font-display text-[2.5rem] tracking-tight sm:text-6xl">
-                    <CountUp value={item.value} prefix={item.prefix} suffix={item.suffix} lang={lang} />
-                  </p>
-                  <p className="mt-2 text-cream-muted">{item.label}</p>
-                </div>
-              </Reveal>
+          <Stagger className="space-y-4 lg:col-span-5" step={120}>
+            {numbers.items.slice(1).map((item) => (
+              <div key={item.label} className="rounded-2xl border border-white/15 bg-white/[0.06] p-7 sm:p-8">
+                <p className="whitespace-nowrap font-display text-[2.5rem] tracking-tight sm:text-6xl">
+                  <CountUp value={item.value} prefix={item.prefix} suffix={item.suffix} lang={lang} />
+                </p>
+                <p className="mt-2 text-cream-muted">{item.label}</p>
+              </div>
             ))}
-            <Reveal delay={240}>
+            <div>
               <p className="flex items-center gap-2.5 pt-2 text-cream-muted">
                 <CheckIcon className="h-4 w-4 shrink-0 text-sky" />
                 {numbers.note}
@@ -132,8 +130,8 @@ export function HomeView({ lang }: { lang: Lang }) {
                 {numbers.link}
                 <ArrowIcon className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-1" />
               </Link>
-            </Reveal>
-          </div>
+            </div>
+          </Stagger>
         </div>
       </section>
 

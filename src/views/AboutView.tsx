@@ -1,7 +1,7 @@
 import { CtaBand } from "@/components/CtaBand";
 import { MainLogo } from "@/components/Logo";
 import { PageHero } from "@/components/PageHero";
-import { Reveal } from "@/components/Reveal";
+import { Reveal } from "@/components/motion";
 import { getContent } from "@/content";
 import type { Lang } from "@/lib/routes";
 import { card, container } from "@/lib/ui";

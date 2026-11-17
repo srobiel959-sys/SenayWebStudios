@@ -1,7 +1,7 @@
 import type { Content } from "@/content";
 import { lighthouse } from "@/content/shared";
 import { container } from "@/lib/ui";
-import { Reveal } from "../Reveal";
+import { Reveal } from "@/components/motion";
 import { SectionHeading } from "../SectionHeading";
 
 // Fire målte Lighthouse-tall som ringer, i samme stil som Google viser dem.

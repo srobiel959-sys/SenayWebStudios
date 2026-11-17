@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { btnArrowLight, kicker } from "@/lib/ui";
 import { ArrowCircle, CheckIcon, CrossIcon } from "./Icons";
-import { Reveal } from "./Reveal";
+import { Reveal } from "@/components/motion";
 
 // To kort side om side: «slik er det ofte» dempet til venstre, «slik gjør vi det»
 // mørkeblått med hvit tekst til høyre. Brukes av byrå-sammenligningen og «Hvorfor nettside».

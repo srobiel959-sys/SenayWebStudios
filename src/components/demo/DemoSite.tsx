@@ -185,6 +185,7 @@ export function DemoSite({
   lang,
   fictionalLabel,
   caret = false,
+  preloadHero = false,
 }: {
   /** Eksemplet, allerede på riktig språk (se localizeDemo i content/demos.ts). */
   demo: Demo;
@@ -192,6 +193,8 @@ export function DemoSite({
   fictionalLabel: string;
   /** Viser en blinkende skrivemarkør etter navnet (brukes i «Din nettside, live»). */
   caret?: boolean;
+  /** Last toppbildet med en gang. Bare når eksempelet er selve siden (det største elementet, LCP). */
+  preloadHero?: boolean;
 }) {
   const { theme } = demo;
   const t = ui[lang];
@@ -241,7 +244,7 @@ export function DemoSite({
               className="relative isolate flex min-h-[32rem] flex-col justify-end overflow-hidden rounded-[1.75rem] text-white @3xl:min-h-[40rem] @3xl:rounded-[2.25rem]"
               style={{ backgroundColor: shade }}
             >
-              <Image src={photo} alt="" fill sizes="(min-width: 1024px) 90vw, 100vw" className="dm-kenburns -z-20 object-cover" />
+              <Image src={photo} alt="" fill preload={preloadHero} sizes="(min-width: 1024px) 90vw, 100vw" className="dm-kenburns -z-20 object-cover" />
               {/* På smale skjermer ligger teksten over hele bildet, så skyggen dekker mer der. */}
               <div
                 className="absolute inset-0 -z-10 @3xl:hidden"

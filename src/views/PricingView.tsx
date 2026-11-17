@@ -4,7 +4,7 @@ import { Faq } from "@/components/Faq";
 import { JsonLd } from "@/components/JsonLd";
 import { PageHero } from "@/components/PageHero";
 import { PricingCards } from "@/components/PricingCards";
-import { Reveal } from "@/components/Reveal";
+import { Reveal } from "@/components/motion";
 import { SectionHeading } from "@/components/SectionHeading";
 import { getContent } from "@/content";
 import type { Lang } from "@/lib/routes";

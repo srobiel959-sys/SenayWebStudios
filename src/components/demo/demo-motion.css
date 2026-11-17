@@ -1,11 +1,11 @@
-/* Bevegelse i eksempelsidene (DemoSite + DemoMotion). Rolig og kort,
-   og helt av ved redusert bevegelse. */
+/* Bevegelse i eksempelsidene (DemoSite + DemoMotion). Samme kurve og varigheter som
+   Senay-siden (--motion-* i globals.css). Rolig og kort, og helt av ved redusert bevegelse. */
 
 /* Toppen: teksten kommer inn trinnvis, bildet «puster» rolig inn. */
 @keyframes dm-rise {
   from {
     opacity: 0.01;
-    transform: translateY(22px);
+    transform: translate3d(0, var(--motion-distance), 0);
   }
   to {
     opacity: 1;
@@ -13,12 +13,12 @@
   }
 }
 .dm-rise {
-  animation: dm-rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation: dm-rise 700ms var(--motion-ease) both;
 }
-.dm-d1 { animation-delay: 90ms; }
-.dm-d2 { animation-delay: 200ms; }
-.dm-d3 { animation-delay: 320ms; }
-.dm-d4 { animation-delay: 440ms; }
+.dm-d1 { animation-delay: 80ms; }
+.dm-d2 { animation-delay: 160ms; }
+.dm-d3 { animation-delay: 240ms; }
+.dm-d4 { animation-delay: 320ms; }
 
 @keyframes dm-kenburns {
   from {
@@ -31,37 +31,29 @@
   }
 }
 .dm-kenburns {
-  animation: dm-kenburns 1.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation: dm-kenburns 1.6s var(--motion-ease) both;
+}
+/* Mindre zoom på mobil. */
+@media (max-width: 767px) {
+  @keyframes dm-kenburns {
+    from {
+      transform: scale(1.05);
+      opacity: 0.4;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
 }
 
-/* Elementer som tones inn ved scroll. Skjules bare når JavaScript er klart. */
-.demo-motion[data-motion-ready] [data-motion="rise"]:not([data-shown]) {
-  opacity: 0;
-  transform: translateY(28px);
-}
-.demo-motion [data-motion="rise"] {
-  transition:
-    opacity 0.8s cubic-bezier(0.2, 0.7, 0.2, 1),
-    transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
-}
-
-/* Lister: hvert punkt kommer inn etter hverandre. */
-.demo-motion[data-motion-ready] [data-motion="stagger"]:not([data-shown]) > * {
-  opacity: 0;
-  transform: translateY(18px);
-}
+/* Inntoning ved scroll (rise og stagger) styres av motoren i src/lib/motion/engine.ts og
+   [data-motion-pending] i globals.css. Her står bare hover-overgangene til listepunktene. */
 .demo-motion [data-motion="stagger"] > * {
   transition:
-    opacity 0.7s cubic-bezier(0.2, 0.7, 0.2, 1),
-    transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1),
-    box-shadow 0.3s ease,
-    translate 0.3s ease;
+    box-shadow var(--motion-fast) ease,
+    translate var(--motion-fast) ease;
 }
-.demo-motion [data-motion="stagger"] > :nth-child(2) { transition-delay: 80ms, 80ms, 0s, 0s; }
-.demo-motion [data-motion="stagger"] > :nth-child(3) { transition-delay: 160ms, 160ms, 0s, 0s; }
-.demo-motion [data-motion="stagger"] > :nth-child(4) { transition-delay: 240ms, 240ms, 0s, 0s; }
-.demo-motion [data-motion="stagger"] > :nth-child(5) { transition-delay: 320ms, 320ms, 0s, 0s; }
-.demo-motion [data-motion="stagger"] > :nth-child(6) { transition-delay: 400ms, 400ms, 0s, 0s; }
 
 /* Ikonene i fordelsraden tegnes når raden kommer til syne. */
 .demo-motion .dm-draw path {
@@ -69,7 +61,7 @@
   stroke-dashoffset: 0;
   transition: stroke-dashoffset 1.1s cubic-bezier(0.65, 0, 0.35, 1) 0.15s;
 }
-.demo-motion[data-motion-ready] [data-motion]:not([data-shown]) .dm-draw path {
+.demo-motion [data-motion-pending] .dm-draw path {
   stroke-dashoffset: 1;
 }
 
@@ -79,13 +71,14 @@
   clip-path: inset(0 0 0 0 round 1.5rem);
 }
 .demo-motion [data-motion="image"] img {
-  transition: transform 1.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition: transform 1.4s var(--motion-ease);
 }
-.demo-motion[data-motion-ready] [data-motion="image"]:not([data-shown]) {
+.demo-motion [data-motion="image"][data-motion-pending] {
+  opacity: 1;
   clip-path: inset(100% 0 0 0 round 1.5rem);
 }
-.demo-motion[data-motion-ready] [data-motion="image"]:not([data-shown]) img {
-  transform: scale(1.15);
+.demo-motion [data-motion="image"][data-motion-pending] img {
+  transform: scale(1.1);
 }
 
 /* Avslutningsbåndet: en rolig lysstripe som glir forbi. */
@@ -128,7 +121,7 @@
   }
 }
 .dm-swap {
-  animation: dm-swap 0.55s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation: dm-swap 0.55s var(--motion-ease) both;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -144,5 +137,13 @@
   .demo-motion [data-motion] img,
   .demo-motion .dm-draw path {
     transition: none;
+  }
+  .demo-motion [data-motion-pending],
+  .demo-motion [data-motion-pending] img {
+    clip-path: inset(0 0 0 0 round 1.5rem) !important;
+    transform: none !important;
+  }
+  .demo-motion [data-motion-pending] .dm-draw path {
+    stroke-dashoffset: 0;
   }
 }
